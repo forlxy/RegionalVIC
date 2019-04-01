@@ -1,8 +1,7 @@
 
-
 <head>
     <meta charset='utf-8' />
-    <title>Show polygon information on click</title>
+    <title>Demo</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
@@ -24,7 +23,6 @@
 <body>
     <h2>Demo</h2>
     <div id="map"></div>
-    <div id='geocoder' class='geocoder'></div>
 
     <script>
  const TOKEN = "pk.eyJ1Ijoia2FzYWx1b3FpIiwiYSI6ImNqbHZ2OW53bTB5aHozcW9kcDJibndycXUifQ.SeWM7HbI0owT-Rwuv14Ntg";
@@ -229,13 +227,13 @@ function getRandomColor() {
         
 
 
+        formRegionColorMap();
 
 map.on('load', function () {
     // Add a layer showing the places.
-    formRegionColorMap();
     map.addSource("states", {
         "type": "geojson",
-        "data": "https://raw.githubusercontent.com/kasaluoqi/root/master/LGA_2018_AUST_VIC.geojson"
+        "data": "https://raw.githubusercontent.com/kasaluoqi/root/master/LGA_2018_AUST_VIC_ID.geojson"
     });
 
     map.addLayer({
@@ -248,11 +246,9 @@ map.on('load', function () {
                 ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", myData]],
             "fill-opacity": ["case",
                 ["boolean", ["feature-state", "hover"], false],
-                1,
-                0.5
+                0.7,
+                0.3
             ]
-
-
         }
     });
 
@@ -269,16 +265,6 @@ map.on('load', function () {
 
 
 
-    map.on('click', 'state-fills', function (e) {
-
-        var lgaCode = e.features[0].properties.LGA_CODE18;
-        var name = e.features[0].properties.LGA_NAME18;
-        new mapboxgl.Popup()
-            .setLngLat(e.lngLat)
-            .setHTML("LGA Code: " + lgaCode + ", Name: " + name)
-            .addTo(map);
-    });
-
 
     // When the user moves their mouse over the state-fill layer, we'll update the
     // feature state for the feature under the mouse.
@@ -287,7 +273,7 @@ map.on('load', function () {
             if (hoveredStateId) {
                 map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
             }
-            hoveredStateId = e.features[0].properties.LGA_CODE18;
+            hoveredStateId = e.features[0].id;
             map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
         }
     });
@@ -300,7 +286,17 @@ map.on('load', function () {
         }
         hoveredStateId = null;
     });
+    
 
+    map.on('click', 'state-fills', function (e) {
+
+        var lgaCode = e.features[0].properties.LGA_CODE18;
+        var name = e.features[0].properties.LGA_NAME18;
+        new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML("LGA Code: " + lgaCode + ", Name: " + name)
+            .addTo(map);
+    });
 });
 
     </script>
