@@ -1,22 +1,32 @@
 
+
 <head>
-<meta charset='utf-8' />
-<title>Show polygon information on click</title>
-<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
-<style>
-body { margin:0; padding:0; }
-#map { position:absolute; top:0; bottom:0; width:100%; }
-</style>
+    <meta charset='utf-8' />
+    <title>Show polygon information on click</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
-<h2>Demo</h2>
-<div id="map"></div>
-<div id='geocoder' class='geocoder'></div>
- 
-<script>
+    <h2>Demo</h2>
+    <div id="map"></div>
+    <div id='geocoder' class='geocoder'></div>
+
+    <script>
  const TOKEN = "pk.eyJ1Ijoia2FzYWx1b3FpIiwiYSI6ImNqbHZ2OW53bTB5aHozcW9kcDJibndycXUifQ.SeWM7HbI0owT-Rwuv14Ntg";
 
 mapboxgl.accessToken = TOKEN;
@@ -27,10 +37,10 @@ var map = new mapboxgl.Map({
     center: [145.045837, -37.876823],
     zoom: 13
 });
- 
+
 var hoveredStateId = null;
 
- 
+
 function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
@@ -39,7 +49,105 @@ function getRandomColor() {
     }
     return color;
 }
- 
+
+        var myData = { "VIC221": '#EED322', "VIC213": '#627BC1'};
+        var myData = {
+            "VIC245": getRandomColor(),
+            "VIC246": getRandomColor(),
+            "VIC243": getRandomColor(),
+            "VIC221": getRandomColor(),
+            "VIC200": getRandomColor(),
+            "VIC231": getRandomColor(),
+            "VIC226": getRandomColor(),
+            "VIC227": getRandomColor(),
+            "VIC230": getRandomColor(),
+            "VIC190": getRandomColor(),
+            "VIC191": getRandomColor(),
+            "VIC192": getRandomColor(),
+            "VIC189": getRandomColor(),
+            "VIC205": getRandomColor(),
+            "VIC206": getRandomColor(),
+            "VIC207": getRandomColor(),
+            "VIC214": getRandomColor(),
+            "VIC222": getRandomColor(),
+            "VIC232": getRandomColor(),
+            "VIC233": getRandomColor(),
+            "VIC234": getRandomColor(),
+            "VIC235": getRandomColor(),
+            "VIC195": getRandomColor(),
+            "VIC196": getRandomColor(),
+            "VIC201": getRandomColor(),
+            "VIC209": getRandomColor(),
+            "VIC210": getRandomColor(),
+            "VIC223": getRandomColor(),
+            "VIC212": getRandomColor(),
+            "VIC213": getRandomColor(),
+            "VIC198": getRandomColor(),
+            "VIC202": getRandomColor(),
+            "VIC203": getRandomColor(),
+            "VIC250": getRandomColor(),
+            "VIC199": getRandomColor(),
+            "VIC204": getRandomColor(),
+            "VIC229": getRandomColor(),
+            "VIC152": getRandomColor(),
+            "VIC153": getRandomColor(),
+            "VIC219": getRandomColor(),
+            "VIC185": getRandomColor(),
+            "VIC110": getRandomColor(),
+            "VIC173": getRandomColor(),
+            "VIC93": getRandomColor(),
+            "VIC173": getRandomColor(),
+            "VIC173": getRandomColor(),
+            "VIC249": getRandomColor(),
+            "VIC177": getRandomColor(),
+            "VIC247": getRandomColor(),
+            "VIC179": getRandomColor(),
+            "VIC182": getRandomColor(),
+            "VIC184": getRandomColor(),
+            "VIC248": getRandomColor(),
+            "VIC250": getRandomColor(),
+            "VIC224": getRandomColor(),
+            "VIC166": getRandomColor(),
+            "VIC236": getRandomColor(),
+            "VIC105": getRandomColor(),
+            "VIC239": getRandomColor(),
+            "VIC178": getRandomColor(),
+            "VIC218": getRandomColor(),
+            "VIC186": getRandomColor(),
+            "VIC183": getRandomColor(),
+            "VIC180": getRandomColor(),
+            "VIC225": getRandomColor(),
+            "VIC220": getRandomColor(),
+            "VIC217": getRandomColor(),
+            "VIC215": getRandomColor(),
+            "VIC241": getRandomColor(),
+            "VIC94": getRandomColor(),
+            "VIC211": getRandomColor(),
+            "VIC169": getRandomColor(),
+            "VIC193": getRandomColor(),
+            "VIC194": getRandomColor(),
+            "VIC244": getRandomColor(),
+            "VIC237": getRandomColor(),
+            "VIC197": getRandomColor(),
+            "VIC216": getRandomColor(),
+            "VIC132": getRandomColor(),
+            "VIC131": getRandomColor(),
+            "VIC208": getRandomColor(),
+            "VIC121": getRandomColor(),
+            "VIC181": getRandomColor(),
+            "VIC251": getRandomColor(),
+            "VIC251": getRandomColor(),
+            "VIC188": getRandomColor(),
+            "VIC187": getRandomColor(),
+            "VIC238": getRandomColor(),
+            "VIC251": getRandomColor(),
+            "VIC228": getRandomColor(),
+            "VIC240": getRandomColor(),
+            "VIC242": getRandomColor()
+        };
+
+
+
 map.on('load', function () {
     // Add a layer showing the places.
 
@@ -54,27 +162,14 @@ map.on('load', function () {
         "source": "states",
         "layout": {},
         "paint": {
-            "fill-color": {
-                property: 'lga_pid',
-                type: 'categorical',
-                stops: [
-                    ['VIC245', '#F2F12D'],
-                    ['VIC246', '#723122'],
-                    ['VIC221', '#A25626'],
-                    ['VIC237', '#627BC1'],
-                    ['5', '#CA8323'],
-                    ['6', '#B86B25'],
-                    ['7', '#A25626'],
-                    ['8', '#8B4225'],
-                    ['9', '#723122']
-                ]
-            },
+            "fill-color": 
+            ["get", ["to-string", ["get", "lga_pid"]], ["literal", myData]],
             "fill-opacity": ["case",
                 ["boolean", ["feature-state", "hover"], false],
                 1,
                 0.5
             ]
-            
+
 
         }
     });
@@ -93,7 +188,7 @@ map.on('load', function () {
 
 
     map.on('click', 'state-fills', function (e) {
-        
+
         var lga_pid = e.features[0].properties.lga_pid;
         var name = e.features[0].properties.vic_lga__3;
         new mapboxgl.Popup()
@@ -125,7 +220,7 @@ map.on('load', function () {
     });
 
 });
- 
-</script>
+
+    </script>
 
 </body>
