@@ -33,7 +33,6 @@ C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\bin\Debug\netcorea
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\bin\Debug\netcoreapp2.1\RegionalVIC.pdb
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\bin\Debug\netcoreapp2.1\RegionalVIC.Views.dll
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\bin\Debug\netcoreapp2.1\RegionalVIC.Views.pdb
-C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.csprojAssemblyReference.cache
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.csproj.CoreCompileInputs.cache
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.RazorAssemblyInfo.cache
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.RazorAssemblyInfo.cs
@@ -54,3 +53,4 @@ C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcorea
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.dll
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.pdb
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.csproj.CopyComplete
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.csprojAssemblyReference.cache
