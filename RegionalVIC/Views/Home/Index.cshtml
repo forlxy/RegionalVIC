@@ -9,6 +9,7 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 
@@ -29,25 +30,8 @@
 
 
     <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var chart = new Chart(ctx, {
-            // The type of chart we want to create
-            type: 'line',
-
-            // The data for our dataset
-            data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                datasets: [{
-                    label: 'My First dataset',
-                    backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
-                    data: [0, 10, 5, 2, 20, 30, 45]
-                }]
-            },
-
-            // Configuration options go here
-            options: {}
-        });
+        var lines;
+        var table;
 
 
         const TOKEN = "pk.eyJ1Ijoia2FzYWx1b3FpIiwiYSI6ImNqbHZ2OW53bTB5aHozcW9kcDJibndycXUifQ.SeWM7HbI0owT-Rwuv14Ntg";
@@ -313,10 +297,66 @@
             });
 
 
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var chart = new Chart(ctx, {
+                // The type of chart we want to create
+                type: 'line',
+
+                // The data for our dataset
+                data: {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                    datasets: [{
+                        label: 'My First dataset',
+                        backgroundColor: 'rgb(255, 99, 132)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        data: [0, 10, 5, 2, 20, 30, 45]
+                    }]
+                },
+
+                // Configuration options go here
+                options: {}
+            });
+
             map.on('click', 'state-fills', function (e) {
 
                 var lgaCode = e.features[0].properties.LGA_CODE18;
                 var name = e.features[0].properties.LGA_NAME18;
+                if (table != null) {
+
+                    var list = getItems(table, lgaCode, "bedroom", "1")
+                    list.sort((a, b) => (a.year > b.year) ? 1 : (getMonthFromString(a.month) > getMonthFromString(b.month)) ? 1 : -1)
+                    var data = [];
+                    var labels = [];
+                    for (var i = 0; i < list.length; i++) {
+                        labels.push(getMonthFromString(getItem(list[i], "month")) + "/" + getItem(list[i], "year"));
+                        data.push(getItem(list[i], "median"));
+                    }
+
+                    if (data != null && labels != null) {
+                        chart.destroy();
+                        ctx = document.getElementById("myChart").getContext("2d");
+                        chart = new Chart(ctx, {
+                            // The type of chart we want to create
+                            type: 'line',
+
+                            // The data for our dataset
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'Price median',
+                                    backgroundColor: 'rgb(255, 99, 132)',
+                                    borderColor: 'rgb(255, 99, 132)',
+                                    data: data
+                                }]
+                            },
+
+                            // Configuration options go here
+                            options: {}
+                        });
+
+                    }
+                }
+
                 new mapboxgl.Popup()
                     .setLngLat(e.lngLat)
                     .setHTML("LGA Code: " + lgaCode + ", Name: " + name)
@@ -324,36 +364,60 @@
             });
         });
 
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "Rental_Report_with_LGA_Code.csv",
+                dataType: "text",
+                success: function (data) {
+                    table = processData(data);
+                }
+            });
+        });
+
+        function processData(allText) {
+            var allTextLines = allText.split(/\r\n|\n/);
+            var headers = allTextLines[0].split(',');
+            lines = [];
+
+
+            for (var i = 1; i < allTextLines.length; i++) {
+                var data = allTextLines[i].split(',');
+                if (data.length == headers.length) {
+                    var object = new Object;
+                    for (var j = 0; j < headers.length; j++) {
+                        header = headers[j]
+                        value = data[j]
+                        object[header] = value
+                    }
+                    lines.push(object);
+                }
+            }
+            //alert(lines);
+            return lines;
+        }
+
+
+        function getItems(objects, lgaCode, attriName, attriValue) {
+            var list = [];
+            for (var i = 0; i < objects.length; i++) {
+                object = objects[i];
+                if (object != null && parseInt(object["LGA_Code"]) == parseInt(lgaCode)) {
+                    if (attriValue != null && attriName != null && parseInt(object[attriName]) == parseInt(attriValue))
+                        list.push(object);
+                }
+            }
+            return list;
+        }
+
+        function getItem(object, name) {
+            return object[name]
+        }
+
+        function getMonthFromString(mon) {
+            return new Date(Date.parse(mon + " 1, 2012")).getMonth() + 1
+        }
+
     </script>
 
-
-    @*
-
-        <div class="jumbotron">
-            <h1>ASP.NET</h1>
-            <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-            <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Getting started</h2>
-                <p>
-                    ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                    enables a clean separation of concerns and gives you full control over markup
-                    for enjoyable, agile development.
-                </p>
-                <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-            </div>
-            <div class="col-md-4">
-                <h2>Get more libraries</h2>
-                <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-                <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-            </div>
-            <div class="col-md-4">
-                <h2>Web Hosting</h2>
-                <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-                <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-            </div>
-        </div>*@
 </body>
