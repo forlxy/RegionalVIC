@@ -407,7 +407,8 @@
                 object = objects[i];
                 if (object != null && parseInt(object["LGA_Code"]) == parseInt(lgaCode)) {
                     if (attriValue != null && attriName != null && parseInt(object[attriName]) == parseInt(attriValue))
-                        list.push(object);
+                        if (object["median"] != "")
+                            list.push(object);
                 }
             }
             return list;
