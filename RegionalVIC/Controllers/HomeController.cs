@@ -29,5 +29,11 @@ namespace RegionalVIC
 
             return View();
         }
+        public IActionResult Map()
+        {
+            ViewBag.Message = "Your map page.";
+
+            return View();
+        }
     }
 }
