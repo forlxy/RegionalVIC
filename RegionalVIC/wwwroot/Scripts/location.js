@@ -69,7 +69,7 @@ document.getElementById('save-trip')
         var name = document.getElementById('trip-name').value;
         if (name.length > 10)
             window.alert("The length of trip name cannot exceed 10!");
-        else if (name.length == 0)
+        else if (name.length === 0)
             window.alert("The length of trip name cannot be 0!");
         else {
             $.ajax({
@@ -78,7 +78,7 @@ document.getElementById('save-trip')
                 data: "{value:'" + url + "',name:'" + name + "'}",
                 contentType: 'application/json',
                 success: function (result) {
-                    if (result == "Error") {
+                    if (result === "Error") {
                         window.alert("Your trip has not been loaded correctly!");
                     }
                     else {
@@ -430,15 +430,15 @@ function newDropoff(coords, counter, length) {
     dropoffs.features.push(pt);
     pointHopper[pt.properties.key] = pt;
     allCounter++;
-    if (allCounter == length) {
+    if (allCounter === length) {
         // Make a request to the Optimization API
         allCounter = 0;
         $.ajax({
             method: 'GET',
-            url: assembleQueryURL(),
+            url: assembleQueryURL()
         }).done(function (data) {
             // Create a GeoJSON feature collection
-            if (data.trips[0].distance == 0) {
+            if (data.trips[0].distance === 0) {
                 window.alert('Don\'t choose the same point to form a trip!');
                 return;
             }
