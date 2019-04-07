@@ -1,7 +1,29 @@
 ﻿@using RegionalVIC.Models.DB;
-@model Tuple<Rtrtbl, Critbl, Ppltbl>
+@*@model Tuple<Rtrtbl, Critbl, Ppltbl>*@
 @*@model IEnumerable<Rtrtbl>*@
 <style>
+    /* Style the header */
+    .floatmap {
+        padding: 10px 16px;
+        background: #555;
+        color: #f1f1f1;
+    }
+
+    /* Page content */
+    .content {
+        padding: 16px;
+    }
+
+    /* The sticky class is added to the header with JS when it reaches its scroll position */
+    .sticky {
+        position: fixed;
+        top: 0;
+    }
+
+        /* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+        .sticky + .content {
+            padding-top: 102px;
+        }
 
     /*
         * This is the compiled css for Bootstrap tabs and pills.
@@ -518,13 +540,13 @@
         background: rgba(255, 255, 255, 0.8);
         margin-right: 20px;
         font-family: Arial, sans-serif;
-        overflow: auto;
+        overflow: hidden;
         border-radius: 3px;
     }
 
     #features {
         top: 0;
-        height: 150px;
+        height: 120px;
         margin-top: 20px;
         width: 300px;
     }
@@ -584,7 +606,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="/">RegionVIC</a>
+            <a class="navbar-brand js-scroll-trigger" href="/">RegionalVIC</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
@@ -592,19 +614,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#services">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#team">Team</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+                        <a class="nav-link js-scroll-trigger" href="/">Home</a>
                     </li>
                 </ul>
             </div>
@@ -614,7 +624,7 @@
     <header class="masthead">
         <div class="container">
             <div class="intro-normal">
-                <div class="intro-lead-in">Welcome To RegionVIC!</div>
+                <div class="intro-lead-in">Welcome To RegionalVIC!</div>
             </div>
         </div>
     </header>
@@ -637,6 +647,7 @@
                             <div><span style='background-color: #E6B71E'></span>200</div>
                             <div><span style='background-color: #EED322'></span>150</div>
                             <div><span style='background-color: #F2F12D'></span>50</div>
+                            <div><span style='background-color: #ddd'></span>No data</div>
                         </div>
 
                         <div id='state-crime-legend' class='legend' style="display: none">
@@ -650,10 +661,11 @@
                             <div><span style='background-color: #E6B71E'></span>3%</div>
                             <div><span style='background-color: #EED322'></span>2%</div>
                             <div><span style='background-color: #F2F12D'></span>1%</div>
+                            <div><span style='background-color: #ddd'></span>No data</div>
                         </div>
 
                         <div id='state-density-legend' class='legend' style="display: none">
-                            <h4>Density</h4>
+                            <h4>Population Density</h4>
                             <div><span style='background-color: #723122'></span>200</div>
                             <div><span style='background-color: #8B4225'></span>50</div>
                             <div><span style='background-color: #A25626'></span>20</div>
@@ -662,6 +674,7 @@
                             <div><span style='background-color: #E6B71E'></span>3</div>
                             <div><span style='background-color: #EED322'></span>1</div>
                             <div><span style='background-color: #F2F12D'></span>0-1</div>
+                            <div><span style='background-color: #ddd'></span>No data</div>
                         </div>
                     </div>
                 </div>
@@ -699,24 +712,26 @@
                                                 <br>
                                                 <div class="form-group row">
                                                     <div class="col-md-6">
+                                                        <label for="sel2">Type:</label>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <select class="form-control" id="sel2" onchange="changeSelect()">
+                                                            <option>Flat</option>
+                                                            <option>House</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-md-6">
                                                         <label for="sel1">Num of bedroom:</label>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <select class="form-control" id="sel1">
                                                             <option>1</option>
                                                             <option>2</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <div class="col-md-6">
-                                                        <label for="sel2">Type:</label>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <select class="form-control" id="sel2">
-                                                            <option>House</option>
-                                                            <option>Flat</option>
+                                                            <option>3</option>
+                                                            <option disabled>4</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -816,7 +831,7 @@
                                         <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx2" href="#collapseTwo2"
                                            aria-expanded="false" aria-controls="collapseTwo2">
                                             <h5 class="mb-0">
-                                                <i class="fa fa-chevron-down pull-right"></i> Density
+                                                <i class="fa fa-chevron-down pull-right"></i> Population Density
                                             </h5>
                                         </a>
                                     </div>
@@ -847,27 +862,28 @@
                             *@
 
                             <div class="form-group row">
-                                <h6>Accomondation Weight (a): <span id="acmValue"></span></h6>
+                                <h6>Accommodation Importance (a): <span id="acmValue"></span></h6>
                                 <div class="slidecontainer">
                                     <input type="range" min="0" max="10" value="5" class="slider" id="acmSlider">
                                 </div>
+
                             </div>
 
                             <div class="form-group row">
-                                <h6>Criminal Weight (b): <span id="crmValue"></span></h6>
+                                <h6>Safety Importance (b): <span id="crmValue"></span></h6>
                                 <div class="slidecontainer">
                                     <input type="range" min="0" max="10" value="5" class="slider" id="crmSlider">
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <h6>Density Weight (c): <span id="pouValue"></span></h6>
+                                <h6>Population Importance (c): <span id="pouValue"></span></h6>
                                 <div class="slidecontainer">
                                     <input type="range" min="0" max="10" value="5" class="slider" id="pouSlider">
                                 </div>
                             </div>
                             <h6>Higher Weight: You care it more!</h6>
-                            <small><i>Final Score = a * Accomondation score + b * Criminal score + c * Density score </i></small>
+                            <small><i>Final Score = a * Accommodation score + b * Safety score + c * Population score </i></small>
                             <br><hr>
                             <h4>My budget (per week)</h4>
                             <br>
@@ -900,19 +916,48 @@
         </div>
     </section>
 
-    @*<div>
-        <table class="table table-bordered table-sm table-striped">
-            <tbody>
-                @foreach (var p in Model)
-                {
-                    <tr>
-                        <td>@p.LgaCode</td>
-                        <td>@p.Median</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>*@
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="copyright">
+                        Copyright &copy; RegionalVIC 2019. Theme is from <a href="https://startbootstrap.com/themes/">Start Bootstrap</a> website under MIT license.
+                    </span>
+                </div>
+                @*<div class="col-md-4">
+                        <ul class="list-inline social-buttons">
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="list-inline quicklinks">
+                            <li class="list-inline-item">
+                                <a href="#">Privacy Policy</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">Terms of Use</a>
+                            </li>
+                        </ul>
+                    </div>*@
+            </div>
+        </div>
+    </footer>
 
     <script>
         var lines;
@@ -1150,7 +1195,7 @@
 
         var customData = new Object
 
-
+        //Generate Color
         formRegionColorMap();
 
         map.on('load', function () {
@@ -1159,7 +1204,7 @@
                 "type": "geojson",
                 "data": "https://raw.githubusercontent.com/kasaluoqi/root/master/LGA_2018_AUST_VIC_ID.geojson"
             });
-
+            //All colored states layer
             map.addLayer({
                 "id": "state-fills",
                 "type": "fill",
@@ -1176,6 +1221,7 @@
                 }
             });
 
+            //Generated layer
             map.addLayer({
                 "id": "cheo",
                 "type": "fill",
@@ -1184,11 +1230,13 @@
                 "paint": {
                     "fill-color":
                         ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]],
-                    "fill-opacity": 0.7
+                    "fill-opacity": ["case",
+                        ["boolean", ["feature-state", "hover"], false],
+                        1,
+                        0.5
+                    ]
                 }
             });
-
-
 
             // When the user moves their mouse over the state-fill layer, we'll update the
             // feature state for the feature under the mouse.
@@ -1211,28 +1259,38 @@
                 hoveredStateId = null;
             });
 
-
-            //var ctx = document.getElementById('myChart').getContext('2d');
-            //var chart = new Chart(ctx);
-
-
+            //Show information block and hover effect
             map.on('mousemove', "cheo", function (e) {
                 var over = document.getElementById('features');
                 features.style.display = "block"
 
                 var states = map.queryRenderedFeatures(e.point);
                 if (states.length > 0) {
-                    document.getElementById('pd').innerHTML = '<h3><strong>' + states[0].properties.LGA_NAME18 + '</strong></h3><p><strong><em>' + displayList[states[0].properties.LGA_CODE18] + '</strong>.</em></p>';
+                    document.getElementById('pd').innerHTML = '<h5><strong>' + states[0].properties.LGA_NAME18 + '</strong></h5><p><strong><em>' + displayList[states[0].properties.LGA_CODE18] + '</strong>.</em></p>';
                 } else {
                     document.getElementById('pd').innerHTML = '<p>Hover over a state!</p>';
                 }
+
+                if (e.features.length > 0) {
+                    if (hoveredStateId) {
+                        map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                    }
+                    hoveredStateId = e.features[0].id;
+                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
+                }
             });
 
+            //Reset information block and hover effect
             map.on('mouseleave', "cheo", function (e) {
                 var over = document.getElementById('features');
                 features.style.display = "none"
-            });
 
+                if (hoveredStateId) {
+                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                }
+                hoveredStateId = null;
+            });
+            //Popup regions name
             map.on('click', 'state-fills', function (e) {
 
                 var sel1 = jQuery("#sel1 option:selected").val();
@@ -1242,11 +1300,27 @@
 
                 new mapboxgl.Popup()
                     .setLngLat(e.lngLat)
-                    .setHTML("LGA Code: " + lgaCode + ", Name: " + name)
+                    .setHTML(name)
                     .addTo(map);
             });
         });
         var filename = "Rental_Report_with_LGA_Code.csv";
+        //Monitor select type changes
+        function changeSelect() {
+            var typeSelectValue = $("#sel2").val();
+
+            if (typeSelectValue == "House") {
+                $("#sel1").val("2");
+                $('#sel1').find('option:contains(1)').prop('disabled', true);
+                $('#sel1').find('option:contains(4)').prop('disabled', false);
+            }
+            else {
+
+                $('#sel1').find('option:contains(1)').prop('disabled', false);
+                $("#sel1").val("1");
+                $('#sel1').find('option:contains(4)').prop('disabled', true);
+            }
+        }
 
         $(document).ready(function () {
             $.getJSON('https://raw.githubusercontent.com/kasaluoqi/root/master/LGA_2018_AUST_VIC_ID.geojson', function (data) {
@@ -1279,6 +1353,22 @@
                     desyTable = processData(data);
                 }
             });
+            //Reset as tab changed
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                resetLayer();
+            });
+
+            //$('#acmSlider').slider().on('slideStop', function (ev) {
+            //    recommendation()
+            //});
+
+            //$('#acmSlider').slider().on('slideStop', function (ev) {
+            //    recommendation()
+            //});
+
+            //$('#acmSlider').slider().on('slideStop', function (ev) {
+            //    recommendation()
+            //});
         });
 
         function readData(filename) {
@@ -1294,6 +1384,7 @@
         var stateLegend = document.getElementById('state-legend');
         var stateCrimeLegend = document.getElementById('state-crime-legend');
         var stateDesyLegend = document.getElementById('state-density-legend');
+        //Reset Layers
         function resetLayer() {
 
             map.setLayoutProperty("state-fills", 'visibility', 'visible');
@@ -1304,8 +1395,9 @@
             stateDesyLegend.style.display = 'none';
         }
         var displayList = new Object
+        //Show filter map
         function choropleth(option) {
-
+            //Accomodation
             if (option == "a") {
 
                 stateLegend.style.display = "block"
@@ -1320,7 +1412,7 @@
                     tmpList.sort((a, b) => (a.year < b.year) ? 1 :
                         (getMonthFromString(a.month) < getMonthFromString(b.month)) ? 1 : -1)
                     displayList[[allCode[i]]] = parseInt(getItem(tmpList[0], "median")) != 0 ? "House median is $" + parseInt(getItem(tmpList[0], "median"))
-                        + ". Number of recorded house: " + parseInt(getItem(tmpList[0], "count")) : "No record";
+                        + ".<p> Number of recorded house: " + parseInt(getItem(tmpList[0], "count")) + "</p>" : "No record";
                     cheo[allCode[i]] = getColor(
                         parseInt(
                             getItem(tmpList[0], "median")
@@ -1332,6 +1424,7 @@
                 map.setLayoutProperty("state-fills", 'visibility', 'none');
                 map.setLayoutProperty("cheo", 'visibility', 'visible');
             }
+            //Safety
             else if (option == "s") {
 
                 stateCrimeLegend.style.display = "block"
@@ -1340,13 +1433,16 @@
 
                 var objects = crimeTable;
 
+                for (var i = 0; i < allCode.length; i++) {
+                    crimeCheo[allCode[i]] = "#ddd"
+                }
                 for (var j = 0; j < objects.length; j++) {
                     for (var i = 0; i < allCode.length; i++) {
 
                         var object = objects[j];
                         if (object != null && object["Year ending December"] == "2018" &&
                             parseInt(object["LGA_Code"]) == allCode[i]) {
-                            displayList[[allCode[i]]] = parseFloat(object["Rate"]) != 0 ? "Criminal Rate: " + parseFloat(object["Rate"]).toFixed(2) + "%. Incident number: " + parseInt(object["Incidents Recorded"]) : "No record";
+                            displayList[[allCode[i]]] = parseFloat(object["Rate"]) != 0 ? "Criminal Rate: " + parseFloat(object["Rate"]).toFixed(2) + "%. <p>Incident number: " + parseInt(object["Incidents Recorded"]) + '</p>' : "No record";
                             crimeCheo[allCode[i]] = getCrimeColor(parseFloat(object["Rate"]));
                         }
                     }
@@ -1358,7 +1454,7 @@
                 map.setLayoutProperty("cheo", 'visibility', 'visible');
 
             }
-
+            //Population density
             else if (option == "p") {
 
                 stateLegend.style.display = "none"
@@ -1367,12 +1463,15 @@
 
                 var objects = desyTable;
 
+                for (var i = 0; i < allCode.length; i++) {
+                    desyCheo[allCode[i]] = "#ddd"
+                }
                 for (var j = 0; j < objects.length; j++) {
                     for (var i = 0; i < allCode.length; i++) {
 
                         var object = objects[j];
                         if (object != null && parseInt(object["LGA Code"]) == allCode[i]) {
-                            displayList[[allCode[i]]] = parseFloat(object["Density"]) != 0 ? "Density: " + parseFloat(object["Density"]).toFixed(2) + ". Population: " + parseInt(object["Population"]) : "No record";
+                            displayList[[allCode[i]]] = parseFloat(object["Density"]) != 0 ? "Density: " + parseFloat(object["Density"]).toFixed(2) + ". <p>Population: " + parseInt(object["Population"]) + '</p>' : "No record";
                             desyCheo[allCode[i]] = getDesyColor(parseFloat(object["Density"]));
                         }
                     }
@@ -1388,7 +1487,21 @@
         }
 
 
-        // get color depending on population density value
+        //window.onscroll = function () { myFunction() };
+
+        //// Get the offset position of the navbar
+        //var sticky = map.offsetTop;
+
+        //// Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+        //function myFunction() {
+        //    if (window.pageYOffset > sticky) {
+        //        map.classList.add("sticky");
+        //    } else {
+        //        map.classList.remove("sticky");
+        //    }
+        //}
+
+        // get color depending on house price value
         function getColor(d) {
             return d > 550 ? '#723122' :
                 d > 450 ? '#8B4225' :
@@ -1398,21 +1511,23 @@
                                 d > 200 ? '#E6B71E' :
                                     d > 150 ? '#EED322' :
                                         d > 50 ? '#F2F12D' :
-                                            '#000000';
+                                            '#ddd';
         }
+        // get color depending on criminal rate
         function getCrimeColor(d) {
             return d > 10 ? '#723122' :
                 d > 8 ? '#8B4225' :
                     d > 7 ? '#A25626' :
                         d > 6 ? '#B86B25' :
                             d > 5 ? '#CA8323' :
-                                d > 4 ? '##DA9C20' :
+                                d > 4 ? '#DA9C20' :
                                     d > 3 ? '#E6B71E' :
                                         d > 2 ? '#EED322' :
                                             d > 1 ? '#F2F12D' :
-                                                '#000000';
+                                                '#ddd';
         }
 
+        // get color depending on population density value
         function getDesyColor(d) {
             return d > 200 ? '#723122' :
                 d > 50 ? '#8B4225' :
@@ -1421,9 +1536,11 @@
                             d > 5 ? '#CA8323' :
                                 d > 3 ? '#E6B71E' :
                                     d > 1 ? '#EED322' :
-                                        '#F2F12D'
+                                        d > 0 ? '#F2F12D' :
+                                            '#ddd';
         }
 
+        //read data from csv file
         function processData(allText) {
             var allTextLines = allText.split(/\r\n|\n/);
             var headers = allTextLines[0].split(',');
@@ -1447,7 +1564,7 @@
         }
 
         var rates = new Object;
-
+        //Get acommondation rating
         function getRatingByPrice(d) {
             return d > 550 ? 0 :
                 d > 500 ? 1 :
@@ -1462,6 +1579,7 @@
                                                     10;
         }
 
+        //Get criminal rating
         function getRatingByCrime(d) {
             return d > 10 ? 0 :
                 d > 9 ? 1 :
@@ -1475,6 +1593,7 @@
                                                 d > 1 ? 9 : 10;
         }
 
+        //Get population rating
         function getRatingByDensity(d) {
             return d > 200 ? 0 :
                 d > 150 ? 1 :
@@ -1493,7 +1612,7 @@
                                                                     d > 1 ? 1 : 0;
         }
 
-
+        //Recommendation
         function recommendation() {
 
             var recomdList = document.getElementById('recomd-list');
@@ -1501,13 +1620,14 @@
 
             var minBudget = parseInt(document.getElementById("min-bgt-recom").value);
             var maxBudget = parseInt(document.getElementById("max-bgt-recom").value);
+            var minBudget = isNaN(minBudget) ? 0 : minBudget;
+            var maxBudget = isNaN(maxBudget) ? 1000 : maxBudget;
 
             var objects = table;
             var crimeObject = crimeTable;
             var desyObject = desyTable;
 
             var list = [];
-
 
             var acmWeight = parseFloat(acmslider.value);
             var crmWeight = parseFloat(crmSlider.value);
@@ -1573,23 +1693,29 @@
             list.sort((a, b) => (rates[parseInt(a.LGA_Code)] < rates[parseInt((b.LGA_Code))]) ? 1 : -1)
             for (var i = 0; i < list.length; i++) {
                 var recomdList = document.getElementById('recomd-list');
-                recomdList.innerHTML += '<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">   <div class="d-flex w-100 justify-content-between" > <h5 class="mb-1">'
-                    + list[i]["LGA"] + '</h5> <small class="text-muted" >' + list[i]["type"].toUpperCase() + ", B" + parseInt(list[i]["bedroom"]) + '</small> </div > <p class="mb-1">'
-                    + "Rate: " + rates[parseInt(list[i]["LGA_Code"])].toFixed(2) + '</p> </a>';
+                recomdList.innerHTML += '<div class="list-group-item list-group-item-action flex-column align-items-start">   <div class="d-flex w-100 justify-content-between" > <h5 class="mb-1">'
+                    + list[i]["LGA"] + '</h5> <small class="text-muted" >Top ' + (i + 1) + '</small> </div > <p class="mb-1">'
+                    + "Region: " + list[i]["region"] + '</p> <small>' + parseInt(list[i]["bedroom"]) + " bedroom(s) " + jsUcfirst(list[i]["type"]) + '</small> </div>';
 
             }
 
-            //return list;
+            if (list.length == 0) {
+                var filterList = document.getElementById('recomd-list');
+                filterList.innerHTML += '<div class="list-group-item list-group-item-action flex-column align-items-start">   <div class="d-flex w-100 justify-content-between" > <h5 class="mb-1">' +
+                    'No record within this price range</h5> <small class="text-muted" ></small> </div> <p class="mb-1">'
+                    + 'Change your price range and try again</p> </div>';
+            }
 
         }
 
-
+        //Filter
         function filter() {
             var filterList = document.getElementById('list');
             filterList.innerHTML = "";
-
             var minBudget = parseInt(document.getElementById("min-bgt").value);
             var maxBudget = parseInt(document.getElementById("max-bgt").value);
+            var minBudget = isNaN(minBudget) ? 0 : minBudget;
+            var maxBudget = isNaN(maxBudget) ? 1000 : maxBudget;
 
             var objects = table;
 
@@ -1605,18 +1731,28 @@
             list.sort((a, b) => (a.median > b.median) ? 1 : -1)
             for (var i = 0; i < list.length; i++) {
                 var filterList = document.getElementById('list');
-                filterList.innerHTML += '<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">   <div class="d-flex w-100 justify-content-between" > <h5 class="mb-1">'
-                    + list[i]["LGA"] + " - $" + list[i]["median"] + '</h5> <small class="text-muted" >' + list[i]["region"] + '</small> </div> <p class="mb-1">'
-                    + "Type: " + list[i]["type"] + ". Num of bedroom: " + parseInt(list[i]["bedroom"]) + '</p> </a>';
+                filterList.innerHTML += '<div class="list-group-item list-group-item-action flex-column align-items-start">   <div class="d-flex w-100 justify-content-between" > <h6 class="mb-1">'
+                    + list[i]["LGA"] + " - " + list[i]["region"] + '</h6> <small class="text-muted" >$' + parseInt(list[i]["median"]) + '</small> </div> <p class="mb-1">'
+                    + parseInt(list[i]["bedroom"]) + " bedroom(s) " + jsUcfirst(list[i]["type"]) + '</p> </div>';
 
             }
 
-            //return list;
+            if (list.length == 0) {
+                var filterList = document.getElementById('list');
+                filterList.innerHTML += '<div class="list-group-item list-group-item-action flex-column align-items-start">   <div class="d-flex w-100 justify-content-between" > <h6 class="mb-1">' +
+                    'No record within this price range</h6> <small class="text-muted" ></small> </div> <p class="mb-1">'
+                    + 'Change your price range and try again</p> </div>';
+
+            }
 
         }
-
+        //Capital first letter
+        function jsUcfirst(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+        //Return value
         var getItems = function ()
-                                                            /*function getItems(objects, lgaCode, attriName, attriValue, year = "", yearValue = "")*/ {
+                                                                /*function getItems(objects, lgaCode, attriName, attriValue, year = "", yearValue = "")*/ {
             if (arguments.length < 2)
                 return;
             var objects = arguments[0];
@@ -1658,25 +1794,25 @@
         function getItem(object, name) {
             return object != null ? object[name] : 0
         }
-
+        //Get month number
         function getMonthFromString(mon) {
             return new Date(Date.parse(mon + " 1, 2012")).getMonth() + 1
         }
-
+        //is number
         function isNumber(str) {
             val = parseInt(str)
             if (isNaN(val))
                 return false;
             return true;
         }
-
+        //is NAN?
         function processNumber(str) {
             val = parseInt(str)
             if (isNaN(val))
                 return str;
             return val;
         }
-
+        //Show polygons
         function showPolygonArea(e) {
             featureGroup.clearLayers();
             featureGroup.addLayer(e.layer);
