@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RegionalVIC.Models.DB;
 
 namespace RegionalVIC
 {
@@ -17,6 +19,10 @@ namespace RegionalVIC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            var connection = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=regionalVIC;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+            services.AddDbContext<regionalVICContext>(options =>
+               options.UseSqlServer(connection));
         }
 
 

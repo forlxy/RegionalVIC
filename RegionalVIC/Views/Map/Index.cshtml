@@ -1,0 +1,1701 @@
+﻿@using RegionalVIC.Models.DB;
+@model Tuple<Rtrtbl, Critbl, Ppltbl>
+@*@model IEnumerable<Rtrtbl>*@
+<style>
+
+    /*
+        * This is the compiled css for Bootstrap tabs and pills.
+        * Compiled from bootstrap 2.3.2 (less/navs.less)
+        */
+    .card-header .fa {
+        transition: .3s transform ease-in-out;
+    }
+
+    .card-header .collapsed .fa {
+        transform: rotate(90deg);
+    }
+
+    .clearfix {
+        *zoom: 1;
+    }
+
+        .clearfix:before,
+        .clearfix:after {
+            display: table;
+            content: "";
+            line-height: 0;
+        }
+
+        .clearfix:after {
+            clear: both;
+        }
+
+    .hide-text {
+        font: 0/0 a;
+        color: transparent;
+        text-shadow: none;
+        background-color: transparent;
+        border: 0;
+    }
+
+    .input-block-level {
+        display: block;
+        width: 100%;
+        min-height: 30px;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .nav {
+        margin-left: 0;
+        margin-bottom: 20px;
+        list-style: none;
+    }
+
+        .nav > li > a {
+            display: block;
+        }
+
+            .nav > li > a:hover,
+            .nav > li > a:focus {
+                text-decoration: none;
+                background-color: #eeeeee;
+            }
+
+            .nav > li > a > img {
+                max-width: none;
+            }
+
+        .nav > .pull-right {
+            float: right;
+        }
+
+    .nav-header {
+        display: block;
+        padding: 3px 15px;
+        font-size: 11px;
+        font-weight: bold;
+        line-height: 20px;
+        color: #999999;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+        text-transform: uppercase;
+    }
+
+    .nav li + .nav-header {
+        margin-top: 9px;
+    }
+
+    .nav-list {
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-bottom: 0;
+    }
+
+        .nav-list > li > a,
+        .nav-list .nav-header {
+            margin-left: -15px;
+            margin-right: -15px;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        .nav-list > li > a {
+            padding: 3px 15px;
+        }
+
+        .nav-list > .active > a,
+        .nav-list > .active > a:hover,
+        .nav-list > .active > a:focus {
+            color: #ffffff;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+            background-color: #0088cc;
+        }
+
+        .nav-list [class^="icon-"],
+        .nav-list [class*=" icon-"] {
+            margin-right: 2px;
+        }
+
+        .nav-list .divider {
+            *width: 100%;
+            height: 1px;
+            margin: 9px 1px;
+            *margin: -5px 0 5px;
+            overflow: hidden;
+            background-color: #e5e5e5;
+            border-bottom: 1px solid #ffffff;
+        }
+
+    .nav-tabs,
+    .nav-pills {
+        *zoom: 1;
+    }
+
+        .nav-tabs:before,
+        .nav-pills:before,
+        .nav-tabs:after,
+        .nav-pills:after {
+            display: table;
+            content: "";
+            line-height: 0;
+        }
+
+        .nav-tabs:after,
+        .nav-pills:after {
+            clear: both;
+        }
+
+        .nav-tabs > li,
+        .nav-pills > li {
+            float: left;
+        }
+
+            .nav-tabs > li > a,
+            .nav-pills > li > a {
+                padding-right: 12px;
+                padding-left: 12px;
+                margin-right: 2px;
+                line-height: 14px;
+            }
+
+    .nav-tabs {
+        border-bottom: 1px solid #ddd;
+    }
+
+        .nav-tabs > li {
+            margin-bottom: -1px;
+        }
+
+            .nav-tabs > li > a {
+                padding-top: 8px;
+                padding-bottom: 8px;
+                line-height: 20px;
+                border: 1px solid transparent;
+                border-radius: 4px 4px 0 0;
+            }
+
+                .nav-tabs > li > a:hover,
+                .nav-tabs > li > a:focus {
+                    border-color: #eeeeee #eeeeee #dddddd;
+                }
+
+        .nav-tabs > .active > a,
+        .nav-tabs > .active > a:hover,
+        .nav-tabs > .active > a:focus {
+            color: #555555;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-bottom-color: transparent;
+            cursor: default;
+        }
+
+    .nav-pills > li > a {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        margin-top: 2px;
+        margin-bottom: 2px;
+        border-radius: 5px;
+    }
+
+    .nav-pills > .active > a,
+    .nav-pills > .active > a:hover,
+    .nav-pills > .active > a:focus {
+        color: #ffffff;
+        background-color: #0088cc;
+    }
+
+    .nav-stacked > li {
+        float: none;
+    }
+
+        .nav-stacked > li > a {
+            margin-right: 0;
+        }
+
+    .nav-tabs.nav-stacked {
+        border-bottom: 0;
+    }
+
+        .nav-tabs.nav-stacked > li > a {
+            border: 1px solid #ddd;
+            border-radius: 0;
+        }
+
+        .nav-tabs.nav-stacked > li:first-child > a {
+            border-top-right-radius: 4px;
+            border-top-left-radius: 4px;
+        }
+
+        .nav-tabs.nav-stacked > li:last-child > a {
+            border-bottom-right-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+
+        .nav-tabs.nav-stacked > li > a:hover,
+        .nav-tabs.nav-stacked > li > a:focus {
+            border-color: #ddd;
+            z-index: 2;
+        }
+
+    .nav-pills.nav-stacked > li > a {
+        margin-bottom: 3px;
+    }
+
+    .nav-pills.nav-stacked > li:last-child > a {
+        margin-bottom: 1px;
+    }
+
+    .nav-tabs .dropdown-menu {
+        border-radius: 0 0 6px 6px;
+    }
+
+    .nav-pills .dropdown-menu {
+        border-radius: 6px;
+    }
+
+    .nav .dropdown-toggle .caret {
+        border-top-color: #0088cc;
+        border-bottom-color: #0088cc;
+        margin-top: 6px;
+    }
+
+    .nav .dropdown-toggle:hover .caret,
+    .nav .dropdown-toggle:focus .caret {
+        border-top-color: #005580;
+        border-bottom-color: #005580;
+    }
+    /* move down carets for tabs */
+    .nav-tabs .dropdown-toggle .caret {
+        margin-top: 8px;
+    }
+
+    .nav .active .dropdown-toggle .caret {
+        border-top-color: #fff;
+        border-bottom-color: #fff;
+    }
+
+    .nav-tabs .active .dropdown-toggle .caret {
+        border-top-color: #555555;
+        border-bottom-color: #555555;
+    }
+
+    .nav > .dropdown.active > a:hover,
+    .nav > .dropdown.active > a:focus {
+        cursor: pointer;
+    }
+
+    .nav-tabs .open .dropdown-toggle,
+    .nav-pills .open .dropdown-toggle,
+    .nav > li.dropdown.open.active > a:hover,
+    .nav > li.dropdown.open.active > a:focus {
+        color: #ffffff;
+        background-color: #999999;
+        border-color: #999999;
+    }
+
+    .nav li.dropdown.open .caret,
+    .nav li.dropdown.open.active .caret,
+    .nav li.dropdown.open a:hover .caret,
+    .nav li.dropdown.open a:focus .caret {
+        border-top-color: #ffffff;
+        border-bottom-color: #ffffff;
+        opacity: 1;
+        filter: alpha(opacity=100);
+    }
+
+    .tabs-stacked .open > a:hover,
+    .tabs-stacked .open > a:focus {
+        border-color: #999999;
+    }
+
+    .tabbable {
+        *zoom: 1;
+    }
+
+        .tabbable:before,
+        .tabbable:after {
+            display: table;
+            content: "";
+            line-height: 0;
+        }
+
+        .tabbable:after {
+            clear: both;
+        }
+
+    .tab-content {
+        overflow: hidden;
+    }
+
+    .tabs-below > .nav-tabs,
+    .tabs-right > .nav-tabs,
+    .tabs-left > .nav-tabs {
+        border-bottom: 0;
+    }
+
+    .tab-content > .tab-pane,
+    .pill-content > .pill-pane {
+        display: none;
+    }
+
+    .tab-content > .active,
+    .pill-content > .active {
+        display: block;
+    }
+
+    .tabs-below > .nav-tabs {
+        border-top: 1px solid #ddd;
+    }
+
+        .tabs-below > .nav-tabs > li {
+            margin-top: -1px;
+            margin-bottom: 0;
+        }
+
+            .tabs-below > .nav-tabs > li > a {
+                border-radius: 0 0 4px 4px;
+            }
+
+                .tabs-below > .nav-tabs > li > a:hover,
+                .tabs-below > .nav-tabs > li > a:focus {
+                    border-bottom-color: transparent;
+                    border-top-color: #ddd;
+                }
+
+        .tabs-below > .nav-tabs > .active > a,
+        .tabs-below > .nav-tabs > .active > a:hover,
+        .tabs-below > .nav-tabs > .active > a:focus {
+            border-color: transparent #ddd #ddd #ddd;
+        }
+
+    .tabs-left > .nav-tabs > li,
+    .tabs-right > .nav-tabs > li {
+        float: none;
+    }
+
+        .tabs-left > .nav-tabs > li > a,
+        .tabs-right > .nav-tabs > li > a {
+            min-width: 74px;
+            margin-right: 0;
+            margin-bottom: 3px;
+        }
+
+    .tabs-left > .nav-tabs {
+        float: left;
+        margin-right: 19px;
+        border-right: 1px solid #ddd;
+    }
+
+        .tabs-left > .nav-tabs > li > a {
+            margin-right: -1px;
+            border-radius: 4px 0 0 4px;
+        }
+
+            .tabs-left > .nav-tabs > li > a:hover,
+            .tabs-left > .nav-tabs > li > a:focus {
+                border-color: #eeeeee #dddddd #eeeeee #eeeeee;
+            }
+
+        .tabs-left > .nav-tabs .active > a,
+        .tabs-left > .nav-tabs .active > a:hover,
+        .tabs-left > .nav-tabs .active > a:focus {
+            border-color: #ddd transparent #ddd #ddd;
+            *border-right-color: #ffffff;
+        }
+
+    .tabs-right > .nav-tabs {
+        float: right;
+        margin-left: 19px;
+        border-left: 1px solid #ddd;
+    }
+
+        .tabs-right > .nav-tabs > li > a {
+            margin-left: -1px;
+            border-radius: 0 4px 4px 0;
+        }
+
+            .tabs-right > .nav-tabs > li > a:hover,
+            .tabs-right > .nav-tabs > li > a:focus {
+                border-color: #eeeeee #eeeeee #eeeeee #dddddd;
+            }
+
+        .tabs-right > .nav-tabs .active > a,
+        .tabs-right > .nav-tabs .active > a:hover,
+        .tabs-right > .nav-tabs .active > a:focus {
+            border-color: #ddd #ddd #ddd transparent;
+            *border-left-color: #ffffff;
+        }
+
+    .nav > .disabled > a {
+        color: #999999;
+    }
+
+        .nav > .disabled > a:hover,
+        .nav > .disabled > a:focus {
+            text-decoration: none;
+            background-color: transparent;
+            cursor: default;
+        }
+
+    .slidecontainer {
+        width: 100%;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
+
+        .slider:hover {
+            opacity: 1;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+
+    .list-group {
+        max-height: 400px;
+        margin-bottom: 10px;
+        overflow: scroll;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .legend {
+        background-color: #fff;
+        border-radius: 3px;
+        bottom: 30px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.10);
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        padding: 10px;
+        position: absolute;
+        right: 10px;
+        z-index: 1;
+    }
+
+        .legend h4 {
+            margin: 0 0 10px;
+        }
+
+        .legend div span {
+            border-radius: 50%;
+            display: inline-block;
+            height: 10px;
+            margin-right: 5px;
+            width: 10px;
+        }
+
+
+    /**
+    * Set rules for how the map overlays
+    * (information box and legend) will be displayed
+    * on the page. */
+    .map-overlay {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.8);
+        margin-right: 20px;
+        font-family: Arial, sans-serif;
+        overflow: auto;
+        border-radius: 3px;
+    }
+
+    #features {
+        top: 0;
+        height: 150px;
+        margin-top: 20px;
+        width: 300px;
+    }
+
+
+    .i-am-centered {
+        margin: auto;
+        max-width: 300px;
+    }
+
+    .drop-placeholder {
+        background-color: lightgray;
+        height: 3.5em;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        line-height: 1.2em;
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>RegionalVIC - Explore Regional Victoria</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+    <!-- Custom styles for this template -->
+    <link href="/css/agency.min.css" rel="stylesheet">
+
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+    <link rel='/stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.css' type='text/css' />
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <script src="/Scripts/rangeslider.js"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.min.js'></script>
+
+    <link href="/css/rangeslider.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="/">RegionVIC</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#team">Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Header -->
+    <header class="masthead">
+        <div class="container">
+            <div class="intro-normal">
+                <div class="intro-lead-in">Welcome To RegionVIC!</div>
+            </div>
+        </div>
+    </header>
+
+    <section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="container">
+                        <div id="map" style="height:800px"></div>
+                        <div class='map-overlay' id='features' style="display: none"><div id='pd'><p></p></div></div>
+
+                        <div id='state-legend' class='legend' style="display: none">
+                            <h4>House Price</h4>
+                            <div><span style='background-color: #723122'></span>550</div>
+                            <div><span style='background-color: #8B4225'></span>450</div>
+                            <div><span style='background-color: #A25626'></span>350</div>
+                            <div><span style='background-color: #B86B25'></span>300</div>
+                            <div><span style='background-color: #CA8323'></span>250</div>
+                            <div><span style='background-color: #E6B71E'></span>200</div>
+                            <div><span style='background-color: #EED322'></span>150</div>
+                            <div><span style='background-color: #F2F12D'></span>50</div>
+                        </div>
+
+                        <div id='state-crime-legend' class='legend' style="display: none">
+                            <h4>Crime rate</h4>
+                            <div><span style='background-color: #723122'></span>10%</div>
+                            <div><span style='background-color: #8B4225'></span>8%</div>
+                            <div><span style='background-color: #A25626'></span>7%</div>
+                            <div><span style='background-color: #B86B25'></span>6%</div>
+                            <div><span style='background-color: #CA8323'></span>5%</div>
+                            <div><span style='background-color: #DA9C20'></span>4%</div>
+                            <div><span style='background-color: #E6B71E'></span>3%</div>
+                            <div><span style='background-color: #EED322'></span>2%</div>
+                            <div><span style='background-color: #F2F12D'></span>1%</div>
+                        </div>
+
+                        <div id='state-density-legend' class='legend' style="display: none">
+                            <h4>Density</h4>
+                            <div><span style='background-color: #723122'></span>200</div>
+                            <div><span style='background-color: #8B4225'></span>50</div>
+                            <div><span style='background-color: #A25626'></span>20</div>
+                            <div><span style='background-color: #B86B25'></span>8</div>
+                            <div><span style='background-color: #CA8323'></span>5</div>
+                            <div><span style='background-color: #E6B71E'></span>3</div>
+                            <div><span style='background-color: #EED322'></span>1</div>
+                            <div><span style='background-color: #F2F12D'></span>0-1</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#home">Living </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#safety">Safety</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#recommendation">Recommendation</a>
+                        </li>
+
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="home" class="tab-pane container active">
+                            <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+                                <div class="card">
+                                    <div class="card-header" role="tab" id="headingOne1">
+                                        <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
+                                           aria-controls="collapseOne1">
+                                            <h5 class="mb-0">
+                                                <i class="fa fa-chevron-down pull-right"></i>
+                                                House type and size
+                                            </h5>
+                                        </a>
+                                    </div>
+                                    <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1" data-parent="#accordionEx">
+                                        <div class="card-body">
+                                            <div class="container">
+                                                <br>
+                                                <div class="form-group row">
+                                                    <div class="col-md-6">
+                                                        <label for="sel1">Num of bedroom:</label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <select class="form-control" id="sel1">
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-md-6">
+                                                        <label for="sel2">Type:</label>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <select class="form-control" id="sel2">
+                                                            <option>House</option>
+                                                            <option>Flat</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                @*<p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>*@
+                                                @*<p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>*@
+
+                                                <div class="form-group row">
+                                                    <div class="col-md-6">
+                                                        <button type="button" class="btn btn-primary btn-block" onclick="choropleth('a')">Show</button>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <button type="button" class="btn btn-primary btn-block" onclick="resetLayer()">Reset</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*<canvas id="myChart"></canvas>*@
+
+                                <div class="card">
+                                    <div class="card-header" role="tab" id="headingTwo2">
+                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2"
+                                           aria-expanded="false" aria-controls="collapseTwo2">
+                                            <h5 class="mb-0">
+                                                <i class="fa fa-chevron-down pull-right"></i> Budget Filter
+                                            </h5>
+                                        </a>
+                                    </div>
+                                    <div id="collapseTwo2" class="collapse" role="tabpanel" aria-labelledby="headingTwo2" data-parent="#accordionEx">
+                                        <div class="card-body">
+                                            <div class="container">
+                                                <div class="form-group">
+
+                                                    <h4>My budget (per week)</h4>
+                                                    <br>
+                                                    <div class="form-group row">
+                                                        <div class="input-group mb-3 col-md-5">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">$</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" id="min-bgt">
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <label for="max-bgt">to</label>
+                                                        </div>
+                                                        <div class="input-group mb-3 col-md-5">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">$</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" id="max-bgt">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btn btn-primary btn-block" onclick="filter()">Search</button>
+
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div id='list' class="list-group">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div id="safety" class="tab-pane container fade">
+                            <div class="accordion md-accordion" id="accordionEx2" role="tablist" aria-multiselectable="true">
+                                <div class="card">
+                                    <div class="card-header" role="tab" id="headingOne1">
+                                        <a data-toggle="collapse" data-parent="#accordionEx2" href="#collapseOne1" aria-expanded="true"
+                                           aria-controls="collapseOne1">
+                                            <h5 class="mb-0">
+                                                <i class="fa fa-chevron-down pull-right"></i>
+                                                Criminal Rate
+                                            </h5>
+                                        </a>
+                                    </div>
+                                    <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1" data-parent="#accordionEx2">
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <div class="col-md-6">
+                                                    <button type="button" class="btn btn-primary btn-block" onclick="choropleth('s')">Show</button>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <button type="button" class="btn btn-primary btn-block" onclick="resetLayer()">Reset</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header" role="tab" id="headingTwo2">
+                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx2" href="#collapseTwo2"
+                                           aria-expanded="false" aria-controls="collapseTwo2">
+                                            <h5 class="mb-0">
+                                                <i class="fa fa-chevron-down pull-right"></i> Density
+                                            </h5>
+                                        </a>
+                                    </div>
+                                    <div id="collapseTwo2" class="collapse" role="tabpanel" aria-labelledby="headingTwo2" data-parent="#accordionEx2">
+                                        <div class="card-body">
+
+                                            <div class="form-group row">
+                                                <div class="col-md-6">
+                                                    <button type="button" class="btn btn-primary btn-block" onclick="choropleth('p')">Show</button>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <button type="button" class="btn btn-primary btn-block" onclick="resetLayer()">Reset</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="recommendation" class="tab-pane container fade">
+                            <br>
+                            @*
+                                                        <ul id="sortable">
+                                    <li>Acommodation</li>
+                                    <li>Safety</li>
+                                </ul>
+                            *@
+
+                            <div class="form-group row">
+                                <h6>Accomondation Weight (a): <span id="acmValue"></span></h6>
+                                <div class="slidecontainer">
+                                    <input type="range" min="0" max="10" value="5" class="slider" id="acmSlider">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <h6>Criminal Weight (b): <span id="crmValue"></span></h6>
+                                <div class="slidecontainer">
+                                    <input type="range" min="0" max="10" value="5" class="slider" id="crmSlider">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <h6>Density Weight (c): <span id="pouValue"></span></h6>
+                                <div class="slidecontainer">
+                                    <input type="range" min="0" max="10" value="5" class="slider" id="pouSlider">
+                                </div>
+                            </div>
+                            <h6>Higher Weight: You care it more!</h6>
+                            <small><i>Final Score = a * Accomondation score + b * Criminal score + c * Density score </i></small>
+                            <br><hr>
+                            <h4>My budget (per week)</h4>
+                            <br>
+                            <div class="form-group row">
+                                <div class="input-group mb-3 col-md-5">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="min-bgt-recom">
+                                </div>
+                                <div class="col-md-1">
+                                    <label for="max-bgt">to</label>
+                                </div>
+                                <div class="input-group mb-3 col-md-5">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="max-bgt-recom">
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-block" onclick="recommendation()">One-click Recommendation</button>
+                            <hr>
+                            <div id='recomd-list' class="list-group">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @*<div>
+        <table class="table table-bordered table-sm table-striped">
+            <tbody>
+                @foreach (var p in Model)
+                {
+                    <tr>
+                        <td>@p.LgaCode</td>
+                        <td>@p.Median</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>*@
+
+    <script>
+        var lines;
+        var table;
+        var crimeTable;
+        var desyTable;
+
+        var allCode = [20110, 20260, 20570, 20660, 20740, 20830, 20910, 21010, 21110, 21180, 21270, 21370, 21450, 21610, 21670, 21750, 21830, 21890, 22110, 22170, 22250, 22310, 22410, 22490, 22620, 22670, 22750, 22830, 22910, 22980, 23110, 23190, 23270, 23350, 23430, 23670, 23810, 23940, 24130, 24210, 24250, 24330, 24410, 24600, 24650, 24780, 24850, 24900, 24970, 25060, 25150, 25250, 25340, 25430, 25490, 25620, 25710, 25810, 25900, 25990, 26080, 26170, 26260, 26350, 26430, 26490, 26610, 26670, 26700, 26730, 26810, 26890, 26980, 27070, 27170, 27260, 27350, 27450, 27630, 29399, 29499, 29799];
+
+        const TOKEN = "pk.eyJ1Ijoia2FzYWx1b3FpIiwiYSI6ImNqbHZ2OW53bTB5aHozcW9kcDJibndycXUifQ.SeWM7HbI0owT-Rwuv14Ntg";
+
+        mapboxgl.accessToken = TOKEN;
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/light-v9',
+            //style: 'mapbox://styles/mapbox/light-v9',
+            center: [145.045837, -37.876823],
+            zoom: 6
+        });
+
+        var hoveredStateId = null;
+        var highlightedStateId = null;
+
+        var acmslider = document.getElementById("acmSlider");
+        var crmSlider = document.getElementById("crmSlider");
+        var pouSlider = document.getElementById("pouSlider");
+
+        var acmValue = document.getElementById("acmValue");
+        var crmValue = document.getElementById("crmValue");
+        var pouValue = document.getElementById("pouValue");
+
+        acmValue.innerHTML = acmslider.value;
+        crmValue.innerHTML = crmSlider.value;
+        pouValue.innerHTML = pouSlider.value;
+
+        acmslider.oninput = function () {
+            acmValue.innerHTML = this.value;
+        }
+        crmSlider.oninput = function () {
+            crmValue.innerHTML = this.value;
+        }
+        pouSlider.oninput = function () {
+            pouValue.innerHTML = this.value;
+        }
+
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        var myData;
+        var rcMap;
+        var cheo = new Object;
+        var crimeCheo = new Object;
+        var desyCheo = new Object;
+        function formRegionColorMap() {
+            rcMap = new Map();
+            rcMap.set('20110', getRandomColor());
+            rcMap.set('20260', getRandomColor());
+            rcMap.set('20570', getRandomColor());
+            rcMap.set('20660', getRandomColor());
+            rcMap.set('20740', getRandomColor());
+            rcMap.set('20830', getRandomColor());
+            rcMap.set('20910', getRandomColor());
+            rcMap.set('21010', getRandomColor());
+            rcMap.set('21110', getRandomColor());
+            rcMap.set('21180', getRandomColor());
+            rcMap.set('21270', getRandomColor());
+            rcMap.set('21370', getRandomColor());
+            rcMap.set('21450', getRandomColor());
+            rcMap.set('21610', getRandomColor());
+            rcMap.set('21670', getRandomColor());
+            rcMap.set('21750', getRandomColor());
+            rcMap.set('21830', getRandomColor());
+            rcMap.set('21890', getRandomColor());
+            rcMap.set('22110', getRandomColor());
+            rcMap.set('22170', getRandomColor());
+            rcMap.set('22250', getRandomColor());
+            rcMap.set('22310', getRandomColor());
+            rcMap.set('22410', getRandomColor());
+            rcMap.set('22490', getRandomColor());
+            rcMap.set('22620', getRandomColor());
+            rcMap.set('22670', getRandomColor());
+            rcMap.set('22750', getRandomColor());
+            rcMap.set('22830', getRandomColor());
+            rcMap.set('22910', getRandomColor());
+            rcMap.set('22980', getRandomColor());
+            rcMap.set('23110', getRandomColor());
+            rcMap.set('23190', getRandomColor());
+            rcMap.set('23270', getRandomColor());
+            rcMap.set('23350', getRandomColor());
+            rcMap.set('23430', getRandomColor());
+            rcMap.set('23670', getRandomColor());
+            rcMap.set('23810', getRandomColor());
+            rcMap.set('23940', getRandomColor());
+            rcMap.set('24130', getRandomColor());
+            rcMap.set('24210', getRandomColor());
+            rcMap.set('24250', getRandomColor());
+            rcMap.set('24330', getRandomColor());
+            rcMap.set('24410', getRandomColor());
+            rcMap.set('24600', getRandomColor());
+            rcMap.set('24650', getRandomColor());
+            rcMap.set('24780', getRandomColor());
+            rcMap.set('24850', getRandomColor());
+            rcMap.set('24900', getRandomColor());
+            rcMap.set('24970', getRandomColor());
+            rcMap.set('25060', getRandomColor());
+            rcMap.set('25150', getRandomColor());
+            rcMap.set('25250', getRandomColor());
+            rcMap.set('25340', getRandomColor());
+            rcMap.set('25430', getRandomColor());
+            rcMap.set('25490', getRandomColor());
+            rcMap.set('25620', getRandomColor());
+            rcMap.set('25710', getRandomColor());
+            rcMap.set('25810', getRandomColor());
+            rcMap.set('25900', getRandomColor());
+            rcMap.set('25990', getRandomColor());
+            rcMap.set('26080', getRandomColor());
+            rcMap.set('26170', getRandomColor());
+            rcMap.set('26260', getRandomColor());
+            rcMap.set('26350', getRandomColor());
+            rcMap.set('26430', getRandomColor());
+            rcMap.set('26490', getRandomColor());
+            rcMap.set('26610', getRandomColor());
+            rcMap.set('26670', getRandomColor());
+            rcMap.set('26700', getRandomColor());
+            rcMap.set('26730', getRandomColor());
+            rcMap.set('26810', getRandomColor());
+            rcMap.set('26890', getRandomColor());
+            rcMap.set('26980', getRandomColor());
+            rcMap.set('27070', getRandomColor());
+            rcMap.set('27170', getRandomColor());
+            rcMap.set('27260', getRandomColor());
+            rcMap.set('27350', getRandomColor());
+            rcMap.set('27450', getRandomColor());
+            rcMap.set('27630', getRandomColor());
+            rcMap.set('29399', getRandomColor());
+            rcMap.set('29499', getRandomColor());
+            rcMap.set('29799', getRandomColor());
+
+            initialiseColor();
+        }
+
+        function initialiseColor() {
+            //var myData = { "VIC221": '#EED322', "VIC213": '#627BC1'};
+            myData = {
+                "20110": rcMap.get('20110'),
+                "20260": rcMap.get('20260'),
+                "20570": rcMap.get('20570'),
+                "20660": rcMap.get('20660'),
+                "20740": rcMap.get('20740'),
+                "20830": rcMap.get('20830'),
+                "20910": rcMap.get('20910'),
+                "21010": rcMap.get('21010'),
+                "21110": rcMap.get('21110'),
+                "21180": rcMap.get('21180'),
+                "21270": rcMap.get('21270'),
+                "21370": rcMap.get('21370'),
+                "21450": rcMap.get('21450'),
+                "21610": rcMap.get('21610'),
+                "21670": rcMap.get('21670'),
+                "21750": rcMap.get('21750'),
+                "21830": rcMap.get('21830'),
+                "21890": rcMap.get('21890'),
+                "22110": rcMap.get('22110'),
+                "22170": rcMap.get('22170'),
+                "22250": rcMap.get('22250'),
+                "22310": rcMap.get('22310'),
+                "22410": rcMap.get('22410'),
+                "22490": rcMap.get('22490'),
+                "22620": rcMap.get('22620'),
+                "22670": rcMap.get('22670'),
+                "22750": rcMap.get('22750'),
+                "22830": rcMap.get('22830'),
+                "22910": rcMap.get('22910'),
+                "22980": rcMap.get('22980'),
+                "23110": rcMap.get('23110'),
+                "23190": rcMap.get('23190'),
+                "23270": rcMap.get('23270'),
+                "23350": rcMap.get('23350'),
+                "23430": rcMap.get('23430'),
+                "23670": rcMap.get('23670'),
+                "23810": rcMap.get('23810'),
+                "23940": rcMap.get('23940'),
+                "24130": rcMap.get('24130'),
+                "24210": rcMap.get('24210'),
+                "24250": rcMap.get('24250'),
+                "24330": rcMap.get('24330'),
+                "24410": rcMap.get('24410'),
+                "24600": rcMap.get('24600'),
+                "24650": rcMap.get('24650'),
+                "24780": rcMap.get('24780'),
+                "24850": rcMap.get('24850'),
+                "24900": rcMap.get('24900'),
+                "24970": rcMap.get('24970'),
+                "25060": rcMap.get('25060'),
+                "25150": rcMap.get('25150'),
+                "25250": rcMap.get('25250'),
+                "25340": rcMap.get('25340'),
+                "25430": rcMap.get('25430'),
+                "25490": rcMap.get('25490'),
+                "25620": rcMap.get('25620'),
+                "25710": rcMap.get('25710'),
+                "25810": rcMap.get('25810'),
+                "25900": rcMap.get('25900'),
+                "25990": rcMap.get('25990'),
+                "26080": rcMap.get('26080'),
+                "26170": rcMap.get('26170'),
+                "26260": rcMap.get('26260'),
+                "26350": rcMap.get('26350'),
+                "26430": rcMap.get('26430'),
+                "26490": rcMap.get('26490'),
+                "26610": rcMap.get('26610'),
+                "26670": rcMap.get('26670'),
+                "26700": rcMap.get('26700'),
+                "26730": rcMap.get('26730'),
+                "26810": rcMap.get('26810'),
+                "26890": rcMap.get('26890'),
+                "26980": rcMap.get('26980'),
+                "27070": rcMap.get('27070'),
+                "27170": rcMap.get('27170'),
+                "27260": rcMap.get('27260'),
+                "27350": rcMap.get('27350'),
+                "27450": rcMap.get('27450'),
+                "27630": rcMap.get('27630'),
+                "29399": rcMap.get('29399'),
+                "29499": rcMap.get('29499'),
+                "29799": rcMap.get('29799')
+            };
+        }
+
+        var customData = new Object
+
+
+        formRegionColorMap();
+
+        map.on('load', function () {
+            // Add a layer showing the places.
+            map.addSource("states", {
+                "type": "geojson",
+                "data": "https://raw.githubusercontent.com/kasaluoqi/root/master/LGA_2018_AUST_VIC_ID.geojson"
+            });
+
+            map.addLayer({
+                "id": "state-fills",
+                "type": "fill",
+                "source": "states",
+                "layout": { 'visibility': 'visible' },
+                "paint": {
+                    "fill-color":
+                        ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", myData]],
+                    "fill-opacity": ["case",
+                        ["boolean", ["feature-state", "hover"], false],
+                        0.7,
+                        0.3
+                    ]
+                }
+            });
+
+            map.addLayer({
+                "id": "cheo",
+                "type": "fill",
+                "source": "states",
+                "layout": { 'visibility': 'none' },
+                "paint": {
+                    "fill-color":
+                        ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]],
+                    "fill-opacity": 0.7
+                }
+            });
+
+
+
+            // When the user moves their mouse over the state-fill layer, we'll update the
+            // feature state for the feature under the mouse.
+            map.on("mousemove", "state-fills", function (e) {
+                if (e.features.length > 0) {
+                    if (hoveredStateId) {
+                        map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                    }
+                    hoveredStateId = e.features[0].id;
+                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
+                }
+            });
+
+            // When the mouse leaves the state-fill layer, update the feature state of the
+            // previously hovered feature.
+            map.on("mouseleave", "state-fills", function () {
+                if (hoveredStateId) {
+                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                }
+                hoveredStateId = null;
+            });
+
+
+            //var ctx = document.getElementById('myChart').getContext('2d');
+            //var chart = new Chart(ctx);
+
+
+            map.on('mousemove', "cheo", function (e) {
+                var over = document.getElementById('features');
+                features.style.display = "block"
+
+                var states = map.queryRenderedFeatures(e.point);
+                if (states.length > 0) {
+                    document.getElementById('pd').innerHTML = '<h3><strong>' + states[0].properties.LGA_NAME18 + '</strong></h3><p><strong><em>' + displayList[states[0].properties.LGA_CODE18] + '</strong>.</em></p>';
+                } else {
+                    document.getElementById('pd').innerHTML = '<p>Hover over a state!</p>';
+                }
+            });
+
+            map.on('mouseleave', "cheo", function (e) {
+                var over = document.getElementById('features');
+                features.style.display = "none"
+            });
+
+            map.on('click', 'state-fills', function (e) {
+
+                var sel1 = jQuery("#sel1 option:selected").val();
+                var sel2 = jQuery("#sel2 option:selected").val();
+                var lgaCode = e.features[0].properties.LGA_CODE18;
+                var name = e.features[0].properties.LGA_NAME18;
+
+                new mapboxgl.Popup()
+                    .setLngLat(e.lngLat)
+                    .setHTML("LGA Code: " + lgaCode + ", Name: " + name)
+                    .addTo(map);
+            });
+        });
+        var filename = "Rental_Report_with_LGA_Code.csv";
+
+        $(document).ready(function () {
+            $.getJSON('https://raw.githubusercontent.com/kasaluoqi/root/master/LGA_2018_AUST_VIC_ID.geojson', function (data) {
+                customData = (data);
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "/Rental_Report_with_LGA_Code.csv",
+                dataType: "text",
+                success: function (data) {
+                    table = processData(data);
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "/Criminal_Incidents_with_LGA_Code.csv",
+                dataType: "text",
+                success: function (data) {
+                    crimeTable = processData(data);
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "/Population_Density_2017_Regional.csv",
+                dataType: "text",
+                success: function (data) {
+                    desyTable = processData(data);
+                }
+            });
+        });
+
+        function readData(filename) {
+            $.ajax({
+                type: "GET",
+                url: "/" + filename,
+                dataType: "text",
+                success: function (data) {
+                    table = processData(data);
+                }
+            });
+        }
+        var stateLegend = document.getElementById('state-legend');
+        var stateCrimeLegend = document.getElementById('state-crime-legend');
+        var stateDesyLegend = document.getElementById('state-density-legend');
+        function resetLayer() {
+
+            map.setLayoutProperty("state-fills", 'visibility', 'visible');
+            map.setLayoutProperty("cheo", 'visibility', 'none');
+
+            stateLegend.style.display = 'none';
+            stateCrimeLegend.style.display = 'none';
+            stateDesyLegend.style.display = 'none';
+        }
+        var displayList = new Object
+        function choropleth(option) {
+
+            if (option == "a") {
+
+                stateLegend.style.display = "block"
+                stateCrimeLegend.style.display = "none"
+                stateDesyLegend.style.display = "none"
+
+                var sel1 = jQuery("#sel1 option:selected").val();
+                var sel2 = jQuery("#sel2 option:selected").val();
+
+                for (var i = 0; i < allCode.length; i++) {
+                    var tmpList = getItems.call(this, table, allCode[i], "bedroom", sel1, "type", sel2);
+                    tmpList.sort((a, b) => (a.year < b.year) ? 1 :
+                        (getMonthFromString(a.month) < getMonthFromString(b.month)) ? 1 : -1)
+                    displayList[[allCode[i]]] = parseInt(getItem(tmpList[0], "median")) != 0 ? "House median is $" + parseInt(getItem(tmpList[0], "median"))
+                        + ". Number of recorded house: " + parseInt(getItem(tmpList[0], "count")) : "No record";
+                    cheo[allCode[i]] = getColor(
+                        parseInt(
+                            getItem(tmpList[0], "median")
+                        )
+                    )
+                }
+                map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
+
+                map.setLayoutProperty("state-fills", 'visibility', 'none');
+                map.setLayoutProperty("cheo", 'visibility', 'visible');
+            }
+            else if (option == "s") {
+
+                stateCrimeLegend.style.display = "block"
+                stateLegend.style.display = "none"
+                stateDesyLegend.style.display = "none"
+
+                var objects = crimeTable;
+
+                for (var j = 0; j < objects.length; j++) {
+                    for (var i = 0; i < allCode.length; i++) {
+
+                        var object = objects[j];
+                        if (object != null && object["Year ending December"] == "2018" &&
+                            parseInt(object["LGA_Code"]) == allCode[i]) {
+                            displayList[[allCode[i]]] = parseFloat(object["Rate"]) != 0 ? "Criminal Rate: " + parseFloat(object["Rate"]).toFixed(2) + "%. Incident number: " + parseInt(object["Incidents Recorded"]) : "No record";
+                            crimeCheo[allCode[i]] = getCrimeColor(parseFloat(object["Rate"]));
+                        }
+                    }
+                }
+
+                map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", crimeCheo]]);
+
+                map.setLayoutProperty("state-fills", 'visibility', 'none');
+                map.setLayoutProperty("cheo", 'visibility', 'visible');
+
+            }
+
+            else if (option == "p") {
+
+                stateLegend.style.display = "none"
+                stateCrimeLegend.style.display = "none"
+                stateDesyLegend.style.display = "block"
+
+                var objects = desyTable;
+
+                for (var j = 0; j < objects.length; j++) {
+                    for (var i = 0; i < allCode.length; i++) {
+
+                        var object = objects[j];
+                        if (object != null && parseInt(object["LGA Code"]) == allCode[i]) {
+                            displayList[[allCode[i]]] = parseFloat(object["Density"]) != 0 ? "Density: " + parseFloat(object["Density"]).toFixed(2) + ". Population: " + parseInt(object["Population"]) : "No record";
+                            desyCheo[allCode[i]] = getDesyColor(parseFloat(object["Density"]));
+                        }
+                    }
+                }
+
+                map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", desyCheo]]);
+
+                map.setLayoutProperty("state-fills", 'visibility', 'none');
+                map.setLayoutProperty("cheo", 'visibility', 'visible');
+
+            }
+
+        }
+
+
+        // get color depending on population density value
+        function getColor(d) {
+            return d > 550 ? '#723122' :
+                d > 450 ? '#8B4225' :
+                    d > 350 ? '#A25626' :
+                        d > 300 ? '#B86B25' :
+                            d > 250 ? '#CA8323' :
+                                d > 200 ? '#E6B71E' :
+                                    d > 150 ? '#EED322' :
+                                        d > 50 ? '#F2F12D' :
+                                            '#000000';
+        }
+        function getCrimeColor(d) {
+            return d > 10 ? '#723122' :
+                d > 8 ? '#8B4225' :
+                    d > 7 ? '#A25626' :
+                        d > 6 ? '#B86B25' :
+                            d > 5 ? '#CA8323' :
+                                d > 4 ? '##DA9C20' :
+                                    d > 3 ? '#E6B71E' :
+                                        d > 2 ? '#EED322' :
+                                            d > 1 ? '#F2F12D' :
+                                                '#000000';
+        }
+
+        function getDesyColor(d) {
+            return d > 200 ? '#723122' :
+                d > 50 ? '#8B4225' :
+                    d > 20 ? '#A25626' :
+                        d > 8 ? '#B86B25' :
+                            d > 5 ? '#CA8323' :
+                                d > 3 ? '#E6B71E' :
+                                    d > 1 ? '#EED322' :
+                                        '#F2F12D'
+        }
+
+        function processData(allText) {
+            var allTextLines = allText.split(/\r\n|\n/);
+            var headers = allTextLines[0].split(',');
+            lines = [];
+
+
+            for (var i = 1; i < allTextLines.length; i++) {
+                var data = allTextLines[i].split(',');
+                if (data.length == headers.length) {
+                    var object = new Object;
+                    for (var j = 0; j < headers.length; j++) {
+                        header = headers[j]
+                        value = data[j]
+                        object[header] = value
+                    }
+                    lines.push(object);
+                }
+            }
+            //alert(lines);
+            return lines;
+        }
+
+        var rates = new Object;
+
+        function getRatingByPrice(d) {
+            return d > 550 ? 0 :
+                d > 500 ? 1 :
+                    d > 450 ? 2 :
+                        d > 400 ? 3 :
+                            d > 350 ? 4 :
+                                d > 300 ? 5 :
+                                    d > 250 ? 6 :
+                                        d > 225 ? 7 :
+                                            d > 200 ? 8 :
+                                                d > 150 ? 9 :
+                                                    10;
+        }
+
+        function getRatingByCrime(d) {
+            return d > 10 ? 0 :
+                d > 9 ? 1 :
+                    d > 8 ? 2 :
+                        d > 7 ? 3 :
+                            d > 6 ? 4 :
+                                d > 5 ? 5 :
+                                    d > 4 ? 6 :
+                                        d > 3 ? 7 :
+                                            d > 2 ? 8 :
+                                                d > 1 ? 9 : 10;
+        }
+
+        function getRatingByDensity(d) {
+            return d > 200 ? 0 :
+                d > 150 ? 1 :
+                    d > 100 ? 5 :
+                        d > 50 ? 7 :
+                            d > 25 ? 8 :
+                                d > 15 ? 9 :
+                                    d > 10 ? 10 :
+                                        d > 8 ? 8 :
+                                            d > 7 ? 7 :
+                                                d > 6 ? 6 :
+                                                    d > 5 ? 5 :
+                                                        d > 4 ? 4 :
+                                                            d > 3 ? 3 :
+                                                                d > 2 ? 2 :
+                                                                    d > 1 ? 1 : 0;
+        }
+
+
+        function recommendation() {
+
+            var recomdList = document.getElementById('recomd-list');
+            recomdList.innerHTML = "";
+
+            var minBudget = parseInt(document.getElementById("min-bgt-recom").value);
+            var maxBudget = parseInt(document.getElementById("max-bgt-recom").value);
+
+            var objects = table;
+            var crimeObject = crimeTable;
+            var desyObject = desyTable;
+
+            var list = [];
+
+
+            var acmWeight = parseFloat(acmslider.value);
+            var crmWeight = parseFloat(crmSlider.value);
+            var pouWeight = parseFloat(pouSlider.value);
+
+            var sum = acmWeight + crmWeight + pouWeight;
+
+            acmWeight /= sum
+            crmWeight /= sum
+            pouWeight /= sum
+
+            //All rate:
+            for (var i = 0; i < allCode.length; i++) {
+                rates[allCode[i]] = -1;
+                for (var j = 0; j < objects.length; j++) {
+                    var object = objects[j];
+                    if (object != null && object["LGA_Code"] != "" && object["median"] != null &&
+                        parseInt(object["LGA_Code"]) === allCode[i]) {
+                        if (object["year"] == "2018") {
+                            rates[allCode[i]] = acmWeight * getRatingByPrice(parseInt(object["median"]));
+                            break;
+                        }
+                    }
+                }
+            }
+
+            for (var i = 0; i < allCode.length; i++) {
+                for (var j = 0; j < objects.length; j++) {
+                    var object = crimeObject[j];
+                    if (rates[allCode[i]] != -1 && object != null && object["LGA_Code"] != ""
+                        && object["Year ending December"] == "2018" && object["Rate"] != null &&
+                        parseInt(object["LGA_Code"]) === allCode[i]) {
+                        rates[allCode[i]] += crmWeight * getRatingByCrime(parseFloat(object["Rate"]));
+                        break;
+                    }
+                }
+            }
+
+            for (var i = 0; i < allCode.length; i++) {
+                for (var j = 0; j < objects.length; j++) {
+                    var object = desyObject[j];
+                    if (rates[allCode[i]] != -1 && object != null && object["LGA Code"] != ""
+                        && object["Density"] != null &&
+                        parseInt(object["LGA Code"]) === allCode[i]) {
+                        rates[allCode[i]] += pouWeight * getRatingByDensity(parseFloat(object["Density"]));
+                        break;
+                    }
+                }
+            }
+
+
+            for (var i = 0; i < objects.length; i++) {
+                var object = objects[i];
+                if (rates[allCode[i]] != -1 && object != null && object["LGA_Code"] != "" && object["median"] != "" &&
+                    parseInt(object["median"]) > minBudget && parseInt(object["median"]) < maxBudget) {
+                    if (object["year"] == "2018" && object["type"] != "all")
+                        list.push(object);
+                }
+            }
+
+
+
+            list.sort((a, b) => (rates[parseInt(a.LGA_Code)] < rates[parseInt((b.LGA_Code))]) ? 1 : -1)
+            for (var i = 0; i < list.length; i++) {
+                var recomdList = document.getElementById('recomd-list');
+                recomdList.innerHTML += '<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">   <div class="d-flex w-100 justify-content-between" > <h5 class="mb-1">'
+                    + list[i]["LGA"] + '</h5> <small class="text-muted" >' + list[i]["type"].toUpperCase() + ", B" + parseInt(list[i]["bedroom"]) + '</small> </div > <p class="mb-1">'
+                    + "Rate: " + rates[parseInt(list[i]["LGA_Code"])].toFixed(2) + '</p> </a>';
+
+            }
+
+            //return list;
+
+        }
+
+
+        function filter() {
+            var filterList = document.getElementById('list');
+            filterList.innerHTML = "";
+
+            var minBudget = parseInt(document.getElementById("min-bgt").value);
+            var maxBudget = parseInt(document.getElementById("max-bgt").value);
+
+            var objects = table;
+
+            var list = [];
+            for (var i = 0; i < objects.length; i++) {
+                var object = objects[i];
+                if (object != null && object["median"] != "" &&
+                    parseInt(object["median"]) > minBudget && parseInt(object["median"]) < maxBudget) {
+                    if (object["year"] == "2018" && object["type"] != "all")
+                        list.push(object);
+                }
+            }
+            list.sort((a, b) => (a.median > b.median) ? 1 : -1)
+            for (var i = 0; i < list.length; i++) {
+                var filterList = document.getElementById('list');
+                filterList.innerHTML += '<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">   <div class="d-flex w-100 justify-content-between" > <h5 class="mb-1">'
+                    + list[i]["LGA"] + " - $" + list[i]["median"] + '</h5> <small class="text-muted" >' + list[i]["region"] + '</small> </div> <p class="mb-1">'
+                    + "Type: " + list[i]["type"] + ". Num of bedroom: " + parseInt(list[i]["bedroom"]) + '</p> </a>';
+
+            }
+
+            //return list;
+
+        }
+
+        var getItems = function ()
+                                                            /*function getItems(objects, lgaCode, attriName, attriValue, year = "", yearValue = "")*/ {
+            if (arguments.length < 2)
+                return;
+            var objects = arguments[0];
+            var lgaCode = arguments[1];
+
+            var args = new Object;
+            for (var i = 2; i < arguments.length; i = i + 2) {
+                args[arguments[i]] = arguments[i + 1]
+            }
+
+            var list = [];
+            for (var i = 0; i < objects.length; i++) {
+                var object = objects[i];
+                var ready = true;
+                if (object != null && parseInt(object["LGA_Code"]) == parseInt(lgaCode)) {
+
+                    for (var j = 0; j < Object.keys(args).length; j++) {
+                        attriName = Object.keys(args)[j];
+                        attriValue = Object.values(args)[j];
+
+                        if (attriValue != null && attriName != null &&
+                            isNumber(attriValue) ? parseInt(object[attriName]) == parseInt(attriValue) : object[attriName].toUpperCase() == attriValue.toUpperCase()
+                        ) {
+                            if (object["median"] != "" && object["year"] == "2018")
+                                ready &= true;
+                            else
+                                ready &= false;
+                        }
+                        else
+                            ready &= false;
+                    }
+                    if (ready)
+                        list.push(object);
+                }
+            }
+            return list;
+        }
+
+        function getItem(object, name) {
+            return object != null ? object[name] : 0
+        }
+
+        function getMonthFromString(mon) {
+            return new Date(Date.parse(mon + " 1, 2012")).getMonth() + 1
+        }
+
+        function isNumber(str) {
+            val = parseInt(str)
+            if (isNaN(val))
+                return false;
+            return true;
+        }
+
+        function processNumber(str) {
+            val = parseInt(str)
+            if (isNaN(val))
+                return str;
+            return val;
+        }
+
+        function showPolygonArea(e) {
+            featureGroup.clearLayers();
+            featureGroup.addLayer(e.layer);
+
+            // Here 'e.layer' holds the L.Polygon instance:
+            new L.Marker(e.layer.getBounds().getCenter()).addTo(featureGroup);
+
+            e.layer.bindPopup((LGeo.area(e.layer) / 1000000).toFixed(2) + ' km<sup>2</sup>');
+            e.layer.openPopup();
+        }
+    </script>
+
+    <!-- Contact form JavaScript -->
+    <script src="/js/jqBootstrapValidation.js"></script>
+    <script src="/js/contact_me.js"></script>
+    <!-- Custom scripts for this template -->
+    <script src="/js/agency.min.js"></script>
+
+</body>
+
+</html>
+

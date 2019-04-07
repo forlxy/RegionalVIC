@@ -1,0 +1,80 @@
+﻿@model RegionalVIC.Models.DB.Rtrtbl
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+
+<h4>Rtrtbl</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Seq" />
+            <div class="form-group">
+                <label asp-for="Yr" class="control-label"></label>
+                <input asp-for="Yr" class="form-control" />
+                <span asp-validation-for="Yr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mth" class="control-label"></label>
+                <input asp-for="Mth" class="form-control" />
+                <span asp-validation-for="Mth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quarter" class="control-label"></label>
+                <input asp-for="Quarter" class="form-control" />
+                <span asp-validation-for="Quarter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Region" class="control-label"></label>
+                <input asp-for="Region" class="form-control" />
+                <span asp-validation-for="Region" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LgaCode" class="control-label"></label>
+                <input asp-for="LgaCode" class="form-control" />
+                <span asp-validation-for="LgaCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Typ" class="control-label"></label>
+                <input asp-for="Typ" class="form-control" />
+                <span asp-validation-for="Typ" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NoOfBedrm" class="control-label"></label>
+                <input asp-for="NoOfBedrm" class="form-control" />
+                <span asp-validation-for="NoOfBedrm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Count" class="control-label"></label>
+                <input asp-for="Count" class="form-control" />
+                <span asp-validation-for="Count" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Median" class="control-label"></label>
+                <input asp-for="Median" class="form-control" />
+                <span asp-validation-for="Median" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+</body>
+</html>

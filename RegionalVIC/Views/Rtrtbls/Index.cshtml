@@ -1,0 +1,91 @@
+﻿@model IEnumerable<RegionalVIC.Models.DB.Rtrtbl>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Yr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quarter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Region)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LgaCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Typ)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoOfBedrm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Count)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Median)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Yr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quarter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Region)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LgaCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Typ)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoOfBedrm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Count)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Median)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Seq">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Seq">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Seq">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>

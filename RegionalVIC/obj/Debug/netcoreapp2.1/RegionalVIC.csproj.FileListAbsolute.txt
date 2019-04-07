@@ -52,5 +52,10 @@ C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcorea
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.pdb
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.csproj.CopyComplete
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.csprojAssemblyReference.cache
-C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\Home\Map.g.cshtml.cs
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\Map\Index.g.cshtml.cs
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\Rtrtbls\Create.g.cshtml.cs
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\Rtrtbls\Delete.g.cshtml.cs
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\Rtrtbls\Details.g.cshtml.cs
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\Rtrtbls\Edit.g.cshtml.cs
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\Rtrtbls\Index.g.cshtml.cs
