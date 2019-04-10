@@ -594,8 +594,8 @@
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Plugin JavaScript -->
     <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <script src="/Scripts/rangeslider.js"></script>
+    <script src="https://unpkg.com/tinyqueue@2.0.0/tinyqueue.min.js"></script>
+    <script src="/js/polylabel.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.min.js'></script>
@@ -632,9 +632,9 @@
     <section id="services">
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-lg-7 col-md-6 col-sm-12">
                     <div class="container">
-                        <div id="map" style="height:800px"></div>
+                        <div id="map" class="mmap" style="height:800px"></div>
                         <div class='map-overlay' id='features' style="display: none"><div id='pd'><p></p></div></div>
 
                         <div id='state-legend' class='legend' style="display: none">
@@ -678,7 +678,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-lg-5 col-md-6 col-sm-12">
 
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
@@ -964,7 +964,7 @@
         var table;
         var crimeTable;
         var desyTable;
-
+        
         var allCode = [20110, 20260, 20570, 20660, 20740, 20830, 20910, 21010, 21110, 21180, 21270, 21370, 21450, 21610, 21670, 21750, 21830, 21890, 22110, 22170, 22250, 22310, 22410, 22490, 22620, 22670, 22750, 22830, 22910, 22980, 23110, 23190, 23270, 23350, 23430, 23670, 23810, 23940, 24130, 24210, 24250, 24330, 24410, 24600, 24650, 24780, 24850, 24900, 24970, 25060, 25150, 25250, 25340, 25430, 25490, 25620, 25710, 25810, 25900, 25990, 26080, 26170, 26260, 26350, 26430, 26490, 26610, 26670, 26700, 26730, 26810, 26890, 26980, 27070, 27170, 27260, 27350, 27450, 27630, 29399, 29499, 29799];
 
         const TOKEN = "pk.eyJ1Ijoia2FzYWx1b3FpIiwiYSI6ImNqbHZ2OW53bTB5aHozcW9kcDJibndycXUifQ.SeWM7HbI0owT-Rwuv14Ntg";
@@ -1195,6 +1195,40 @@
 
         var customData = new Object
 
+        function flytoPoly(LGA_Code) {
+
+            map.flyTo({
+                center: p,
+                zoom: 20
+            });
+            var features = customData["features"];
+            //map.setFilter('state-fills', ['==', ['number', ['get', 'LGA_CODE18']], LGA_Code]);
+            if (features) {
+                if (features.length) {
+                    var p;
+                    var feat;
+                    features.forEach(function (feature) {
+                        if (parseInt(feature.properties.LGA_CODE18) === LGA_Code) {
+
+                            feat = feature;
+                            var coords = feature.geometry.coordinates;
+                            p = polylabel(coords, 1.0);
+                        }
+                    });
+                    map.flyTo({
+                        center: p,
+                        zoom: 9
+                    });
+                    if (hoveredStateId) {
+                        map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                    }
+                    hoveredStateId = feat.id;
+                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
+                }
+            }
+            
+        }
+
         //Generate Color
         formRegionColorMap();
 
@@ -1215,7 +1249,7 @@
                         ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", myData]],
                     "fill-opacity": ["case",
                         ["boolean", ["feature-state", "hover"], false],
-                        0.7,
+                        0.9,
                         0.3
                     ]
                 }
@@ -1237,10 +1271,62 @@
                     ]
                 }
             });
+            //map.addLayer({
+            //    "id": "region-label",
+            //    "type": "symbol",
+            //    "source": "states",
+            //    "layout": {
+            //        'text-field': '{LGA_NAME18}',
+            //        'text-font': ["Lato Bold"],
+            //        'text-size': {
+            //            "base": 1,
+            //            "stops": [
+            //                [12, 12],
+            //                [16, 16]
+            //            ]
+            //        },
+            //        "text-padding": 3,
+            //        "text-letter-spacing": 0.1,
+            //        "text-max-width": 7,
+            //        "text-transform": "uppercase",
+            //        "text-justify": {
+            //            "stops": [
+            //                [
+            //                    8,
+            //                    "left"
+            //                ],
+            //                [
+            //                    9,
+            //                    "center"
+            //                ]
+            //            ]
+            //        },
+            //        "text-anchor": {
+            //            "stops": [
+            //                [
+            //                    8,
+            //                    "bottom-left"
+            //                ],
+            //                [
+            //                    9,
+            //                    "center"
+            //                ]
+            //            ]
+            //        }
+            //    },
+            //    "paint": {
+            //        "text-color": "#333",
+            //        "text-halo-color": "hsl(0, 0%, 100%)",
+            //        "text-halo-width": 1.5,
+            //        "text-halo-blur": 1
+            //    }
+            //});
 
             // When the user moves their mouse over the state-fill layer, we'll update the
             // feature state for the feature under the mouse.
             map.on("mousemove", "state-fills", function (e) {
+                map.getCanvas().style.cursor = e.features.length ? 'pointer' : '';
+
                 if (e.features.length > 0) {
                     if (hoveredStateId) {
                         map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
@@ -1369,6 +1455,15 @@
             //$('#acmSlider').slider().on('slideStop', function (ev) {
             //    recommendation()
             //});
+
+            //$(window).scroll(function () {
+            //    if ($(window).scrollTop <= 50) {
+            //        $(".mmap").css("bottom", 50 - $(window).scrollTop() ); //I want this value to change dynamically as the scrollbar moves down, so that the div stays on top of screen
+            //    } else {
+            //        $(".mmap").css("bottom", 100 - $(window).scrollTop() );
+            //    }
+            //});
+
         });
 
         function readData(filename) {
@@ -1693,7 +1788,7 @@
             list.sort((a, b) => (rates[parseInt(a.LGA_Code)] < rates[parseInt((b.LGA_Code))]) ? 1 : -1)
             for (var i = 0; i < list.length; i++) {
                 var recomdList = document.getElementById('recomd-list');
-                recomdList.innerHTML += '<div class="list-group-item list-group-item-action flex-column align-items-start">   <div class="d-flex w-100 justify-content-between" > <h5 class="mb-1">'
+                recomdList.innerHTML += '<div onclick="flytoPoly(' + parseInt(list[i]["LGA_Code"]) + ')" class="list-group-item list-group-item-action flex-column align-items-start">   <div class="d-flex w-100 justify-content-between" > <h5 class="mb-1">'
                     + list[i]["LGA"] + '</h5> <small class="text-muted" >Top ' + (i + 1) + '</small> </div > <p class="mb-1">'
                     + "Region: " + list[i]["region"] + '</p> <small>' + parseInt(list[i]["bedroom"]) + " bedroom(s) " + jsUcfirst(list[i]["type"]) + '</small> </div>';
 
@@ -1731,7 +1826,7 @@
             list.sort((a, b) => (a.median > b.median) ? 1 : -1)
             for (var i = 0; i < list.length; i++) {
                 var filterList = document.getElementById('list');
-                filterList.innerHTML += '<div class="list-group-item list-group-item-action flex-column align-items-start">   <div class="d-flex w-100 justify-content-between" > <h6 class="mb-1">'
+                filterList.innerHTML += '<div onclick="flytoPoly(' + parseInt(list[i]["LGA_Code"]) + ')" class="list-group-item list-group-item-action flex-column align-items-start">   <div class="d-flex w-100 justify-content-between" > <h6 class="mb-1">'
                     + list[i]["LGA"] + " - " + list[i]["region"] + '</h6> <small class="text-muted" >$' + parseInt(list[i]["median"]) + '</small> </div> <p class="mb-1">'
                     + parseInt(list[i]["bedroom"]) + " bedroom(s) " + jsUcfirst(list[i]["type"]) + '</p> </div>';
 
