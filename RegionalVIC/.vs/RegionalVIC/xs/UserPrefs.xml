@@ -1,18 +1,19 @@
 ﻿<Properties StartupConfiguration="{37DCFD75-BDF2-4C1E-9545-3FFC382D4681}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/DbController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Models/DB/RegionalVICContext.cs">
     <Files>
       <File FileName="Controllers/DbController.cs" Line="10" Column="1" />
+      <File FileName="Models/DB/RegionalVICContext.cs" Line="94" Column="21" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RegionalVIC" expanded="True">
             <Node name="RegionalVIC" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="DbController.cs" selected="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
               <Node name="Models" expanded="True">
-                <Node name="DB" expanded="True" />
+                <Node name="DB" expanded="True">
+                  <Node name="RegionalVICContext.cs" selected="True" />
+                </Node>
               </Node>
               <Node name="Views" expanded="True">
                 <Node name="Home" expanded="True" />

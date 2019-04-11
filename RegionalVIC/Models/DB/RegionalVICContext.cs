@@ -90,8 +90,8 @@ namespace RegionalVIC.Models.DB
                     .IsUnicode(false);
 
                 entity.Property(e => e.LgaDesc)
-                    .HasColumnName("LGA_desc")
-                    //.HasColumnType("varchar(max)")
+                    //.HasColumnName("LGA_desc")
+                    .HasColumnType("varchar(MAX)")
                     .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasDefaultValueSql("('')");
