@@ -91,6 +91,7 @@ namespace RegionalVIC.Models.DB
 
                 entity.Property(e => e.LgaDesc)
                     .HasColumnName("LGA_desc")
+                    //.HasColumnType("varchar(max)")
                     .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasDefaultValueSql("('')");
