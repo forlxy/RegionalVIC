@@ -1339,6 +1339,8 @@
             // When the mouse leaves the state-fill layer, update the feature state of the
             // previously hovered feature.
             map.on("mouseleave", "state-fills", function () {
+
+                map.getCanvas().style.cursor = e.features.length ? 'default' : '';
                 if (hoveredStateId) {
                     map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
                 }
@@ -1786,11 +1788,11 @@
 
 
             list.sort((a, b) => (rates[parseInt(a.LGA_Code)] < rates[parseInt((b.LGA_Code))]) ? 1 : -1)
-            for (var i = 0; i < list.length; i++) {
+            for (var i = 0; i < 10; i++) {
                 var recomdList = document.getElementById('recomd-list');
-                recomdList.innerHTML += '<div onclick="flytoPoly(' + parseInt(list[i]["LGA_Code"]) + ')" class="list-group-item list-group-item-action flex-column align-items-start">   <div class="d-flex w-100 justify-content-between" > <h5 class="mb-1">'
+                recomdList.innerHTML += '<a href="javascript:flytoPoly(' + parseInt(list[i]["LGA_Code"]) + ')" class="list-group-item list-group-item-action flex-column align-items-start">   <div class="d-flex w-100 justify-content-between" > <h5 class="mb-1">'
                     + list[i]["LGA"] + '</h5> <small class="text-muted" >Top ' + (i + 1) + '</small> </div > <p class="mb-1">'
-                    + "Region: " + list[i]["region"] + '</p> <small>' + parseInt(list[i]["bedroom"]) + " bedroom(s) " + jsUcfirst(list[i]["type"]) + '</small> </div>';
+                    + "Region: " + list[i]["region"] + '</p> <small>' + parseInt(list[i]["bedroom"]) + " bedroom(s) " + jsUcfirst(list[i]["type"]) + '</small> </a>';
 
             }
 
@@ -1826,9 +1828,9 @@
             list.sort((a, b) => (a.median > b.median) ? 1 : -1)
             for (var i = 0; i < list.length; i++) {
                 var filterList = document.getElementById('list');
-                filterList.innerHTML += '<div onclick="flytoPoly(' + parseInt(list[i]["LGA_Code"]) + ')" class="list-group-item list-group-item-action flex-column align-items-start">   <div class="d-flex w-100 justify-content-between" > <h6 class="mb-1">'
+                filterList.innerHTML += '<a href="javascript:flytoPoly(' + parseInt(list[i]["LGA_Code"]) + ')" class="list-group-item list-group-item-action flex-column align-items-start">   <div class="d-flex w-100 justify-content-between" > <h6 class="mb-1">'
                     + list[i]["LGA"] + " - " + list[i]["region"] + '</h6> <small class="text-muted" >$' + parseInt(list[i]["median"]) + '</small> </div> <p class="mb-1">'
-                    + parseInt(list[i]["bedroom"]) + " bedroom(s) " + jsUcfirst(list[i]["type"]) + '</p> </div>';
+                    + parseInt(list[i]["bedroom"]) + " bedroom(s) " + jsUcfirst(list[i]["type"]) + '</p> </a>';
 
             }
 
