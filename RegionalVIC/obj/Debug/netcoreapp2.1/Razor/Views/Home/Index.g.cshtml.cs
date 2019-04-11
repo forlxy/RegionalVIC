@@ -40,14 +40,14 @@ namespace AspNetCore
         #pragma warning disable 1998
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
-#line 1 "C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\Views\Home\Index.cshtml"
+#line 1 "/Users/sysadmin/GitKraken/RegionalVIC/RegionalVIC/Views/Home/Index.cshtml"
   
     ViewBag.Title = "Home Page";
 
 #line default
 #line hidden
-            BeginContext(41, 35, true);
-            WriteLiteral("<!DOCTYPE html>\r\n<html lang=\"en\">\r\n");
+            BeginContext(38, 33, true);
+            WriteLiteral("<!DOCTYPE html>\n<html lang=\"en\">\n");
             EndContext();
             BeginContext(76, 1087, false);
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "327bf71e4a3b4fe98a0dabbfe86eaa41", async() => {
@@ -57,7 +57,7 @@ namespace AspNetCore
     <meta name=""viewport"" content=""width=device-width, initial-scale=1, shrink-to-fit=no"">
     <meta name=""description"" content="""">
     <meta name=""author"" content="""">
-    <title>RegionalVIC - Time for a new journey</title>
+    <title>RegionalVIC - A guide to moving to regional Victoria</title>
     <!-- Bootstrap core CSS -->
     <link href=""vendor/bootstrap/css/bootstrap.min.css"" rel=""stylesheet"">
     <!-- Custom fonts for this template -->
@@ -67,8 +67,8 @@ namespace AspNetCore
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
     <!-- Custom styles for this template -->
-    <");
-                WriteLiteral("link href=\"css/agency.min.css\" rel=\"stylesheet\">\r\n");
+    ");
+                WriteLiteral("<link href=\"css/agency.min.css\" rel=\"stylesheet\">\n");
                 EndContext();
             }
             );
@@ -82,8 +82,8 @@ namespace AspNetCore
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             EndContext();
-            BeginContext(1163, 2, true);
-            WriteLiteral("\r\n");
+            BeginContext(1158, 1, true);
+            WriteLiteral("\n");
             EndContext();
             BeginContext(1165, 10186, false);
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "553c5ed330a34dd69ea9a3477be7b788", async() => {
@@ -106,17 +106,17 @@ namespace AspNetCore
                         <a class=""nav-link js-scroll-trigger"" href=""#team"">Team</a>
                     </li>
                 </ul>
-            </");
-                WriteLiteral(@"div>
-        </div>
+            </div>
+        </div");
+                WriteLiteral(@">
     </nav>
     <!-- Header -->
     <header class=""masthead"">
         <div class=""container"">
             <div class=""intro-text"">
                 <div class=""intro-lead-in"">Welcome To RegionalVIC!</div>
-                <div class=""intro-heading text-uppercase"">Wanna start a new journey?</div>
-                <a class=""btn btn-primary btn-xl text-uppercase js-scroll-trigger"" href=""/Map/index""><i>Start you journey here!</i></a>
+                <div class=""intro-heading text-uppercase"">Wanna move to regional Victoria?</div>
+                <a class=""btn btn-primary btn-xl text-uppercase js-scroll-trigger"" href=""/Map/index""><i>Let's go!</i></a>
             </div>
         </div>
     </header>
@@ -133,49 +133,48 @@ namespace AspNetCore
                     <ul class=""timeline"">
                         <li>
                             <div class=""timeline-image"">
-                            ");
-                WriteLiteral(@"    <img class=""rounded-circle img-fluid"" src=""img/about/a1.jpg"" alt="""">
+                                <img class=""rounded-circle img-fluid"" src=""img/a");
+                WriteLiteral(@"bout/a1.jpg"" alt="""">
                             </div>
                             <div class=""timeline-panel"">
                                 <div class=""timeline-heading"">
                                     <h4 class=""subheading"">Background</h4>
                                 </div>
                                 <div class=""timeline-body"">
-                                    <p class=""text-muted"">The population growth in the major cities of Australia is an unavoidable concern. As a result, it is becoming more challenging for international graduates who want to permanently live in Australia in the future to get job opportunities in Melbourne and enjoy a comfortable living environment. On the other hand, the application of PR for international graduates becoming more competitive. </p>
+                                    <p class=""text-muted"">Over-population is one of the issues in Melbourne. Besides, for international graduates, many competitors are in the application of skilled immigration visa. As a result, it becomes more challenging for international graduates who want to live in Australia permanently. </p>
                                 </div>
                             </div>
                         </li>
-                        <li class=""timeline-inverted"">");
-                WriteLiteral(@"
+                        <li class=""timeline-inverted"">
                             <div class=""timeline-image"">
                                 <img class=""rounded-circle img-fluid"" src=""img/about/a2.jpg"" alt="""">
-                            </div>
+                        ");
+                WriteLiteral(@"    </div>
                             <div class=""timeline-panel"">
                                 <div class=""timeline-heading"">
                                     
                                     <h4 class=""subheading"">What we provide</h4>
                                 </div>
                                 <div class=""timeline-body"">
-                                    <p class=""text-muted"">RegionalVIC - provides the most essential information for international graduated students who are considering to move to regional Victoria. We analyzed the most urgent needs such as accommodation and safety situation from user’s perspective and provide recommendation of suitable areas to live in by filtering their requirements. </p>
+                                    <p class=""text-muted"">RegionalVIC - provides the key information for international graduates who consider moving to regional Victoria. Our website analyzes their requirements such as accommodation and safety to provide the suggestion of suitable areas to live in. </p>
                                 </div>
                             </div>
-              ");
-                WriteLiteral(@"          </li>
+                        </li>
                         <li>
                             <div class=""timeline-image"">
                                 <img class=""rounded-circle img-fluid"" src=""img/about/a3.jpg"" alt="""">
                             </div>
-                            <div class=""timeline-panel"">
+                            <div class=""timeli");
+                WriteLiteral(@"ne-panel"">
                                 <div class=""timeline-heading"">
                                     <h4 class=""subheading"">Value</h4>
                                 </div>
                                 <div class=""timeline-body"">
-                                    <p class=""text-muted"">Reduce the increasing population in Melbourne. Help users to make their decision of choosing a suitable place in regional Victoria to live and reach a consensus with the new immigration policy of Australia government - encourage people to move to regional areas. </p>
+                                    <p class=""text-muted"">Mitigate the over-population issue in Melbourne. Help international graduates to decide on a suitable region to live. Coordinate with the new immigration policy of Australia government - encourage new immigrants to move to regional areas. </p>
                                 </div>
                             </div>
                         </li>
-                        <li class=""timeline-inverted""");
-                WriteLiteral(@">
+                        <li class=""timeline-inverted"">
                             <div class=""timeline-image"">
                                 <h4>
                                     Be Part
@@ -183,7 +182,8 @@ namespace AspNetCore
                                     <br>Story!
                                 </h4>
                             </div>
-                        </li>
+               ");
+                WriteLiteral(@"         </li>
                     </ul>
                 </div>
             </div>
@@ -204,12 +204,13 @@ namespace AspNetCore
                      ");
                 WriteLiteral(@"   <img class=""mx-auto rounded-circle"" src=""img/team/1.png"" style=""width:200px;height:200px;"" alt="""">
                         <h4>Sam</h4>
-                        <p class=""text-muted"">Developper</p>
+                        <p class=""text-muted"">Developer</p>
                     </div>
                 </div>
                 <div class=""col"">
                     <div class=""team-member"">
-                        <img class=""mx-auto rounded-circle"" src=""img/team/2.png"" style=""width:200px;height:200px;""  alt="""">
+                   ");
+                WriteLiteral(@"     <img class=""mx-auto rounded-circle"" src=""img/team/2.png"" style=""width:200px;height:200px;""  alt="""">
                         <h4>Mahi</h4>
                         <p class=""text-muted"">Business Analyst</p>
                     </div>

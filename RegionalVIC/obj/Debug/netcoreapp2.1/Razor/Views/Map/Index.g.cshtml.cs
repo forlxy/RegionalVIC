@@ -13,7 +13,7 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
-#line 1 "C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\Views\Map\Index.cshtml"
+#line 1 "/Users/sysadmin/GitKraken/RegionalVIC/RegionalVIC/Views/Map/Index.cshtml"
 using RegionalVIC.Models.DB;
 
 #line default
@@ -44,10 +44,10 @@ using RegionalVIC.Models.DB;
         #pragma warning disable 1998
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
-            BeginContext(71, 2, true);
-            WriteLiteral("\r\n");
+            BeginContext(70, 1, true);
+            WriteLiteral("\n");
             EndContext();
-            BeginContext(105, 13765, true);
+            BeginContext(102, 13198, true);
             WriteLiteral(@"<style>
     /* Style the header */
     .floatmap {
@@ -89,10 +89,10 @@ using RegionalVIC.Models.DB;
     }
 
         .clearfix:before,
-        .clearfix:a");
-            WriteLiteral(@"fter {
+        .clearfix:after {
             display: table;
-            content: """";
+      ");
+            WriteLiteral(@"      content: """";
             line-height: 0;
         }
 
@@ -140,12 +140,12 @@ using RegionalVIC.Models.DB;
             float: right;
         }
 
-    .nav-he");
-            WriteLiteral(@"ader {
+    .nav-header {
         display: block;
         padding: 3px 15px;
         font-size: 11px;
-        font-weight: bold;
+        ");
+            WriteLiteral(@"font-weight: bold;
         line-height: 20px;
         color: #999999;
         text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
@@ -182,14 +182,14 @@ using RegionalVIC.Models.DB;
         }
 
         .nav-list [class^=""icon-""],
-        .nav-");
-            WriteLiteral(@"list [class*="" icon-""] {
+        .nav-list [class*="" icon-""] {
             margin-right: 2px;
         }
 
         .nav-list .divider {
             *width: 100%;
-            height: 1px;
+          ");
+            WriteLiteral(@"  height: 1px;
             margin: 9px 1px;
             *margin: -5px 0 5px;
             overflow: hidden;
@@ -227,8 +227,7 @@ using RegionalVIC.Models.DB;
                 padding-left: 12px;
                 margin-right: 2px;
                 line-height: 14px;
-        ");
-            WriteLiteral(@"    }
+            }
 
     .nav-tabs {
         border-bottom: 1px solid #ddd;
@@ -239,7 +238,8 @@ using RegionalVIC.Models.DB;
         }
 
             .nav-tabs > li > a {
-                padding-top: 8px;
+     ");
+            WriteLiteral(@"           padding-top: 8px;
                 padding-bottom: 8px;
                 line-height: 20px;
                 border: 1px solid transparent;
@@ -266,8 +266,7 @@ using RegionalVIC.Models.DB;
         padding-bottom: 8px;
         margin-top: 2px;
         margin-bottom: 2px;
-     ");
-            WriteLiteral(@"   border-radius: 5px;
+        border-radius: 5px;
     }
 
     .nav-pills > .active > a,
@@ -277,7 +276,8 @@ using RegionalVIC.Models.DB;
         background-color: #0088cc;
     }
 
-    .nav-stacked > li {
+    .nav-stacke");
+            WriteLiteral(@"d > li {
         float: none;
     }
 
@@ -310,8 +310,7 @@ using RegionalVIC.Models.DB;
             z-index: 2;
         }
 
-    .nav-pills.nav-s");
-            WriteLiteral(@"tacked > li > a {
+    .nav-pills.nav-stacked > li > a {
         margin-bottom: 3px;
     }
 
@@ -324,7 +323,8 @@ using RegionalVIC.Models.DB;
     }
 
     .nav-pills .dropdown-menu {
-        border-radius: 6px;
+        border");
+            WriteLiteral(@"-radius: 6px;
     }
 
     .nav .dropdown-toggle .caret {
@@ -354,8 +354,7 @@ using RegionalVIC.Models.DB;
     }
 
     .nav > .dropdown.active > a:hover,
-    .nav > ");
-            WriteLiteral(@".dropdown.active > a:focus {
+    .nav > .dropdown.active > a:focus {
         cursor: pointer;
     }
 
@@ -365,7 +364,8 @@ using RegionalVIC.Models.DB;
     .nav > li.dropdown.open.active > a:focus {
         color: #ffffff;
         background-color: #999999;
-        border-color: #999999;
+        bo");
+            WriteLiteral(@"rder-color: #999999;
     }
 
     .nav li.dropdown.open .caret,
@@ -398,8 +398,7 @@ using RegionalVIC.Models.DB;
             clear: both;
         }
 
- ");
-            WriteLiteral(@"   .tab-content {
+    .tab-content {
         overflow: hidden;
     }
 
@@ -416,7 +415,8 @@ using RegionalVIC.Models.DB;
 
     .tab-content > .active,
     .pill-content > .active {
-        display: block;
+        display: bloc");
+            WriteLiteral(@"k;
     }
 
     .tabs-below > .nav-tabs {
@@ -440,8 +440,7 @@ using RegionalVIC.Models.DB;
 
         .tabs-below > .nav-tabs > .active > a,
         .tabs-below > .nav-tabs > .active > a:hover,
-        .ta");
-            WriteLiteral(@"bs-below > .nav-tabs > .active > a:focus {
+        .tabs-below > .nav-tabs > .active > a:focus {
             border-color: transparent #ddd #ddd #ddd;
         }
 
@@ -455,7 +454,8 @@ using RegionalVIC.Models.DB;
             min-width: 74px;
             margin-right: 0;
             margin-bottom: 3px;
-        }
+      ");
+            WriteLiteral(@"  }
 
     .tabs-left > .nav-tabs {
         float: left;
@@ -476,8 +476,7 @@ using RegionalVIC.Models.DB;
         .tabs-left > .nav-tabs .active > a,
         .tabs-left > .nav-tabs .active > a:hover,
         .tabs-left > .nav-tabs .active > a:focus {
-            border-color: ");
-            WriteLiteral(@"#ddd transparent #ddd #ddd;
+            border-color: #ddd transparent #ddd #ddd;
             *border-right-color: #ffffff;
         }
 
@@ -493,7 +492,8 @@ using RegionalVIC.Models.DB;
         }
 
             .tabs-right > .nav-tabs > li > a:hover,
-            .tabs-right > .nav-tabs > li > a:focus {
+            .tabs-right > .nav-tabs > ");
+            WriteLiteral(@"li > a:focus {
                 border-color: #eeeeee #eeeeee #eeeeee #dddddd;
             }
 
@@ -512,8 +512,7 @@ using RegionalVIC.Models.DB;
         .nav > .disabled > a:focus {
             text-decoration: none;
             background-color: transparent;
-            cu");
-            WriteLiteral(@"rsor: default;
+            cursor: default;
         }
 
     .slidecontainer {
@@ -537,7 +536,8 @@ using RegionalVIC.Models.DB;
         }
 
         .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
+            -");
+            WriteLiteral(@"webkit-appearance: none;
             appearance: none;
             width: 25px;
             height: 25px;
@@ -558,8 +558,7 @@ using RegionalVIC.Models.DB;
         max-height: 400px;
         margin-bottom: 10px;
         overflow: scroll;
-        overflow-x: hi");
-            WriteLiteral(@"dden;
+        overflow-x: hidden;
         -webkit-overflow-scrolling: touch;
     }
 
@@ -581,7 +580,8 @@ using RegionalVIC.Models.DB;
 
         .legend div span {
             border-radius: 50%;
-            display: inline-block;
+       ");
+            WriteLiteral(@"     display: inline-block;
             height: 10px;
             margin-right: 5px;
             width: 10px;
@@ -600,8 +600,7 @@ using RegionalVIC.Models.DB;
         margin-right: 20px;
         font-family: Arial, sans-serif;
         overflow: hidden;
-        border");
-            WriteLiteral(@"-radius: 3px;
+        border-radius: 3px;
     }
 
     #features {
@@ -647,8 +646,8 @@ using RegionalVIC.Models.DB;
     <link href=""https://fonts.googleapis.com/css?family=Montserrat:400,700"" rel=""stylesheet"" type=""text/css"">
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='https:/");
-                WriteLiteral(@"/fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googlea");
+                WriteLiteral(@"pis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
     <!-- Custom styles for this template -->
     <link href=""/css/agency.min.css"" rel=""stylesheet"">
 
@@ -706,8 +705,8 @@ using RegionalVIC.Models.DB;
     <header class=""masthead"">
         <div class=""container"">
             <div class=""intro-normal"">
-                <div class=""intro-l");
-                WriteLiteral(@"ead-in"">Welcome To RegionalVIC!</div>
+                <div class=""intro-lead-in"">Welcome To Re");
+                WriteLiteral(@"gionalVIC!</div>
             </div>
         </div>
     </header>
@@ -794,7 +793,8 @@ using RegionalVIC.Models.DB;
                 WriteLiteral(@"               </h5>
                                         </a>
                                     </div>
-                                    <div id=""collapseOne1"" class=""collapse show"" role=""tabpanel"" aria-labelledby=""headingOne1"" data-parent=""#accordionEx"">
+                             ");
+                WriteLiteral(@"       <div id=""collapseOne1"" class=""collapse show"" role=""tabpanel"" aria-labelledby=""headingOne1"" data-parent=""#accordionEx"">
                                         <div class=""card-body"">
                                             <div class=""container"">
                                                 <br>
@@ -858,8 +858,8 @@ using RegionalVIC.Models.DB;
                                     <div id=""collapseTwo2"" class=""collapse"" role=""tabpanel"" aria-labelledby=""headingTwo2"" data-parent=""#accordionEx"">
                                         <div class=""card-body"">
                                             <div class=""container"">
-                                                <div");
-                WriteLiteral(@" class=""form-group"">
+                                                <div class=""form-");
+                WriteLiteral(@"group"">
 
                                                     <h4>My budget (per week)</h4>
                                                     <br>
@@ -872,9 +872,9 @@ using RegionalVIC.Models.DB;
                                                         </div>
                                                         <div class=""col-md-1"">
                                                             <label for=""max-bgt"">to</label>
-                                                        </di");
-                WriteLiteral(@"v>
-                                                        <div class=""input-group mb-3 col-md-5"">
+                                                        </div>
+                       ");
+                WriteLiteral(@"                                 <div class=""input-group mb-3 col-md-5"">
                                                             <div class=""input-group-prepend"">
                                                                 <span class=""input-group-text"">$</span>
                                                             </div>
@@ -887,10 +887,10 @@ using RegionalVIC.Models.DB;
                                             </div>
                                         </div>
                                         <hr>
-                                        <div id='list' class=""list-group");
-                WriteLiteral(@""">
+                                        <div id='list' class=""list-group"">
 
-                                        </div>
+                                    ");
+                WriteLiteral(@"    </div>
                                     </div>
                                 </div>
 
@@ -905,10 +905,10 @@ using RegionalVIC.Models.DB;
                                             <h5 class=""mb-0"">
                                                 <i class=""fa fa-chevron-down pull-right""></i>
                                                 Criminal Rate
-                                       ");
-                WriteLiteral(@"     </h5>
+                                            </h5>
                                         </a>
-                                    </div>
+ ");
+                WriteLiteral(@"                                   </div>
                                     <div id=""collapseOne1"" class=""collapse show"" role=""tabpanel"" aria-labelledby=""headingOne1"" data-parent=""#accordionEx2"">
                                         <div class=""card-body"">
                                             <div class=""form-group row"">
@@ -919,10 +919,10 @@ using RegionalVIC.Models.DB;
                                                     <button type=""button"" class=""btn btn-primary btn-block"" onclick=""resetLayer()"">Reset</button>
                                                 </div>
                                             </div>
-                      ");
-                WriteLiteral(@"                  </div>
+                                        </div>
                                     </div>
-                                </div>
+  ");
+                WriteLiteral(@"                              </div>
 
                                 <div class=""card"">
                                     <div class=""card-header"" role=""tab"" id=""headingTwo2"">
@@ -936,9 +936,9 @@ using RegionalVIC.Models.DB;
                                     <div id=""collapseTwo2"" class=""collapse"" role=""tabpanel"" aria-labelledby=""headingTwo2"" data-parent=""#accordionEx2"">
                                         <div class=""card-body"">
 
-  ");
-                WriteLiteral(@"                                          <div class=""form-group row"">
-                                                <div class=""col-md-6"">
+                                            <div class=""form-group row"">
+               ");
+                WriteLiteral(@"                                 <div class=""col-md-6"">
                                                     <button type=""button"" class=""btn btn-primary btn-block"" onclick=""choropleth('p')"">Show</button>
                                                 </div>
                                                 <div class=""col-md-6"">
@@ -974,9 +974,9 @@ using RegionalVIC.Models.DB;
 
                             <div class=""form-group row"">
                                 <h6>Population Importance (c): <span id=""pouValue""></span></h6>
-                                <div class=""sl");
-                WriteLiteral(@"idecontainer"">
-                                    <input type=""range"" min=""0"" max=""10"" value=""5"" class=""slider"" id=""pouSlider"">
+                                <div class=""slidecontainer"">
+   ");
+                WriteLiteral(@"                                 <input type=""range"" min=""0"" max=""10"" value=""5"" class=""slider"" id=""pouSlider"">
                                 </div>
                             </div>
                             <h6>Higher Weight: You care it more!</h6>
@@ -991,8 +991,8 @@ using RegionalVIC.Models.DB;
                                     </div>
                                     <input type=""text"" class=""form-control"" id=""min-bgt-recom"">
                                 </div>
-                   ");
-                WriteLiteral(@"             <div class=""col-md-1"">
+                                <div class=""col-md-1""");
+                WriteLiteral(@">
                                     <label for=""max-bgt"">to</label>
                                 </div>
                                 <div class=""input-group mb-3 col-md-5"">
@@ -1015,10 +1015,10 @@ using RegionalVIC.Models.DB;
     </section>
 
 
-    <!-");
-                WriteLiteral(@"- Footer -->
+    <!-- Footer -->
     <footer>
-        <div class=""container"">
+        <div class=""container"">");
+                WriteLiteral(@"
             <div class=""row"">
                 <div class=""col-md-12"">
                     <span class=""copyright"">
@@ -1079,7 +1079,8 @@ using RegionalVIC.Models.DB;
         }
 
 
-        function getRandomColor() {
+        funct");
+                WriteLiteral(@"ion getRandomColor() {
             var letters = '0123456789ABCDEF';
             var color = '#';
             for (var i = 0; i < 6; i++) {
@@ -1106,7 +1107,8 @@ using RegionalVIC.Models.DB;
             rcMap.set('21");
                 WriteLiteral(@"180', getRandomColor());
             rcMap.set('21270', getRandomColor());
-            rcMap.set('21370', getRandomColor());
+      ");
+                WriteLiteral(@"      rcMap.set('21370', getRandomColor());
             rcMap.set('21450', getRandomColor());
             rcMap.set('21610', getRandomColor());
             rcMap.set('21670', getRandomColor());
@@ -1127,7 +1129,8 @@ using RegionalVIC.Models.DB;
             rcMap.set('22980'");
                 WriteLiteral(@", getRandomColor());
             rcMap.set('23110', getRandomColor());
-            rcMap.set('23190', getRandomColor());
+            rcMap.set('23190',");
+                WriteLiteral(@" getRandomColor());
             rcMap.set('23270', getRandomColor());
             rcMap.set('23350', getRandomColor());
             rcMap.set('23430', getRandomColor());
@@ -1149,7 +1152,8 @@ using RegionalVIC.Models.DB;
                 WriteLiteral(@"tRandomColor());
             rcMap.set('25150', getRandomColor());
             rcMap.set('25250', getRandomColor());
-            rcMap.set('25340', getRandomColor());
+    ");
+                WriteLiteral(@"        rcMap.set('25340', getRandomColor());
             rcMap.set('25430', getRandomColor());
             rcMap.set('25490', getRandomColor());
             rcMap.set('25620', getRandomColor());
@@ -1170,7 +1174,8 @@ using RegionalVIC.Models.DB;
                 WriteLiteral(@"domColor());
             rcMap.set('26810', getRandomColor());
             rcMap.set('26890', getRandomColor());
-            rcMap.set('26980', getRandomColor());
+            rcMap.set('26980");
+                WriteLiteral(@"', getRandomColor());
             rcMap.set('27070', getRandomColor());
             rcMap.set('27170', getRandomColor());
             rcMap.set('27260', getRandomColor());
@@ -1196,7 +1201,8 @@ using RegionalVIC.Models.DB;
                 ""20830"": rcMap.get('20830'),
                 ""20910"": rcMap.get('20910'),
                 ""21010"": rcMap.get('21010'),
-                ""21110"": rcMap.get('21110'),
+                """);
+                WriteLiteral(@"21110"": rcMap.get('21110'),
                 ""21180"": rcMap.get('21180'),
                 ""21270"": rcMap.get('21270'),
                 ""21370"": rcMap.get('21370'),
@@ -1220,7 +1226,8 @@ using RegionalVIC.Models.DB;
                 ""22910"": rcMap.get('22910'),
                 ""22980"": rcMap.get('22980'),
                 ""23110"": rcMap.get('23110'),
-                ""23190"": rcMap.get('23190'),
+      ");
+                WriteLiteral(@"          ""23190"": rcMap.get('23190'),
                 ""23270"": rcMap.get('23270'),
                 ""23350"": rcMap.get('23350'),
                 ""23430"": rcMap.get('23430'),
@@ -1243,7 +1250,8 @@ using RegionalVIC.Models.DB;
                 ""25150"": rcMap.get('25150'),
                 ""25250"": rcMap.get('25250'),
                 ""25340"": rcMap.get('25340'),
-                ""25430"": rcMap.get('25430'),
+                ""25430"": rcMap.get('2543");
+                WriteLiteral(@"0'),
                 ""25490"": rcMap.get('25490'),
                 ""25620"": rcMap.get('25620'),
                 ""25710"": rcMap.get('25710'),
@@ -1267,7 +1275,8 @@ using RegionalVIC.Models.DB;
                 ""27070"": rcMap.get('27070'),
                 ""27170"": rcMap.get('27170'),
                 ""27260"": rcMap.get('27260'),
-                ""27350"": rcMap.get('27350'),
+                ""27350"": rcMa");
+                WriteLiteral(@"p.get('27350'),
                 ""27450"": rcMap.get('27450'),
                 ""27630"": rcMap.get('27630'),
                 ""29399"": rcMap.get('29399'),
@@ -1373,7 +1382,8 @@ using RegionalVIC.Models.DB;
             map.on('mousemove', ""cheo"", function (e");
                 WriteLiteral(@") {
                 var over = document.getElementById('features');
-                features.style.display = ""block""
+                features.style.");
+                WriteLiteral(@"display = ""block""
 
                 var states = map.queryRenderedFeatures(e.point);
                 if (states.length > 0) {
@@ -1394,7 +1404,8 @@ using RegionalVIC.Models.DB;
             //Reset inf");
                 WriteLiteral(@"ormation block and hover effect
             map.on('mouseleave', ""cheo"", function (e) {
-                var over = document.getElementById('features');
+                var over = docu");
+                WriteLiteral(@"ment.getElementById('features');
                 features.style.display = ""none""
 
                 if (hoveredStateId) {
@@ -1422,7 +1433,8 @@ using RegionalVIC.Models.DB;
         function changeSelect() {
             var typeSelectValue = $(""#sel2"").val();
 
-            if (typeSelectValue == ""House"") {
+            if (t");
+                WriteLiteral(@"ypeSelectValue == ""House"") {
                 $(""#sel1"").val(""2"");
                 $('#sel1').find('option:contains(1)').prop('disabled', true);
                 $('#sel1').find('option:contains(4)').prop('disabled', false);
@@ -1452,7 +1464,8 @@ using RegionalVIC.Models.DB;
 
             $.ajax({
                 type: ""GET"",
-                url: ""/Criminal_Incidents_with_LGA_Code.csv"",
+          ");
+                WriteLiteral(@"      url: ""/Criminal_Incidents_with_LGA_Code.csv"",
                 dataType: ""text"",
                 success: function (data) {
                     crimeTable = processData(data);
@@ -1484,7 +1497,8 @@ using RegionalVIC.Models.DB;
             //$('#acmSlider').slider().on('slideStop', function (ev) {
             //    recommendation()
             //});
-        });
+      ");
+                WriteLiteral(@"  });
 
         function readData(filename) {
             $.ajax({
@@ -1514,7 +1528,8 @@ using RegionalVIC.Models.DB;
         //Show filter map
         function choropleth(option) {
             //Accomodation
-            if (option == ""a"") {
+            ");
+                WriteLiteral(@"if (option == ""a"") {
 
                 stateLegend.style.display = ""block""
                 stateCrimeLegend.style.display = ""none""
@@ -1532,7 +1547,8 @@ using RegionalVIC.Models.DB;
                         + "".<p> Number of recorded house: "" + parseInt(getItem(tmpList[0], ""count"")) + ""</p>"" : ""No record"";
                     cheo[allCode[i]] = getColor(
                         parseInt(
-                            getItem(tmpList[0], ""median"")
+               ");
+                WriteLiteral(@"             getItem(tmpList[0], ""median"")
                         )
                     )
                 }
@@ -1558,7 +1574,8 @@ using RegionalVIC.Models.DB;
                     for (var i = 0; i < allCode.length; i++) {
 
                         var object = objects[j];
-                        if (object != null && object[""Year ending December""] == ""2018"" &&
+                        if (object != null && object[""Year ");
+                WriteLiteral(@"ending December""] == ""2018"" &&
                             parseInt(object[""LGA_Code""]) == allCode[i]) {
                             displayList[[allCode[i]]] = parseFloat(object[""Rate""]) != 0 ? ""Criminal Rate: "" + parseFloat(object[""Rate""]).toFixed(2) + ""%. <p>Incident number: "" + parseInt(object[""Incidents Recorded""]) + '</p>' : ""No record"";
                             crimeCheo[allCode[i]] = getCrimeColor(parseFloat(object[""Rate""]));
@@ -1578,7 +1595,8 @@ using RegionalVIC.Models.DB;
 
                 stateLegend.style.display = ""none""
                 stateCrimeLegend.style.display = ""none""
-                stateDesyLegend.style.display = ""block""
+                stateDesyLegend.style.disp");
+                WriteLiteral(@"lay = ""block""
 
                 var objects = desyTable;
 
@@ -1599,7 +1617,8 @@ using RegionalVIC.Models.DB;
 
                 map.setPaintProperty(""cheo"", 'fill-color', [""get"", [""to-string"", [""get"", ""LGA_CODE18""]], [""literal"", desyCheo]]);
 
-                map.setLayoutProperty(""state-fills"", 'visibility', 'none');
+                map.setLayoutProperty(""state-fills"", 'v");
+                WriteLiteral(@"isibility', 'none');
                 map.setLayoutProperty(""cheo"", 'visibility', 'visible');
 
             }
@@ -1630,7 +1649,8 @@ using RegionalVIC.Models.DB;
                         d > 300 ? '#B86B25' :
                             d > 250 ? '#CA8323' :
                                 d > 200 ? '#E6B71E' :
-                                    d > 150 ? '#EED322' :
+                                 ");
+                WriteLiteral(@"   d > 150 ? '#EED322' :
                                         d > 50 ? '#F2F12D' :
                                             '#ddd';
         }
@@ -1655,7 +1675,8 @@ using RegionalVIC.Models.DB;
                 d > 50 ? '#8B4225' :
                     d > 20 ? '#A25626' :
                         d > 8 ? '#B86B25' :
-                            d > 5 ? '#CA8323' :
+                            ");
+                WriteLiteral(@"d > 5 ? '#CA8323' :
                                 d > 3 ? '#E6B71E' :
                                     d > 1 ? '#EED322' :
                                         d > 0 ? '#F2F12D' :
@@ -1684,7 +1705,8 @@ using RegionalVIC.Models.DB;
             }
             //alert(lines);
             return lines;
-        }
+       ");
+                WriteLiteral(@" }
 
         var rates = new Object;
         //Get acommondation rating
@@ -1713,7 +1735,8 @@ using RegionalVIC.Models.DB;
                                 d > 5 ? 5 :
                                     d > 4 ? 6 :
                                         d > 3 ? 7 :
-                                            d > 2 ? 8 :
+                   ");
+                WriteLiteral(@"                         d > 2 ? 8 :
                                                 d > 1 ? 9 : 10;
         }
 
@@ -1738,7 +1761,8 @@ using RegionalVIC.Models.DB;
         }
 
         //Recommendation
-        function recommendation() {
+  ");
+                WriteLiteral(@"      function recommendation() {
 
             var recomdList = document.getElementById('recomd-list');
             recomdList.innerHTML = """";
@@ -1767,7 +1791,8 @@ using RegionalVIC.Models.DB;
 
             //All rate:
             for (var i = 0; i < allCode.length; i++) {
-                rates[allCode[i]] = -1;
+                rates[allCode[i]] = -1;");
+                WriteLiteral(@"
                 for (var j = 0; j < objects.length; j++) {
                     var object = objects[j];
                     if (object != null && object[""LGA_Code""] != """" && object[""median""] != null &&
@@ -1787,7 +1812,8 @@ using RegionalVIC.Models.DB;
                     if (rates[allCode[i]] != -1 && object != null && object[""LGA_Code""] != """"
                         && object[""Year ending December""] == ""2018"" && object[""Rate""] != null &&
                         parseInt(object[""LGA_Code""]) === allCode[i]) {
-                        rates[allCode[i]] += crmWeight * getRatingByCrime(parseFloat(object[""Rate""]));
+                        rates[allCode[i]] += cr");
+                WriteLiteral(@"mWeight * getRatingByCrime(parseFloat(object[""Rate""]));
                         break;
                     }
                 }
@@ -1810,7 +1836,8 @@ using RegionalVIC.Models.DB;
             for (var i = 0; i < objects.length; i++) {
                 var object = objects[i];
                 if (rates[allCode[i]] != -1 && object != null && object[""LGA_Code""] != """" && object[""median""] != """" &&
-                    parseInt(object[""median""]) > minBudget && parseInt(object[""median""]) < maxBudget) {
+                    parseInt(object[""median""]) > minBudget && parseInt(object[""median""]) ");
+                WriteLiteral(@"< maxBudget) {
                     if (object[""year""] == ""2018"" && object[""type""] != ""all"")
                         list.push(object);
                 }
@@ -1852,7 +1879,8 @@ using RegionalVIC.Models.DB;
             var list = [];
             for (var i = 0; i < objects.length; i++) {
                 var object = objects[i];
-                if (object != null && object[""median""] != """" &&
+                if (o");
+                WriteLiteral(@"bject != null && object[""median""] != """" &&
                     parseInt(object[""median""]) > minBudget && parseInt(object[""median""]) < maxBudget) {
                     if (object[""year""] == ""2018"" && object[""type""] != ""all"")
                         list.push(object);
@@ -1891,7 +1919,8 @@ using RegionalVIC.Models.DB;
             var lgaCode = arguments[1];
 
             var args = new Object;
-            for (var i = 2; i < arguments.length; i = i + 2) {
+        ");
+                WriteLiteral(@"    for (var i = 2; i < arguments.length; i = i + 2) {
                 args[arguments[i]] = arguments[i + 1]
             }
 
@@ -1912,7 +1941,8 @@ using RegionalVIC.Models.DB;
                             if (object[""median""] != """" && object[""year""] == ""2018"")
                                 ready &= true;
                             else
-                                ready &= false;
+                              ");
+                WriteLiteral(@"  ready &= false;
                         }
                         else
                             ready &= false;
@@ -1949,7 +1979,8 @@ using RegionalVIC.Models.DB;
         //Show polygons
         function showPolygonArea(e) {
             featureGroup.clearLayers();
-            featureGroup.addLayer(e.layer);
+            featureGroup.add");
+                WriteLiteral(@"Layer(e.layer);
 
             // Here 'e.layer' holds the L.Polygon instance:
             new L.Marker(e.layer.getBounds().getCenter()).addTo(featureGroup);
