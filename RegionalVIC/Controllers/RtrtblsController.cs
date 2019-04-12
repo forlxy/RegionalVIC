@@ -16,6 +16,10 @@ namespace RegionalVIC.Controllers
         public RtrtblsController(regionalVICContext context)
         {
             _context = context;
+
+            //  Testing DbController
+            DbController DbCtrl = new DbController(_context);
+            DbCtrl.getLGAMAS("R".ToString()[0]);
         }
 
         // GET: Rtrtbls

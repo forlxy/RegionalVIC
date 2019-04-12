@@ -20,9 +20,17 @@ namespace RegionalVIC.Controllers
         }
 
         //  Get LGAMAS by status. e.g. "R" - Region
-        private void getLGAMAS(char sts)
+        public void getLGAMAS(char sts)
         {
+            //  So far, cannot get result with this statement. lgamas.Count() is 0.
             var lgamas = _context.Lgamas.Where(e => e.State.Contains(sts));
+            var myLgaList = new List<string>();
+
+            for (int i = 0; i < lgamas.Count(); i++)
+            {
+                // myLgaList.Add(lgamas.);
+            }
+            var myLgaArray = myLgaList.ToArray();
 
         }
     }
