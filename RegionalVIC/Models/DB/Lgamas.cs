@@ -8,6 +8,9 @@ namespace RegionalVIC.Models.DB
         public Lgamas()
         {
             Critbl = new HashSet<Critbl>();
+            Lgatbl = new HashSet<Lgatbl>();
+            Ppltbl = new HashSet<Ppltbl>();
+            Rtrtbl = new HashSet<Rtrtbl>();
         }
 
         public string LgaCode { get; set; }
@@ -19,5 +22,8 @@ namespace RegionalVIC.Models.DB
         public string Status { get; set; }
 
         public ICollection<Critbl> Critbl { get; set; }
+        public ICollection<Lgatbl> Lgatbl { get; set; }
+        public ICollection<Ppltbl> Ppltbl { get; set; }
+        public ICollection<Rtrtbl> Rtrtbl { get; set; }
     }
 }

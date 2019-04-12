@@ -19,19 +19,31 @@ namespace RegionalVIC.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Lgamas.ToListAsync());
+        }
+
         //  Get LGAMAS by status. e.g. "R" - Region
-        public void getLGAMAS(char sts)
+        public async Task<IActionResult> GetRegionLGA(char? sts)
         {
             //  So far, cannot get result with this statement. lgamas.Count() is 0.
-            var lgamas = _context.Lgamas.Where(e => e.State.Contains(sts));
-            var myLgaList = new List<string>();
-
-            for (int i = 0; i < lgamas.Count(); i++)
+            if (sts == null)
             {
-                // myLgaList.Add(lgamas.);
+                return NotFound();
             }
-            var myLgaArray = myLgaList.ToArray();
 
+            var lgamas = await _context.Lgamas
+                .FindAsync(6, sts);
+                //.Where(e => e.State.Contains(sts));
+                
+            if (lgamas == null)
+            {
+                return NotFound();
+            }
+
+            return View(lgamas);
         }
+
     }
 }

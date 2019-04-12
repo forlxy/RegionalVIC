@@ -18,8 +18,8 @@ namespace RegionalVIC.Controllers
             _context = context;
 
             //  Testing DbController
-            DbController DbCtrl = new DbController(_context);
-            DbCtrl.getLGAMAS("R".ToString()[0]);
+            //DbController DbCtrl = new DbController(_context);
+            //object obj =  DbCtrl.GetRegionLGA("R".ToString()[0]);
         }
 
         // GET: Rtrtbls
