@@ -1,9 +1,10 @@
 ﻿<Properties StartupConfiguration="{37DCFD75-BDF2-4C1E-9545-3FFC382D4681}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/DbController.cs">
     <Files>
-      <File FileName="Controllers/DbController.cs" Line="45" Column="33" />
+      <File FileName="Controllers/DbController.cs" Line="40" Column="1" />
       <File FileName="Views/Map/Index.cshtml" Line="961" Column="1" />
       <File FileName="Controllers/RtrtblsController.cs" Line="22" Column="15" />
+      <File FileName="Models/DB/RegionalVICContext.cs" Line="13" Column="25" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">

@@ -12,5 +12,7 @@ namespace RegionalVIC.Models.DB
         public byte Lvl { get; set; }
         public short Parent { get; set; }
         public string Status { get; set; }
+
+        public Sttmas SttCodeNavigation { get; set; }
     }
 }

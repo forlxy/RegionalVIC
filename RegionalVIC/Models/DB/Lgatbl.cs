@@ -11,5 +11,7 @@ namespace RegionalVIC.Models.DB
         public string NameCrime { get; set; }
         public string Region { get; set; }
         public string Status { get; set; }
+
+        public Lgamas LgaCodeNavigation { get; set; }
     }
 }

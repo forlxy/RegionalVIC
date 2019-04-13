@@ -15,5 +15,7 @@ namespace RegionalVIC.Models.DB
         public byte? NoOfBedrm { get; set; }
         public int? Count { get; set; }
         public int? Median { get; set; }
+
+        public Lgamas LgaCodeNavigation { get; set; }
     }
 }

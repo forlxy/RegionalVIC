@@ -9,5 +9,7 @@ namespace RegionalVIC.Models.DB
         public string LgaCode { get; set; }
         public int Popul { get; set; }
         public decimal Density { get; set; }
+
+        public Lgamas LgaCodeNavigation { get; set; }
     }
 }

@@ -21,6 +21,8 @@ namespace RegionalVIC.Models.DB
         public string State { get; set; }
         public string Status { get; set; }
 
+        public Sttmas SttCodeNavigation { get; set; }
+
         public ICollection<Critbl> Critbl { get; set; }
         public ICollection<Lgatbl> Lgatbl { get; set; }
         public ICollection<Ppltbl> Ppltbl { get; set; }
