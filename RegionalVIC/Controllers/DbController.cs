@@ -27,10 +27,8 @@ namespace RegionalVIC.Controllers
         //  Get LGAMAS by status. e.g. "R" - Region
         public async Task<IActionResult> GetRegionLGA(char sts)
         {
-            //  So far, cannot get result with this statement. lgamas.Count() is 0.
             var lgamas = await _context.Lgamas
-                .FirstOrDefaultAsync(e => e.Status.Contains(sts));
-                //.Where(e => e.State.Contains(sts));
+                .Where(e => e.Status.Contains(sts)).ToListAsync();
                 
             if (lgamas == null)
             {
