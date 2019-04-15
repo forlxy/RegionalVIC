@@ -29,7 +29,7 @@ namespace RegionalVIC.Models.DB
             if (!optionsBuilder.IsConfigured)
             {
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=regionalVIC;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=tcp:regionalvic.database.windows.net,1433;Initial Catalog=regionalVIC;Persist Security Info=False;User ID=vic_web;Password=b@55m0rp12E;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
         }
 
@@ -91,7 +91,8 @@ namespace RegionalVIC.Models.DB
 
                 entity.Property(e => e.LgaDesc)
                     .HasColumnName("LGA_desc")
-                    .HasMaxLength(255)
+                    .HasColumnType("varchar(MAX)")
+                    //.HasMaxLength(255)
                     .IsUnicode(false)
                     .HasDefaultValueSql("('')");
 
@@ -111,6 +112,12 @@ namespace RegionalVIC.Models.DB
                     .HasColumnName("status")
                     .HasMaxLength(1)
                     .HasDefaultValueSql("('A')");
+
+                entity.HasOne(d => d.SttCodeNavigation)
+                    .WithMany(p => p.Lgamas)
+                    .HasForeignKey(d => d.State)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_LGAMAS_STTMAS");
             });
 
             modelBuilder.Entity<Lgatbl>(entity =>
@@ -151,6 +158,12 @@ namespace RegionalVIC.Models.DB
                     .HasColumnName("status")
                     .HasMaxLength(1)
                     .HasDefaultValueSql("('A')");
+
+                entity.HasOne(d => d.LgaCodeNavigation)
+                    .WithMany(p => p.Lgatbl)
+                    .HasForeignKey(d => d.LgaCode)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_LGATBL_LGAMAS");
             });
 
             modelBuilder.Entity<Ppltbl>(entity =>
@@ -171,6 +184,12 @@ namespace RegionalVIC.Models.DB
                     .HasColumnType("decimal(18, 4)");
 
                 entity.Property(e => e.Popul).HasColumnName("popul");
+
+                entity.HasOne(d => d.LgaCodeNavigation)
+                    .WithMany(p => p.Ppltbl)
+                    .HasForeignKey(d => d.LgaCode)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PPLTBL_LGAMAS");
             });
 
             modelBuilder.Entity<Regmas>(entity =>
@@ -206,6 +225,12 @@ namespace RegionalVIC.Models.DB
                     .HasColumnName("status")
                     .HasMaxLength(1)
                     .HasDefaultValueSql("('A')");
+
+                entity.HasOne(d => d.SttCodeNavigation)
+                    .WithMany(p => p.Regmas)
+                    .HasForeignKey(d => d.State)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_REGMAS_STTMAS");
             });
 
             modelBuilder.Entity<Rtrtbl>(entity =>
@@ -253,6 +278,12 @@ namespace RegionalVIC.Models.DB
                     .IsUnicode(false);
 
                 entity.Property(e => e.Yr).HasColumnName("yr");
+
+                entity.HasOne(d => d.LgaCodeNavigation)
+                    .WithMany(p => p.Rtrtbl)
+                    .HasForeignKey(d => d.LgaCode)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_RTRTBL_LGAMAS");
             });
 
             modelBuilder.Entity<Sbbmas>(entity =>
@@ -288,6 +319,12 @@ namespace RegionalVIC.Models.DB
                 entity.Property(e => e.Status)
                     .HasColumnName("status")
                     .HasMaxLength(1);
+
+                entity.HasOne(d => d.SttCodeNavigation)
+                    .WithMany(p => p.Sbbmas)
+                    .HasForeignKey(d => d.State)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SBBMAS_STTMAS");
             });
 
             modelBuilder.Entity<Sttmas>(entity =>

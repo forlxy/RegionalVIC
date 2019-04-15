@@ -49,8 +49,9 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Take(10)) {
         <tr>
+
             <td>
                 @Html.DisplayFor(modelItem => item.Yr)
             </td>

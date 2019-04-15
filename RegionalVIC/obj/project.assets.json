@@ -5991,7 +5991,6 @@
       "sha512": "HS3iRWZKcUw/8eZ/08GXKY2Bn7xNzQPzf8gRPHGSowX7u7XXu9i9YEaBeBNKUXWfI7qjvT2zXtLUvbN0hds8vg==",
       "type": "package",
       "path": "microsoft.codeanalysis.analyzers/1.1.0",
-      "hasTools": true,
       "files": [
         ".nupkg.metadata",
         "ThirdPartyNotices.rtf",
@@ -16533,11 +16532,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kasal\\source\\repos\\kasaluoqi\\RegionalVIC\\RegionalVIC\\RegionalVIC.csproj",
+      "projectUniqueName": "C:\\Users\\kasal\\Source\\Repos\\kasaluoqi\\RegionalVIC\\RegionalVIC\\RegionalVIC.csproj",
       "projectName": "RegionalVIC",
-      "projectPath": "C:\\Users\\kasal\\source\\repos\\kasaluoqi\\RegionalVIC\\RegionalVIC\\RegionalVIC.csproj",
+      "projectPath": "C:\\Users\\kasal\\Source\\Repos\\kasaluoqi\\RegionalVIC\\RegionalVIC\\RegionalVIC.csproj",
       "packagesPath": "C:\\Users\\kasal\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kasal\\source\\repos\\kasaluoqi\\RegionalVIC\\RegionalVIC\\obj\\",
+      "outputPath": "C:\\Users\\kasal\\Source\\Repos\\kasaluoqi\\RegionalVIC\\RegionalVIC\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

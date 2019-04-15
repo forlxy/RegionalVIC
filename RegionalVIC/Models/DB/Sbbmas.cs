@@ -11,5 +11,7 @@ namespace RegionalVIC.Models.DB
         public string Name { get; set; }
         public string Area { get; set; }
         public string Status { get; set; }
+
+        public Sttmas SttCodeNavigation { get; set; }
     }
 }
