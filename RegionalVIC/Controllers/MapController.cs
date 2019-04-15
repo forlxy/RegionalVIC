@@ -99,5 +99,21 @@ namespace RegionalVIC.Controllers
                 return View();
             }
         }
+
+
+        //getMedian(allCode[i], sel1, sel2)
+        [HttpPost]
+        public Object getMedian(string code, string bedroom, string type)
+        {
+            int bedno = Int32.Parse(bedroom);
+            {
+                var list = _context.Rtrtbl
+                    .Where(r => r.LgaCode.Contains(code) && (int)r.NoOfBedrm == bedno && r.Yr.Equals(2018) && r.Typ.Contains(type)).ToList();
+                //Need ore task sort for years
+                var median = list.Count > 0 ? list[0].Median : 0;
+                return "{median:'" + median + "', code:'" + code + "'}";
+            }
+
+        }
     }
 }

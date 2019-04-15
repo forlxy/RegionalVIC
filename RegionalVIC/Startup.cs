@@ -55,7 +55,7 @@ namespace RegionalVIC
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=locations}/{action=Index}/{id?}");
+                    template: "{controller=Map}/{action=Index}/{id?}");
             });
         }
     }

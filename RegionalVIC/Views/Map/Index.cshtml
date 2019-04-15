@@ -1236,7 +1236,7 @@
             // Add a layer showing the places.
             map.addSource("states", {
                 "type": "geojson",
-                "data": "https://raw.githubusercontent.com/kasaluoqi/root/master/LGA_2018_AUST_VIC_ID.geojson"
+                "data": "/LGA_2018_AUST_VIC_ID.json"
             });
             //All colored states layer
             map.addLayer({
@@ -1411,7 +1411,7 @@
         }
 
         $(document).ready(function () {
-            $.getJSON('https://raw.githubusercontent.com/kasaluoqi/root/master/LGA_2018_AUST_VIC_ID.geojson', function (data) {
+            $.getJSON('/LGA_2018_AUST_VIC_ID.json', function (data) {
                 customData = (data);
             });
 
@@ -1468,16 +1468,17 @@
 
         });
 
-        function readData(filename) {
-            $.ajax({
-                type: "GET",
-                url: "/" + filename,
-                dataType: "text",
-                success: function (data) {
-                    table = processData(data);
-                }
-            });
-        }
+        //function readData(filename) {
+        //    $.ajax({
+        //        type: "GET",
+        //        url: "/" + filename,
+        //        dataType: "text",
+        //        success: function (data) {
+        //            table = processData(data);
+        //        }
+        //    });
+        //}
+
         var stateLegend = document.getElementById('state-legend');
         var stateCrimeLegend = document.getElementById('state-crime-legend');
         var stateDesyLegend = document.getElementById('state-density-legend');
@@ -1505,21 +1506,39 @@
                 var sel2 = jQuery("#sel2 option:selected").val();
 
                 for (var i = 0; i < allCode.length; i++) {
-                    var tmpList = getItems.call(this, table, allCode[i], "bedroom", sel1, "type", sel2);
-                    tmpList.sort((a, b) => (a.year < b.year) ? 1 :
-                        (getMonthFromString(a.month) < getMonthFromString(b.month)) ? 1 : -1)
-                    displayList[[allCode[i]]] = parseInt(getItem(tmpList[0], "median")) != 0 ? "House median is $" + parseInt(getItem(tmpList[0], "median"))
-                        + ".<p> Number of recorded house: " + parseInt(getItem(tmpList[0], "count")) + "</p>" : "No record";
-                    cheo[allCode[i]] = getColor(
-                        parseInt(
-                            getItem(tmpList[0], "median")
-                        )
-                    )
-                }
-                map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
+                    //getMedian(allCode[i], sel1, sel2)
+                    var data = "{code:'" + allCode[i] + "', bedroom:'" + sel1 + "', type:'" + sel2 + "'}"
+                    $.ajax({
+                        url: '@Url.Action("getMedian", "Map")',
+                        type: 'POST',
+                        data: { code: allCode[i], bedroom: sel1, type: sel2},
+                        success: function(data)
+                        {
+                            var result = JSON.parse(data);
+                            var code = result["code"];
+                            var median = result["median"];
+                            cheo[code] = getColor(parseInt(median))
+                            map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
 
-                map.setLayoutProperty("state-fills", 'visibility', 'none');
-                map.setLayoutProperty("cheo", 'visibility', 'visible');
+                            map.setLayoutProperty("state-fills", 'visibility', 'none');
+                            map.setLayoutProperty("cheo", 'visibility', 'visible');
+                        }
+                    });
+                    //var tmpList = getItems.call(this, table, allCode[i], "bedroom", sel1, "type", sel2);
+                    //tmpList.sort((a, b) => (a.year < b.year) ? 1 :
+                    //    (getMonthFromString(a.month) < getMonthFromString(b.month)) ? 1 : -1)
+                    //displayList[[allCode[i]]] = parseInt(getItem(tmpList[0], "median")) != 0 ? "House median is $" + parseInt(getItem(tmpList[0], "median"))
+                    //    + ".<p> Number of recorded house: " + parseInt(getItem(tmpList[0], "count")) + "</p>" : "No record";
+                    //cheo[allCode[i]] = getColor(
+                    //    parseInt(
+                    //        getItem(tmpList[0], "median")
+                    //    )
+                    //)
+                }
+                //map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
+
+                //map.setLayoutProperty("state-fills", 'visibility', 'none');
+                //map.setLayoutProperty("cheo", 'visibility', 'visible');
             }
             //Safety
             else if (option == "s") {
