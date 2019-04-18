@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RegionalVIC.Models;
 using RegionalVIC.Models.DB;
+using Newtonsoft.Json;
 
 namespace RegionalVIC.Controllers
 {
@@ -101,7 +103,6 @@ namespace RegionalVIC.Controllers
         }
 
 
-        //getMedian(allCode[i], sel1, sel2)
         [HttpPost]
         public Object getMedian(string code, string bedroom, string type)
         {
@@ -111,9 +112,79 @@ namespace RegionalVIC.Controllers
                     .Where(r => r.LgaCode.Contains(code) && (int)r.NoOfBedrm == bedno && r.Yr.Equals(2018) && r.Typ.Contains(type)).ToList();
                 //Need ore task sort for years
                 var median = list.Count > 0 ? list[0].Median : 0;
-                return "{median:'" + median + "', code:'" + code + "'}";
+                return "{\"median\":\"" + median + "\", \"code\":\"" + code + "\"}";
             }
 
         }
+
+        [HttpPost]
+        public Object getAllMedian(string bedroom, string type)
+        {
+            List<colorDisplay> result = new List<colorDisplay>();
+            var regionsList = _context.Lgatbl.ToList();
+            int bedno = Int32.Parse(bedroom);
+            var list = _context.Rtrtbl
+                       .Where(r => r.LgaCode != "" && (int)r.NoOfBedrm == bedno && r.Yr.Equals(2018) && r.Quarter.Equals(3) && r.Typ.Contains(type)).ToList();
+
+            foreach (var t in regionsList)
+            {
+                int median = 0;
+
+                string display = "No record";
+                foreach (var l in list)
+                { 
+
+                    if(l.LgaCode.Contains(t.LgaCode))
+                    {
+                        //Need ore task sort for years
+                        median = l.Median ?? default(int);
+                        display = median != 0 ? "The median of the " + type + " (bedroom: " + bedno + ") is $" + median + "." : "No record";
+                        break;
+                    }
+                }
+                colorDisplay cd = new colorDisplay(Int32.Parse(t.LgaCode), colorDisplay.getAcomColor(median), display);
+                result.Add(cd);
+            }
+
+            var json = JsonConvert.SerializeObject(result);
+            return json;
+
+        }
+
+        [HttpPost]
+        public Object getCrmRate(string code)
+        {
+            {
+                var list = _context.Critbl
+                     .Where(r => r.LgaCode.Contains(code) && r.YrEnd.Equals(2018)).ToList();
+                //Need ore task sort for years
+                var rate = list.Count > 0 ? list[0].Rate : 0;
+                var icdNum = list.Count > 0 ? list[0].IncdRcd : 0;
+                return "{\"rate\":\"" + rate + "\", \"incident\":\"" + icdNum + "\", \"code\":\"" + code + "\"}";
+            }
+
+        }
+
+        [HttpPost]
+        public Object getDensity(string code)
+        {
+            {
+                var list = _context.Ppltbl
+                    .Where(r => r.LgaCode.Contains(code)).ToList();
+                //Need ore task sort for years
+                var density = list.Count > 0 ? list[0].Density : 0;
+                var population = list.Count > 0 ? list[0].Popul : 0;
+                return "{\"density\":\"" + density + "\", \"population\":\"" + population + "\", \"code\":\"" + code + "\"}";
+            }
+             
+        }
+
+        [HttpPost]
+        public Object saveText(string text)
+        {
+            System.IO.File.WriteAllText(@"test.js", text);
+            return "yes";
+        }
+
     }
 }
