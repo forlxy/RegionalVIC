@@ -37,7 +37,7 @@ namespace RegionalVIC.Models
                                             "#ddd";
         }
         // get color depending on criminal rate
-        public static string getCrimeColor(int d)
+        public static string getCrimeColor(decimal d)
         {
             return d > 10 ? "#723122" :
                 d > 8 ? "#8B4225" :
@@ -52,7 +52,7 @@ namespace RegionalVIC.Models
         }
 
         // get color depending on population density value
-        public static string getDesyColor(int d)
+        public static string getDesyColor(decimal d)
         {
             return d > 200 ? "#723122" :
                 d > 50 ? "#8B4225" :
