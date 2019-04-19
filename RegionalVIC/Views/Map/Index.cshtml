@@ -816,7 +816,7 @@
                                         <div class="card-body">
                                             <div class="form-group row">
                                                 <div class="col-md-6">
-                                                    <button type="button" class="btn btn-primary btn-block" onclick="choropleth('s')">Show</button>
+                                                    <button type="button" class="btn btn-primary btn-block" onclick="choropleth('c')">Show</button>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <button type="button" class="btn btn-primary btn-block" onclick="resetLayer()">Reset</button>
@@ -840,7 +840,7 @@
 
                                             <div class="form-group row">
                                                 <div class="col-md-6">
-                                                    <button type="button" class="btn btn-primary btn-block" onclick="choropleth('p')">Show</button>
+                                                    <button type="button" class="btn btn-primary btn-block" onclick="choropleth('d')">Show</button>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <button type="button" class="btn btn-primary btn-block" onclick="resetLayer()">Reset</button>
@@ -962,9 +962,6 @@
     <script>
         var lga
         var lines;
-        //var table;
-        //var crimeTable;
-        //var desyTable;
 
         var allCode = [20110, 20260, 20570, 20660, 20740, 20830, 20910, 21010, 21110, 21180, 21270, 21370, 21450, 21610, 21670, 21750, 21830, 21890, 22110, 22170, 22250, 22310, 22410, 22490, 22620, 22670, 22750, 22830, 22910, 22980, 23110, 23190, 23270, 23350, 23430, 23670, 23810, 23940, 24130, 24210, 24250, 24330, 24410, 24600, 24650, 24780, 24850, 24900, 24970, 25060, 25150, 25250, 25340, 25430, 25490, 25620, 25710, 25810, 25900, 25990, 26080, 26170, 26260, 26350, 26430, 26490, 26610, 26670, 26700, 26730, 26810, 26890, 26980, 27070, 27170, 27260, 27350, 27450, 27630, 29399, 29499, 29799];
 
@@ -1193,11 +1190,8 @@
                 "29799": rcMap.get('29799')
             };
         }
-
-        //var customData = new Object
-        //var regionFileContent;
-
-        function flytoPoly(LGA_Code) {s
+       
+        function flytoPoly(LGA_Code) {
 
             map.flyTo({
                 center: p,
@@ -1472,7 +1466,6 @@
                     .addTo(map);
             });
         });
-        //var filename = "Rental_Report_with_LGA_Code.csv";
         //Monitor select type changes
         function changeSelect() {
             var typeSelectValue = $("#sel2").val();
@@ -1489,18 +1482,7 @@
                 $('#sel1').find('option:contains(4)').prop('disabled', true);
             }
         }
-
-
-        //function readData(filename) {
-        //    $.ajax({
-        //        type: "GET",
-        //        url: "/" + filename,
-        //        dataType: "text",
-        //        success: function (data) {
-        //            table = processData(data);
-        //        }
-        //    });
-        //}
+ 
 
         var stateLegend = document.getElementById('state-legend');
         var stateCrimeLegend = document.getElementById('state-crime-legend');
@@ -1521,56 +1503,16 @@
             //Accomodation
             if (option == "a") {
 
-                stateLegend.style.display = "block"
-                stateCrimeLegend.style.display = "none"
-                stateDesyLegend.style.display = "none"
-
                 var sel1 = jQuery("#sel1 option:selected").val();
                 var sel2 = jQuery("#sel2 option:selected").val();
-
-                @*for (var i = 0; i < allCode.length; i++) {
-                    //getMedian(allCode[i], sel1, sel2)
-                    $.ajax({
-                        url: '@Url.Action("getMedian", "Map")',
-                        type: 'POST',
-                        data: { code: allCode[i], bedroom: sel1, type: sel2},
-                        success: function(data)
-                        {
-                            var result = JSON.parse(data);
-                            var code = result["code"];
-                            var median = result["median"];
-                            cheo[code] = getColor(parseInt(median))
-                            displayList[code] = parseInt(median) != 0 ? "House median is $" + parseInt(median)
-                                + "." : "No record";
-
-                            map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
-
-                            //map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
-                            //map.setLayoutProperty("state-fills", 'visibility', 'none');
-                            //map.setLayoutProperty("cheo", 'visibility', 'visible');
-                        },
-                    });
-                    //var tmpList = getItems.call(this, table, allCode[i], "bedroom", sel1, "type", sel2);
-                    //tmpList.sort((a, b) => (a.year < b.year) ? 1 :
-                    //    (getMonthFromString(a.month) < getMonthFromString(b.month)) ? 1 : -1)
-                    //displayList[[allCode[i]]] = parseInt(getItem(tmpList[0], "median")) != 0 ? "House median is $" + parseInt(getItem(tmpList[0], "median"))
-                    //    + ".<p> Number of recorded house: " + parseInt(getItem(tmpList[0], "count")) + "</p>" : "No record";
-                    //cheo[allCode[i]] = getColor(
-                    //    parseInt(
-                    //        getItem(tmpList[0], "median")
-                    //    )
-                    //)
-                }*@
+                
                 $.ajax({
-                        url: '@Url.Action("getAllMedian", "Map")',
+                        url: '@Url.Action("getContent", "Map")',
                         type: 'POST',
-                        data: { bedroom: sel1, type: sel2},
+                        data: { require: "a", bedroom: sel1, type: sel2},
                         success: function(data)
                         {
                             var result = JSON.parse(data);
-                            //var code = result["code"];
-                            //var color = result["color"];
-                            //var display = result["display"]
                             for (var i = 0; i < result.length; i++) {
                                 var item = result[i];
                                 var code = item["code"];
@@ -1580,118 +1522,71 @@
                                 displayList[code] = display;
 
                             }
-                            //cheo[code] = getColor(parseInt(median))
-                            //displayList[code] = parseInt(median) != 0 ? "House median is $" + parseInt(median)
-                            //    + "." : "No record";
+
+                            stateLegend.style.display = "block"
+                            stateCrimeLegend.style.display = "none"
+                            stateDesyLegend.style.display = "none"
 
                             map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
-
                             map.setLayoutProperty("state-fills", 'visibility', 'none');
                             map.setLayoutProperty("cheo", 'visibility', 'visible');
                         },
                     });
             }
             //Safety
-            else if (option == "s") {
+            else if (option == "c") {
 
-                stateCrimeLegend.style.display = "block"
-                stateLegend.style.display = "none"
-                stateDesyLegend.style.display = "none"
+                $.ajax({
+                    url: '@Url.Action("getContent", "Map")',
+                    type: 'POST',
+                    data: { require: "c" },
+                    success: function (data) {
+                        var result = JSON.parse(data);
+                        for (var i = 0; i < result.length; i++) {
+                            var item = result[i];
+                            var code = item["code"];
+                            var color = item["color"];
+                            var display = item["display"]
+                            cheo[code] = color;
+                            displayList[code] = display;
+                        }
 
-                //var objects = crimeTable;
+                        stateCrimeLegend.style.display = "block"
+                        stateLegend.style.display = "none"
+                        stateDesyLegend.style.display = "none"
 
-                for (var i = 0; i < allCode.length; i++) {
-                    crimeCheo[allCode[i]] = "#ddd"
-                }
-                //for (var j = 0; j < objects.length; j++) {
-                    for (var i = 0; i < allCode.length; i++) {
-
-                        //var object = objects[j];
-                        //if (object != null && object["Year ending December"] == "2018" &&
-                        //    parseInt(object["LGA_Code"]) == allCode[i]) {
-                        //    displayList[[allCode[i]]] = parseFloat(object["Rate"]) != 0 ? "Criminal Rate: " + parseFloat(object["Rate"]).toFixed(2) + "%. <p>Incident number: " + parseInt(object["Incidents Recorded"]) + '</p>' : "No record";
-                        //    crimeCheo[allCode[i]] = getCrimeColor(parseFloat(object["Rate"]));
-                        //}
-
-                        $.ajax({
-                        url: '@Url.Action("getCrmRate", "Map")',
-                        type: 'POST',
-                        data: { code: allCode[i] },
-                        success: function(data)
-                        {
-                            var result = JSON.parse(data);
-                            var code = result["code"];
-                            var rate = result["rate"];
-                            var icdNum = result["incident"];
-
-                            displayList[code] = parseFloat(rate) != 0 ? "Criminal Rate: " + parseFloat(rate).toFixed(2) + "%. <p>Incident number: " + parseInt(icdNum) + '</p>' : "No record";
-                            crimeCheo[code] = getCrimeColor(parseFloat(rate));
-
-                            map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", crimeCheo]]);
-
-                            map.setLayoutProperty("state-fills", 'visibility', 'none');
-                            map.setLayoutProperty("cheo", 'visibility', 'visible');
-                            //map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", crimeCheo]]);
-
-                            //map.setLayoutProperty("state-fills", 'visibility', 'none');
-                            //map.setLayoutProperty("cheo", 'visibility', 'visible');
-                        },
-                    });
-                    }
-                //}
-
-
+                        map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
+                        map.setLayoutProperty("state-fills", 'visibility', 'none');
+                        map.setLayoutProperty("cheo", 'visibility', 'visible');
+                    },
+                });
             }
             //Population density
-            else if (option == "p") {
+            else if (option == "d") {
+                $.ajax({
+                    url: '@Url.Action("getContent", "Map")',
+                    type: 'POST',
+                    data: { require: "d" },
+                    success: function (data) {
+                        var result = JSON.parse(data);
+                        for (var i = 0; i < result.length; i++) {
+                            var item = result[i];
+                            var code = item["code"];
+                            var color = item["color"];
+                            var display = item["display"]
+                            cheo[code] = color;
+                            displayList[code] = display;
+                        }
 
-                stateLegend.style.display = "none"
-                stateCrimeLegend.style.display = "none"
-                stateDesyLegend.style.display = "block"
+                        stateDesyLegend.style.display = "block"
+                        stateLegend.style.display = "none"
+                        stateCrimeLegend.style.display = "none"
 
-                //var objects = desyTable;
-
-                for (var i = 0; i < allCode.length; i++) {
-                    desyCheo[allCode[i]] = "#ddd"
-                }
-                //for (var j = 0; j < objects.length; j++) {
-                    for (var i = 0; i < allCode.length; i++) {
-
-                        ////var object = objects[j];
-                        //if (object != null && parseInt(object["LGA Code"]) == allCode[i]) {
-                        //    displayList[[allCode[i]]] = parseFloat(object["Density"]) != 0 ? "Density: " + parseFloat(object["Density"]).toFixed(2) + ". <p>Population: " + parseInt(object["Population"]) + '</p>' : "No record";
-                        //    desyCheo[allCode[i]] = getDesyColor(parseFloat(object["Density"]));
-                        //}
-
-
-                        $.ajax({
-                        url: '@Url.Action("getDensity", "Map")',
-                        type: 'POST',
-                        data: { code: allCode[i] },
-                        success: function(data)
-                        {
-                            var result = JSON.parse(data);
-                            var code = result["code"];
-                            var density = result["density"];
-                            var population = result["population"];
-
-                            displayList[code] = parseFloat(density) != 0 ? "Density: " + parseFloat(density).toFixed(2) + ". <p>Population: " + parseInt(population) + '</p>' : "No record";
-                            desyCheo[code] = getDesyColor(parseFloat(density));
-
-                            map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", desyCheo]]);
-
-                            map.setLayoutProperty("state-fills", 'visibility', 'none');
-                            map.setLayoutProperty("cheo", 'visibility', 'visible');
-                            //map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", desyCheo]]);
-
-                            //map.setLayoutProperty("state-fills", 'visibility', 'none');
-                            //map.setLayoutProperty("cheo", 'visibility', 'visible');
-                        },
-                        });
-                    }
-                //}
-
-
+                        map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
+                        map.setLayoutProperty("state-fills", 'visibility', 'none');
+                        map.setLayoutProperty("cheo", 'visibility', 'visible');
+                    },
+                });
             }
 
         }
@@ -1710,117 +1605,7 @@
         //        map.classList.remove("sticky");
         //    }
         //}
-
-        // get color depending on house price value
-        function getColor(d) {
-            return d > 550 ? '#723122' :
-                d > 450 ? '#8B4225' :
-                    d > 350 ? '#A25626' :
-                        d > 300 ? '#B86B25' :
-                            d > 250 ? '#CA8323' :
-                                d > 200 ? '#E6B71E' :
-                                    d > 150 ? '#EED322' :
-                                        d > 50 ? '#F2F12D' :
-                                            '#ddd';
-        }
-        // get color depending on criminal rate
-        function getCrimeColor(d) {
-            return d > 10 ? '#723122' :
-                d > 8 ? '#8B4225' :
-                    d > 7 ? '#A25626' :
-                        d > 6 ? '#B86B25' :
-                            d > 5 ? '#CA8323' :
-                                d > 4 ? '#DA9C20' :
-                                    d > 3 ? '#E6B71E' :
-                                        d > 2 ? '#EED322' :
-                                            d > 1 ? '#F2F12D' :
-                                                '#ddd';
-        }
-
-        // get color depending on population density value
-        function getDesyColor(d) {
-            return d > 200 ? '#723122' :
-                d > 50 ? '#8B4225' :
-                    d > 20 ? '#A25626' :
-                        d > 8 ? '#B86B25' :
-                            d > 5 ? '#CA8323' :
-                                d > 3 ? '#E6B71E' :
-                                    d > 1 ? '#EED322' :
-                                        d > 0 ? '#F2F12D' :
-                                            '#ddd';
-        }
-
-        //read data from csv file
-        //function processData(allText) {
-        //    var allTextLines = allText.split(/\r\n|\n/);
-        //    var headers = allTextLines[0].split(',');
-        //    lines = [];
-
-
-        //    for (var i = 1; i < allTextLines.length; i++) {
-        //        var data = allTextLines[i].split(',');
-        //        if (data.length == headers.length) {
-        //            var object = new Object;
-        //            for (var j = 0; j < headers.length; j++) {
-        //                header = headers[j]
-        //                value = data[j]
-        //                object[header] = value
-        //            }
-        //            lines.push(object);
-        //        }
-        //    }
-        //    //alert(lines);
-        //    return lines;
-        //}
-
-        var rates = new Object;
-        //Get acommondation rating
-        function getRatingByPrice(d) {
-            return d > 550 ? 0 :
-                d > 500 ? 1 :
-                    d > 450 ? 2 :
-                        d > 400 ? 3 :
-                            d > 350 ? 4 :
-                                d > 300 ? 5 :
-                                    d > 250 ? 6 :
-                                        d > 225 ? 7 :
-                                            d > 200 ? 8 :
-                                                d > 150 ? 9 :
-                                                    10;
-        }
-
-        //Get criminal rating
-        function getRatingByCrime(d) {
-            return d > 10 ? 0 :
-                d > 9 ? 1 :
-                    d > 8 ? 2 :
-                        d > 7 ? 3 :
-                            d > 6 ? 4 :
-                                d > 5 ? 5 :
-                                    d > 4 ? 6 :
-                                        d > 3 ? 7 :
-                                            d > 2 ? 8 :
-                                                d > 1 ? 9 : 10;
-        }
-
-        //Get population rating
-        function getRatingByDensity(d) {
-            return d > 200 ? 0 :
-                d > 150 ? 1 :
-                    d > 100 ? 5 :
-                        d > 50 ? 7 :
-                            d > 25 ? 8 :
-                                d > 15 ? 9 :
-                                    d > 10 ? 10 :
-                                        d > 8 ? 8 :
-                                            d > 7 ? 7 :
-                                                d > 6 ? 6 :
-                                                    d > 5 ? 5 :
-                                                        d > 4 ? 4 :
-                                                            d > 3 ? 3 :
-                                                                d > 2 ? 2 :
-                                                                    d > 1 ? 1 : 0;
-        }
+        
 
         //Recommendation
         function recommendation() {
@@ -1833,89 +1618,23 @@
             var minBudget = isNaN(minBudget) ? 0 : minBudget;
             var maxBudget = isNaN(maxBudget) ? 1000 : maxBudget;
 
-            var objects = table;
-            var crimeObject = crimeTable;
-            var desyObject = desyTable;
-
-            var list = [];
-
             var acmWeight = parseFloat(acmslider.value);
             var crmWeight = parseFloat(crmSlider.value);
             var pouWeight = parseFloat(pouSlider.value);
-
             var sum = acmWeight + crmWeight + pouWeight;
-
             acmWeight /= sum
             crmWeight /= sum
             pouWeight /= sum
 
-            //All rate:
-            for (var i = 0; i < allCode.length; i++) {
-                rates[allCode[i]] = -1;
-                for (var j = 0; j < objects.length; j++) {
-                    var object = objects[j];
-                    if (object != null && object["LGA_Code"] != "" && object["median"] != null &&
-                        parseInt(object["LGA_Code"]) === allCode[i]) {
-                        if (object["year"] == "2018") {
-                            rates[allCode[i]] = acmWeight * getRatingByPrice(parseInt(object["median"]));
-                            break;
-                        }
-                    }
-                }
-            }
-
-            for (var i = 0; i < allCode.length; i++) {
-                for (var j = 0; j < objects.length; j++) {
-                    var object = crimeObject[j];
-                    if (rates[allCode[i]] != -1 && object != null && object["LGA_Code"] != ""
-                        && object["Year ending December"] == "2018" && object["Rate"] != null &&
-                        parseInt(object["LGA_Code"]) === allCode[i]) {
-                        rates[allCode[i]] += crmWeight * getRatingByCrime(parseFloat(object["Rate"]));
-                        break;
-                    }
-                }
-            }
-
-            for (var i = 0; i < allCode.length; i++) {
-                for (var j = 0; j < objects.length; j++) {
-                    var object = desyObject[j];
-                    if (rates[allCode[i]] != -1 && object != null && object["LGA Code"] != ""
-                        && object["Density"] != null &&
-                        parseInt(object["LGA Code"]) === allCode[i]) {
-                        rates[allCode[i]] += pouWeight * getRatingByDensity(parseFloat(object["Density"]));
-                        break;
-                    }
-                }
-            }
-
-
-            for (var i = 0; i < objects.length; i++) {
-                var object = objects[i];
-                if (rates[allCode[i]] != -1 && object != null && object["LGA_Code"] != "" && object["median"] != "" &&
-                    parseInt(object["median"]) > minBudget && parseInt(object["median"]) < maxBudget) {
-                    if (object["year"] == "2018" && object["type"] != "all")
-                        list.push(object);
-                }
-            }
-
-
-
-            list.sort((a, b) => (rates[parseInt(a.LGA_Code)] < rates[parseInt((b.LGA_Code))]) ? 1 : -1)
-            for (var i = 0; i < 10; i++) {
-                var recomdList = document.getElementById('recomd-list');
-                recomdList.innerHTML += '<a href="javascript:flytoPoly(' + parseInt(list[i]["LGA_Code"]) + ')" class="list-group-item list-group-item-action flex-column align-items-start">   <div class="d-flex w-100 justify-content-between" > <h5 class="mb-1">'
-                    + list[i]["LGA"] + '</h5> <small class="text-muted" >Top ' + (i + 1) + '</small> </div > <p class="mb-1">'
-                    + "Region: " + list[i]["region"] + '</p> <small>' + parseInt(list[i]["bedroom"]) + " bedroom(s) " + jsUcfirst(list[i]["type"]) + '</small> </a>';
-
-            }
-
-            if (list.length == 0) {
-                var filterList = document.getElementById('recomd-list');
-                filterList.innerHTML += '<div class="list-group-item list-group-item-action flex-column align-items-start">   <div class="d-flex w-100 justify-content-between" > <h5 class="mb-1">' +
-                    'No record within this price range</h5> <small class="text-muted" ></small> </div> <p class="mb-1">'
-                    + 'Change your price range and try again</p> </div>';
-            }
-
+            $.ajax({
+                url: '@Url.Action("getRecommendation", "Map")',
+                type: 'POST',
+                data: { min: minBudget, max: maxBudget, acmWeight: acmWeight, crmWeight: crmWeight, pouWeight: pouWeight},
+                success: function (data) {
+                    recomdList.innerHTML = data
+                },
+            });
+            
         }
 
         //Filter
@@ -1927,83 +1646,19 @@
             var minBudget = isNaN(minBudget) ? 0 : minBudget;
             var maxBudget = isNaN(maxBudget) ? 1000 : maxBudget;
 
-            var objects = table;
+            
+            $.ajax({
+                url: '@Url.Action("filterRent", "Map")',
+                type: 'POST',
+                data: { min: minBudget, max: maxBudget},
+                success: function (data) {
+                    filterList.innerHTML = data
+                },
+            });
 
-            var list = [];
-            for (var i = 0; i < objects.length; i++) {
-                var object = objects[i];
-                if (object != null && object["median"] != "" &&
-                    parseInt(object["median"]) > minBudget && parseInt(object["median"]) < maxBudget) {
-                    if (object["year"] == "2018" && object["type"] != "all")
-                        list.push(object);
-                }
-            }
-            list.sort((a, b) => (a.median > b.median) ? 1 : -1)
-            for (var i = 0; i < list.length; i++) {
-                var filterList = document.getElementById('list');
-                filterList.innerHTML += '<a href="javascript:flytoPoly(' + parseInt(list[i]["LGA_Code"]) + ')" class="list-group-item list-group-item-action flex-column align-items-start">   <div class="d-flex w-100 justify-content-between" > <h6 class="mb-1">'
-                    + list[i]["LGA"] + " - " + list[i]["region"] + '</h6> <small class="text-muted" >$' + parseInt(list[i]["median"]) + '</small> </div> <p class="mb-1">'
-                    + parseInt(list[i]["bedroom"]) + " bedroom(s) " + jsUcfirst(list[i]["type"]) + '</p> </a>';
-
-            }
-
-            if (list.length == 0) {
-                var filterList = document.getElementById('list');
-                filterList.innerHTML += '<div class="list-group-item list-group-item-action flex-column align-items-start">   <div class="d-flex w-100 justify-content-between" > <h6 class="mb-1">' +
-                    'No record within this price range</h6> <small class="text-muted" ></small> </div> <p class="mb-1">'
-                    + 'Change your price range and try again</p> </div>';
-
-            }
 
         }
-        //Capital first letter
-        function jsUcfirst(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
-        //Return value
-        var getItems = function ()   /*function getItems(objects, lgaCode, attriName, attriValue, year = "", yearValue = "")*/
-        {
-            if (arguments.length < 2)
-                return;
-            var objects = arguments[0];
-            var lgaCode = arguments[1];
 
-            var args = new Object;
-            for (var i = 2; i < arguments.length; i = i + 2) {
-                args[arguments[i]] = arguments[i + 1]
-            }
-
-            var list = [];
-            for (var i = 0; i < objects.length; i++) {
-                var object = objects[i];
-                var ready = true;
-                if (object != null && parseInt(object["LGA_Code"]) == parseInt(lgaCode)) {
-
-                    for (var j = 0; j < Object.keys(args).length; j++) {
-                        attriName = Object.keys(args)[j];
-                        attriValue = Object.values(args)[j];
-
-                        if (attriValue != null && attriName != null &&
-                            isNumber(attriValue) ? parseInt(object[attriName]) == parseInt(attriValue) : object[attriName].toUpperCase() == attriValue.toUpperCase()
-                        ) {
-                            if (object["median"] != "" && object["year"] == "2018")
-                                ready &= true;
-                            else
-                                ready &= false;
-                        }
-                        else
-                            ready &= false;
-                    }
-                    if (ready)
-                        list.push(object);
-                }
-            }
-            return list;
-        }
-
-        function getItem(object, name) {
-            return object != null ? object[name] : 0
-        }
         //Get month number
         function getMonthFromString(mon) {
             return new Date(Date.parse(mon + " 1, 2012")).getMonth() + 1
@@ -2026,7 +1681,6 @@
         function showPolygonArea(e) {
             featureGroup.clearLayers();
             featureGroup.addLayer(e.layer);
-
             // Here 'e.layer' holds the L.Polygon instance:
             new L.Marker(e.layer.getBounds().getCenter()).addTo(featureGroup);
 

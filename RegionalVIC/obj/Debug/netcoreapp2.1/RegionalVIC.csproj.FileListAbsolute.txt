@@ -79,7 +79,6 @@ C:\Users\kasal\Source\Repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcorea
 C:\Users\kasal\Source\Repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\Home\About.g.cshtml.cs
 C:\Users\kasal\Source\Repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\Home\Contact.g.cshtml.cs
 C:\Users\kasal\Source\Repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.g.cshtml.cs
-C:\Users\kasal\Source\Repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\locations\Index.g.cshtml.cs
 C:\Users\kasal\Source\Repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\Map\Index.g.cshtml.cs
 C:\Users\kasal\Source\Repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\Rtrtbls\Create.g.cshtml.cs
 C:\Users\kasal\Source\Repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\Rtrtbls\Delete.g.cshtml.cs
