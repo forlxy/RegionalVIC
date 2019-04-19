@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\NewFolder\" />
     <Folder Include="Views\Movie\" />
   </ItemGroup>
 
