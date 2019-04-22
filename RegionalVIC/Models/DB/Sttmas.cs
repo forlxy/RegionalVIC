@@ -10,6 +10,9 @@ namespace RegionalVIC.Models.DB
             Lgamas = new HashSet<Lgamas>();
             Regmas = new HashSet<Regmas>();
             Sbbmas = new HashSet<Sbbmas>();
+            Cobtbl = new HashSet<Cobtbl>();
+            Cmmtbl = new HashSet<Cmmtbl>();
+            Lggtbl = new HashSet<Lggtbl>();
         }
 
         public string StateCode { get; set; }
@@ -21,5 +24,8 @@ namespace RegionalVIC.Models.DB
         public ICollection<Lgamas> Lgamas { get; set; }
         public ICollection<Regmas> Regmas { get; set; }
         public ICollection<Sbbmas> Sbbmas { get; set; }
+        public ICollection<Cobtbl> Cobtbl { get; set; }
+        public ICollection<Cmmtbl> Cmmtbl { get; set; }
+        public ICollection<Lggtbl> Lggtbl { get; set; }
     }
 }

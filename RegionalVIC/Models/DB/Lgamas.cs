@@ -11,6 +11,9 @@ namespace RegionalVIC.Models.DB
             Lgatbl = new HashSet<Lgatbl>();
             Ppltbl = new HashSet<Ppltbl>();
             Rtrtbl = new HashSet<Rtrtbl>();
+            Cobtbl = new HashSet<Cobtbl>();
+            Cmmtbl = new HashSet<Cmmtbl>();
+            Lggtbl = new HashSet<Lggtbl>();
         }
 
         public string LgaCode { get; set; }
@@ -27,5 +30,8 @@ namespace RegionalVIC.Models.DB
         public ICollection<Lgatbl> Lgatbl { get; set; }
         public ICollection<Ppltbl> Ppltbl { get; set; }
         public ICollection<Rtrtbl> Rtrtbl { get; set; }
+        public ICollection<Cobtbl> Cobtbl { get; set; }
+        public ICollection<Cmmtbl> Cmmtbl { get; set; }
+        public ICollection<Lggtbl> Lggtbl { get; set; }
     }
 }

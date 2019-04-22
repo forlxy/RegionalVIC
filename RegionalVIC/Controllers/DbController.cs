@@ -25,18 +25,32 @@ namespace RegionalVIC.Controllers
         }
 
         //  Get LGAMAS by status. e.g. "R" - Region
-        public async Task<IActionResult> GetRegionLGA(char sts)
+        [HttpPost]
+        public Object GetRegionLGA(char sts)
         {
-            var lgamas = await _context.Lgamas
-                .Where(e => e.Status.Contains(sts)).ToListAsync();
-                
+            var lgamas = _context.Lgamas
+                .Where(e => e.Status.Contains(sts)).ToList();
+
             if (lgamas == null)
             {
                 return NotFound();
             }
 
-            return View(lgamas);
+            return lgamas;
         }
+
+        //public async Task<IActionResult> GetRegionLGA(char sts)
+        //{
+        //    var lgamas = await _context.Lgamas
+        //        .Where(e => e.Status.Contains(sts)).ToListAsync();
+
+        //    if (lgamas == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(lgamas);
+        //}
 
     }
 }
