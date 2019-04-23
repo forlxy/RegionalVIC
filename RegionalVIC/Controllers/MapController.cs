@@ -289,10 +289,11 @@ namespace RegionalVIC.Controllers
         {
             var list = (from r in _context.Cmmtbl
                         join l in _context.Cobmas on r.CobCode equals l.Seq
+                        join t in _context.Lgatbl on r.LgaCode equals t.LgaCode
                         where l.Cob == country
                         select new
                         {
-                            LgaCode = r.LgaCode,
+                            LgaName = t.LgaName,
                             Percnt = r.Percnt,
                             Cob = l.Cob
                         }).ToList();
@@ -305,7 +306,7 @@ namespace RegionalVIC.Controllers
             //string[] value = new string[list.Count];
             for (var i = 0; i < list.Count; i++)
             {
-                var label = list[i].LgaCode;
+                var label = list[i].LgaName;
                 var value = list[i].Percnt.ToString();
 
                 chartItem item = new chartItem(label, value);
