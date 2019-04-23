@@ -106,6 +106,18 @@ namespace RegionalVIC.Models.DB
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.LgaImage)
+                    .HasColumnName("LGA_image")
+                    .HasColumnType("varchar(MAX)")
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.LgaVideo)
+                    .HasColumnName("LGA_video")
+                    .HasColumnType("varchar(MAX)")
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('')");
+
                 entity.Property(e => e.State)
                     .IsRequired()
                     .HasColumnName("state")

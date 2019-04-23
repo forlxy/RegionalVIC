@@ -22,6 +22,7 @@
   <ItemGroup>
     <Folder Include="Models\NewFolder\" />
     <Folder Include="Views\Movie\" />
+    <Folder Include="Views\Chart\" />
   </ItemGroup>
 
 </Project>
