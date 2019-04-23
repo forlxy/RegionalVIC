@@ -23,6 +23,11 @@ namespace RegionalVIC.Models.DB
         public virtual DbSet<Rtrtbl> Rtrtbl { get; set; }
         public virtual DbSet<Sbbmas> Sbbmas { get; set; }
         public virtual DbSet<Sttmas> Sttmas { get; set; }
+        public virtual DbSet<Cobmas> Cobmas { get; set; }
+        public virtual DbSet<Cobtbl> Cobtbl { get; set; }
+        public virtual DbSet<Cmmtbl> Cmmtbl { get; set; }
+        public virtual DbSet<Lggmas> Lggmas { get; set; }
+        public virtual DbSet<Lggtbl> Lggtbl { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -357,6 +362,208 @@ namespace RegionalVIC.Models.DB
                     .HasMaxLength(1)
                     .HasDefaultValueSql("('A')");
             });
+
+            modelBuilder.Entity<Cobmas>(entity =>
+            {
+                entity.HasKey(e => e.Seq);
+
+                entity.ToTable("COBMAS");
+
+                entity.Property(e => e.Seq).HasColumnName("seq");
+
+                entity.Property(e => e.Cob)
+                    .HasColumnName("cob")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Status)
+                    .HasColumnName("status")
+                    .HasMaxLength(1);
+            });
+
+            modelBuilder.Entity<Cobtbl>(entity =>
+            {
+                entity.HasKey(e => new { e.Yr, e.LgaCode, e.State, e.CobCode });
+
+                entity.ToTable("COBTBL");
+
+                entity.Property(e => e.Yr).HasColumnName("yr");
+
+                entity.Property(e => e.LgaCode)
+                    .IsRequired()
+                    .HasColumnName("LGA_code")
+                    .HasMaxLength(5)
+                    .HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.State)
+                    .IsRequired()
+                    .HasColumnName("state_code")
+                    .HasMaxLength(3)
+                    .HasDefaultValueSql("(N'VIC')");
+
+                entity.Property(e => e.CobCode).HasColumnName("cob");
+
+                entity.Property(e => e.Rank).HasColumnName("rank");
+
+                entity.Property(e => e.Ppl).HasColumnName("ppl");
+
+                entity.Property(e => e.Percnt)
+                    .HasColumnName("percnt")
+                    .HasColumnType("decimal(3, 1)");
+
+                entity.Property(e => e.Ttl_ppl)
+                    .HasColumnName("ttl_ppl")
+                    .HasDefaultValueSql("((0))");
+
+                entity.HasOne(d => d.LgaCodeNavigation)
+                    .WithMany(p => p.Cobtbl)
+                    .HasForeignKey(d => d.LgaCode)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_COBTBL_LGAMAS");
+
+                entity.HasOne(d => d.SttCodeNavigation)
+                    .WithMany(p => p.Cobtbl)
+                    .HasForeignKey(d => d.State)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_COBTBL_STTMAS");
+
+                entity.HasOne(d => d.CobCodeNavigation)
+                    .WithMany(p => p.Cobtbl)
+                    .HasForeignKey(d => d.CobCode)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_COBTBL_COBMAS");
+            });
+
+            modelBuilder.Entity<Cmmtbl>(entity =>
+            {
+                entity.HasKey(e => new { e.Yr, e.LgaCode, e.State, e.CobCode });
+
+                entity.ToTable("CMMTBL");
+
+                entity.Property(e => e.Yr).HasColumnName("yr");
+
+                entity.Property(e => e.LgaCode)
+                    .IsRequired()
+                    .HasColumnName("LGA_code")
+                    .HasMaxLength(5)
+                    .HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.State)
+                    .IsRequired()
+                    .HasColumnName("state_code")
+                    .HasMaxLength(3)
+                    .HasDefaultValueSql("(N'VIC')");
+
+                entity.Property(e => e.CobCode).HasColumnName("cob_code");
+
+                entity.Property(e => e.Rank).HasColumnName("rank");
+
+                entity.Property(e => e.Suburbs)
+                    .HasColumnName("suburbs")
+                    .HasColumnType("varchar(MAX)")
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.Ppl).HasColumnName("ppl");
+
+                entity.Property(e => e.Percnt)
+                    .HasColumnName("percnt")
+                    .HasColumnType("decimal(3, 1)");
+
+                entity.Property(e => e.Ttl_ppl)
+                    .HasColumnName("ttl_ppl")
+                    .HasDefaultValueSql("((0))");
+
+                entity.HasOne(d => d.LgaCodeNavigation)
+                    .WithMany(p => p.Cmmtbl)
+                    .HasForeignKey(d => d.LgaCode)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CMMTBL_LGAMAS");
+
+                entity.HasOne(d => d.SttCodeNavigation)
+                    .WithMany(p => p.Cmmtbl)
+                    .HasForeignKey(d => d.State)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CMMTBL_STTMAS");
+
+                entity.HasOne(d => d.CobCodeNavigation)
+                    .WithMany(p => p.Cmmtbl)
+                    .HasForeignKey(d => d.CobCode)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CMMTBL_COBMAS");
+            });
+
+            modelBuilder.Entity<Lggmas>(entity =>
+            {
+                entity.HasKey(e => e.Seq);
+
+                entity.ToTable("LGGMAS");
+
+                entity.Property(e => e.Seq).HasColumnName("seq");
+
+                entity.Property(e => e.Lang)
+                    .HasColumnName("language")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Status)
+                    .HasColumnName("status")
+                    .HasMaxLength(1);
+            });
+
+            modelBuilder.Entity<Lggtbl>(entity =>
+            {
+                entity.HasKey(e => new { e.Yr, e.LgaCode, e.State, e.LangCode });
+
+                entity.ToTable("LGGTBL");
+
+                entity.Property(e => e.Yr).HasColumnName("yr");
+
+                entity.Property(e => e.LgaCode)
+                    .IsRequired()
+                    .HasColumnName("LGA_code")
+                    .HasMaxLength(5)
+                    .HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.State)
+                    .IsRequired()
+                    .HasColumnName("state_code")
+                    .HasMaxLength(3)
+                    .HasDefaultValueSql("(N'VIC')");
+
+                entity.Property(e => e.LangCode).HasColumnName("lang_code");
+
+                entity.Property(e => e.Rank).HasColumnName("rank");
+
+                entity.Property(e => e.Ppl).HasColumnName("ppl");
+
+                entity.Property(e => e.Percnt)
+                    .HasColumnName("percnt")
+                    .HasColumnType("decimal(3, 1)");
+
+                entity.Property(e => e.Ttl_ppl)
+                    .HasColumnName("ttl_ppl")
+                    .HasDefaultValueSql("((0))");
+
+                entity.HasOne(d => d.LgaCodeNavigation)
+                    .WithMany(p => p.Lggtbl)
+                    .HasForeignKey(d => d.LgaCode)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_LGGTBL_LGAMAS");
+
+                entity.HasOne(d => d.SttCodeNavigation)
+                    .WithMany(p => p.Lggtbl)
+                    .HasForeignKey(d => d.State)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_LGGTBL_STTMAS");
+
+                entity.HasOne(d => d.LangCodeNavigation)
+                    .WithMany(p => p.Lggtbl)
+                    .HasForeignKey(d => d.LangCode)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_LGGTBL_LGGMAS");
+            });
+
         }
     }
 }
