@@ -1,4 +1,4 @@
-﻿@using RegionalVIC.Models.DB;
+﻿@using RegionalVIC.Controllers;
 @*@model Tuple<Rtrtbl, Critbl, Ppltbl>*@
 @*@model IEnumerable<Rtrtbl>*@
 <style>
@@ -633,7 +633,7 @@
         </div>
     </header>
 
-    <section id="services">
+    <section id="map-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7 col-md-6 col-sm-12">
@@ -920,6 +920,14 @@
         </div>
     </section>
 
+    <section id="chart">
+        <div class="col-md-4">
+            <h2>Chart</h2>
+            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+            <canvas id="myChart"></canvas>
+        </div>
+    </section>
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -961,11 +969,12 @@
             </div>
         </div>
     </footer>
-
+    <!-- Load the File-->>
     <script type="text/javascript" src="/lga.js.gz"></script>
     <script>
         var lga
         var lines;
+        var toggleRecomd = false;
 
         var allCode = [20110, 20260, 20570, 20660, 20740, 20830, 20910, 21010, 21110, 21180, 21270, 21370, 21450, 21610, 21670, 21750, 21830, 21890, 22110, 22170, 22250, 22310, 22410, 22490, 22620, 22670, 22750, 22830, 22910, 22980, 23110, 23190, 23270, 23350, 23430, 23670, 23810, 23940, 24130, 24210, 24250, 24330, 24410, 24600, 24650, 24780, 24850, 24900, 24970, 25060, 25150, 25250, 25340, 25430, 25490, 25620, 25710, 25810, 25900, 25990, 26080, 26170, 26260, 26350, 26430, 26490, 26610, 26670, 26700, 26730, 26810, 26890, 26980, 27070, 27170, 27260, 27350, 27450, 27630, 29399, 29499, 29799];
 
@@ -1230,71 +1239,29 @@
 
         //Generate Color
         formRegionColorMap();
-
+        //showChart();
 
         $(document).ready(function () {
             
-
-            //var string = LZString.decompress(region);
-            //lga = JSON.parse(string);
-            
-
-            //$.getJSON('/LGA_2018_AUST_VIC_ID.json', function (data) {
-            //    customData = (data);
-            //    regionFileContent = JSON.stringify(customData);
-
-            //});
-
-            //$.get('/lga.js', function (data) {
-            //    //var content = $(data);
-
-            //    var byteArray = new Uint8Array(data);
-            //    var color = pako.inflate(byteArray, { to: 'string' });
-            //});
-
-            //$.ajax({
-            //    type: "GET",
-            //    url: "/Rental_Report_with_LGA_Code.csv",
-            //    dataType: "text",
-            //    success: function (data) {
-            //        table = processData(data);
-            //    }
-            //});
-
-            //$.ajax({
-            //    type: "GET",
-            //    url: "/Criminal_Incidents_with_LGA_Code.csv",
-            //    dataType: "text",
-            //    success: function (data) {
-            //        crimeTable = processData(data);
-            //    }
-            //});
-
-            //$.ajax({
-            //    type: "GET",
-            //    url: "/Population_Density_2017_Regional.csv",
-            //    dataType: "text",
-            //    success: function (data) {
-            //        desyTable = processData(data);
-            //    }
-            //});
-
             //Reset as tab changed
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 resetLayer();
             });
 
-            //$('#acmSlider').slider().on('slideStop', function (ev) {
-            //    recommendation()
-            //});
+            $('#acmSlider').on('slideStop', function (ev) {
+                if(toggleRecomd)
+                    recommendation()
+            });
 
-            //$('#acmSlider').slider().on('slideStop', function (ev) {
-            //    recommendation()
-            //});
+            $('#crmSlider').on('slideStop', function (ev) {
+                if (toggleRecomd)
+                    recommendation()
+            });
 
-            //$('#acmSlider').slider().on('slideStop', function (ev) {
-            //    recommendation()
-            //});
+            $('#pouSlider').on('slideStop', function (ev) {
+                if (toggleRecomd)
+                    recommendation()
+            });
 
             //$(window).scroll(function () {
             //    if ($(window).scrollTop <= 50) {
@@ -1307,9 +1274,6 @@
         });
 
         map.on('load', function () {
-            //$.getScript("/lga.json", function () {
-            //    //alert("Script loaded and executed.");
-            //});
             // Add a layer showing the places.
             map.addSource("states", {
                 "type": "geojson",
@@ -1595,6 +1559,151 @@
         }
 
 
+        var myChart;
+        //var canvas = document.getElementById("myChart");
+        //var ctx = canvas.getContext("2d");
+
+        function showChart(label, value) {
+
+            var values = [parseFloat(value), 100 - parseFloat(value)];
+            var labels = [label, 'Others'];
+            
+            var config = {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: [
+                            "#FF6384",
+                            "#D3D3D3"
+                        ],
+                        hoverBackgroundColor: [
+                            "#FF6384",
+                            "#D3D3D3"
+                        ]
+                    }]
+                },
+                options: {
+                    elements: {
+                        center: {
+                            text: values[0]+'%',
+                            color: '#FF6384', // Default is #000000
+                            fontStyle: 'Arial', // Default is Arial
+                            sidePadding: 20 // Defualt is 20 (as a percentage)
+                        }
+                    }
+                }
+            };
+
+
+            var ctx = document.getElementById("myChart").getContext("2d");
+            if (myChart)
+                myChart.destroy();
+            myChart = new Chart(ctx, config);
+            
+            //dmbChart(150, 150, 125, 25, values, colors, labels, 0);
+            
+        }
+        //test
+        initLanguageCharts("20110");
+
+        function initLanguageCharts(lgaCode) {
+
+            $.ajax({
+                url: '@Url.Action("getLan", "Map")',
+                type: 'POST',
+                data: { code: lgaCode },
+                success: function (data) {
+                    var result = JSON.parse(data);
+                    
+                    Chart.pluginService.register({
+                        beforeDraw: function (chart) {
+                            if (chart.config.options.elements.center) {
+                                //Get ctx from string
+                                var ctx = chart.chart.ctx;
+
+                                //Get options from the center object in options
+                                var centerConfig = chart.config.options.elements.center;
+                                var fontStyle = centerConfig.fontStyle || 'Arial';
+                                var txt = centerConfig.text;
+                                var color = centerConfig.color || '#000';
+                                var sidePadding = centerConfig.sidePadding || 20;
+                                var sidePaddingCalculated = (sidePadding / 100) * (chart.innerRadius * 2)
+                                //Start with a base font of 30px
+                                ctx.font = "30px " + fontStyle;
+
+                                //Get the width of the string and also the width of the element minus 10 to give it 5px side padding
+                                var stringWidth = ctx.measureText(txt).width;
+                                var elementWidth = (chart.innerRadius * 2) - sidePaddingCalculated;
+
+                                // Find out how much the font can grow in width.
+                                var widthRatio = elementWidth / stringWidth;
+                                var newFontSize = Math.floor(30 * widthRatio);
+                                var elementHeight = (chart.innerRadius * 2);
+
+                                // Pick a new font size so it will not be larger than the height of label.
+                                var fontSizeToUse = Math.min(newFontSize, elementHeight);
+
+                                //Set font settings to draw it correctly.
+                                ctx.textAlign = 'center';
+                                ctx.textBaseline = 'middle';
+                                var centerX = ((chart.chartArea.left + chart.chartArea.right) / 2);
+                                var centerY = ((chart.chartArea.top + chart.chartArea.bottom) / 2);
+                                ctx.font = fontSizeToUse + "px " + fontStyle;
+                                ctx.fillStyle = color;
+
+                                //Draw text in center
+                                ctx.fillText(txt, centerX, centerY);
+                            }
+                        }
+                    });
+
+                    for (var i = 0; i < result.length; i++) {
+                        var item = result[i];
+                        var label = item["label"];
+                        var value = item["value"];
+
+                        showChart(label, value);
+                    }
+                    
+                },
+            });
+
+
+        }
+
+        function dmbChart(cx, cy, radius, arcwidth, values, colors, labels, selectedValue) {
+            var tot = 0;
+            var accum = 0;
+            var PI = Math.PI;
+            var PI2 = PI * 2;
+            var offset = -PI / 2;
+            ctx.lineWidth = arcwidth;
+            for (var i = 0; i < values.length; i++) { tot += values[i]; }
+            for (var i = 0; i < values.length; i++) {
+                ctx.beginPath();
+                ctx.arc(cx, cy, radius,
+                    offset + PI2 * (accum / tot),
+                    offset + PI2 * ((accum + values[i]) / tot)
+                );
+                ctx.strokeStyle = colors[i];
+                ctx.stroke();
+                accum += values[i];
+            }
+            var innerRadius = radius - arcwidth - 3;
+            ctx.beginPath();
+            ctx.arc(cx, cy, innerRadius, 0, PI2);
+            ctx.fillStyle = colors[selectedValue];
+            ctx.fill();
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'bottom';
+            ctx.fillStyle = 'white';
+            ctx.font = (innerRadius / 2) + 'px verdana';
+            ctx.fillText(values[selectedValue]+"%", cx, cy + innerRadius * .5);
+            ctx.font = (innerRadius / 4) + 'px verdana';
+            ctx.fillText(labels[selectedValue], cx, cy - innerRadius * .4);
+        }
         //window.onscroll = function () { myFunction() };
 
         //// Get the offset position of the navbar
@@ -1634,6 +1743,7 @@
                 type: 'POST',
                 data: { min: minBudget, max: maxBudget, acmWeight: acmWeight, crmWeight: crmWeight, pouWeight: pouWeight},
                 success: function (data) {
+                    toggleRecomd = true;
                     recomdList.innerHTML = data
                 },
             });

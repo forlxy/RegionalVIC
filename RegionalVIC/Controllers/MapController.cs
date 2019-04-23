@@ -10,6 +10,22 @@ using Newtonsoft.Json;
 
 namespace RegionalVIC.Controllers
 {
+    public class chartItem
+    {
+        public string label;
+        public string value;
+
+        public chartItem()
+        {
+
+        }
+
+        public chartItem(string label, string value)
+        {
+            this.label = label;
+            this.value = value;
+        }
+    }
     public class recommendationItem
     {
         public string code;
@@ -266,6 +282,107 @@ namespace RegionalVIC.Controllers
 
         }
 
+
+
+        [HttpPost]
+        public string getRegions(string country)
+        {
+            var list = (from r in _context.Cmmtbl
+                        join l in _context.Cobmas on r.CobCode equals l.Seq
+                        where l.Cob == country
+                        select new
+                        {
+                            LgaCode = r.LgaCode,
+                            Percnt = r.Percnt,
+                            Cob = l.Cob
+                        }).ToList();
+
+
+            list = list.OrderByDescending(t => t.Percnt).ToList();
+
+            List<chartItem> chartList = new List<chartItem>();
+            //string[] label = new string[list.Count];
+            //string[] value = new string[list.Count];
+            for (var i = 0; i < list.Count; i++)
+            {
+                var label = list[i].LgaCode;
+                var value = list[i].Percnt.ToString();
+
+                chartItem item = new chartItem(label, value);
+                chartList.Add(item);
+            }
+
+            var json = JsonConvert.SerializeObject(chartList);
+            return json;
+
+        }
+
+        [HttpPost]
+        public string getCountry(string code)
+        {
+            var list = (from r in _context.Cobtbl
+                        join l in _context.Cobmas on r.CobCode equals l.Seq
+                        where r.LgaCode == code
+                        select new
+                        {
+                            LgaCode = r.LgaCode,
+                            Percnt = r.Percnt,
+                            Cob = l.Cob
+                        }).ToList();
+
+
+            list = list.OrderByDescending(t => t.Percnt).ToList();
+
+            List<chartItem> chartList = new List<chartItem>();
+            //string[] label = new string[list.Count];
+            //string[] value = new string[list.Count];
+            for (var i = 0; i < list.Count; i++)
+            {
+                var label = list[i].Cob;
+                var value = list[i].Percnt.ToString();
+
+                chartItem item = new chartItem(label, value);
+                chartList.Add(item);
+            }
+
+            var json = JsonConvert.SerializeObject(chartList);
+            return json;
+
+        }
+
+
+        [HttpPost]
+        public string getLan(string code)
+        {
+            var list = (from r in _context.Lggtbl
+                        join l in _context.Lggmas on r.LangCode equals l.Seq
+                        where r.LgaCode == code
+                        select new
+                        {
+                            LgaCode = r.LgaCode,
+                            Percnt = r.Percnt,
+                            Lang = l.Lang
+                        }).ToList();
+
+
+            list = list.OrderByDescending(t => t.Percnt).ToList();
+
+            List<chartItem> chartList = new List<chartItem>();
+            //string[] label = new string[list.Count];
+            //string[] value = new string[list.Count];
+            for (var i = 0; i < list.Count; i++)
+            {
+                var label = list[i].Lang;
+                var value = list[i].Percnt.ToString();
+
+                chartItem item = new chartItem(label, value);
+                chartList.Add(item);
+            }
+
+            var json = JsonConvert.SerializeObject(chartList);
+            return json;
+
+        }
 
         [HttpPost]
         public string filterRent(int min, int max)
