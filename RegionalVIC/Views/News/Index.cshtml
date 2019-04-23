@@ -1,0 +1,216 @@
+﻿<style>
+.post-preview > a {
+  color: #212529;
+}
+
+.post-preview > a:focus, .post-preview > a:hover {
+  text-decoration: none;
+  color: #0085A1;
+}
+
+.post-preview > a > .post-title {
+  font-size: 30px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.post-preview > a > .post-subtitle {
+  font-weight: 300;
+  margin: 0 0 10px;
+}
+
+.post-preview > .post-meta {
+  font-size: 18px;
+  font-style: italic;
+  margin-top: 0;
+  color: #868e96;
+}
+
+.post-preview > .post-meta > a {
+  text-decoration: none;
+  color: #212529;
+}
+
+.post-preview > .post-meta > a:focus, .post-preview > .post-meta > a:hover {
+  text-decoration: underline;
+  color: #0085A1;
+}
+
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>RegionalVIC - Explore Regional Victoria</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+    <!-- Custom styles for this template -->
+    <link href="/css/agency.min.css" rel="stylesheet">
+
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+    <link rel='/stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.css' type='text/css' />
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="https://unpkg.com/tinyqueue@2.0.0/tinyqueue.min.js"></script>
+    <script src="/js/polylabel.js"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.min.js'></script>
+
+
+    <link href="/css/rangeslider.css" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="/">RegionalVIC</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="/">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="/Map">Map</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Header -->
+    <header class="masthead">
+        <div class="container">
+            <div class="intro-normal">
+                <div class="intro-lead-in">Welcome To RegionalVIC!</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section id="articles">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="news">
+                    </div>
+                    <hr>
+                </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="copyright">
+                        Copyright &copy; RegionalVIC 2019. Theme is from <a href="https://startbootstrap.com/themes/">Start Bootstrap</a> website under MIT license.
+                    </span>
+                </div>
+                @*<div class="col-md-4">
+                        <ul class="list-inline social-buttons">
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="list-inline quicklinks">
+                            <li class="list-inline-item">
+                                <a href="#">Privacy Policy</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">Terms of Use</a>
+                            </li>
+                        </ul>
+                    </div>*@
+            </div>
+        </div>
+    </footer>
+    <script>
+
+        {
+            $.ajax({
+                url:
+                    //"https://newsapi.org/v2/everything?q=-Trump,+immigration,+plan&sources=abc-news-au&apiKey=79a6a2e25a7c4063a5857e750e7b80fc",
+                    //"https://gnews.io/api/v2/?q=plan+visa+austrlia+migration&token=d6064764444e9134bd179852cec2c4a7",
+                    "https://gnews.io/api/v2/?q=policy+victoria+austrlia+immigration+visa+migrant+regional+plan&country=AU&token=d6064764444e9134bd179852cec2c4a7",
+                method: "GET",
+                error: function () {
+                    console.log("fucked");
+                },
+                success: function (data) {
+                    processData(data);
+                }
+            });
+
+            function processData(data) {
+
+                if (data.count_results === 0) {
+
+                    var $element = $('<div class="post-preview"> <strong> <h2 class="post-title"> ' + "No content" + '</h2 >'
+                        + '<h3 class="post-subtitle"> ' + "There is no latest news about immigration." + '</h3></strong></div><hr>');
+
+                    $(".news").append($element);
+                }
+                else {
+                    for (var i = 0; i < data.articles.length; i++) {
+                        var source = data.articles[i].source;
+                        var title = data.articles[i].title;
+                        var description = data.articles[i].desc;
+                        var artUrl = data.articles[i].link;
+                        var date = data.articles[i].date;
+                        var website = data.articles[i].website;
+
+                        var $element = $('<div class="post-preview"> <a href="' + artUrl + '"> <h2 class="post-title"> ' + title + '</h2 >'
+                            + '<h3 class="post-subtitle"> ' + description + '</h3></a><p class="post-meta">Posted by  <a href="' + website + '">' + source + '</a> on <strong>' + date + ' </strong> </p></div><hr>');
+
+                        $(".news").append($element);
+                        //console.log(artUrl);
+                    }
+                }
+            }
+
+        }
+    </script>
+    <!-- Contact form JavaScript -->
+    <script src="/js/jqBootstrapValidation.js"></script>
+    <script src="/js/contact_me.js"></script>
+    <!-- Custom scripts for this template -->
+    <script src="/js/agency.min.js"></script>
+</body>
+</html>

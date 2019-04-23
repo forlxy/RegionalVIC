@@ -358,7 +358,7 @@ namespace RegionalVIC.Controllers
             {
                 display += "<a href=\"javascript:flytoPoly(" + rates[j].code + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
                     "  <div class=\"d-flex w-100 justify-content-between\" > <h6 class=\"mb-1\">"
-                    + rates[j].name + " - " + rates[j].region + "</h6> <small class=\"text-muted\" >Top"
+                    + rates[j].name + " - " + rates[j].region + "</h6> <small class=\"text-muted\" >Top "
                     + (j+1) + "</small> </div> <p class=\"mb-1\">" + "</p> <small>" + rates[j].bedroom + " bedroom(s) " + FirstCharToUpper(rates[j].type) + "</small> </a>";
                 
             }
