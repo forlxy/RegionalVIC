@@ -241,13 +241,13 @@ namespace RegionalVIC.Controllers
                         {
                             //Need ore task sort for years
                             median = l.Median ?? default(int);
-                            display = median != 0 ? "The median of the <strong>" + type + " </strong>(bedroom: <strong>" + bedno + "</strong>) is <strong>$" + median + "</strong>." : "No record";
+                            display = median != 0 ? "The median of the <strong>" + type + " </strong>(bedroom: <strong>" + bedno + "</strong>) is <strong>$" + median + "/week</strong>." : "No record";
                             
                             displayText += (median != 0) ? "<a href=\"javascript:flytoPoly(" + l.LgaCode + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
                                 "<div class=\"d-flex w-100 justify-content-between\" > " +
                                 "<h6 class=\"mb-1\">"
                                 + l.LgaName + " - " + l.Region + "</h6> <small class=\"text-muted\" >$ "
-                                + l.Median + "</small> </div>" +
+                                + l.Median + "/w</small> </div>" +
                                 "<div class=\"d-flex w-100 justify-content-between\" > " +
                                 "<div>" + l.NoOfBedrm + " bedroom(s) " + FirstCharToUpper(l.Typ) + "</div> " +
                                 "<div class=\"color-box\" style=\"background-color:" + colorDisplay.getAcomColor(median) + ";\"></div>" +
@@ -509,7 +509,7 @@ namespace RegionalVIC.Controllers
                 display += "<a href=\"javascript:flytoPoly(" + i.LgaCode + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
                     "  <div class=\"d-flex w-100 justify-content-between\" > <h6 class=\"mb-1\">"
                     + i.LgaName + " - " + i.Region + "</h6> <small class=\"text-muted\" >$"
-                    + i.Median + "</small> </div> " +
+                    + i.Median + "/w</small> </div> " +
                     "<div class=\"d-flex w-100 justify-content-between\" > " +
                     "<p class=\"mb-1\">"
                     + i.Bedroom + " bedroom(s) " + FirstCharToUpper(i.Type) + "</p> " +
@@ -577,7 +577,7 @@ namespace RegionalVIC.Controllers
             rates = rates.OrderByDescending(t => t.rate).ToList();
 
             string[] areas = new string[10];
-            for (var j = 0; j < 10; j++)
+            for (var j = 0; j < ((rates.Count < 10)? rates.Count : 10); j++)
             {
                 areas[j] = rates[j].code;
                 display += "<a href=\"javascript:flytoPoly(" + rates[j].code + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +

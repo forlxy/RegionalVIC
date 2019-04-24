@@ -662,7 +662,7 @@
             </div>
         </div>
     </header>
-    <div class="loader loader-default is-active" id="loader"></div>
+    <div class="loader loader-default is-active" data-text id="loader"></div>
     <section id="map-section">
         <div class="container">
             <div class="row">
@@ -716,7 +716,7 @@
 
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#home">Living </a>
+                            <a class="nav-link active" data-toggle="tab" href="#home">Rent </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#safety">Safety</a>
@@ -802,24 +802,27 @@
                                                 <div class="form-group">
 
                                                     <h4>My budget (per week)</h4>
-                                                    <br>
-                                                    <div class="form-group row">
-                                                        <div class="input-group mb-3 col-md-5">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text">$</span>
-                                                            </div>
-                                                            <input type="text" class="form-control" id="min-bgt">
-                                                        </div>
-                                                        <div class="col-md-1">
-                                                            <label for="max-bgt">to</label>
-                                                        </div>
-                                                        <div class="input-group mb-3 col-md-5">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text">$</span>
-                                                            </div>
-                                                            <input type="text" class="form-control" id="max-bgt">
-                                                        </div>
+                                                    <div class="range-slider">
+                                                        <input type="text" class="filterRanger" value="" />
                                                     </div>
+                                                    <br>
+                                                    @*<div class="form-group row">
+            <div class="input-group mb-3 col-md-5">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                </div>
+                <input type="text" class="form-control" id="min-bgt">
+            </div>
+            <div class="col-md-1">
+                <label for="max-bgt">to</label>
+            </div>
+            <div class="input-group mb-3 col-md-5">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                </div>
+                <input type="text" class="form-control" id="max-bgt">
+            </div>
+        </div>*@
                                                 </div>
                                                 <button type="button" class="btn btn-primary btn-block" onclick="filter()">Search</button>
 
@@ -894,49 +897,51 @@
 
                         <div id="recommendation" class="tab-pane container fade">
                             <br>
-                            <div class="form-group row">
-                                <h6>Accommodation Importance (a): <span id="acmValue"></span></h6>
-                                <div class="slidecontainer">
-                                    <input type="range" min="0" max="10" value="5" class="slider" id="acmSlider">
-                                </div>
-
-                            </div>
-
-                            <div class="form-group row">
-                                <h6>Safety Importance (b): <span id="crmValue"></span></h6>
-                                <div class="slidecontainer">
-                                    <input type="range" min="0" max="10" value="5" class="slider" id="crmSlider">
+                            <div class="form-group">
+                                <h6>Accommodation Importance (a): </h6>
+                                <div class="range-slider">
+                                    <input type="text" class="acmSlider" value="" />
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <h6>Population Importance (c): <span id="pouValue"></span></h6>
-                                <div class="slidecontainer">
-                                    <input type="range" min="0" max="10" value="5" class="slider" id="pouSlider">
+                            <div class="form-group">
+                                <h6>Safety Importance (b): </h6>
+                                <div class="range-slider">
+                                    <input type="text" class="crmSlider" value="" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <h6>Population Importance (c): </h6>
+                                <div class="range-slider">
+                                    <input type="text" class="pouSlider" value="" />
                                 </div>
                             </div>
                             <h6>Higher Weight: You care it more!</h6>
                             <small><i>Final Score = a * Accommodation score + b * Safety score + c * Population score </i></small>
                             <br><hr>
                             <h4>My budget (per week)</h4>
-                            <br>
-                            <div class="form-group row">
-                                <div class="input-group mb-3 col-md-5">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">$</span>
-                                    </div>
-                                    <input type="text" class="form-control" id="min-bgt-recom">
-                                </div>
-                                <div class="col-md-1">
-                                    <label for="max-bgt">to</label>
-                                </div>
-                                <div class="input-group mb-3 col-md-5">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">$</span>
-                                    </div>
-                                    <input type="text" class="form-control" id="max-bgt-recom">
-                                </div>
+                            <div class="range-slider">
+                                <input type="text" class="recommendRanger" value="" />
                             </div>
+                            <br>
+                            @*<div class="form-group row">
+            <div class="input-group mb-3 col-md-5">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                </div>
+                <input type="text" class="form-control" id="min-bgt-recom">
+            </div>
+            <div class="col-md-1">
+                <label for="max-bgt">to</label>
+            </div>
+            <div class="input-group mb-3 col-md-5">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                </div>
+                <input type="text" class="form-control" id="max-bgt-recom">
+            </div>
+        </div>*@
                             <button type="button" class="btn btn-primary btn-block" onclick="recommendation()">One-click Recommendation</button>
                             <hr>
                             <div id='recomd-list' class="list-group">
@@ -1021,18 +1026,22 @@
         var hoveredStateId = null;
         var highlightedStateId = null;
 
-        var acmslider = document.getElementById("acmSlider");
-        var crmSlider = document.getElementById("crmSlider");
-        var pouSlider = document.getElementById("pouSlider");
+        //var acmslider = document.getElementById("acmSlider");
+        //var crmSlider = document.getElementById("crmSlider");
+        //var pouSlider = document.getElementById("pouSlider");
 
-        var acmValue = document.getElementById("acmValue");
-        var crmValue = document.getElementById("crmValue");
-        var pouValue = document.getElementById("pouValue");
+        //var acmValue = document.getElementById("acmValue");
+        //var crmValue = document.getElementById("crmValue");
+        //var pouValue = document.getElementById("pouValue");
 
-        acmValue.innerHTML = acmslider.value;
-        crmValue.innerHTML = crmSlider.value;
-        pouValue.innerHTML = pouSlider.value;
+        //acmValue.innerHTML = acmslider.value;
+        //crmValue.innerHTML = crmSlider.value;
+        //pouValue.innerHTML = pouSlider.value;
 
+        var minFBudget;
+        var maxFBudget;
+        var minRBudget;
+        var maxRBudget;
 
         function getRandomColor() {
             var letters = '0123456789ABCDEF';
@@ -1282,37 +1291,37 @@
                 list.innerHTML = slist.innerHTML = recomdList.innerHTML = "";
             });
             
-            $('#acmSlider').on('input change', function (ev) {
-                acmValue.innerHTML = this.value;
-            });
-            $('#acmSlider').on('mouseup touchend', function (ev) {
-                if (toggleRecomd) {
-                    //acmslider.disabled = true;
-                    recommendation();
-                }
-            });
+            //$('#acmSlider').on('input change', function (ev) {
+            //    acmValue.innerHTML = this.value;
+            //});
+            //$('#acmSlider').on('mouseup touchend', function (ev) {
+            //    if (toggleRecomd) {
+            //        //acmslider.disabled = true;
+            //        recommendation();
+            //    }
+            //});
             
-            $('#crmSlider').on('input change', function (ev) {
-                crmValue.innerHTML = this.value;
-            });
+            //$('#crmSlider').on('input change', function (ev) {
+            //    crmValue.innerHTML = this.value;
+            //});
 
-            $('#crmSlider').on('mouseup touchend', function (ev) {
-                if (toggleRecomd) {
-                    //crmSlider.disabled = true;
-                    recommendation();
-                }
-            });
+            //$('#crmSlider').on('mouseup touchend', function (ev) {
+            //    if (toggleRecomd) {
+            //        //crmSlider.disabled = true;
+            //        recommendation();
+            //    }
+            //});
 
-            $('#pouSlider').on('input change', function (ev) {
-                pouValue.innerHTML = this.value;
-            });
+            //$('#pouSlider').on('input change', function (ev) {
+            //    pouValue.innerHTML = this.value;
+            //});
 
-            $('#pouSlider').on('mouseup touchend', function (ev) {
-                if (toggleRecomd) {
-                    //pouSlider.disabled = true;
-                    recommendation();
-                }
-            });
+            //$('#pouSlider').on('mouseup touchend', function (ev) {
+            //    if (toggleRecomd) {
+            //        //pouSlider.disabled = true;
+            //        recommendation();
+            //    }
+            //});
 
             //$(window).scroll(function () {
             //    if ($(window).scrollTop <= 50) {
@@ -1466,7 +1475,10 @@
             //Show information block and hover effect
             map.on('mousemove', "cheo", function (e) {
                 var over = document.getElementById('features');
-                features.style.display = "block"
+                if (showCheoBlock)
+                    features.style.display = "block";
+                else
+                    features.style.display = "none";
 
                 var states = map.queryRenderedFeatures(e.point);
                 if (states.length > 0) {
@@ -1582,6 +1594,8 @@
                             stateCrimeLegend.style.display = "none"
                             stateDesyLegend.style.display = "none"
 
+                            showCheoBlock = true;
+
                             map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
                             map.setLayoutProperty("state-fills", 'visibility', 'none');
                             map.setLayoutProperty("cheo", 'visibility', 'visible');
@@ -1616,6 +1630,8 @@
                         stateLegend.style.display = "none"
                         stateDesyLegend.style.display = "none"
 
+                        showCheoBlock = true;
+
                         map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
                         map.setLayoutProperty("state-fills", 'visibility', 'none');
                         map.setLayoutProperty("cheo", 'visibility', 'visible');
@@ -1648,6 +1664,8 @@
                         stateDesyLegend.style.display = "block"
                         stateLegend.style.display = "none"
                         stateCrimeLegend.style.display = "none"
+
+                        showCheoBlock = true;
 
                         map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
                         map.setLayoutProperty("state-fills", 'visibility', 'none');
@@ -1847,7 +1865,128 @@
         //        map.classList.remove("sticky");
         //    }
         //}
+        var acmWeight;
+        var crmWeight;
+        var pouWeight;
         
+        var $acmrange = $(".acmSlider"),
+            instance,
+            min = 0,
+            max = 10
+
+        $acmrange.ionRangeSlider({
+            skin: "round",
+            type: "single",
+            min: min,
+            max: max,
+            from: 5,
+            values: [
+                "Not important", "Not important", "Less important", "Less important", "Average", 
+                "Average", "Average", "Important", "Important", "Very Important", "Very Important"
+            ],
+            onStart: updateA,
+            onFinish: updateA
+        });
+        instance = $acmrange.data("ionRangeSlider");
+
+        function updateA(data) {
+            acmWeight = data.from;
+            if (toggleRecomd) {
+                //acmslider.disabled = true;
+                recommendation();
+            }
+        }
+
+
+        var $crmrange = $(".crmSlider"),
+            instance,
+            min = 0,
+            max = 10
+
+        $crmrange.ionRangeSlider({
+            skin: "round",
+            type: "single",
+            min: min,
+            max: max,
+            from: 5,
+            values: [
+                "Not important", "Not important", "Less important", "Less important", "Average",
+                "Average", "Average", "Important", "Important", "Very Important", "Very Important"
+            ],
+            onStart: updateC,
+            onFinish: updateC
+        });
+        instance = $crmrange.data("ionRangeSlider");
+
+        function updateC(data) {
+            crmWeight = data.from;
+            if (toggleRecomd) {
+                //acmslider.disabled = true;
+                recommendation();
+            }
+        }
+
+
+        var $pourange = $(".pouSlider"),
+            instance,
+            min = 0,
+            max = 10
+
+        $pourange.ionRangeSlider({
+            skin: "round",
+            type: "single",
+            min: min,
+            max: max,
+            from: 5,
+            values: [
+                "Not important", "Not important", "Less important", "Less important", "Average",
+                "Average", "Average", "Important", "Important", "Very Important", "Very Important"
+            ],
+            onStart: updateP,
+            onFinish: updateP
+        });
+        instance = $pourange.data("ionRangeSlider");
+
+        function updateP(data) {
+            pouWeight = data.from;
+            if (toggleRecomd) {
+                //acmslider.disabled = true;
+                recommendation();
+            }
+        }
+
+
+
+
+        var $rrange = $(".recommendRanger"),
+            instance,
+            min = 100,
+            max = 1100,
+            from = 0,
+            to = 0;
+
+        $rrange.ionRangeSlider({
+            skin: "round",
+            type: "double",
+            min: min,
+            max: max,
+            from: 100,
+            to: 1100,
+            prefix: "$",
+            step: 10,
+            grid: true,             // show/hide grid
+            onStart: updateRecommendInputs,
+            onChange: updateRecommendInputs
+        });
+        instance = $rrange.data("ionRangeSlider");
+
+
+        function updateRecommendInputs(data) {
+            from = data.from;
+            to = data.to;
+            minRBudget = from;
+            maxRBudget = to;
+        }
 
         //Recommendation
         function recommendation() {
@@ -1857,23 +1996,23 @@
             var recomdList = document.getElementById('recomd-list');
             recomdList.innerHTML = "";
 
-            var minBudget = parseInt(document.getElementById("min-bgt-recom").value);
-            var maxBudget = parseInt(document.getElementById("max-bgt-recom").value);
-            var minBudget = isNaN(minBudget) ? 0 : minBudget;
-            var maxBudget = isNaN(maxBudget) ? 1000 : maxBudget;
+            //var minBudget = parseInt(document.getElementById("min-bgt-recom").value);
+            //var maxBudget = parseInt(document.getElementById("max-bgt-recom").value);
+            minRBudget = isNaN(minRBudget) ? 0 : minRBudget;
+            maxRBudget = isNaN(maxRBudget) ? 1000 : maxRBudget;
 
-            var acmWeight = parseFloat(acmslider.value);
-            var crmWeight = parseFloat(crmSlider.value);
-            var pouWeight = parseFloat(pouSlider.value);
-            var sum = acmWeight + crmWeight + pouWeight;
-            acmWeight /= sum
-            crmWeight /= sum
-            pouWeight /= sum
+            var calAcmWeight = acmWeight;
+            var calCrmWeight = crmWeight;
+            var calPouWeight = pouWeight;
+            var sum = calAcmWeight + calCrmWeight + calPouWeight;
+            calAcmWeight /= sum
+            calCrmWeight /= sum
+            calPouWeight /= sum
 
             $.ajax({
                 url: '@Url.Action("getRecommendation", "Map")',
                 type: 'POST',
-                data: { min: minBudget, max: maxBudget, acmWeight: acmWeight, crmWeight: crmWeight, pouWeight: pouWeight},
+                data: { min: minRBudget, max: maxRBudget, acmWeight: calAcmWeight, crmWeight: calCrmWeight, pouWeight: calPouWeight},
                 success: function (data) {
                     toggleRecomd = true;
 
@@ -1881,12 +2020,15 @@
                     var areas = result["areas"];
                     for (var i = 0; i < allCode.length; i++) {
                         cheo[allCode[i]] = "#ddd";
+                        displayList[allCode[i]] = "";
                     }
-                    for (var i = 0; i < 10; i++) {
+                    for (var i = 0; i < areas.length; i++) {
                         var code = areas[i];
                         cheo[code] = myData[code];
                     }
                     recomdList.innerHTML = result["display"];
+
+                    showCheoBlock = false;
 
                     map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
                     map.setLayoutProperty("state-fills", 'visibility', 'none');
@@ -1903,33 +2045,63 @@
             
         }
 
+        var $frange = $(".filterRanger"),
+            instance,
+            min = 100,
+            max = 1100,
+            from = 0,
+            to = 0;
+
+        $frange.ionRangeSlider({
+            skin: "round",
+            type: "double",
+            min: min,
+            max: max,
+            from: 100,
+            to: 1100,
+            step: 10,            // default 1 (set step)
+            prefix: "$",
+            grid: true,             // show/hide grid
+            onStart: updateFilterInputs,
+            onChange: updateFilterInputs
+        });
+        instance = $frange.data("ionRangeSlider");
+
+        function updateFilterInputs(data) {
+            from = data.from;
+            to = data.to;
+            minFBudget = from;
+            maxFBudget = to;
+        }
+        
         //Filter
         function filter() {
             var filterList = document.getElementById('list');
             filterList.innerHTML = "";
-            var minBudget = parseInt(document.getElementById("min-bgt").value);
-            var maxBudget = parseInt(document.getElementById("max-bgt").value);
-            var minBudget = isNaN(minBudget) ? 0 : minBudget;
-            var maxBudget = isNaN(maxBudget) ? 1000 : maxBudget;
+            //var minBudget = parseInt(document.getElementById("min-bgt").value);
+            //var maxBudget = parseInt(document.getElementById("max-bgt").value);
+            minFBudget = isNaN(minFBudget) ? 0 : minFBudget;
+            maxFBudget = isNaN(maxFBudget) ? 1000 : maxFBudget;
 
 
             $("#loader").addClass("is-active");
             $.ajax({
                 url: '@Url.Action("filterRent", "Map")',
                 type: 'POST',
-                data: { min: minBudget, max: maxBudget},
+                data: { min: minFBudget, max: maxFBudget},
                 success: function (data) {
                     var result = JSON.parse(data);
                     var areas = result["areas"];
                     for (var i = 0; i < allCode.length; i++) {
                         cheo[allCode[i]] = "#ddd";
+                        displayList[allCode[i]] = "";
                     }
                     for (var i = 0; i < areas.length; i++) {
                         var code = areas[i];
                         cheo[code] = myData[code];
                     }
                     filterList.innerHTML = result["display"];
-
+                    showCheoBlock = false;
                     map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
                     map.setLayoutProperty("state-fills", 'visibility', 'none');
                     map.setLayoutProperty("cheo", 'visibility', 'visible');
