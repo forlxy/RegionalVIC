@@ -52,7 +52,7 @@ namespace AspNetCore
             WriteLiteral("\n<!DOCTYPE html>\n\n<html>\n");
             EndContext();
             BeginContext(86, 98, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3421fa9423ff45b8bac16a3e14f6e0fb", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "86e18cc7ca2d490ab69c180905577584", async() => {
                 BeginContext(92, 85, true);
                 WriteLiteral("\n    <meta name=\"viewport\" content=\"width=device-width\" />\n    <title>Delete</title>\n");
                 EndContext();
@@ -72,7 +72,7 @@ namespace AspNetCore
             WriteLiteral("\n");
             EndContext();
             BeginContext(185, 1807, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eaea1c65d64f485da77e4eae2187f1e0", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b0f06a0152644a1faa0565707a2ef990", async() => {
                 BeginContext(191, 142, true);
                 WriteLiteral("\n\n<h3>Are you sure you want to delete this?</h3>\n<div>\n    <h4>Rtrtbl</h4>\n    <hr />\n    <dl class=\"dl-horizontal\">\n        <dt>\n            ");
                 EndContext();
