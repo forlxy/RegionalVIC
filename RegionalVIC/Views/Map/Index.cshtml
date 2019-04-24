@@ -507,12 +507,12 @@
     .legend {
         background-color: #fff;
         border-radius: 3px;
-        bottom: 30px;
+        bottom: 10px;
         box-shadow: 0 1px 2px rgba(0,0,0,0.10);
         font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
         padding: 10px;
         position: absolute;
-        right: 10px;
+        right: 30px;
         z-index: 1;
     }
 
@@ -539,16 +539,26 @@
         right: 0;
         background: rgba(255, 255, 255, 0.8);
         margin-right: 20px;
-        font-family: Arial, sans-serif;
+        font-family: Helvetica, sans-serif;
         overflow: hidden;
         border-radius: 3px;
     }
 
+        .map-overlay .block-content {
+            margin-top: 10px;
+            margin-left: 10px;
+            font-family: Impact, Charcoal, sans-serif
+        }
+
+            .map-overlay .block-content .content-line {
+                font-family: "Trebuchet MS", Helvetica, sans-serif
+            }
+
     #features {
-        top: 0;
-        height: 120px;
-        margin-top: 20px;
-        width: 300px;
+        top: 0px;
+        height: 100px;
+        margin-top: 10px;
+        width: 250px;
     }
 
 
@@ -563,6 +573,21 @@
         padding-top: 12px;
         padding-bottom: 12px;
         line-height: 1.2em;
+    }
+
+    .mapboxgl-popup {
+        max-width: 400px;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
+
+    .color-box {
+        width: 30px;
+        height: 15px;
+        display: inline-block;
+        background-color: #ccc;
+        position: relative;
+        left: 5px;
+        top: 5px;
     }
 </style>
 
@@ -599,8 +624,13 @@
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.min.js'></script>
+    <script src="/Scripts/ion.rangeSlider.min.js"></script>
 
     <link href="/css/rangeslider.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/css-loader.css">
+
+    <link rel="stylesheet" href="/css/ion.rangeSlider.min.css">
+    
 </head>
 
 <body>
@@ -632,54 +662,54 @@
             </div>
         </div>
     </header>
-
+    <div class="loader loader-default is-active" id="loader"></div>
     <section id="map-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7 col-md-6 col-sm-12">
-                    <div class="container">
-                        <div id="map" class="mmap" style="height:800px"></div>
-                        <div class='map-overlay' id='features' style="display: none"><div id='pd'><p></p></div></div>
+                        <div class="container" style="height:800px">
+                            <div id="map" class="mmap" style="height:800px"></div>
+                            <div class='map-overlay' id='features' style="display: none"><div class='block-content' id='pd'><p></p></div></div>
 
-                        <div id='state-legend' class='legend' style="display: none">
-                            <h4>House Price</h4>
-                            <div><span style='background-color: #723122'></span>550</div>
-                            <div><span style='background-color: #8B4225'></span>450</div>
-                            <div><span style='background-color: #A25626'></span>350</div>
-                            <div><span style='background-color: #B86B25'></span>300</div>
-                            <div><span style='background-color: #CA8323'></span>250</div>
-                            <div><span style='background-color: #E6B71E'></span>200</div>
-                            <div><span style='background-color: #EED322'></span>150</div>
-                            <div><span style='background-color: #F2F12D'></span>50</div>
-                            <div><span style='background-color: #ddd'></span>No data</div>
-                        </div>
+                            <div id='state-legend' class='legend' style="display: none">
+                                <h4>House price</h4>
+                                <div><span style='background-color: #723122'></span>550</div>
+                                <div><span style='background-color: #8B4225'></span>450</div>
+                                <div><span style='background-color: #A25626'></span>350</div>
+                                <div><span style='background-color: #B86B25'></span>300</div>
+                                <div><span style='background-color: #CA8323'></span>250</div>
+                                <div><span style='background-color: #E6B71E'></span>200</div>
+                                <div><span style='background-color: #EED322'></span>150</div>
+                                <div><span style='background-color: #F2F12D'></span>50</div>
+                                <div><span style='background-color: #ddd'></span>No data</div>
+                            </div>
 
-                        <div id='state-crime-legend' class='legend' style="display: none">
-                            <h4>Crime rate</h4>
-                            <div><span style='background-color: #723122'></span>10%</div>
-                            <div><span style='background-color: #8B4225'></span>8%</div>
-                            <div><span style='background-color: #A25626'></span>7%</div>
-                            <div><span style='background-color: #B86B25'></span>6%</div>
-                            <div><span style='background-color: #CA8323'></span>5%</div>
-                            <div><span style='background-color: #DA9C20'></span>4%</div>
-                            <div><span style='background-color: #E6B71E'></span>3%</div>
-                            <div><span style='background-color: #EED322'></span>2%</div>
-                            <div><span style='background-color: #F2F12D'></span>1%</div>
-                            <div><span style='background-color: #ddd'></span>No data</div>
-                        </div>
+                            <div id='state-crime-legend' class='legend' style="display: none">
+                                <h4>Criminal rate</h4>
+                                <div><span style='background-color: #723122'></span>10%</div>
+                                <div><span style='background-color: #8B4225'></span>8%</div>
+                                <div><span style='background-color: #A25626'></span>7%</div>
+                                <div><span style='background-color: #B86B25'></span>6%</div>
+                                <div><span style='background-color: #CA8323'></span>5%</div>
+                                <div><span style='background-color: #DA9C20'></span>4%</div>
+                                <div><span style='background-color: #E6B71E'></span>3%</div>
+                                <div><span style='background-color: #EED322'></span>2%</div>
+                                <div><span style='background-color: #F2F12D'></span>1%</div>
+                                <div><span style='background-color: #ddd'></span>No data</div>
+                            </div>
 
-                        <div id='state-density-legend' class='legend' style="display: none">
-                            <h4>Population Density</h4>
-                            <div><span style='background-color: #723122'></span>200</div>
-                            <div><span style='background-color: #8B4225'></span>50</div>
-                            <div><span style='background-color: #A25626'></span>20</div>
-                            <div><span style='background-color: #B86B25'></span>8</div>
-                            <div><span style='background-color: #CA8323'></span>5</div>
-                            <div><span style='background-color: #E6B71E'></span>3</div>
-                            <div><span style='background-color: #EED322'></span>1</div>
-                            <div><span style='background-color: #F2F12D'></span>0-1</div>
-                            <div><span style='background-color: #ddd'></span>No data</div>
-                        </div>
+                            <div id='state-density-legend' class='legend' style="display: none">
+                                <h4>Population density</h4>
+                                <div><span style='background-color: #723122'></span>200</div>
+                                <div><span style='background-color: #8B4225'></span>50</div>
+                                <div><span style='background-color: #A25626'></span>20</div>
+                                <div><span style='background-color: #B86B25'></span>8</div>
+                                <div><span style='background-color: #CA8323'></span>5</div>
+                                <div><span style='background-color: #E6B71E'></span>3</div>
+                                <div><span style='background-color: #EED322'></span>1</div>
+                                <div><span style='background-color: #F2F12D'></span>0-1</div>
+                                <div><span style='background-color: #ddd'></span>No data</div>
+                            </div>
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-6 col-sm-12">
@@ -795,12 +825,13 @@
 
                                             </div>
                                         </div>
-                                        <hr>
-                                        <div id='list' class="list-group">
-
-                                        </div>
                                     </div>
                                 </div>
+
+                            </div>
+
+                            <hr>
+                            <div id='list' class="list-group">
 
                             </div>
                         </div>
@@ -854,17 +885,15 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <hr>
+                            <div id='slist' class="list-group">
+
+                            </div>
                         </div>
 
                         <div id="recommendation" class="tab-pane container fade">
                             <br>
-                            @*
-                                                        <ul id="sortable">
-                                    <li>Acommodation</li>
-                                    <li>Safety</li>
-                                </ul>
-                            *@
-
                             <div class="form-group row">
                                 <h6>Accommodation Importance (a): <span id="acmValue"></span></h6>
                                 <div class="slidecontainer">
@@ -1004,15 +1033,6 @@
         crmValue.innerHTML = crmSlider.value;
         pouValue.innerHTML = pouSlider.value;
 
-        acmslider.oninput = function () {
-            acmValue.innerHTML = this.value;
-        }
-        crmSlider.oninput = function () {
-            crmValue.innerHTML = this.value;
-        }
-        pouSlider.oninput = function () {
-            pouValue.innerHTML = this.value;
-        }
 
         function getRandomColor() {
             var letters = '0123456789ABCDEF';
@@ -1201,6 +1221,15 @@
                 "29499": rcMap.get('29499'),
                 "29799": rcMap.get('29799')
             };
+            //Set colors             
+            $.ajax({
+                url: '@Url.Action("setCodeColors", "Map")',
+                type: 'POST',
+                data: { json: JSON.stringify(myData) },
+                success: function (data) {
+
+                },
+            });
         }
        
         function flytoPoly(LGA_Code) {
@@ -1246,21 +1275,43 @@
             //Reset as tab changed
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 resetLayer();
+
+                var list = document.getElementById('list');
+                var slist = document.getElementById('slist');
+                var recomdList = document.getElementById('recomd-list');
+                list.innerHTML = slist.innerHTML = recomdList.innerHTML = "";
+            });
+            
+            $('#acmSlider').on('input change', function (ev) {
+                acmValue.innerHTML = this.value;
+            });
+            $('#acmSlider').on('mouseup touchend', function (ev) {
+                if (toggleRecomd) {
+                    //acmslider.disabled = true;
+                    recommendation();
+                }
+            });
+            
+            $('#crmSlider').on('input change', function (ev) {
+                crmValue.innerHTML = this.value;
             });
 
-            $('#acmSlider').on('slideStop', function (ev) {
-                if(toggleRecomd)
-                    recommendation()
+            $('#crmSlider').on('mouseup touchend', function (ev) {
+                if (toggleRecomd) {
+                    //crmSlider.disabled = true;
+                    recommendation();
+                }
             });
 
-            $('#crmSlider').on('slideStop', function (ev) {
-                if (toggleRecomd)
-                    recommendation()
+            $('#pouSlider').on('input change', function (ev) {
+                pouValue.innerHTML = this.value;
             });
 
-            $('#pouSlider').on('slideStop', function (ev) {
-                if (toggleRecomd)
-                    recommendation()
+            $('#pouSlider').on('mouseup touchend', function (ev) {
+                if (toggleRecomd) {
+                    //pouSlider.disabled = true;
+                    recommendation();
+                }
             });
 
             //$(window).scroll(function () {
@@ -1362,12 +1413,16 @@
             //        "text-halo-blur": 1
             //    }
             //});
+            var popup = new mapboxgl.Popup({
+                closeButton: false,
+                closeOnClick: false
+            });
 
             // When the user moves their mouse over the state-fill layer, we'll update the
             // feature state for the feature under the mouse.
             map.on("mousemove", "state-fills", function (e) {
                 map.getCanvas().style.cursor = e.point.length ? 'pointer' : '';
-
+                
                 if (e.features.length > 0) {
                     if (hoveredStateId) {
                         map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
@@ -1375,13 +1430,33 @@
                     hoveredStateId = e.features[0].id;
                     map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
                 }
+
+                var coordinates = e.features[0].geometry.coordinates.slice();
+                var code = e.features[0].properties.LGA_CODE18;
+
+                // Ensure that if the map is zoomed out such that multiple
+                // copies of the feature are visible, the popup appears
+                // over the copy being pointed to.
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+
+                // Populate the popup and set its coordinates
+                // based on the feature found.
+                popup.setLngLat([e.lngLat.lng, e.lngLat.lat])
+                    .setHTML(code + ', ' + e.lngLat.lat + ', ' + e.lngLat.lng)
+                    .addTo(map);
             });
 
             // When the mouse leaves the state-fill layer, update the feature state of the
             // previously hovered feature.
             map.on("mouseleave", "state-fills", function (e) {
 
-                map.getCanvas().style.cursor = e.point.length ? 'default' : '';
+                //map.getCanvas().style.cursor = e.point.length ? 'default' : '';
+
+                map.getCanvas().style.cursor = '';
+                popup.remove();
+
                 if (hoveredStateId) {
                     map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
                 }
@@ -1395,7 +1470,8 @@
 
                 var states = map.queryRenderedFeatures(e.point);
                 if (states.length > 0) {
-                    document.getElementById('pd').innerHTML = '<h5><strong>' + states[0].properties.LGA_NAME18 + '</strong></h5><p><strong><em>' + displayList[states[0].properties.LGA_CODE18] + '</strong>.</em></p>';
+                    var name = states[0].properties.LGA_NAME18.substring(0, states[0].properties.LGA_NAME18.indexOf(" ("));
+                    document.getElementById('pd').innerHTML = '<h5><strong>' + name + '</strong></h5><div class="content-line">' + displayList[states[0].properties.LGA_CODE18] + '</div>.';
                 } else {
                     document.getElementById('pd').innerHTML = '<p>Hover over a state!</p>';
                 }
@@ -1432,7 +1508,14 @@
                     .setHTML(name)
                     .addTo(map);
             });
+
+            map.on('idle', function () {
+                //Loader
+                $("#loader").removeClass("is-active");
+
+            });
         });
+
         //Monitor select type changes
         function changeSelect() {
             var typeSelectValue = $("#sel2").val();
@@ -1465,11 +1548,15 @@
             stateDesyLegend.style.display = 'none';
         }
         var displayList = new Object
+
         //Show filter map
         function choropleth(option) {
             //Accomodation
+
+            $("#loader").addClass("is-active");
             if (option == "a") {
 
+                var list = document.getElementById('list');
                 var sel1 = jQuery("#sel1 option:selected").val();
                 var sel2 = jQuery("#sel2 option:selected").val();
                 
@@ -1479,9 +1566,9 @@
                         data: { require: "a", bedroom: sel1, type: sel2},
                         success: function(data)
                         {
-                            var result = JSON.parse(data);
-                            for (var i = 0; i < result.length; i++) {
-                                var item = result[i];
+                            var tmpObj = JSON.parse(data);
+                            for (var i = 0; i < tmpObj["result"].length; i++) {
+                                var item = tmpObj["result"][i];
                                 var code = item["code"];
                                 var color = item["color"];
                                 var display = item["display"]
@@ -1489,7 +1576,8 @@
                                 displayList[code] = display;
 
                             }
-
+                            var displayText = tmpObj["displayText"];
+                            list.innerHTML = displayText;
                             stateLegend.style.display = "block"
                             stateCrimeLegend.style.display = "none"
                             stateDesyLegend.style.display = "none"
@@ -1497,20 +1585,24 @@
                             map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
                             map.setLayoutProperty("state-fills", 'visibility', 'none');
                             map.setLayoutProperty("cheo", 'visibility', 'visible');
+
+                            $("#loader").removeClass("is-active");
+
                         },
                     });
             }
             //Safety
             else if (option == "c") {
 
+                var slist = document.getElementById('slist');
                 $.ajax({
                     url: '@Url.Action("getContent", "Map")',
                     type: 'POST',
                     data: { require: "c" },
                     success: function (data) {
-                        var result = JSON.parse(data);
-                        for (var i = 0; i < result.length; i++) {
-                            var item = result[i];
+                        var tmpObj = JSON.parse(data);
+                        for (var i = 0; i < tmpObj["result"].length; i++) {
+                            var item = tmpObj["result"][i];
                             var code = item["code"];
                             var color = item["color"];
                             var display = item["display"]
@@ -1518,6 +1610,8 @@
                             displayList[code] = display;
                         }
 
+                        var displayText = tmpObj["displayText"];
+                        slist.innerHTML = displayText;
                         stateCrimeLegend.style.display = "block"
                         stateLegend.style.display = "none"
                         stateDesyLegend.style.display = "none"
@@ -1525,25 +1619,31 @@
                         map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
                         map.setLayoutProperty("state-fills", 'visibility', 'none');
                         map.setLayoutProperty("cheo", 'visibility', 'visible');
+
+                        $("#loader").removeClass("is-active");
                     },
                 });
             }
             //Population density
             else if (option == "d") {
+                var slist = document.getElementById('slist');
                 $.ajax({
                     url: '@Url.Action("getContent", "Map")',
                     type: 'POST',
                     data: { require: "d" },
                     success: function (data) {
-                        var result = JSON.parse(data);
-                        for (var i = 0; i < result.length; i++) {
-                            var item = result[i];
+                        var tmpObj = JSON.parse(data);
+                        for (var i = 0; i < tmpObj["result"].length; i++) {
+                            var item = tmpObj["result"][i];
                             var code = item["code"];
                             var color = item["color"];
                             var display = item["display"]
                             cheo[code] = color;
                             displayList[code] = display;
                         }
+
+                        var displayText = tmpObj["displayText"];
+                        slist.innerHTML = displayText;
 
                         stateDesyLegend.style.display = "block"
                         stateLegend.style.display = "none"
@@ -1552,6 +1652,8 @@
                         map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
                         map.setLayoutProperty("state-fills", 'visibility', 'none');
                         map.setLayoutProperty("cheo", 'visibility', 'visible');
+
+                        $("#loader").removeClass("is-active");
                     },
                 });
             }
@@ -1707,7 +1809,7 @@
         }
 
         //test
-        initRegionCharts("China");
+        //initRegionCharts("China");
         function initRegionCharts(country) {
 
             $.ajax({
@@ -1750,6 +1852,8 @@
         //Recommendation
         function recommendation() {
 
+            //Loader
+            $("#loader").addClass("is-active");
             var recomdList = document.getElementById('recomd-list');
             recomdList.innerHTML = "";
 
@@ -1772,7 +1876,28 @@
                 data: { min: minBudget, max: maxBudget, acmWeight: acmWeight, crmWeight: crmWeight, pouWeight: pouWeight},
                 success: function (data) {
                     toggleRecomd = true;
-                    recomdList.innerHTML = data
+
+                    var result = JSON.parse(data);
+                    var areas = result["areas"];
+                    for (var i = 0; i < allCode.length; i++) {
+                        cheo[allCode[i]] = "#ddd";
+                    }
+                    for (var i = 0; i < 10; i++) {
+                        var code = areas[i];
+                        cheo[code] = myData[code];
+                    }
+                    recomdList.innerHTML = result["display"];
+
+                    map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
+                    map.setLayoutProperty("state-fills", 'visibility', 'none');
+                    map.setLayoutProperty("cheo", 'visibility', 'visible');
+
+                    //acmslider.disabled = false;
+                    //crmSlider.disabled = false;
+                    //pouSlider.disabled = false;
+
+                    //Loader
+                    $("#loader").removeClass("is-active");
                 },
             });
             
@@ -1787,13 +1912,29 @@
             var minBudget = isNaN(minBudget) ? 0 : minBudget;
             var maxBudget = isNaN(maxBudget) ? 1000 : maxBudget;
 
-            
+
+            $("#loader").addClass("is-active");
             $.ajax({
                 url: '@Url.Action("filterRent", "Map")',
                 type: 'POST',
                 data: { min: minBudget, max: maxBudget},
                 success: function (data) {
-                    filterList.innerHTML = data
+                    var result = JSON.parse(data);
+                    var areas = result["areas"];
+                    for (var i = 0; i < allCode.length; i++) {
+                        cheo[allCode[i]] = "#ddd";
+                    }
+                    for (var i = 0; i < areas.length; i++) {
+                        var code = areas[i];
+                        cheo[code] = myData[code];
+                    }
+                    filterList.innerHTML = result["display"];
+
+                    map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
+                    map.setLayoutProperty("state-fills", 'visibility', 'none');
+                    map.setLayoutProperty("cheo", 'visibility', 'visible');
+
+                    $("#loader").removeClass("is-active");
                 },
             });
 

@@ -1,0 +1,372 @@
+region,LGA,count,median,year,month,quarter,type,bedroom,LGA_Code
+Barwon South West,Colac-Otway,10.0,205.0,2018,Sep,3.0,flat,1.0,21750.0
+Barwon South West,Corangamite,6.0,168.0,2018,Sep,3.0,flat,1.0,21830.0
+Barwon South West,Glenelg,5.0,150.0,2018,Sep,3.0,flat,1.0,22410.0
+Barwon South West,Greater Geelong,109.0,220.0,2018,Sep,3.0,flat,1.0,22750.0
+Barwon South West,Moyne,,,2018,Sep,3.0,flat,1.0,25490.0
+Barwon South West,Queenscliffe,,,2018,Sep,3.0,flat,1.0,26080.0
+Barwon South West,Southern Grampians,10.0,140.0,2018,Sep,3.0,flat,1.0,26260.0
+Barwon South West,Surf Coast,,,2018,Sep,3.0,flat,1.0,26490.0
+Barwon South West,Warrnambool,20.0,218.0,2018,Sep,3.0,flat,1.0,26730.0
+Barwon South West,Group Total,164.0,220.0,2018,Sep,3.0,flat,1.0,
+Grampians,Ararat,6.0,158.0,2018,Sep,3.0,flat,1.0,20260.0
+Grampians,Ballarat,60.0,175.0,2018,Sep,3.0,flat,1.0,20570.0
+Grampians,Golden Plains,,,2018,Sep,3.0,flat,1.0,22490.0
+Grampians,Hepburn,,,2018,Sep,3.0,flat,1.0,22910.0
+Grampians,Hindmarsh,,,2018,Sep,3.0,flat,1.0,22980.0
+Grampians,Horsham,10.0,150.0,2018,Sep,3.0,flat,1.0,23190.0
+Grampians,Moorabool,5.0,210.0,2018,Sep,3.0,flat,1.0,25150.0
+Grampians,Northern Grampians,,,2018,Sep,3.0,flat,1.0,25810.0
+Grampians,Pyrenees,,,2018,Sep,3.0,flat,1.0,25990.0
+Grampians,West Wimmera,,,2018,Sep,3.0,flat,1.0,26890.0
+Grampians,Yarriambiack,6.0,120.0,2018,Sep,3.0,flat,1.0,27630.0
+Grampians,Group Total,97.0,160.0,2018,Sep,3.0,flat,1.0,
+Loddon Mallee,Buloke,,,2018,Sep,3.0,flat,1.0,21270.0
+Loddon Mallee,Campaspe,5.0,150.0,2018,Sep,3.0,flat,1.0,21370.0
+Loddon Mallee,Central Goldfields,,,2018,Sep,3.0,flat,1.0,21670.0
+Loddon Mallee,Gannawarra,,,2018,Sep,3.0,flat,1.0,22250.0
+Loddon Mallee,Greater Bendigo,31.0,180.0,2018,Sep,3.0,flat,1.0,22620.0
+Loddon Mallee,Loddon,,,2018,Sep,3.0,flat,1.0,23940.0
+Loddon Mallee,Macedon Ranges,6.0,213.0,2018,Sep,3.0,flat,1.0,24130.0
+Loddon Mallee,Mildura,22.0,163.0,2018,Sep,3.0,flat,1.0,24780.0
+Loddon Mallee,Mount Alexander,,,2018,Sep,3.0,flat,1.0,25430.0
+Loddon Mallee,Swan Hill,11.0,150.0,2018,Sep,3.0,flat,1.0,26610.0
+Loddon Mallee,Group Total,83.0,165.0,2018,Sep,3.0,flat,1.0,
+Hume,Alpine,,,2018,Sep,3.0,flat,1.0,20110.0
+Hume,Benalla,5.0,150.0,2018,Sep,3.0,flat,1.0,21010.0
+Hume,Greater Shepparton,37.0,160.0,2018,Sep,3.0,flat,1.0,22830.0
+Hume,Indigo,,,2018,Sep,3.0,flat,1.0,23350.0
+Hume,Mansfield,,,2018,Sep,3.0,flat,1.0,24250.0
+Hume,Mitchell,,,2018,Sep,3.0,flat,1.0,24850.0
+Hume,Moira,14.0,145.0,2018,Sep,3.0,flat,1.0,24900.0
+Hume,Murrindindi,,,2018,Sep,3.0,flat,1.0,25620.0
+Hume,Strathbogie,5.0,210.0,2018,Sep,3.0,flat,1.0,26430.0
+Hume,Towong,,,2018,Sep,3.0,flat,1.0,26670.0
+Hume,Wangaratta,6.0,185.0,2018,Sep,3.0,flat,1.0,26700.0
+Hume,Wodonga,14.0,175.0,2018,Sep,3.0,flat,1.0,27170.0
+Hume,Group Total,96.0,170.0,2018,Sep,3.0,flat,1.0,
+Gippsland,Bass Coast,,,2018,Sep,3.0,flat,1.0,20740.0
+Gippsland,Baw Baw,,,2018,Sep,3.0,flat,1.0,20830.0
+Gippsland,East Gippsland,9.0,190.0,2018,Sep,3.0,flat,1.0,22110.0
+Gippsland,Latrobe,74.0,150.0,2018,Sep,3.0,flat,1.0,23810.0
+Gippsland,South Gippsland,10.0,168.0,2018,Sep,3.0,flat,1.0,26170.0
+Gippsland,Wellington,31.0,165.0,2018,Sep,3.0,flat,1.0,26810.0
+Gippsland,Group Total,129.0,165.0,2018,Sep,3.0,flat,1.0,
+Barwon South West,Colac-Otway,19.0,260.0,2018,Sep,3.0,flat,2.0,21750.0
+Barwon South West,Corangamite,6.0,220.0,2018,Sep,3.0,flat,2.0,21830.0
+Barwon South West,Glenelg,14.0,203.0,2018,Sep,3.0,flat,2.0,22410.0
+Barwon South West,Greater Geelong,361.0,300.0,2018,Sep,3.0,flat,2.0,22750.0
+Barwon South West,Moyne,,,2018,Sep,3.0,flat,2.0,25490.0
+Barwon South West,Queenscliffe,,,2018,Sep,3.0,flat,2.0,26080.0
+Barwon South West,Southern Grampians,12.0,190.0,2018,Sep,3.0,flat,2.0,26260.0
+Barwon South West,Surf Coast,17.0,350.0,2018,Sep,3.0,flat,2.0,26490.0
+Barwon South West,Warrnambool,75.0,260.0,2018,Sep,3.0,flat,2.0,26730.0
+Barwon South West,Group Total,509.0,295.0,2018,Sep,3.0,flat,2.0,
+Grampians,Ararat,9.0,190.0,2018,Sep,3.0,flat,2.0,20260.0
+Grampians,Ballarat,126.0,250.0,2018,Sep,3.0,flat,2.0,20570.0
+Grampians,Golden Plains,,,2018,Sep,3.0,flat,2.0,22490.0
+Grampians,Hepburn,5.0,240.0,2018,Sep,3.0,flat,2.0,22910.0
+Grampians,Hindmarsh,,,2018,Sep,3.0,flat,2.0,22980.0
+Grampians,Horsham,40.0,210.0,2018,Sep,3.0,flat,2.0,23190.0
+Grampians,Moorabool,21.0,280.0,2018,Sep,3.0,flat,2.0,25150.0
+Grampians,Northern Grampians,9.0,170.0,2018,Sep,3.0,flat,2.0,25810.0
+Grampians,Pyrenees,,,2018,Sep,3.0,flat,2.0,25990.0
+Grampians,West Wimmera,,,2018,Sep,3.0,flat,2.0,26890.0
+Grampians,Yarriambiack,,,2018,Sep,3.0,flat,2.0,27630.0
+Grampians,Group Total,214.0,240.0,2018,Sep,3.0,flat,2.0,
+Loddon Mallee,Buloke,,,2018,Sep,3.0,flat,2.0,21270.0
+Loddon Mallee,Campaspe,35.0,215.0,2018,Sep,3.0,flat,2.0,21370.0
+Loddon Mallee,Central Goldfields,13.0,235.0,2018,Sep,3.0,flat,2.0,21670.0
+Loddon Mallee,Gannawarra,8.0,218.0,2018,Sep,3.0,flat,2.0,22250.0
+Loddon Mallee,Greater Bendigo,161.0,255.0,2018,Sep,3.0,flat,2.0,22620.0
+Loddon Mallee,Loddon,,,2018,Sep,3.0,flat,2.0,23940.0
+Loddon Mallee,Macedon Ranges,15.0,340.0,2018,Sep,3.0,flat,2.0,24130.0
+Loddon Mallee,Mildura,65.0,230.0,2018,Sep,3.0,flat,2.0,24780.0
+Loddon Mallee,Mount Alexander,9.0,290.0,2018,Sep,3.0,flat,2.0,25430.0
+Loddon Mallee,Swan Hill,24.0,230.0,2018,Sep,3.0,flat,2.0,26610.0
+Loddon Mallee,Group Total,332.0,245.0,2018,Sep,3.0,flat,2.0,
+Hume,Alpine,15.0,275.0,2018,Sep,3.0,flat,2.0,20110.0
+Hume,Benalla,24.0,210.0,2018,Sep,3.0,flat,2.0,21010.0
+Hume,Greater Shepparton,81.0,240.0,2018,Sep,3.0,flat,2.0,22830.0
+Hume,Indigo,9.0,250.0,2018,Sep,3.0,flat,2.0,23350.0
+Hume,Mansfield,,,2018,Sep,3.0,flat,2.0,24250.0
+Hume,Mitchell,14.0,273.0,2018,Sep,3.0,flat,2.0,24850.0
+Hume,Moira,33.0,245.0,2018,Sep,3.0,flat,2.0,24900.0
+Hume,Murrindindi,8.0,220.0,2018,Sep,3.0,flat,2.0,25620.0
+Hume,Strathbogie,6.0,225.0,2018,Sep,3.0,flat,2.0,26430.0
+Hume,Towong,,,2018,Sep,3.0,flat,2.0,26670.0
+Hume,Wangaratta,31.0,235.0,2018,Sep,3.0,flat,2.0,26700.0
+Hume,Wodonga,76.0,243.0,2018,Sep,3.0,flat,2.0,27170.0
+Hume,Group Total,302.0,240.0,2018,Sep,3.0,flat,2.0,
+Gippsland,Bass Coast,20.0,278.0,2018,Sep,3.0,flat,2.0,20740.0
+Gippsland,Baw Baw,38.0,273.0,2018,Sep,3.0,flat,2.0,20830.0
+Gippsland,East Gippsland,42.0,250.0,2018,Sep,3.0,flat,2.0,22110.0
+Gippsland,Latrobe,86.0,200.0,2018,Sep,3.0,flat,2.0,23810.0
+Gippsland,South Gippsland,14.0,245.0,2018,Sep,3.0,flat,2.0,26170.0
+Gippsland,Wellington,40.0,230.0,2018,Sep,3.0,flat,2.0,26810.0
+Gippsland,Group Total,240.0,230.0,2018,Sep,3.0,flat,2.0,
+Barwon South West,Colac-Otway,,,2018,Sep,3.0,flat,3.0,21750.0
+Barwon South West,Corangamite,,,2018,Sep,3.0,flat,3.0,21830.0
+Barwon South West,Glenelg,,,2018,Sep,3.0,flat,3.0,22410.0
+Barwon South West,Greater Geelong,111.0,370.0,2018,Sep,3.0,flat,3.0,22750.0
+Barwon South West,Moyne,,,2018,Sep,3.0,flat,3.0,25490.0
+Barwon South West,Queenscliffe,,,2018,Sep,3.0,flat,3.0,26080.0
+Barwon South West,Southern Grampians,,,2018,Sep,3.0,flat,3.0,26260.0
+Barwon South West,Surf Coast,8.0,405.0,2018,Sep,3.0,flat,3.0,26490.0
+Barwon South West,Warrnambool,9.0,340.0,2018,Sep,3.0,flat,3.0,26730.0
+Barwon South West,Group Total,136.0,365.0,2018,Sep,3.0,flat,3.0,
+Grampians,Ararat,,,2018,Sep,3.0,flat,3.0,20260.0
+Grampians,Ballarat,48.0,305.0,2018,Sep,3.0,flat,3.0,20570.0
+Grampians,Golden Plains,,,2018,Sep,3.0,flat,3.0,22490.0
+Grampians,Hepburn,,,2018,Sep,3.0,flat,3.0,22910.0
+Grampians,Hindmarsh,,,2018,Sep,3.0,flat,3.0,22980.0
+Grampians,Horsham,15.0,290.0,2018,Sep,3.0,flat,3.0,23190.0
+Grampians,Moorabool,16.0,355.0,2018,Sep,3.0,flat,3.0,25150.0
+Grampians,Northern Grampians,,,2018,Sep,3.0,flat,3.0,25810.0
+Grampians,Pyrenees,,,2018,Sep,3.0,flat,3.0,25990.0
+Grampians,West Wimmera,,,2018,Sep,3.0,flat,3.0,26890.0
+Grampians,Yarriambiack,,,2018,Sep,3.0,flat,3.0,27630.0
+Grampians,Group Total,85.0,315.0,2018,Sep,3.0,flat,3.0,
+Loddon Mallee,Buloke,,,2018,Sep,3.0,flat,3.0,21270.0
+Loddon Mallee,Campaspe,,,2018,Sep,3.0,flat,3.0,21370.0
+Loddon Mallee,Central Goldfields,,,2018,Sep,3.0,flat,3.0,21670.0
+Loddon Mallee,Gannawarra,,,2018,Sep,3.0,flat,3.0,22250.0
+Loddon Mallee,Greater Bendigo,51.0,300.0,2018,Sep,3.0,flat,3.0,22620.0
+Loddon Mallee,Loddon,,,2018,Sep,3.0,flat,3.0,23940.0
+Loddon Mallee,Macedon Ranges,14.0,385.0,2018,Sep,3.0,flat,3.0,24130.0
+Loddon Mallee,Mildura,9.0,300.0,2018,Sep,3.0,flat,3.0,24780.0
+Loddon Mallee,Mount Alexander,,,2018,Sep,3.0,flat,3.0,25430.0
+Loddon Mallee,Swan Hill,5.0,325.0,2018,Sep,3.0,flat,3.0,26610.0
+Loddon Mallee,Group Total,87.0,310.0,2018,Sep,3.0,flat,3.0,
+Hume,Alpine,,,2018,Sep,3.0,flat,3.0,20110.0
+Hume,Benalla,,,2018,Sep,3.0,flat,3.0,21010.0
+Hume,Greater Shepparton,23.0,310.0,2018,Sep,3.0,flat,3.0,22830.0
+Hume,Indigo,,,2018,Sep,3.0,flat,3.0,23350.0
+Hume,Mansfield,,,2018,Sep,3.0,flat,3.0,24250.0
+Hume,Mitchell,13.0,320.0,2018,Sep,3.0,flat,3.0,24850.0
+Hume,Moira,10.0,255.0,2018,Sep,3.0,flat,3.0,24900.0
+Hume,Murrindindi,,,2018,Sep,3.0,flat,3.0,25620.0
+Hume,Strathbogie,,,2018,Sep,3.0,flat,3.0,26430.0
+Hume,Towong,,,2018,Sep,3.0,flat,3.0,26670.0
+Hume,Wangaratta,13.0,325.0,2018,Sep,3.0,flat,3.0,26700.0
+Hume,Wodonga,18.0,305.0,2018,Sep,3.0,flat,3.0,27170.0
+Hume,Group Total,86.0,310.0,2018,Sep,3.0,flat,3.0,
+Gippsland,Bass Coast,12.0,345.0,2018,Sep,3.0,flat,3.0,20740.0
+Gippsland,Baw Baw,13.0,310.0,2018,Sep,3.0,flat,3.0,20830.0
+Gippsland,East Gippsland,,,2018,Sep,3.0,flat,3.0,22110.0
+Gippsland,Latrobe,17.0,250.0,2018,Sep,3.0,flat,3.0,23810.0
+Gippsland,South Gippsland,,,2018,Sep,3.0,flat,3.0,26170.0
+Gippsland,Wellington,12.0,298.0,2018,Sep,3.0,flat,3.0,26810.0
+Gippsland,Group Total,62.0,300.0,2018,Sep,3.0,flat,3.0,
+Barwon South West,Colac-Otway,14.0,275.0,2018,Sep,3.0,house,2.0,21750.0
+Barwon South West,Corangamite,8.0,238.0,2018,Sep,3.0,house,2.0,21830.0
+Barwon South West,Glenelg,9.0,240.0,2018,Sep,3.0,house,2.0,22410.0
+Barwon South West,Greater Geelong,147.0,300.0,2018,Sep,3.0,house,2.0,22750.0
+Barwon South West,Moyne,6.0,250.0,2018,Sep,3.0,house,2.0,25490.0
+Barwon South West,Queenscliffe,,,2018,Sep,3.0,house,2.0,26080.0
+Barwon South West,Southern Grampians,8.0,265.0,2018,Sep,3.0,house,2.0,26260.0
+Barwon South West,Surf Coast,6.0,375.0,2018,Sep,3.0,house,2.0,26490.0
+Barwon South West,Warrnambool,23.0,260.0,2018,Sep,3.0,house,2.0,26730.0
+Barwon South West,Group Total,224.0,300.0,2018,Sep,3.0,house,2.0,
+Grampians,Ararat,9.0,250.0,2018,Sep,3.0,house,2.0,20260.0
+Grampians,Ballarat,80.0,260.0,2018,Sep,3.0,house,2.0,20570.0
+Grampians,Golden Plains,,,2018,Sep,3.0,house,2.0,22490.0
+Grampians,Hepburn,17.0,340.0,2018,Sep,3.0,house,2.0,22910.0
+Grampians,Hindmarsh,5.0,175.0,2018,Sep,3.0,house,2.0,22980.0
+Grampians,Horsham,9.0,215.0,2018,Sep,3.0,house,2.0,23190.0
+Grampians,Moorabool,5.0,300.0,2018,Sep,3.0,house,2.0,25150.0
+Grampians,Northern Grampians,10.0,220.0,2018,Sep,3.0,house,2.0,25810.0
+Grampians,Pyrenees,,,2018,Sep,3.0,house,2.0,25990.0
+Grampians,West Wimmera,,,2018,Sep,3.0,house,2.0,26890.0
+Grampians,Yarriambiack,,,2018,Sep,3.0,house,2.0,27630.0
+Grampians,Group Total,141.0,260.0,2018,Sep,3.0,house,2.0,
+Loddon Mallee,Buloke,,,2018,Sep,3.0,house,2.0,21270.0
+Loddon Mallee,Campaspe,6.0,280.0,2018,Sep,3.0,house,2.0,21370.0
+Loddon Mallee,Central Goldfields,,,2018,Sep,3.0,house,2.0,21670.0
+Loddon Mallee,Gannawarra,9.0,180.0,2018,Sep,3.0,house,2.0,22250.0
+Loddon Mallee,Greater Bendigo,83.0,260.0,2018,Sep,3.0,house,2.0,22620.0
+Loddon Mallee,Loddon,,,2018,Sep,3.0,house,2.0,23940.0
+Loddon Mallee,Macedon Ranges,14.0,338.0,2018,Sep,3.0,house,2.0,24130.0
+Loddon Mallee,Mildura,32.0,253.0,2018,Sep,3.0,house,2.0,24780.0
+Loddon Mallee,Mount Alexander,16.0,320.0,2018,Sep,3.0,house,2.0,25430.0
+Loddon Mallee,Swan Hill,,,2018,Sep,3.0,house,2.0,26610.0
+Loddon Mallee,Group Total,169.0,260.0,2018,Sep,3.0,house,2.0,
+Hume,Alpine,7.0,270.0,2018,Sep,3.0,house,2.0,20110.0
+Hume,Benalla,12.0,220.0,2018,Sep,3.0,house,2.0,21010.0
+Hume,Greater Shepparton,19.0,245.0,2018,Sep,3.0,house,2.0,22830.0
+Hume,Indigo,7.0,240.0,2018,Sep,3.0,house,2.0,23350.0
+Hume,Mansfield,,,2018,Sep,3.0,house,2.0,24250.0
+Hume,Mitchell,,,2018,Sep,3.0,house,2.0,24850.0
+Hume,Moira,10.0,220.0,2018,Sep,3.0,house,2.0,24900.0
+Hume,Murrindindi,7.0,250.0,2018,Sep,3.0,house,2.0,25620.0
+Hume,Strathbogie,7.0,255.0,2018,Sep,3.0,house,2.0,26430.0
+Hume,Towong,,,2018,Sep,3.0,house,2.0,26670.0
+Hume,Wangaratta,20.0,248.0,2018,Sep,3.0,house,2.0,26700.0
+Hume,Wodonga,11.0,260.0,2018,Sep,3.0,house,2.0,27170.0
+Hume,Group Total,107.0,250.0,2018,Sep,3.0,house,2.0,
+Gippsland,Bass Coast,22.0,268.0,2018,Sep,3.0,house,2.0,20740.0
+Gippsland,Baw Baw,19.0,300.0,2018,Sep,3.0,house,2.0,20830.0
+Gippsland,East Gippsland,27.0,240.0,2018,Sep,3.0,house,2.0,22110.0
+Gippsland,Latrobe,59.0,220.0,2018,Sep,3.0,house,2.0,23810.0
+Gippsland,South Gippsland,11.0,270.0,2018,Sep,3.0,house,2.0,26170.0
+Gippsland,Wellington,24.0,230.0,2018,Sep,3.0,house,2.0,26810.0
+Gippsland,Group Total,162.0,250.0,2018,Sep,3.0,house,2.0,
+Barwon South West,Colac-Otway,60.0,310.0,2018,Sep,3.0,house,3.0,21750.0
+Barwon South West,Corangamite,34.0,245.0,2018,Sep,3.0,house,3.0,21830.0
+Barwon South West,Glenelg,40.0,250.0,2018,Sep,3.0,house,3.0,22410.0
+Barwon South West,Greater Geelong,809.0,350.0,2018,Sep,3.0,house,3.0,22750.0
+Barwon South West,Moyne,27.0,250.0,2018,Sep,3.0,house,3.0,25490.0
+Barwon South West,Queenscliffe,,,2018,Sep,3.0,house,3.0,26080.0
+Barwon South West,Southern Grampians,40.0,260.0,2018,Sep,3.0,house,3.0,26260.0
+Barwon South West,Surf Coast,76.0,450.0,2018,Sep,3.0,house,3.0,26490.0
+Barwon South West,Warrnambool,82.0,330.0,2018,Sep,3.0,house,3.0,26730.0
+Barwon South West,Group Total,1169.0,350.0,2018,Sep,3.0,house,3.0,
+Grampians,Ararat,40.0,270.0,2018,Sep,3.0,house,3.0,20260.0
+Grampians,Ballarat,395.0,310.0,2018,Sep,3.0,house,3.0,20570.0
+Grampians,Golden Plains,14.0,375.0,2018,Sep,3.0,house,3.0,22490.0
+Grampians,Hepburn,34.0,350.0,2018,Sep,3.0,house,3.0,22910.0
+Grampians,Hindmarsh,11.0,190.0,2018,Sep,3.0,house,3.0,22980.0
+Grampians,Horsham,81.0,280.0,2018,Sep,3.0,house,3.0,23190.0
+Grampians,Moorabool,64.0,350.0,2018,Sep,3.0,house,3.0,25150.0
+Grampians,Northern Grampians,44.0,253.0,2018,Sep,3.0,house,3.0,25810.0
+Grampians,Pyrenees,15.0,260.0,2018,Sep,3.0,house,3.0,25990.0
+Grampians,West Wimmera,5.0,180.0,2018,Sep,3.0,house,3.0,26890.0
+Grampians,Yarriambiack,12.0,195.0,2018,Sep,3.0,house,3.0,27630.0
+Grampians,Group Total,715.0,300.0,2018,Sep,3.0,house,3.0,
+Loddon Mallee,Buloke,12.0,198.0,2018,Sep,3.0,house,3.0,21270.0
+Loddon Mallee,Campaspe,95.0,290.0,2018,Sep,3.0,house,3.0,21370.0
+Loddon Mallee,Central Goldfields,28.0,253.0,2018,Sep,3.0,house,3.0,21670.0
+Loddon Mallee,Gannawarra,21.0,210.0,2018,Sep,3.0,house,3.0,22250.0
+Loddon Mallee,Greater Bendigo,382.0,308.0,2018,Sep,3.0,house,3.0,22620.0
+Loddon Mallee,Loddon,7.0,240.0,2018,Sep,3.0,house,3.0,23940.0
+Loddon Mallee,Macedon Ranges,70.0,400.0,2018,Sep,3.0,house,3.0,24130.0
+Loddon Mallee,Mildura,159.0,305.0,2018,Sep,3.0,house,3.0,24780.0
+Loddon Mallee,Mount Alexander,36.0,350.0,2018,Sep,3.0,house,3.0,25430.0
+Loddon Mallee,Swan Hill,37.0,275.0,2018,Sep,3.0,house,3.0,26610.0
+Loddon Mallee,Group Total,847.0,310.0,2018,Sep,3.0,house,3.0,
+Hume,Alpine,35.0,285.0,2018,Sep,3.0,house,3.0,20110.0
+Hume,Benalla,44.0,275.0,2018,Sep,3.0,house,3.0,21010.0
+Hume,Greater Shepparton,191.0,300.0,2018,Sep,3.0,house,3.0,22830.0
+Hume,Indigo,12.0,325.0,2018,Sep,3.0,house,3.0,23350.0
+Hume,Mansfield,12.0,323.0,2018,Sep,3.0,house,3.0,24250.0
+Hume,Mitchell,82.0,335.0,2018,Sep,3.0,house,3.0,24850.0
+Hume,Moira,66.0,295.0,2018,Sep,3.0,house,3.0,24900.0
+Hume,Murrindindi,31.0,300.0,2018,Sep,3.0,house,3.0,25620.0
+Hume,Strathbogie,25.0,330.0,2018,Sep,3.0,house,3.0,26430.0
+Hume,Towong,6.0,240.0,2018,Sep,3.0,house,3.0,26670.0
+Hume,Wangaratta,70.0,300.0,2018,Sep,3.0,house,3.0,26700.0
+Hume,Wodonga,133.0,320.0,2018,Sep,3.0,house,3.0,27170.0
+Hume,Group Total,707.0,305.0,2018,Sep,3.0,house,3.0,
+Gippsland,Bass Coast,83.0,320.0,2018,Sep,3.0,house,3.0,20740.0
+Gippsland,Baw Baw,118.0,320.0,2018,Sep,3.0,house,3.0,20830.0
+Gippsland,East Gippsland,120.0,310.0,2018,Sep,3.0,house,3.0,22110.0
+Gippsland,Latrobe,274.0,260.0,2018,Sep,3.0,house,3.0,23810.0
+Gippsland,South Gippsland,67.0,270.0,2018,Sep,3.0,house,3.0,26170.0
+Gippsland,Wellington,137.0,270.0,2018,Sep,3.0,house,3.0,26810.0
+Gippsland,Group Total,799.0,285.0,2018,Sep,3.0,house,3.0,
+Barwon South West,Colac-Otway,19.0,350.0,2018,Sep,3.0,house,4.0,21750.0
+Barwon South West,Corangamite,5.0,250.0,2018,Sep,3.0,house,4.0,21830.0
+Barwon South West,Glenelg,8.0,300.0,2018,Sep,3.0,house,4.0,22410.0
+Barwon South West,Greater Geelong,379.0,420.0,2018,Sep,3.0,house,4.0,22750.0
+Barwon South West,Moyne,7.0,360.0,2018,Sep,3.0,house,4.0,25490.0
+Barwon South West,Queenscliffe,,,2018,Sep,3.0,house,4.0,26080.0
+Barwon South West,Southern Grampians,5.0,300.0,2018,Sep,3.0,house,4.0,26260.0
+Barwon South West,Surf Coast,75.0,500.0,2018,Sep,3.0,house,4.0,26490.0
+Barwon South West,Warrnambool,21.0,400.0,2018,Sep,3.0,house,4.0,26730.0
+Barwon South West,Group Total,519.0,420.0,2018,Sep,3.0,house,4.0,
+Grampians,Ararat,17.0,350.0,2018,Sep,3.0,house,4.0,20260.0
+Grampians,Ballarat,153.0,385.0,2018,Sep,3.0,house,4.0,20570.0
+Grampians,Golden Plains,6.0,385.0,2018,Sep,3.0,house,4.0,22490.0
+Grampians,Hepburn,,,2018,Sep,3.0,house,4.0,22910.0
+Grampians,Hindmarsh,,,2018,Sep,3.0,house,4.0,22980.0
+Grampians,Horsham,20.0,330.0,2018,Sep,3.0,house,4.0,23190.0
+Grampians,Moorabool,30.0,400.0,2018,Sep,3.0,house,4.0,25150.0
+Grampians,Northern Grampians,,,2018,Sep,3.0,house,4.0,25810.0
+Grampians,Pyrenees,,,2018,Sep,3.0,house,4.0,25990.0
+Grampians,West Wimmera,,,2018,Sep,3.0,house,4.0,26890.0
+Grampians,Yarriambiack,,,2018,Sep,3.0,house,4.0,27630.0
+Grampians,Group Total,240.0,380.0,2018,Sep,3.0,house,4.0,
+Loddon Mallee,Buloke,,,2018,Sep,3.0,house,4.0,21270.0
+Loddon Mallee,Campaspe,27.0,370.0,2018,Sep,3.0,house,4.0,21370.0
+Loddon Mallee,Central Goldfields,,,2018,Sep,3.0,house,4.0,21670.0
+Loddon Mallee,Gannawarra,,,2018,Sep,3.0,house,4.0,22250.0
+Loddon Mallee,Greater Bendigo,135.0,350.0,2018,Sep,3.0,house,4.0,22620.0
+Loddon Mallee,Loddon,,,2018,Sep,3.0,house,4.0,23940.0
+Loddon Mallee,Macedon Ranges,42.0,518.0,2018,Sep,3.0,house,4.0,24130.0
+Loddon Mallee,Mildura,47.0,340.0,2018,Sep,3.0,house,4.0,24780.0
+Loddon Mallee,Mount Alexander,,,2018,Sep,3.0,house,4.0,25430.0
+Loddon Mallee,Swan Hill,14.0,310.0,2018,Sep,3.0,house,4.0,26610.0
+Loddon Mallee,Group Total,280.0,350.0,2018,Sep,3.0,house,4.0,
+Hume,Alpine,5.0,450.0,2018,Sep,3.0,house,4.0,20110.0
+Hume,Benalla,15.0,340.0,2018,Sep,3.0,house,4.0,21010.0
+Hume,Greater Shepparton,65.0,360.0,2018,Sep,3.0,house,4.0,22830.0
+Hume,Indigo,14.0,373.0,2018,Sep,3.0,house,4.0,23350.0
+Hume,Mansfield,9.0,380.0,2018,Sep,3.0,house,4.0,24250.0
+Hume,Mitchell,105.0,370.0,2018,Sep,3.0,house,4.0,24850.0
+Hume,Moira,20.0,360.0,2018,Sep,3.0,house,4.0,24900.0
+Hume,Murrindindi,,,2018,Sep,3.0,house,4.0,25620.0
+Hume,Strathbogie,6.0,345.0,2018,Sep,3.0,house,4.0,26430.0
+Hume,Towong,,,2018,Sep,3.0,house,4.0,26670.0
+Hume,Wangaratta,24.0,370.0,2018,Sep,3.0,house,4.0,26700.0
+Hume,Wodonga,88.0,390.0,2018,Sep,3.0,house,4.0,27170.0
+Hume,Group Total,354.0,370.0,2018,Sep,3.0,house,4.0,
+Gippsland,Bass Coast,24.0,390.0,2018,Sep,3.0,house,4.0,20740.0
+Gippsland,Baw Baw,64.0,400.0,2018,Sep,3.0,house,4.0,20830.0
+Gippsland,East Gippsland,41.0,350.0,2018,Sep,3.0,house,4.0,22110.0
+Gippsland,Latrobe,57.0,360.0,2018,Sep,3.0,house,4.0,23810.0
+Gippsland,South Gippsland,12.0,378.0,2018,Sep,3.0,house,4.0,26170.0
+Gippsland,Wellington,43.0,340.0,2018,Sep,3.0,house,4.0,26810.0
+Gippsland,Group Total,241.0,370.0,2018,Sep,3.0,house,4.0,
+Barwon South West,Colac-Otway,125.0,300.0,2018,Sep,3.0,all,,21750.0
+Barwon South West,Corangamite,61.0,240.0,2018,Sep,3.0,all,,21830.0
+Barwon South West,Glenelg,79.0,240.0,2018,Sep,3.0,all,,22410.0
+Barwon South West,Greater Geelong,1916.0,350.0,2018,Sep,3.0,all,,22750.0
+Barwon South West,Moyne,43.0,270.0,2018,Sep,3.0,all,,25490.0
+Barwon South West,Queenscliffe,7.0,320.0,2018,Sep,3.0,all,,26080.0
+Barwon South West,Southern Grampians,75.0,230.0,2018,Sep,3.0,all,,26260.0
+Barwon South West,Surf Coast,185.0,450.0,2018,Sep,3.0,all,,26490.0
+Barwon South West,Warrnambool,230.0,300.0,2018,Sep,3.0,all,,26730.0
+Barwon South West,Group Total,2721.0,340.0,2018,Sep,3.0,all,,
+Grampians,Ararat,84.0,278.0,2018,Sep,3.0,all,,20260.0
+Grampians,Ballarat,862.0,300.0,2018,Sep,3.0,all,,20570.0
+Grampians,Golden Plains,23.0,370.0,2018,Sep,3.0,all,,22490.0
+Grampians,Hepburn,62.0,350.0,2018,Sep,3.0,all,,22910.0
+Grampians,Hindmarsh,18.0,175.0,2018,Sep,3.0,all,,22980.0
+Grampians,Horsham,175.0,250.0,2018,Sep,3.0,all,,23190.0
+Grampians,Moorabool,141.0,350.0,2018,Sep,3.0,all,,25150.0
+Grampians,Northern Grampians,73.0,230.0,2018,Sep,3.0,all,,25810.0
+Grampians,Pyrenees,23.0,260.0,2018,Sep,3.0,all,,25990.0
+Grampians,West Wimmera,7.0,200.0,2018,Sep,3.0,all,,26890.0
+Grampians,Yarriambiack,24.0,175.0,2018,Sep,3.0,all,,27630.0
+Grampians,Group Total,1492.0,300.0,2018,Sep,3.0,all,,
+Loddon Mallee,Buloke,20.0,198.0,2018,Sep,3.0,all,,21270.0
+Loddon Mallee,Campaspe,172.0,280.0,2018,Sep,3.0,all,,21370.0
+Loddon Mallee,Central Goldfields,51.0,250.0,2018,Sep,3.0,all,,21670.0
+Loddon Mallee,Gannawarra,44.0,209.0,2018,Sep,3.0,all,,22250.0
+Loddon Mallee,Greater Bendigo,843.0,300.0,2018,Sep,3.0,all,,22620.0
+Loddon Mallee,Loddon,10.0,240.0,2018,Sep,3.0,all,,23940.0
+Loddon Mallee,Macedon Ranges,161.0,400.0,2018,Sep,3.0,all,,24130.0
+Loddon Mallee,Mildura,334.0,285.0,2018,Sep,3.0,all,,24780.0
+Loddon Mallee,Mount Alexander,68.0,340.0,2018,Sep,3.0,all,,25430.0
+Loddon Mallee,Swan Hill,95.0,250.0,2018,Sep,3.0,all,,26610.0
+Loddon Mallee,Group Total,1798.0,295.0,2018,Sep,3.0,all,,
+Hume,Alpine,65.0,285.0,2018,Sep,3.0,all,,20110.0
+Hume,Benalla,103.0,260.0,2018,Sep,3.0,all,,21010.0
+Hume,Greater Shepparton,416.0,280.0,2018,Sep,3.0,all,,22830.0
+Hume,Indigo,45.0,285.0,2018,Sep,3.0,all,,23350.0
+Hume,Mansfield,33.0,350.0,2018,Sep,3.0,all,,24250.0
+Hume,Mitchell,220.0,350.0,2018,Sep,3.0,all,,24850.0
+Hume,Moira,153.0,260.0,2018,Sep,3.0,all,,24900.0
+Hume,Murrindindi,51.0,280.0,2018,Sep,3.0,all,,25620.0
+Hume,Strathbogie,51.0,285.0,2018,Sep,3.0,all,,26430.0
+Hume,Towong,11.0,260.0,2018,Sep,3.0,all,,26670.0
+Hume,Wangaratta,164.0,290.0,2018,Sep,3.0,all,,26700.0
+Hume,Wodonga,340.0,310.0,2018,Sep,3.0,all,,27170.0
+Hume,Group Total,1652.0,300.0,2018,Sep,3.0,all,,
+Gippsland,Bass Coast,163.0,310.0,2018,Sep,3.0,all,,20740.0
+Gippsland,Baw Baw,255.0,330.0,2018,Sep,3.0,all,,20830.0
+Gippsland,East Gippsland,243.0,290.0,2018,Sep,3.0,all,,22110.0
+Gippsland,Latrobe,567.0,245.0,2018,Sep,3.0,all,,23810.0
+Gippsland,South Gippsland,118.0,270.0,2018,Sep,3.0,all,,26170.0
+Gippsland,Wellington,287.0,260.0,2018,Sep,3.0,all,,26810.0
+Gippsland,Group Total,1633.0,275.0,2018,Sep,3.0,all,,
