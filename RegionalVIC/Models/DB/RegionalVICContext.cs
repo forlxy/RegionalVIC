@@ -118,6 +118,16 @@ namespace RegionalVIC.Models.DB
                     .IsUnicode(false)
                     .HasDefaultValueSql("('')");
 
+                entity.Property(e => e.LgaLongitude)
+                    .HasColumnName("LGA_longitude")
+                    .HasColumnType("float")
+                    .HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.LgaLatitude)
+                    .HasColumnName("LGA_latitude")
+                    .HasColumnType("float")
+                    .HasDefaultValueSql("((0))");
+
                 entity.Property(e => e.State)
                     .IsRequired()
                     .HasColumnName("state")

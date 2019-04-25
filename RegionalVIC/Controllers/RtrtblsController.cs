@@ -21,7 +21,7 @@ namespace RegionalVIC.Controllers
             //DbController DbCtrl = new DbController(_context);
 
             //  Testing DbController Methods
-            //object obj =  DbCtrl.GetRegionLGA("R".ToString()[0]);
+            //object obj = DbCtrl.GetRegionLGA("R".ToString()[0]);
             //object obj = DbCtrl.GetRtrYrQtr(2009);
             //object obj = DbCtrl.GetPpltblByLGA("21830", "R".ToString()[0], 2017);
             //object obj = DbCtrl.GetCobtblByLGA("21830", "R".ToString()[0], 2016);
