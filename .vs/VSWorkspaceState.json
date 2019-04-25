@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\RegionalVIC"
+    "\\RegionalVIC",
+    "\\RegionalVIC\\Views",
+    "\\RegionalVIC\\Views\\Map"
   ],
   "SelectedNode": "\\RegionalVIC.sln",
   "PreviewInSolutionExplorer": false

@@ -1,6 +1,31 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<style>
+
+    .vidheader {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        min-width: 100%;
+        min-height: 100%;
+        z-index: -1;
+        object-position: center;
+        object-fit: cover;
+    }
+</style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,11 +75,16 @@
     </nav>
     <!-- Header -->
     <header class="masthead">
-        <div class="container">
-            <div class="intro-text">
-                <div class="intro-lead-in">Welcome To RegionalVIC!</div>
-                <div class="intro-heading text-uppercase">Wanna move to regional Victoria?</div>
-                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/Map/index"><i>Let's go!</i></a>
+        <div class="vidheader">
+            <div class='container'>
+                <video poster="/img/river-poster.jpg" id="bgvid" playsinline autoplay muted loop>
+                    <source src="/video/loop.mp4" type="video/mp4">
+                </video>
+                <div class="intro-text">
+                    <div class="intro-lead-in">Welcome To RegionalVIC!</div>
+                    <div class="intro-heading text-uppercase">Wanna move to regional Victoria?</div>
+                    <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/Map/index"><i>Let's go!</i></a>
+                </div>
             </div>
         </div>
     </header>

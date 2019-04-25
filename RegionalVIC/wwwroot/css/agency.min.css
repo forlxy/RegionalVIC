@@ -161,11 +161,11 @@ img::-moz-selection {
 header.masthead {
     text-align: center;
     color: #fff;
-    background-image: url(../img/header-bg.jpg);
-    background-repeat: no-repeat;
+    /*background-image: url(../img/header-bg.jpg);*/
+    /*background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;
-    background-size: cover
+    background-size: cover*/
 }
 
     header.masthead .intro-normal {
@@ -713,3 +713,4 @@ ul.social-buttons {
         ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons li a:hover {
             background-color: #fed136
         }
+

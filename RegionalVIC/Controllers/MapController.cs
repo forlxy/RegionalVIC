@@ -216,7 +216,7 @@ namespace RegionalVIC.Controllers
 
                 var list = (from r in _context.Rtrtbl
                             join l in _context.Lgatbl on r.LgaCode equals l.LgaCode
-                            where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3) && r.Typ.Contains(type)
+                            where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3) && r.Typ.Contains(type) && (int)r.NoOfBedrm == bedno
                             select new
                             {
                                 LgaCode = r.LgaCode,
@@ -482,8 +482,8 @@ namespace RegionalVIC.Controllers
             string display = "";
             var list = (from r in _context.Rtrtbl
                 join l in _context.Lgatbl on r.LgaCode equals l.LgaCode
-                where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3) && r.Median > 0 && (r.Median >= min && r.Median <= max)
-                select new
+                where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3) && r.Median > 0 && (r.Median >= min && r.Median <= max) && !r.Typ.Contains("all")
+                        select new
                 {
                     LgaCode = r.LgaCode,
                     Median = r.Median,
@@ -533,7 +533,7 @@ namespace RegionalVIC.Controllers
                         join l in _context.Lgatbl on r.LgaCode equals l.LgaCode
                         join p in _context.Ppltbl on r.LgaCode equals p.LgaCode
                         join c in _context.Critbl on r.LgaCode equals c.LgaCode
-                        where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3) &&
+                        where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3) && !r.Typ.Contains("all") &&
                             r.Median > 0 && (r.Median >= min && r.Median <= max) &&
                             c.YrEnd.Equals(2018) && c.Rate > 0 &&
                             p.Density > 0

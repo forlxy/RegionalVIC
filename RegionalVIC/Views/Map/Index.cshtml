@@ -589,6 +589,29 @@
         left: 5px;
         top: 5px;
     }
+
+    .vidheader {
+        position: relative;
+        width: 100%;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        min-width: 100%;
+        min-height: 100%;
+        z-index: -1;
+        object-position: center;
+        object-fit: cover;
+    }
 </style>
 
 <!DOCTYPE html>
@@ -625,12 +648,14 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.min.js'></script>
     <script src="/Scripts/ion.rangeSlider.min.js"></script>
+    <script src="/Scripts/covervid.min.js"></script>
+    <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js"></script>
 
     <link href="/css/rangeslider.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/css-loader.css">
 
     <link rel="stylesheet" href="/css/ion.rangeSlider.min.css">
-    
+
 </head>
 
 <body>
@@ -656,8 +681,14 @@
     </nav>
     <!-- Header -->
     <header class="masthead">
-        <div class="container">
+        <div class="vidheader">
+            <div class='vidContain'>
+                <video poster="/img/river-poster.jpg" id="bgvid" playsinline autoplay muted loop>
+                    <source src="/video/river.mp4" type="video/mp4">
+                </video>
+            </div>
             <div class="intro-normal">
+                
                 <div class="intro-lead-in">Welcome To RegionalVIC!</div>
             </div>
         </div>
@@ -898,7 +929,7 @@
                         <div id="recommendation" class="tab-pane container fade">
                             <br>
                             <div class="form-group">
-                                <h6>Accommodation Importance (a): </h6>
+                                <h6>Rent Importance (a): </h6>
                                 <div class="range-slider">
                                     <input type="text" class="acmSlider" value="" />
                                 </div>
@@ -918,7 +949,7 @@
                                 </div>
                             </div>
                             <h6>Higher Weight: You care it more!</h6>
-                            <small><i>Final Score = a * Accommodation score + b * Safety score + c * Population score </i></small>
+                            <small><i>Final Score = a * Rent score + b * Safety score + c * Population score </i></small>
                             <br><hr>
                             <h4>My budget (per week)</h4>
                             <div class="range-slider">
@@ -1054,8 +1085,11 @@
         var myData;
         var rcMap;
         var cheo = new Object;
+        var textColor = new Object;
         var crimeCheo = new Object;
         var desyCheo = new Object;
+        var initCodeColor = false;
+        var initMap = false;
         function formRegionColorMap() {
             rcMap = new Map();
             rcMap.set('20110', getRandomColor());
@@ -1236,7 +1270,11 @@
                 type: 'POST',
                 data: { json: JSON.stringify(myData) },
                 success: function (data) {
-
+                    initCodeColor = true;
+                    if (initCodeColor && initMap) {
+                        //loader
+                        $("#loader").removeClass("is-active");
+                    }
                 },
             });
         }
@@ -1280,7 +1318,12 @@
         //showChart();
 
         $(document).ready(function () {
-            
+
+            for (var i = 0; i < allCode.length; i++) {
+                cheo[allCode[i]] = "#ddd";
+                textColor[allCode[i]] = "#333";
+            }
+
             //Reset as tab changed
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 resetLayer();
@@ -1291,38 +1334,6 @@
                 list.innerHTML = slist.innerHTML = recomdList.innerHTML = "";
             });
             
-            //$('#acmSlider').on('input change', function (ev) {
-            //    acmValue.innerHTML = this.value;
-            //});
-            //$('#acmSlider').on('mouseup touchend', function (ev) {
-            //    if (toggleRecomd) {
-            //        //acmslider.disabled = true;
-            //        recommendation();
-            //    }
-            //});
-            
-            //$('#crmSlider').on('input change', function (ev) {
-            //    crmValue.innerHTML = this.value;
-            //});
-
-            //$('#crmSlider').on('mouseup touchend', function (ev) {
-            //    if (toggleRecomd) {
-            //        //crmSlider.disabled = true;
-            //        recommendation();
-            //    }
-            //});
-
-            //$('#pouSlider').on('input change', function (ev) {
-            //    pouValue.innerHTML = this.value;
-            //});
-
-            //$('#pouSlider').on('mouseup touchend', function (ev) {
-            //    if (toggleRecomd) {
-            //        //pouSlider.disabled = true;
-            //        recommendation();
-            //    }
-            //});
-
             //$(window).scroll(function () {
             //    if ($(window).scrollTop <= 50) {
             //        $(".mmap").css("bottom", 50 - $(window).scrollTop() ); //I want this value to change dynamically as the scrollbar moves down, so that the div stays on top of screen
@@ -1372,60 +1383,61 @@
                     ]
                 }
             });
-            //map.addLayer({
-            //    "id": "region-label",
-            //    "type": "symbol",
-            //    "source": "states",
-            //    "layout": {
-            //        'text-field': '{LGA_NAME18}',
-            //        'text-font': ["Lato Bold"],
-            //        'text-size': {
-            //            "base": 1,
-            //            "stops": [
-            //                [12, 12],
-            //                [16, 16]
-            //            ]
-            //        },
-            //        "text-padding": 3,
-            //        "text-letter-spacing": 0.1,
-            //        "text-max-width": 7,
-            //        "text-transform": "uppercase",
-            //        "text-justify": {
-            //            "stops": [
-            //                [
-            //                    8,
-            //                    "left"
-            //                ],
-            //                [
-            //                    9,
-            //                    "center"
-            //                ]
-            //            ]
-            //        },
-            //        "text-anchor": {
-            //            "stops": [
-            //                [
-            //                    8,
-            //                    "bottom-left"
-            //                ],
-            //                [
-            //                    9,
-            //                    "center"
-            //                ]
-            //            ]
-            //        }
-            //    },
-            //    "paint": {
-            //        "text-color": "#333",
-            //        "text-halo-color": "hsl(0, 0%, 100%)",
-            //        "text-halo-width": 1.5,
-            //        "text-halo-blur": 1
-            //    }
-            //});
-            var popup = new mapboxgl.Popup({
-                closeButton: false,
-                closeOnClick: false
+
+
+            var featureCollection = {
+                "type": "FeatureCollection",
+
+                "features": [
+
+                ]
+            }
+            lga.features.forEach(function (feature) {
+                //draw.add(feature);
+                if (feature.geometry != null) {
+
+                    var centroidPt = turf.center(feature);
+                    centroidPt.properties.title = feature.properties.LGA_NAME18;
+                    centroidPt.properties.LGA_CODE18 = feature.properties.LGA_CODE18;
+                    featureCollection.features.push(centroidPt);
+                }
+            })
+
+            map.addSource('label', {
+                'type': 'geojson',
+                'data': featureCollection
             });
+
+            map.addLayer({
+                "id": "region-label",
+                "type": "symbol",
+                "source": "label",
+                "layout": {
+                    'text-field': '{title}',
+                    'text-font': ["Lato Bold"],
+                    'text-size': {
+                        "base": 2,
+                        "stops": [
+                            [12, 12],
+                            [16, 16]
+                        ]
+                    },
+                    "text-padding": 3,
+                    "text-letter-spacing": 0.1,
+                    "text-max-width": 7
+                },
+                "paint": {
+                    "text-color":
+                        ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]],
+                    "text-halo-color": "hsl(0, 0%, 100%)",
+                    "text-halo-width": 1.5,
+                    "text-halo-blur": 1
+                }
+            });
+            //var popup = new mapboxgl.Popup({
+            //    closeButton: false,
+            //    closeOnClick: false
+            //});
 
             // When the user moves their mouse over the state-fill layer, we'll update the
             // feature state for the feature under the mouse.
@@ -1452,9 +1464,9 @@
 
                 // Populate the popup and set its coordinates
                 // based on the feature found.
-                popup.setLngLat([e.lngLat.lng, e.lngLat.lat])
-                    .setHTML(code + ', ' + e.lngLat.lat + ', ' + e.lngLat.lng)
-                    .addTo(map);
+                //popup.setLngLat([e.lngLat.lng, e.lngLat.lat])
+                //    .setHTML(code + ', ' + e.lngLat.lat + ', ' + e.lngLat.lng)
+                //    .addTo(map);
             });
 
             // When the mouse leaves the state-fill layer, update the feature state of the
@@ -1464,7 +1476,7 @@
                 //map.getCanvas().style.cursor = e.point.length ? 'default' : '';
 
                 map.getCanvas().style.cursor = '';
-                popup.remove();
+                //popup.remove();
 
                 if (hoveredStateId) {
                     map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
@@ -1482,9 +1494,14 @@
 
                 var states = map.queryRenderedFeatures(e.point);
                 if (states.length > 0) {
-                    var name = states[0].properties.LGA_NAME18.substring(0, states[0].properties.LGA_NAME18.indexOf(" ("));
-                    document.getElementById('pd').innerHTML = '<h5><strong>' + name + '</strong></h5><div class="content-line">' + displayList[states[0].properties.LGA_CODE18] + '</div>.';
-                } else {
+                    for (var i = 0; i < states.length; i++) {
+                        if (states[0].layer.id == "cheo") {
+                            var name = states[0].properties.LGA_NAME18.substring(0, states[0].properties.LGA_NAME18.indexOf(" ("));
+                            document.getElementById('pd').innerHTML = '<h5><strong>' + name + '</strong></h5><div class="content-line">' + displayList[states[0].properties.LGA_CODE18] + '</div>.';
+                            break;
+                        }
+                    }
+               } else {
                     document.getElementById('pd').innerHTML = '<p>Hover over a state!</p>';
                 }
 
@@ -1515,17 +1532,41 @@
                 var lgaCode = e.features[0].properties.LGA_CODE18;
                 var name = e.features[0].properties.LGA_NAME18;
 
-                new mapboxgl.Popup()
-                    .setLngLat(e.lngLat)
-                    .setHTML(name)
-                    .addTo(map);
+                //new mapboxgl.Popup()
+                //    .setLngLat(e.lngLat)
+                //    .setHTML(name)
+                //    .addTo(map);
             });
 
             map.on('idle', function () {
-                //Loader
-                $("#loader").removeClass("is-active");
+                initMap = true;
+                if (initCodeColor && initMap) {
+                    //Loader
+                    $("#loader").removeClass("is-active");
 
+                }
             });
+
+
+            //map.addSource('label', {
+            //    'type': 'geojson',
+            //    'data': featureCollection
+            //});
+
+            //// Add the label style
+            //map.addLayer({
+            //    'id': 'label-style',
+            //    'type': 'symbol',
+            //    'source': 'label',
+            //    'layout': {
+            //        'text-field': ['get', 'title']
+
+            //    },
+            //    'paint': {
+            //        'text-color': 'red'
+
+            //    }
+            //});
         });
 
         //Monitor select type changes
@@ -1552,20 +1593,29 @@
         //Reset Layers
         function resetLayer() {
 
+            for (var i = 0; i < allCode.length; i++) {
+                cheo[allCode[i]] = "#ddd";
+                textColor[allCode[i]] = "#333";
+            }
+
+            map.setPaintProperty("region-label", 'text-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]]);
+
             map.setLayoutProperty("state-fills", 'visibility', 'visible');
             map.setLayoutProperty("cheo", 'visibility', 'none');
 
             stateLegend.style.display = 'none';
             stateCrimeLegend.style.display = 'none';
             stateDesyLegend.style.display = 'none';
+
+
         }
         var displayList = new Object
 
         //Show filter map
         function choropleth(option) {
-            //Accomodation
-
+            
             $("#loader").addClass("is-active");
+            //Rent
             if (option == "a") {
 
                 var list = document.getElementById('list');
@@ -1585,6 +1635,12 @@
                                 var color = item["color"];
                                 var display = item["display"]
                                 cheo[code] = color;
+                                if (color === '#ddd') {
+                                    textColor[code] = '#999';
+                                }
+                                else {
+                                    textColor[code] = '#333';
+                                }
                                 displayList[code] = display;
 
                             }
@@ -1595,6 +1651,7 @@
                             stateDesyLegend.style.display = "none"
 
                             showCheoBlock = true;
+                            map.setPaintProperty("region-label", 'text-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]]);
 
                             map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
                             map.setLayoutProperty("state-fills", 'visibility', 'none');
@@ -1621,6 +1678,12 @@
                             var color = item["color"];
                             var display = item["display"]
                             cheo[code] = color;
+                            if (color === '#ddd') {
+                                textColor[code] = '#999';
+                            }
+                            else {
+                                textColor[code] = '#333';
+                            }
                             displayList[code] = display;
                         }
 
@@ -1631,6 +1694,8 @@
                         stateDesyLegend.style.display = "none"
 
                         showCheoBlock = true;
+
+                        map.setPaintProperty("region-label", 'text-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]]);
 
                         map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
                         map.setLayoutProperty("state-fills", 'visibility', 'none');
@@ -1655,6 +1720,12 @@
                             var color = item["color"];
                             var display = item["display"]
                             cheo[code] = color;
+                            if (color === '#ddd') {
+                                textColor[code] = '#999';
+                            }
+                            else {
+                                textColor[code] = '#333';
+                            }
                             displayList[code] = display;
                         }
 
@@ -1666,6 +1737,8 @@
                         stateCrimeLegend.style.display = "none"
 
                         showCheoBlock = true;
+
+                        map.setPaintProperty("region-label", 'text-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]]);
 
                         map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
                         map.setLayoutProperty("state-fills", 'visibility', 'none');
@@ -1828,6 +1901,7 @@
 
         //test
         //initRegionCharts("China");
+
         function initRegionCharts(country) {
 
             $.ajax({
@@ -2025,10 +2099,18 @@
                     for (var i = 0; i < areas.length; i++) {
                         var code = areas[i];
                         cheo[code] = myData[code];
+                        if (cheo[code] === '#ddd') {
+                            textColor[code] = '#999';
+                        }
+                        else {
+                            textColor[code] = '#333';
+                        }
                     }
                     recomdList.innerHTML = result["display"];
 
                     showCheoBlock = false;
+
+                    map.setPaintProperty("region-label", 'text-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]]);
 
                     map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
                     map.setLayoutProperty("state-fills", 'visibility', 'none');
@@ -2099,9 +2181,17 @@
                     for (var i = 0; i < areas.length; i++) {
                         var code = areas[i];
                         cheo[code] = myData[code];
+                        if (cheo[code] === '#ddd') {
+                            textColor[code] = '#999';
+                        }
+                        else {
+                            textColor[code] = '#333';
+                        }
                     }
                     filterList.innerHTML = result["display"];
                     showCheoBlock = false;
+                    map.setPaintProperty("region-label", 'text-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]]);
+
                     map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
                     map.setLayoutProperty("state-fills", 'visibility', 'none');
                     map.setLayoutProperty("cheo", 'visibility', 'visible');
