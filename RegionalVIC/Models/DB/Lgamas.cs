@@ -20,6 +20,8 @@ namespace RegionalVIC.Models.DB
         public string LgaName { get; set; }
         public string LgaBdesc { get; set; }
         public string LgaDesc { get; set; }
+        public string LgaImage { get; set; }
+        public string LgaVideo { get; set; }
         public decimal LgaArea { get; set; }
         public string State { get; set; }
         public string Status { get; set; }

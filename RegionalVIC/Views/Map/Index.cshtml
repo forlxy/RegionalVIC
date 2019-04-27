@@ -37,6 +37,7 @@
         bottom: 0;
         right: 0;
         background: rgba(255, 255, 255, 0.8);
+        font-size: 20px;
         margin-right: 20px;
         font-family: Helvetica, sans-serif;
         overflow: hidden;
@@ -55,7 +56,7 @@
 
     #features {
         top: 0px;
-        height: 100px;
+        height: 110px;
         margin-top: 10px;
         width: 250px;
     }
@@ -113,12 +114,37 @@
     }
 
 
+
+    .culture-card {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 800px;
+        min-width: 500px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+        .culture-card .info-close {
+            position: absolute;
+            right: 0;
+            top: 0;
+            padding: 4px;
+        }
+
+        .culture-card .info-content {
+            padding: 4px;
+        }
+
+
     .info-card {
         position: absolute;
         left: 0;
         top: 0;
-        margin-left: 20px;
-        overflow: hidden;
+        height: 800px;
+        min-width: 350px;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 
         .info-card .info-close {
@@ -160,6 +186,45 @@
         position: relative;
         z-index: 2;
     }
+
+    img {
+        display: block;
+        max-width: 350px;
+        max-height: 200px;
+        width: 100%;
+        height: 100%;
+    }
+
+    #image-container {
+        min-width: 340px;
+        min-height: 200px;
+    }
+    
+    #more-content {
+        min-width: 348px;
+        min-height: 286px;
+    }
+    .chartProgress {
+        min-width: 100px;
+        min-height: 100px;
+    }
+
+
+    .chartItem {
+        max-height: 125px;
+    }
+
+    .irs--round .irs-from, .irs--round .irs-to, .irs--round .irs-single {
+        background-color: #F2A02A !important
+    }
+
+    .irs--round .irs-bar {
+        background-color: #F2A02A !important
+    }
+    .irs--round .irs-handle {
+        border: 4px solid #F2A02A !important
+    }
+
 </style>
 
 <!DOCTYPE html>
@@ -179,10 +244,6 @@
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
-    <!-- Custom styles for this template -->
-    <link href="/css/agency.min.css" rel="stylesheet">
 
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
     <link rel='/stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.css' type='text/css' />
@@ -196,9 +257,13 @@
     <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="https://unpkg.com/tinyqueue@2.0.0/tinyqueue.min.js"></script>
     <script src="/js/polylabel.js"></script>
+
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
     <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.min.js'></script>
+
     <script src="/Scripts/ion.rangeSlider.min.js"></script>
     <script src="/Scripts/covervid.min.js"></script>
     <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js"></script>
@@ -208,6 +273,8 @@
 
     <link rel="stylesheet" href="/css/ion.rangeSlider.min.css">
 
+    <!-- Custom styles for this template -->
+    <link href="/css/agency.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 
@@ -247,7 +314,7 @@
         </div>
     </header>
 
-    @*<div class="loader loader-default is-active" data-text id="loader"></div>*@
+    <div class="loader loader-default is-active" data-text id="loader"></div>
 
     <section>
         <div class="container">
@@ -277,7 +344,7 @@
                         </li>
                     </ul>
 
-                    <div class="tab-content p-3">
+                    <div class="tab-content">
 
                         <!-- Reccomendation Pane -->
 
@@ -307,7 +374,7 @@
                                                         <label for="amrSlider"
                                                                class="font--18 text--lebel">Safety (b)</label>
                                                         <div class="range-slider">
-                                                            <input type="text" class="amrSlider" value="" />
+                                                            <input type="text" class="crmSlider" value="" />
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -318,7 +385,7 @@
                                                             <input type="text" class="pouSlider" value="" />
                                                         </div>
                                                     </div>
-                                                    <p class="text--tiny">
+                                                    <p class="text-sm-left">
                                                         Final Score = a * Rent score + b
                                                         * Safety
                                                         score + c *
@@ -372,7 +439,7 @@
                                             <button class="button w-100 dropdown-toggle" type="button"
                                                     id="budgetDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
                                                     aria-expanded="false">
-                                                Rent
+                                                Rent(per week)
                                             </button>
                                             <div class="dropdown-menu importance-of-factors"
                                                  aria-labelledby="budgetDropdownMenu">
@@ -462,14 +529,14 @@
                             <div class="filter">
                                 <div class="row">
                                     <div class="col-12 col-md-12 col-lg-5">
-                                        <button class="button mt-3 w-100"
+                                        <button class="button mt-3 w-100" id="country"
                                                 onclick="show('countrywithpopulation')">
                                             Birth Country &
                                             Population
                                         </button>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-4">
-                                        <button class="button mt-3 w-100"
+                                        <button class="button mt-3 w-100" id="language"
                                                 onclick="show('languagewithpopulation')">
                                             Language Use
                                         </button>
@@ -484,17 +551,17 @@
                                             <div class="dropdown-menu importance-of-factors"
                                                  aria-labelledby="budgetDropdownMenu">
                                                 <form class="px-4 py-3">
-                                                    <label for="inputState" class="font--18 text--lebel">
+                                                    <label for="inputCountry" class="font--18 text--lebel">
                                                         Select your
                                                         country
                                                     </label>
-                                                    <select id="inputState" class="form-control">
+                                                    <select id="inputCountry" class="form-control">
                                                         <option selected>Choose from List</option>
                                                     </select>
                                                     <div class="mt-3">
                                                         <span class="font--18 font--bold hand text--lebel">Cancel</span>&nbsp;&nbsp;
                                                         <span class="font--18 font--bold hand text--lebel">Reset</span>&nbsp;&nbsp;
-                                                        <span class="font--18 font--bold hand text--colored float-right">Confirm</span>
+                                                        <span class="font--18 font--bold hand text--colored float-right" onclick="show('autocountry')">Confirm</span>
                                                     </div>
                                                 </form>
                                             </div>
@@ -508,37 +575,77 @@
 
                     <div class="mapcontainer">
                         <div id="map" class="mmap" style="height:800px"></div>
-                        <div class='map-overlay' id='features' style="display: block"><div class='block-content' id='pd'><p></p></div></div>
+                        <div class='map-overlay' id='features' style="display: none"><div class='block-content' id='pd'><p></p></div></div>
 
-                        <div id="info-card" class="info-card rounded shadow-lg bg-white" style="max-width: 350px; display: block;">
-                            <div class="card">
-                                <div>
+
+                        <div id="culture-card" class="culture-card rounded shadow-lg bg-white" style="max-width: 500px; display: none;">
+                            <div class="card" id="culture-card-content" style="display:block">
+                                <div width="350" height="30" id="culture-info-content">
+                                    <h2 class="font--20 text--lebel font--bold p-4" id="culture-title"></h2>
+                                    <span class="info-close">
+                                        <i id="culture-card-close-button" class="fa fa-times" role="button" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <hr>
+                                <div id="culture-list-content">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="info-card" class="info-card rounded shadow-lg bg-white" style="max-width: 350px; display: none;">
+                            <div class="card" id="card-content-2" style="display:none">
+                                <div width="350" height="30" id="info-content-2">
+                                    <h2 class="font--20 text--lebel font--bold p-4" id="list-name"></h2>
+                                    <span class="info-close">
+                                        <i id="info-card-close-button-2" class="fa fa-times" role="button" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <div id='list' class="list-group">
+
+                                </div>
+
+
+                                <div id='slist' class="list-group">
+
+                                </div>
+
+                                <div id='recomd-list' class="list-group">
+
+                                </div>
+                            </div>
+
+                            <div class="card" id="card-content">
+                                <div width="350" height="200" id="image-container">
                                     <span class="info-close">
                                         <i id="info-card-close-button" class="fa fa-times" role="button" aria-hidden="true"></i>
                                     </span>
-                                    <img class="" src="http://via.placeholder.com/350x200?text=No+Picture+Found" />
+                                    <img class="" width="348" height="200" id="card-image" src="http://via.placeholder.com/350x200?text=No+Picture+Found" />
                                 </div>
-                                <div class="px-2 pb-4">
+                                <div class="px-2 pb-4" id="more-content">
                                     <div class="row">
                                         <div class="col-12">
-                                            <h2 class="font--22 text--lebel font--bold mt-4" id="card-title">
-                                                Title
-                                            </h2>
-                                            <p class="font--18 subtitle--color" id="card-subtitle">
-                                                Subtitle
+                                            <h2 class="font--22 text--lebel font--bold mt-4" id="card-title"></h2>
+                                            <p class="font--18 subtitle--color mt-1" id="card-subtitle">
+
                                             </p>
                                             <hr>
-                                            <p class="font--18 subtitle--color" id="card-desciption">
-                                                Descriptions
+                                            <p class="font--18 subtitle--color" id="card-description">
+
                                             </p>
+                                            <hr>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div width="350" height="200" id="image-container">
+                                    <iframe id="card-video" width="349" height="200" src=""></iframe>
                                 </div>
                             </div>
                         </div>
 
                         <div id='state-legend' class='legend' style="display: none">
-                            <h4>House price</h4>
+                            <h4>Median Rent</h4>
                             <div><span style='background-color: #723122'></span>550</div>
                             <div><span style='background-color: #8B4225'></span>450</div>
                             <div><span style='background-color: #A25626'></span>350</div>
@@ -579,37 +686,12 @@
                     </div>
 
 
-                    <div id='list' class="list-group">
-
-                    </div>
-
-
-                    <div id='slist' class="list-group">
-
-                    </div>
-
-                    <div id='recomd-list' class="list-group">
-
-                    </div>
                 </div>
             </div>
         </div>
 
     </section>
 
-
-    <section>
-        
-    </section>
-
-    <section id="chart">
-        <div class="col-md-4">
-            <h2>Chart</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-            <canvas id="myChart"></canvas>
-        </div>
-    </section>
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -658,6 +740,7 @@
     var lines;
     var toggleRecomd = false;
 
+        var selected = "";
     var allCode = [20110, 20260, 20570, 20660, 20740, 20830, 20910, 21010, 21110, 21180, 21270, 21370, 21450, 21610, 21670, 21750, 21830, 21890, 22110, 22170, 22250, 22310, 22410, 22490, 22620, 22670, 22750, 22830, 22910, 22980, 23110, 23190, 23270, 23350, 23430, 23670, 23810, 23940, 24130, 24210, 24250, 24330, 24410, 24600, 24650, 24780, 24850, 24900, 24970, 25060, 25150, 25250, 25340, 25430, 25490, 25620, 25710, 25810, 25900, 25990, 26080, 26170, 26260, 26350, 26430, 26490, 26610, 26670, 26700, 26730, 26810, 26890, 26980, 27070, 27170, 27260, 27350, 27450, 27630, 29399, 29499, 29799];
 
     const TOKEN = "pk.eyJ1Ijoia2FzYWx1b3FpIiwiYSI6ImNqbHZ2OW53bTB5aHozcW9kcDJibndycXUifQ.SeWM7HbI0owT-Rwuv14Ntg";
@@ -677,24 +760,33 @@
 
     var hoveredStateId = null;
     var highlightedStateId = null;
-
-    //var acmslider = document.getElementById("acmSlider");
-    //var crmSlider = document.getElementById("crmSlider");
-    //var pouSlider = document.getElementById("pouSlider");
-
-    //var acmValue = document.getElementById("acmValue");
-    //var crmValue = document.getElementById("crmValue");
-    //var pouValue = document.getElementById("pouValue");
-
-    //acmValue.innerHTML = acmslider.value;
-    //crmValue.innerHTML = crmSlider.value;
-    //pouValue.innerHTML = pouSlider.value;
-
+        
     var minFBudget;
     var maxFBudget;
     var minRBudget;
     var maxRBudget;
 
+
+        function show(option) {
+            $('#culture-list-content').empty();
+            if (option === 'countrywithpopulation') {
+
+                if (selected != "")
+                    initCountryCharts(selected);
+
+            }
+            else if (option === 'languagewithpopulation') {
+
+                if (selected != "")
+                    initLanguageCharts(selected);
+            }
+            else if (option === 'autocountry') {
+
+                var selectedCountry = $("#inputCountry").val();
+                if (selectedCountry!="")
+                    initRegionCharts(selectedCountry);
+            }
+        }
     function getRandomColor() {
         var letters = '0123456789ABCDEF';
         var color = '#';
@@ -901,13 +993,31 @@
             },
         });
     }
+        function easing(t) {
+            return t * (2 - t);
+        }
+        function shrinkMap() {
+            if (!moved) {
+                var deltaDistance = 300;
+                map.panBy([-deltaDistance, 0], {
+                    easing: easing
+                });
+            }
+            moved = true;
+        }
 
+
+        function extendMap() {
+            if (moved) {
+                var deltaDistance = 300;
+                map.panBy([deltaDistance, 0], {
+                    easing: easing
+                });
+            }
+            moved = false;
+        }
     function flytoPoly(LGA_Code) {
 
-        map.flyTo({
-            center: p,
-            zoom: 20
-        });
         var features = lga["features"];
         //map.setFilter('state-fills', ['==', ['number', ['get', 'LGA_CODE18']], LGA_Code]);
         if (features) {
@@ -936,21 +1046,46 @@
 
     }
 
+        function initCountryList() {
+            $("#inputCountry").empty();
+             $.ajax({
+            /**/
+            url: '@Url.Action("getAllCountry", "Map")',
+            /**/
+            type: 'POST',
+            data: { },
+                 success: function (data) {
+                     var list = JSON.parse(data);
+                     for (var i = 0; i < list.length; i++){
+                         var value = list[i];
+                         var o = new Option(value, value);
+                        /// jquerify the DOM object 'o' so we can use the html method
+                         $(o).html(value);
+                        $("#inputCountry").append(o);
+            }
+            },
+            });
+
+        }
     //Generate Color
-    formRegionColorMap();
+        formRegionColorMap();
+        var moved = false;
     //showChart();
 
+        var list = document.getElementById('list');
+        var slist = document.getElementById('slist');
+        var recomdList = document.getElementById('recomd-list');
+
         function resetAll() {
-
+            extendMap();
+            $('#info-card').fadeOut(300);
+            $('#culture-card').fadeOut(300);
             resetLayer();
-
-            var list = document.getElementById('list');
-            var slist = document.getElementById('slist');
-            var recomdList = document.getElementById('recomd-list');
+            selected = "";
             list.innerHTML = slist.innerHTML = recomdList.innerHTML = "";
         }
     $(document).ready(function () {
-
+        initCountryList();
         for (var i = 0; i < allCode.length; i++) {
             cheo[allCode[i]] = "#ddd";
             textColor[allCode[i]] = "#333";
@@ -1123,7 +1258,7 @@
                 for (var i = 0; i < states.length; i++) {
                     if (states[0].layer.id == "cheo") {
                         var name = states[0].properties.LGA_NAME18.substring(0, states[0].properties.LGA_NAME18.indexOf(" ("));
-                        document.getElementById('pd').innerHTML = '<h5><strong>' + name + '</strong></h5><div class="content-line">' + displayList[states[0].properties.LGA_CODE18] + '</div>.';
+                        document.getElementById('pd').innerHTML = '<h5><strong>' + name + '</strong></h5><div class="content-line">' + displayList[states[0].properties.LGA_CODE18] + '</div>';
                         break;
                     }
                 }
@@ -1152,12 +1287,113 @@
         });
         //Popup regions name
         map.on('click', 'state-fills', function (e) {
-
-            var sel1 = jQuery("#sel1 option:selected").val();
-            var sel2 = jQuery("#sel2 option:selected").val();
+            
             var lgaCode = e.features[0].properties.LGA_CODE18;
-            var name = e.features[0].properties.LGA_NAME18;
 
+            selected = lgaCode;
+
+            var content2 = document.querySelector('#card-content-2');
+            content2.style.display = "none";
+            var content1 = document.querySelector('#card-content');
+            content1.style.display = "block";
+
+            var content = document.querySelector('#more-content');
+
+            content.style.display = "none";
+            var image = document.querySelector('#card-image');
+            image.style.display = "none";
+            var video = document.querySelector('#card-video');
+            video.style.display = "none";
+            $.ajax({
+                /**/
+                url: '@Url.Action("getInfo", "Map")',
+                /**/
+                type: 'POST',
+                data: { code: lgaCode },
+                success: function (data) {
+                    var item = JSON.parse(data);
+                    var description = item["descrption"];
+                    var image_link = item["image"];
+                    var video_link = item["video"];
+                    var name = item["name"];
+                    var region = item["region"];
+
+                    // Display airport info
+                    document.querySelector('#card-title').innerText = name;
+                    document.querySelector('#card-subtitle').innerText = region;
+
+                    document.querySelector('#card-description').innerText = description;
+                    
+                    image.src = image_link;
+                    video.src = video_link;
+                    
+                    $('#more-content').fadeIn(200);
+                    {
+                    //function loaded() {
+
+                    //    // Display airport info
+                    //    document.querySelector('#card-title').innerText = name;
+                    //    document.querySelector('#card-subtitle').innerText = region;
+
+                    //    document.querySelector('#card-description').innerText = description;
+
+
+                    //    if ($('#info-card').filter(':visible').length == 0) // all hidden
+                    //    {
+                    //        $('#info-card').fadeIn(300);
+                    //    }
+
+
+                    //    // Ensure the info box is visible
+                    //    document.querySelector('#info-card').style.display = 'block';
+
+                    //}
+
+                    //if (video.complete) {
+                    //    loaded()
+                    //} else {
+                    //    video.addEventListener('load', loaded)
+                    //    video.addEventListener('error', function () {
+                    //        alert('error')
+                    //    })
+                    //}
+                    }
+                    function iloaded() {
+                        //image.style.display = "block";
+                        $('#card-image').fadeIn(200);
+                    }
+
+                    function vloaded() {
+                        //video.style.display = "block";
+                        $('#card-video').fadeIn(200);
+                    }
+
+                    if (image.complete) {
+                        iloaded()
+                    } else {
+                        image.addEventListener('load', iloaded)
+                    }
+
+                    if (video.complete) {
+                        vloaded()
+                    } else {
+                        video.addEventListener('load', vloaded)
+                    }
+
+                    if ($('#info-card').filter(':visible').length == 0) // all hidden
+                    {
+                        shrinkMap();
+                        $('#info-card').fadeIn(300);
+                        $('#culture-card').fadeOut(300);
+                    }
+                    
+                    
+                    // Ensure the info box is visible
+                    document.querySelector('#info-card').style.display = 'block';
+
+                },
+            });
+            {
             //new mapboxgl.Popup()
             //    .setLngLat(e.lngLat)
             //    .setHTML(name)
@@ -1172,14 +1408,8 @@
             //popup.setLngLat(e.lngLat)
             //    .setHTML(name)
             //    .addTo(map);
+            }
 
-
-            // Display airport info
-            document.querySelector('#card-title').innerText = name;
-            document.querySelector('#card-subtitle').innerText = lgaCode;
-            
-            // Ensure the info box is visible
-            document.querySelector('#info-card').style.display = 'block';
         });
 
         map.on('idle', function () {
@@ -1192,29 +1422,27 @@
         });
 
 
-        //map.addSource('label', {
-        //    'type': 'geojson',
-        //    'data': featureCollection
-        //});
-
-        //// Add the label style
-        //map.addLayer({
-        //    'id': 'label-style',
-        //    'type': 'symbol',
-        //    'source': 'label',
-        //    'layout': {
-        //        'text-field': ['get', 'title']
-
-        //    },
-        //    'paint': {
-        //        'text-color': 'red'
-
-        //    }
-        //});
     });
 
         document.querySelector('#info-card-close-button').addEventListener('click', function (event) {
-            document.querySelector('#info-card').style.display = 'none';
+            //document.querySelector('#info-card').style.display = 'none';
+            
+            //$('#info-card').fadeOut(300);
+            resetAll();
+        });
+
+        document.querySelector('#culture-card-close-button').addEventListener('click', function (event) {
+            //document.querySelector('#info-card').style.display = 'none';
+
+            //$('#info-card').fadeOut(300);
+            resetAll();
+        });
+
+        document.querySelector('#info-card-close-button-2').addEventListener('click', function (event) {
+            //document.querySelector('#info-card').style.display = 'none';
+
+            resetAll();
+            //$('#info-card').fadeOut(300);
         });
 
     //Monitor select type changes
@@ -1262,11 +1490,14 @@
     //Show filter map
     function choropleth(option) {
 
+        recomdList.style.display = "none";
         $("#loader").addClass("is-active");
         //Rent
         if (option == "a") {
 
-            var list = document.getElementById('list');
+            document.querySelector('#list-name').innerHTML = "Type Filter List";
+            list.style.display = "block";
+            slist.style.display = "none";
             var sel1 = jQuery("#sel1 option:selected").val();
             var sel2 = jQuery("#sel2 option:selected").val();
 
@@ -1293,6 +1524,14 @@
                         displayList[code] = display;
 
                     }
+
+                    if ($('#info-card').filter(':visible').length == 0) // all hidden
+                    {
+                        shrinkMap();
+                        $('#info-card').fadeIn(300);
+                        $('#culture-card').fadeOut(300);
+                    }
+                    $('#card-content-2').fadeIn(300);
                     var displayText = tmpObj["displayText"];
                     list.innerHTML = displayText;
                     stateLegend.style.display = "block"
@@ -1313,8 +1552,10 @@
         }
         //Safety
         else if (option == "c") {
-
-            var slist = document.getElementById('slist');
+            list.style.display = "none";
+            slist.style.display = "block";
+            document.querySelector('#card-content').style.display = "none";
+            document.querySelector('#list-name').innerHTML = "Criminal Situation";
             $.ajax({
                 /**/
                 url: '@Url.Action("getContent", "Map")',
@@ -1338,6 +1579,14 @@
                         displayList[code] = display;
                     }
 
+
+                    if ($('#info-card').filter(':visible').length == 0) // all hidden
+                    {
+                        shrinkMap();
+                        $('#info-card').fadeIn(300);
+                        $('#culture-card').fadeOut(300);
+                    }
+                    $('#card-content-2').fadeIn(300);
                     var displayText = tmpObj["displayText"];
                     slist.innerHTML = displayText;
                     stateCrimeLegend.style.display = "block"
@@ -1358,7 +1607,10 @@
         }
         //Population density
         else if (option == "d") {
-            var slist = document.getElementById('slist');
+            slist.style.display = "block";
+            list.style.display = "none";
+            document.querySelector('#card-content').style.display = "none";
+            document.querySelector('#list-name').innerHTML = "Population Situation<div class='text--very--small'><p><small>Density: The number of person per km<sup>2</sup> </small></p></div>";
             $.ajax({
                 /**/
                 url: '@Url.Action("getContent", "Map")',
@@ -1382,6 +1634,13 @@
                         displayList[code] = display;
                     }
 
+                    if ($('#info-card').filter(':visible').length == 0) // all hidden
+                    {
+                        shrinkMap();
+                        $('#info-card').fadeIn(300);
+                        $('#culture-card').fadeOut(300);
+                    }
+                    $('#card-content-2').fadeIn(300);
                     var displayText = tmpObj["displayText"];
                     slist.innerHTML = displayText;
 
@@ -1405,11 +1664,11 @@
     }
 
 
-    var myChart;
+    //var myChart;
     //var canvas = document.getElementById("myChart");
     //var ctx = canvas.getContext("2d");
 
-    function showChart(label, value) {
+    function showChart(count, label, value) {
 
         var values = [parseFloat(value), 100 - parseFloat(value)];
         var labels = [label, 'Others'];
@@ -1436,17 +1695,19 @@
                         text: values[0] + '%',
                         color: '#FF6384', // Default is #000000
                         fontStyle: 'Arial', // Default is Arial
-                        sidePadding: 20 // Defualt is 20 (as a percentage)
+                        sidePadding: 10 // Defualt is 20 (as a percentage)
                     }
+                },
+                legend: {
+                    display: false
                 }
             }
         };
 
 
-        var ctx = document.getElementById("myChart").getContext("2d");
-        if (myChart)
-            myChart.destroy();
-        myChart = new Chart(ctx, config);
+        var ctx = document.getElementById("myChart" + count).getContext("2d");
+        
+        var myChart = new Chart(ctx, config);
 
         //dmbChart(150, 150, 125, 25, values, colors, labels, 0);
 
@@ -1455,6 +1716,8 @@
     //initLanguageCharts("20110");
 
     function initLanguageCharts(lgaCode) {
+
+        $('#info-card').fadeOut(300);
 
         $.ajax({
             /**/
@@ -1465,6 +1728,12 @@
             success: function (data) {
                 var result = JSON.parse(data);
 
+                if ($('#culture-card').filter(':visible').length == 0) // all hidden
+                {
+                    shrinkMap();
+                    $('#culture-card').fadeIn(300);
+                }
+                document.querySelector('#culture-title').innerHTML = "Top 10 Languages";
                 resetChartjs();
 
                 for (var i = 0; i < result.length; i++) {
@@ -1472,7 +1741,12 @@
                     var label = item["label"];
                     var value = item["value"];
 
-                    showChart(label, value);
+                    var newElement = '<div class="ml-1 row"><div class="col-12 col-md-7 mt-2"> <h2 class="font--26 text--lebel">TOP ' + (i + 1)
+                        + '</h2>' + '<h2 class="font--20 text--lebel font--bold mt-2 ml-1">' + label + ' </h2> </div> <div class="col-12 col-md-5"> <canvas id="myChart' + i + '"></canvas></div></div><hr>';
+
+                    $('#culture-list-content').append(newElement);
+
+                    showChart(i, label, value);
                 }
 
             },
@@ -1486,6 +1760,8 @@
     //initCountryCharts("20110");
     function initCountryCharts(lgaCode) {
 
+        $('#info-card').fadeOut(300);
+
         $.ajax({
             /**/
             url: '@Url.Action("getCountry", "Map")',
@@ -1497,12 +1773,23 @@
 
                 resetChartjs();
 
+                if ($('#culture-card').filter(':visible').length == 0) // all hidden
+                {
+                    shrinkMap();
+                    $('#culture-card').fadeIn(300);
+                }
+                document.querySelector('#culture-title').innerHTML = "Top 15 Birth Countries";
                 for (var i = 0; i < result.length; i++) {
                     var item = result[i];
                     var label = item["label"];
                     var value = item["value"];
+                    var newElement = '<div class="ml-1 row"><div class="col-12 col-md-7 mt-2"> <h2 class="font--26 text--lebel">TOP '+ (i+1)
+                        + '</h2>' + '<h2 class="font--20 text--lebel font--bold mt-2 ml-1">'+label+' </h2> </div> <div class="col-12 col-md-5"> <canvas id="myChart' + i + '"></canvas></div></div><hr>';
+                    
+                    $('#culture-list-content').append(newElement);
 
-                    showChart(label, value);
+
+                    showChart(i, label, value);
                 }
 
             },
@@ -1511,55 +1798,9 @@
 
     }
 
-    function resetChartjs() {
-
-        Chart.pluginService.register({
-            beforeDraw: function (chart) {
-                if (chart.config.options.elements.center) {
-                    //Get ctx from string
-                    var ctx = chart.chart.ctx;
-
-                    //Get options from the center object in options
-                    var centerConfig = chart.config.options.elements.center;
-                    var fontStyle = centerConfig.fontStyle || 'Arial';
-                    var txt = centerConfig.text;
-                    var color = centerConfig.color || '#000';
-                    var sidePadding = centerConfig.sidePadding || 20;
-                    var sidePaddingCalculated = (sidePadding / 100) * (chart.innerRadius * 2)
-                    //Start with a base font of 30px
-                    ctx.font = "30px " + fontStyle;
-
-                    //Get the width of the string and also the width of the element minus 10 to give it 5px side padding
-                    var stringWidth = ctx.measureText(txt).width;
-                    var elementWidth = (chart.innerRadius * 2) - sidePaddingCalculated;
-
-                    // Find out how much the font can grow in width.
-                    var widthRatio = elementWidth / stringWidth;
-                    var newFontSize = Math.floor(30 * widthRatio);
-                    var elementHeight = (chart.innerRadius * 2);
-
-                    // Pick a new font size so it will not be larger than the height of label.
-                    var fontSizeToUse = Math.min(newFontSize, elementHeight);
-
-                    //Set font settings to draw it correctly.
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    var centerX = ((chart.chartArea.left + chart.chartArea.right) / 2);
-                    var centerY = ((chart.chartArea.top + chart.chartArea.bottom) / 2);
-                    ctx.font = fontSizeToUse + "px " + fontStyle;
-                    ctx.fillStyle = color;
-
-                    //Draw text in center
-                    ctx.fillText(txt, centerX, centerY);
-                }
-            }
-        });
-    }
-
-    //test
-    //initRegionCharts("China");
-
     function initRegionCharts(country) {
+
+        $('#info-card').fadeOut(300);
 
         $.ajax({
             /**/
@@ -1571,19 +1812,82 @@
                 var result = JSON.parse(data);
                 resetChartjs();
 
+
+                if ($('#culture-card').filter(':visible').length == 0) // all hidden
+                {
+                    shrinkMap();
+                    $('#culture-card').fadeIn(300);
+                }
+                document.querySelector('#culture-title').innerHTML = "Top 20 Regions";
+
                 for (var i = 0; i < result.length; i++) {
                     var item = result[i];
                     var label = item["label"];
                     var value = item["value"];
+                    var code = item["code"];
+                    
+                    var newElement = '<a style="text-decoration:none" href="javascript:flytoPoly(' + code + ')" class="ml-1 row"><div class="col-12 col-md-7 mt-2"> <h2 class="font--26 text--lebel">TOP ' + (i + 1)
+                        + '</h2>' + '<h2 class="font--20 text--lebel font--bold mt-2 ml-1">' + label +
+                        ' </h2> </div> <div class="col-12 col-md-5"> <canvas id="myChart' + i + '"></canvas></div></a><hr>';
 
-                    showChart(label, value);
+                    $('#culture-list-content').append(newElement);
+
+
+                    showChart(i, label, value);
                 }
 
             },
         });
 
 
-    }
+        }
+
+
+        function resetChartjs() {
+
+            Chart.pluginService.register({
+                beforeDraw: function (chart) {
+                    if (chart.config.options.elements.center) {
+                        //Get ctx from string
+                        var ctx = chart.chart.ctx;
+
+                        //Get options from the center object in options
+                        var centerConfig = chart.config.options.elements.center;
+                        var fontStyle = centerConfig.fontStyle || 'Arial';
+                        var txt = centerConfig.text;
+                        var color = centerConfig.color || '#000';
+                        var sidePadding = centerConfig.sidePadding || 20;
+                        var sidePaddingCalculated = (sidePadding / 100) * (chart.innerRadius * 2)
+                        //Start with a base font of 30px
+                        ctx.font = "30px " + fontStyle;
+
+                        //Get the width of the string and also the width of the element minus 10 to give it 5px side padding
+                        var stringWidth = ctx.measureText(txt).width;
+                        var elementWidth = (chart.innerRadius * 2) - sidePaddingCalculated;
+
+                        // Find out how much the font can grow in width.
+                        var widthRatio = elementWidth / stringWidth;
+                        var newFontSize = Math.floor(30 * widthRatio);
+                        var elementHeight = (chart.innerRadius * 2);
+
+                        // Pick a new font size so it will not be larger than the height of label.
+                        var fontSizeToUse = Math.min(newFontSize, elementHeight);
+
+                        //Set font settings to draw it correctly.
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        var centerX = ((chart.chartArea.left + chart.chartArea.right) / 2);
+                        var centerY = ((chart.chartArea.top + chart.chartArea.bottom) / 2);
+                        ctx.font = fontSizeToUse + "px " + fontStyle;
+                        ctx.fillStyle = color;
+
+                        //Draw text in center
+                        ctx.fillText(txt, centerX, centerY);
+                    }
+                }
+            });
+        }
+
 
     //window.onscroll = function () { myFunction() };
 
@@ -1722,11 +2026,14 @@
     }
 
     //Recommendation
+
     function recommendation() {
 
+        slist.style.display = "none";
+        list.style.display = "none";
+        recomdList.style.display = "block";
         //Loader
         $("#loader").addClass("is-active");
-        var recomdList = document.getElementById('recomd-list');
         recomdList.innerHTML = "";
 
         //var minBudget = parseInt(document.getElementById("min-bgt-recom").value);
@@ -1741,6 +2048,10 @@
         calAcmWeight /= sum
         calCrmWeight /= sum
         calPouWeight /= sum
+
+
+        document.querySelector('#card-content').style.display = "none";
+        document.querySelector('#list-name').innerHTML = "Recommendation result";
 
         $.ajax({
             /**/
@@ -1763,6 +2074,14 @@
                     cheo[code] = myData[code];
                     textColor[code] = '#333';
                 }
+
+                if ($('#info-card').filter(':visible').length == 0) // all hidden
+                {
+                    shrinkMap();
+                    $('#info-card').fadeIn(300);
+                    $('#culture-card').fadeOut(300);
+                }
+                $('#card-content-2').fadeIn(300);
                 recomdList.innerHTML = result["display"];
 
                 showCheoBlock = false;
@@ -1815,6 +2134,11 @@
 
     //Filter
     function filter() {
+
+        slist.style.display = "none";
+        list.style.display = "block";
+        recomdList.style.display = "none";
+
         var filterList = document.getElementById('list');
         filterList.innerHTML = "";
         //var minBudget = parseInt(document.getElementById("min-bgt").value);
@@ -1822,7 +2146,9 @@
         minFBudget = isNaN(minFBudget) ? 0 : minFBudget;
         maxFBudget = isNaN(maxFBudget) ? 1000 : maxFBudget;
 
-
+        document.querySelector('#card-content').style.display = "none";
+        document.querySelector('#list-name').innerHTML = "Filter result";
+        
         $("#loader").addClass("is-active");
         $.ajax({
             /**/
@@ -1847,6 +2173,19 @@
                         textColor[code] = '#333';
                     }
                 }
+
+
+                //document.querySelector('#card-content-2').style.display = "block";
+
+
+                if ($('#info-card').filter(':visible').length == 0) // all hidden
+                {
+                    shrinkMap();
+                    $('#info-card').fadeIn(300);
+                    $('#culture-card').fadeOut(300);
+                }
+                $('#card-content-2').fadeIn(200);
+
                 filterList.innerHTML = result["display"];
                 showCheoBlock = false;
                 map.setPaintProperty("region-label", 'text-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]]);
@@ -1880,16 +2219,8 @@
             return str;
         return val;
     }
-    //Show polygons
-    function showPolygonArea(e) {
-        featureGroup.clearLayers();
-        featureGroup.addLayer(e.layer);
-        // Here 'e.layer' holds the L.Polygon instance:
-        new L.Marker(e.layer.getBounds().getCenter()).addTo(featureGroup);
-
-        e.layer.bindPopup((LGeo.area(e.layer) / 1000000).toFixed(2) + ' km<sup>2</sup>');
-        e.layer.openPopup();
-    }</script>
+    
+    </script>
 
     <!-- Contact form JavaScript -->
     <script src="/js/jqBootstrapValidation.js"></script>

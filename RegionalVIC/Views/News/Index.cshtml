@@ -9,7 +9,7 @@
 }
 
 .post-preview > a > .post-title {
-  font-size: 30px;
+  font-size: 24px;
   margin-top: 30px;
   margin-bottom: 10px;
 }
@@ -188,8 +188,8 @@
 
                 if (data.count_results === 0) {
 
-                    var $element = $('<div class="post-preview"> <strong> <h2 class="post-title"> ' + "No content" + '</h2 >'
-                        + '<h3 class="post-subtitle"> ' + "There is no latest news about immigration." + '</h3></strong></div><hr>');
+                    var $element = $('<div class="post-preview"> <strong> <h3 class="post-title"> ' + "No content" + '</h3>'
+                        + '<h5 class="post-subtitle"> ' + "There is no latest news about immigration." + '</h5></strong></div><hr>');
 
                     $(".news").append($element);
                 }
@@ -202,8 +202,8 @@
                         var date = data.articles[i].date;
                         var website = data.articles[i].website;
 
-                        var $element = $('<div class="post-preview"> <a href="' + artUrl + '"> <h2 class="post-title"> ' + title + '</h2 >'
-                            + '<h3 class="post-subtitle"> ' + description + '</h3></a><p class="post-meta">Posted by  <a href="' + website + '">' + source + '</a> on <strong>' + date + ' </strong> </p></div><hr>');
+                        var $element = $('<div class="post-preview"> <a href="' + artUrl + '"> <h3 class="post-title"> ' + title + '</h3>'
+                            + '<h5 class="post-subtitle"> ' + description + '</h5></a><p class="post-meta">Posted by  <a href="' + website + '">' + source + '</a> on <strong>' + date + ' </strong> </p></div><hr>');
 
                         $(".news").append($element);
                         //console.log(artUrl);

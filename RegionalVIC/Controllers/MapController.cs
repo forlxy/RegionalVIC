@@ -27,6 +27,24 @@ namespace RegionalVIC.Controllers
             this.value = value;
         }
     }
+    public class chartItemEx
+    {
+        public string code;
+        public string label;
+        public string value;
+
+        public chartItemEx()
+        {
+
+        }
+
+        public chartItemEx(string code, string label, string value)
+        {
+            this.code = code;
+            this.label = label;
+            this.value = value;
+        }
+    }
     public class recommendationItem
     {
         public string code;
@@ -197,6 +215,56 @@ namespace RegionalVIC.Controllers
         }
 
         [HttpPost]
+        public string getAllCountry()
+        {
+            var list = _context.Cobmas.ToList();
+
+            List<string> result = new List<string>();
+            foreach (var i in list)
+            {
+                result.Add(i.Cob);
+            }
+
+
+            var json = JsonConvert.SerializeObject(result);
+            return json;
+
+        }
+
+
+        [HttpPost]
+        public string getInfo(string code)
+        {
+
+
+            var item = (from r in _context.Lgamas
+                        join l in _context.Lgatbl on r.LgaCode equals l.LgaCode
+                        where r.LgaCode.Contains(code)
+                        select new
+                        {
+                            LgaName = r.LgaBdesc,
+                            LgaCode = r.LgaCode,
+                            LgaRegion = l.Region,
+                            LgaDesc = r.LgaDesc,
+                            LgaImage = r.LgaImage,
+                            LgaVideo = r.LgaVideo
+                        }).First();
+
+            var tmpObject = new
+            {
+                name = item.LgaName,
+                region = item.LgaRegion,
+                descrption = item.LgaDesc,
+                image = item.LgaImage,
+                video = item.LgaVideo.Replace("watch?v=", "embed/")
+            };
+
+            var json = JsonConvert.SerializeObject(tmpObject);
+            return json;
+
+        }
+
+        [HttpPost]
         public void setCodeColors(string json)
         {
 
@@ -241,13 +309,13 @@ namespace RegionalVIC.Controllers
                         {
                             //Need ore task sort for years
                             median = l.Median ?? default(int);
-                            display = median != 0 ? "The median of the <strong>" + type + " </strong>(bedroom: <strong>" + bedno + "</strong>) is <strong>$" + median + "/week</strong>." : "No record";
+                            display = median != 0 ? "The median rent is <strong>$" + median + "/week</strong>." : "No record";
                             
                             displayText += (median != 0) ? "<a href=\"javascript:flytoPoly(" + l.LgaCode + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
                                 "<div class=\"d-flex w-100 justify-content-between\" > " +
-                                "<h6 class=\"mb-1\">"
-                                + l.LgaName + " - " + l.Region + "</h6> <small class=\"text-muted\" >$ "
-                                + l.Median + "/w</small> </div>" +
+                                "<h4 class=\"mb-1\">"
+                                + l.LgaName + " - " + l.Region + "</h4> <small class=\"text-muted\" >$"
+                                + l.Median + "</small> </div>" +
                                 "<div class=\"d-flex w-100 justify-content-between\" > " +
                                 "<div>" + l.NoOfBedrm + " bedroom(s) " + FirstCharToUpper(l.Typ) + "</div> " +
                                 "<div class=\"color-box\" style=\"background-color:" + colorDisplay.getAcomColor(median) + ";\"></div>" +
@@ -296,8 +364,8 @@ namespace RegionalVIC.Controllers
 
                             displayText += "<a href=\"javascript:flytoPoly(" + l.LgaCode + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
                                 "<div class=\"d-flex w-100 justify-content-between\" > " +
-                                "<h6 class=\"list-group-item-heading name\">"
-                                + l.LgaName + " - " + l.Region + "</h6> <small class=\"text-muted number\">"
+                                "<h4 class=\"list-group-item-heading name\">"
+                                + l.LgaName + " - " + l.Region + "</h4> <small class=\"text-muted number\">"
                                 + rate + "%</small> </div>" +
                                 "<div class=\"d-flex w-100 justify-content-between\" > " +
                                 "<div>Criminal Rate: " + rate + "%." + "</div> " +
@@ -345,8 +413,8 @@ namespace RegionalVIC.Controllers
 
                             displayText += "<a href=\"javascript:flytoPoly(" + l.LgaCode + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
                                 "<div class=\"d-flex w-100 justify-content-between\" > " +
-                                "<h6 class=\"mb-1\">"
-                                + l.LgaName + " - " + l.Region + "</h6> <small class=\"text-muted\">"
+                                "<h4 class=\"mb-1\">"
+                                + l.LgaName + " - " + l.Region + "</h4> <small class=\"text-muted\">"
                                 + density + "</small> </div>" +
                                 "<div class=\"d-flex w-100 justify-content-between\" > " +
                                 "<div>Density: " + density + ". Population: " + population + "</div> " +
@@ -384,6 +452,7 @@ namespace RegionalVIC.Controllers
                         where l.Cob == country
                         select new
                         {
+                            LgaCode = t.LgaCode,
                             LgaName = t.LgaName,
                             Percnt = r.Percnt,
                             Cob = l.Cob
@@ -392,15 +461,16 @@ namespace RegionalVIC.Controllers
 
             list = list.OrderByDescending(t => t.Percnt).ToList();
 
-            List<chartItem> chartList = new List<chartItem>();
+            List<chartItemEx> chartList = new List<chartItemEx>();
             //string[] label = new string[list.Count];
             //string[] value = new string[list.Count];
             for (var i = 0; i < list.Count; i++)
             {
+                var code = list[i].LgaCode;
                 var label = list[i].LgaName;
                 var value = list[i].Percnt.ToString();
 
-                chartItem item = new chartItem(label, value);
+                chartItemEx item = new chartItemEx(code, label, value);
                 chartList.Add(item);
             }
 
@@ -497,8 +567,8 @@ namespace RegionalVIC.Controllers
             if (list.Count == 0)
             {
                 display = "<div class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
-                   "<div class=\"d-flex w-100 justify-content-between\" > <h6 class=\"mb-1\">" +
-                   "No record within this price range</h6> <small class=\"text-muted\" ></small> </div> <p class=\"mb-1\">" +
+                   "<div class=\"d-flex w-100 justify-content-between\" > <h4 class=\"mb-1\">" +
+                   "No record within this price range</h4> <small class=\"text-muted\" ></small> </div> <p class=\"mb-1\">" +
                    "Change your price range and try again</p> </div>";
             }
 
@@ -507,9 +577,9 @@ namespace RegionalVIC.Controllers
             {
                 tmpAreas.Add(i.LgaCode);
                 display += "<a href=\"javascript:flytoPoly(" + i.LgaCode + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
-                    "  <div class=\"d-flex w-100 justify-content-between\" > <h6 class=\"mb-1\">"
-                    + i.LgaName + " - " + i.Region + "</h6> <small class=\"text-muted\" >$"
-                    + i.Median + "/w</small> </div> " +
+                    "  <div class=\"d-flex w-100 justify-content-between\" > <h4 class=\"mb-1\">"
+                    + i.LgaName + " - " + i.Region + "</h4> <small class=\"text-muted\" >$"
+                    + i.Median + "</small> </div> " +
                     "<div class=\"d-flex w-100 justify-content-between\" > " +
                     "<p class=\"mb-1\">"
                     + i.Bedroom + " bedroom(s) " + FirstCharToUpper(i.Type) + "</p> " +
@@ -554,8 +624,8 @@ namespace RegionalVIC.Controllers
             if (list.Count == 0)
             {
                 display = "<div class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
-                   "<div class=\"d-flex w-100 justify-content-between\" > <h6 class=\"mb-1\">" +
-                   "No record within this price range</h6> <small class=\"text-muted\" ></small> </div> <p class=\"mb-1\">" +
+                   "<div class=\"d-flex w-100 justify-content-between\" > <h4 class=\"mb-1\">" +
+                   "No record within this price range</h4> <small class=\"text-muted\" ></small> </div> <p class=\"mb-1\">" +
                    "Change your price range and try again</p> </div>";
             }
 
@@ -582,8 +652,8 @@ namespace RegionalVIC.Controllers
                 areas[j] = rates[j].code;
                 display += "<a href=\"javascript:flytoPoly(" + rates[j].code + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
                     "<div class=\"d-flex w-100 justify-content-between\" > " +
-                    "<h6 class=\"mb-1\">"
-                    + rates[j].name + " - " + rates[j].region + "</h6> <small class=\"text-muted\" >Top "
+                    "<h4 class=\"mb-1\">"
+                    + rates[j].name + " - " + rates[j].region + "</h4> <small class=\"text-muted\" >Top "
                     + (j+1) + "</small> </div>" +
                     "<div class=\"d-flex w-100 justify-content-between\" > " +
                     "<div>" + rates[j].bedroom + " bedroom(s) " + FirstCharToUpper(rates[j].type) + "</div> " +

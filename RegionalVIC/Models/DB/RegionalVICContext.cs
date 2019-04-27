@@ -93,6 +93,16 @@ namespace RegionalVIC.Models.DB
                     .HasColumnName("LGA_bdesc")
                     .HasMaxLength(50)
                     .IsUnicode(false);
+                
+                entity.Property(e => e.LgaImage)
+                    .HasColumnName("LGA_image")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LgaVideo)
+                    .HasColumnName("LGA_video")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.LgaDesc)
                     .HasColumnName("LGA_desc")
