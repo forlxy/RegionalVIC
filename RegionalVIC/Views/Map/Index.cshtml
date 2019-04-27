@@ -2,507 +2,6 @@
 @*@model Tuple<Rtrtbl, Critbl, Ppltbl>*@
 @*@model IEnumerable<Rtrtbl>*@
 <style>
-    /* Style the header */
-    .floatmap {
-        padding: 10px 16px;
-        background: #555;
-        color: #f1f1f1;
-    }
-
-    /* Page content */
-    .content {
-        padding: 16px;
-    }
-
-    /* The sticky class is added to the header with JS when it reaches its scroll position */
-    .sticky {
-        position: fixed;
-        top: 0;
-    }
-
-        /* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
-        .sticky + .content {
-            padding-top: 102px;
-        }
-
-    /*
-        * This is the compiled css for Bootstrap tabs and pills.
-        * Compiled from bootstrap 2.3.2 (less/navs.less)
-        */
-    .card-header .fa {
-        transition: .3s transform ease-in-out;
-    }
-
-    .card-header .collapsed .fa {
-        transform: rotate(90deg);
-    }
-
-    .clearfix {
-        *zoom: 1;
-    }
-
-        .clearfix:before,
-        .clearfix:after {
-            display: table;
-            content: "";
-            line-height: 0;
-        }
-
-        .clearfix:after {
-            clear: both;
-        }
-
-    .hide-text {
-        font: 0/0 a;
-        color: transparent;
-        text-shadow: none;
-        background-color: transparent;
-        border: 0;
-    }
-
-    .input-block-level {
-        display: block;
-        width: 100%;
-        min-height: 30px;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-    }
-
-    .nav {
-        margin-left: 0;
-        margin-bottom: 20px;
-        list-style: none;
-    }
-
-        .nav > li > a {
-            display: block;
-        }
-
-            .nav > li > a:hover,
-            .nav > li > a:focus {
-                text-decoration: none;
-                background-color: #eeeeee;
-            }
-
-            .nav > li > a > img {
-                max-width: none;
-            }
-
-        .nav > .pull-right {
-            float: right;
-        }
-
-    .nav-header {
-        display: block;
-        padding: 3px 15px;
-        font-size: 11px;
-        font-weight: bold;
-        line-height: 20px;
-        color: #999999;
-        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-        text-transform: uppercase;
-    }
-
-    .nav li + .nav-header {
-        margin-top: 9px;
-    }
-
-    .nav-list {
-        padding-left: 15px;
-        padding-right: 15px;
-        margin-bottom: 0;
-    }
-
-        .nav-list > li > a,
-        .nav-list .nav-header {
-            margin-left: -15px;
-            margin-right: -15px;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-        }
-
-        .nav-list > li > a {
-            padding: 3px 15px;
-        }
-
-        .nav-list > .active > a,
-        .nav-list > .active > a:hover,
-        .nav-list > .active > a:focus {
-            color: #ffffff;
-            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
-            background-color: #0088cc;
-        }
-
-        .nav-list [class^="icon-"],
-        .nav-list [class*=" icon-"] {
-            margin-right: 2px;
-        }
-
-        .nav-list .divider {
-            *width: 100%;
-            height: 1px;
-            margin: 9px 1px;
-            *margin: -5px 0 5px;
-            overflow: hidden;
-            background-color: #e5e5e5;
-            border-bottom: 1px solid #ffffff;
-        }
-
-    .nav-tabs,
-    .nav-pills {
-        *zoom: 1;
-    }
-
-        .nav-tabs:before,
-        .nav-pills:before,
-        .nav-tabs:after,
-        .nav-pills:after {
-            display: table;
-            content: "";
-            line-height: 0;
-        }
-
-        .nav-tabs:after,
-        .nav-pills:after {
-            clear: both;
-        }
-
-        .nav-tabs > li,
-        .nav-pills > li {
-            float: left;
-        }
-
-            .nav-tabs > li > a,
-            .nav-pills > li > a {
-                padding-right: 12px;
-                padding-left: 12px;
-                margin-right: 2px;
-                line-height: 14px;
-            }
-
-    .nav-tabs {
-        border-bottom: 1px solid #ddd;
-    }
-
-        .nav-tabs > li {
-            margin-bottom: -1px;
-        }
-
-            .nav-tabs > li > a {
-                padding-top: 8px;
-                padding-bottom: 8px;
-                line-height: 20px;
-                border: 1px solid transparent;
-                border-radius: 4px 4px 0 0;
-            }
-
-                .nav-tabs > li > a:hover,
-                .nav-tabs > li > a:focus {
-                    border-color: #eeeeee #eeeeee #dddddd;
-                }
-
-        .nav-tabs > .active > a,
-        .nav-tabs > .active > a:hover,
-        .nav-tabs > .active > a:focus {
-            color: #555555;
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            border-bottom-color: transparent;
-            cursor: default;
-        }
-
-    .nav-pills > li > a {
-        padding-top: 8px;
-        padding-bottom: 8px;
-        margin-top: 2px;
-        margin-bottom: 2px;
-        border-radius: 5px;
-    }
-
-    .nav-pills > .active > a,
-    .nav-pills > .active > a:hover,
-    .nav-pills > .active > a:focus {
-        color: #ffffff;
-        background-color: #0088cc;
-    }
-
-    .nav-stacked > li {
-        float: none;
-    }
-
-        .nav-stacked > li > a {
-            margin-right: 0;
-        }
-
-    .nav-tabs.nav-stacked {
-        border-bottom: 0;
-    }
-
-        .nav-tabs.nav-stacked > li > a {
-            border: 1px solid #ddd;
-            border-radius: 0;
-        }
-
-        .nav-tabs.nav-stacked > li:first-child > a {
-            border-top-right-radius: 4px;
-            border-top-left-radius: 4px;
-        }
-
-        .nav-tabs.nav-stacked > li:last-child > a {
-            border-bottom-right-radius: 4px;
-            border-bottom-left-radius: 4px;
-        }
-
-        .nav-tabs.nav-stacked > li > a:hover,
-        .nav-tabs.nav-stacked > li > a:focus {
-            border-color: #ddd;
-            z-index: 2;
-        }
-
-    .nav-pills.nav-stacked > li > a {
-        margin-bottom: 3px;
-    }
-
-    .nav-pills.nav-stacked > li:last-child > a {
-        margin-bottom: 1px;
-    }
-
-    .nav-tabs .dropdown-menu {
-        border-radius: 0 0 6px 6px;
-    }
-
-    .nav-pills .dropdown-menu {
-        border-radius: 6px;
-    }
-
-    .nav .dropdown-toggle .caret {
-        border-top-color: #0088cc;
-        border-bottom-color: #0088cc;
-        margin-top: 6px;
-    }
-
-    .nav .dropdown-toggle:hover .caret,
-    .nav .dropdown-toggle:focus .caret {
-        border-top-color: #005580;
-        border-bottom-color: #005580;
-    }
-    /* move down carets for tabs */
-    .nav-tabs .dropdown-toggle .caret {
-        margin-top: 8px;
-    }
-
-    .nav .active .dropdown-toggle .caret {
-        border-top-color: #fff;
-        border-bottom-color: #fff;
-    }
-
-    .nav-tabs .active .dropdown-toggle .caret {
-        border-top-color: #555555;
-        border-bottom-color: #555555;
-    }
-
-    .nav > .dropdown.active > a:hover,
-    .nav > .dropdown.active > a:focus {
-        cursor: pointer;
-    }
-
-    .nav-tabs .open .dropdown-toggle,
-    .nav-pills .open .dropdown-toggle,
-    .nav > li.dropdown.open.active > a:hover,
-    .nav > li.dropdown.open.active > a:focus {
-        color: #ffffff;
-        background-color: #999999;
-        border-color: #999999;
-    }
-
-    .nav li.dropdown.open .caret,
-    .nav li.dropdown.open.active .caret,
-    .nav li.dropdown.open a:hover .caret,
-    .nav li.dropdown.open a:focus .caret {
-        border-top-color: #ffffff;
-        border-bottom-color: #ffffff;
-        opacity: 1;
-        filter: alpha(opacity=100);
-    }
-
-    .tabs-stacked .open > a:hover,
-    .tabs-stacked .open > a:focus {
-        border-color: #999999;
-    }
-
-    .tabbable {
-        *zoom: 1;
-    }
-
-        .tabbable:before,
-        .tabbable:after {
-            display: table;
-            content: "";
-            line-height: 0;
-        }
-
-        .tabbable:after {
-            clear: both;
-        }
-
-    .tab-content {
-        overflow: hidden;
-    }
-
-    .tabs-below > .nav-tabs,
-    .tabs-right > .nav-tabs,
-    .tabs-left > .nav-tabs {
-        border-bottom: 0;
-    }
-
-    .tab-content > .tab-pane,
-    .pill-content > .pill-pane {
-        display: none;
-    }
-
-    .tab-content > .active,
-    .pill-content > .active {
-        display: block;
-    }
-
-    .tabs-below > .nav-tabs {
-        border-top: 1px solid #ddd;
-    }
-
-        .tabs-below > .nav-tabs > li {
-            margin-top: -1px;
-            margin-bottom: 0;
-        }
-
-            .tabs-below > .nav-tabs > li > a {
-                border-radius: 0 0 4px 4px;
-            }
-
-                .tabs-below > .nav-tabs > li > a:hover,
-                .tabs-below > .nav-tabs > li > a:focus {
-                    border-bottom-color: transparent;
-                    border-top-color: #ddd;
-                }
-
-        .tabs-below > .nav-tabs > .active > a,
-        .tabs-below > .nav-tabs > .active > a:hover,
-        .tabs-below > .nav-tabs > .active > a:focus {
-            border-color: transparent #ddd #ddd #ddd;
-        }
-
-    .tabs-left > .nav-tabs > li,
-    .tabs-right > .nav-tabs > li {
-        float: none;
-    }
-
-        .tabs-left > .nav-tabs > li > a,
-        .tabs-right > .nav-tabs > li > a {
-            min-width: 74px;
-            margin-right: 0;
-            margin-bottom: 3px;
-        }
-
-    .tabs-left > .nav-tabs {
-        float: left;
-        margin-right: 19px;
-        border-right: 1px solid #ddd;
-    }
-
-        .tabs-left > .nav-tabs > li > a {
-            margin-right: -1px;
-            border-radius: 4px 0 0 4px;
-        }
-
-            .tabs-left > .nav-tabs > li > a:hover,
-            .tabs-left > .nav-tabs > li > a:focus {
-                border-color: #eeeeee #dddddd #eeeeee #eeeeee;
-            }
-
-        .tabs-left > .nav-tabs .active > a,
-        .tabs-left > .nav-tabs .active > a:hover,
-        .tabs-left > .nav-tabs .active > a:focus {
-            border-color: #ddd transparent #ddd #ddd;
-            *border-right-color: #ffffff;
-        }
-
-    .tabs-right > .nav-tabs {
-        float: right;
-        margin-left: 19px;
-        border-left: 1px solid #ddd;
-    }
-
-        .tabs-right > .nav-tabs > li > a {
-            margin-left: -1px;
-            border-radius: 0 4px 4px 0;
-        }
-
-            .tabs-right > .nav-tabs > li > a:hover,
-            .tabs-right > .nav-tabs > li > a:focus {
-                border-color: #eeeeee #eeeeee #eeeeee #dddddd;
-            }
-
-        .tabs-right > .nav-tabs .active > a,
-        .tabs-right > .nav-tabs .active > a:hover,
-        .tabs-right > .nav-tabs .active > a:focus {
-            border-color: #ddd #ddd #ddd transparent;
-            *border-left-color: #ffffff;
-        }
-
-    .nav > .disabled > a {
-        color: #999999;
-    }
-
-        .nav > .disabled > a:hover,
-        .nav > .disabled > a:focus {
-            text-decoration: none;
-            background-color: transparent;
-            cursor: default;
-        }
-
-    .slidecontainer {
-        width: 100%;
-    }
-
-    .slider {
-        -webkit-appearance: none;
-        width: 100%;
-        height: 15px;
-        border-radius: 5px;
-        background: #d3d3d3;
-        outline: none;
-        opacity: 0.7;
-        -webkit-transition: .2s;
-        transition: opacity .2s;
-    }
-
-        .slider:hover {
-            opacity: 1;
-        }
-
-        .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            background: #4CAF50;
-            cursor: pointer;
-        }
-
-        .slider::-moz-range-thumb {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            background: #4CAF50;
-            cursor: pointer;
-        }
-
-    .list-group {
-        max-height: 400px;
-        margin-bottom: 10px;
-        overflow: scroll;
-        overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
-    }
 
     .legend {
         background-color: #fff;
@@ -612,6 +111,55 @@
         object-position: center;
         object-fit: cover;
     }
+
+
+    .info-card {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin-left: 20px;
+        overflow: hidden;
+    }
+
+        .info-card .info-close {
+            position: absolute;
+            right: 0;
+            top: 0;
+            padding: 4px;
+        }
+
+        .info-card .info-content {
+            padding: 4px;
+        }
+
+    .mapcontainer{
+        position: relative;
+    }
+    #control-panel {
+        display: none;
+        width: 350px;
+        padding: 8px 11px;
+        padding-top: 35px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background-color: #ddd;
+    }
+
+
+    #control-panel-content {
+        display: none;
+    }
+
+    #main-content {
+        width: 100%;
+        height: auto;
+        display: block;
+        overflow: hidden;
+        position: relative;
+        z-index: 2;
+    }
 </style>
 
 <!DOCTYPE html>
@@ -635,7 +183,6 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
     <!-- Custom styles for this template -->
     <link href="/css/agency.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
 
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
     <link rel='/stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.css' type='text/css' />
@@ -661,6 +208,7 @@
 
     <link rel="stylesheet" href="/css/ion.rangeSlider.min.css">
 
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 
 <body>
@@ -795,7 +343,7 @@
                                             <div class="dropdown-menu importance-of-factors"
                                                  aria-labelledby="budgetDropdownMenu">
                                                 <form class="px-4 py-3">
-                                                    <div class="row">
+                                                    <div class="form-group">
                                                         <div class="range-slider">
                                                             <input type="text" class="recommendRanger" value="" />
                                                         </div>
@@ -812,9 +360,6 @@
                                 </div>
                             </div>
 
-                            <div class="content">
-
-                            </div>
                         </div>
 
                         <!-- Living Pane -->
@@ -878,7 +423,7 @@
                                             <div class="dropdown-menu importance-of-factors"
                                                  aria-labelledby="budgetDropdownMenu">
                                                 <form class="px-4 py-3">
-                                                    <div class="row">
+                                                    <div class="form-group">
                                                         <div class="range-slider">
                                                             <input type="text" class="filterRanger" value="" />
                                                         </div>
@@ -959,6 +504,93 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="mapcontainer">
+                        <div id="map" class="mmap" style="height:800px"></div>
+                        <div class='map-overlay' id='features' style="display: block"><div class='block-content' id='pd'><p></p></div></div>
+
+                        <div id="info-card" class="info-card rounded shadow-lg bg-white" style="max-width: 350px; display: block;">
+                            <div class="card">
+                                <div>
+                                    <span class="info-close">
+                                        <i id="info-card-close-button" class="fa fa-times" role="button" aria-hidden="true"></i>
+                                    </span>
+                                    <img class="" src="http://via.placeholder.com/350x200?text=No+Picture+Found" />
+                                </div>
+                                <div class="px-2 pb-4">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h2 class="font--22 text--lebel font--bold mt-4" id="card-title">
+                                                Title
+                                            </h2>
+                                            <p class="font--18 subtitle--color" id="card-subtitle">
+                                                Subtitle
+                                            </p>
+                                            <hr>
+                                            <p class="font--18 subtitle--color" id="card-desciption">
+                                                Descriptions
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id='state-legend' class='legend' style="display: none">
+                            <h4>House price</h4>
+                            <div><span style='background-color: #723122'></span>550</div>
+                            <div><span style='background-color: #8B4225'></span>450</div>
+                            <div><span style='background-color: #A25626'></span>350</div>
+                            <div><span style='background-color: #B86B25'></span>300</div>
+                            <div><span style='background-color: #CA8323'></span>250</div>
+                            <div><span style='background-color: #E6B71E'></span>200</div>
+                            <div><span style='background-color: #EED322'></span>150</div>
+                            <div><span style='background-color: #F2F12D'></span>50</div>
+                            <div><span style='background-color: #ddd'></span>No data</div>
+                        </div>
+
+                        <div id='state-crime-legend' class='legend' style="display: none">
+                            <h4>Criminal rate</h4>
+                            <div><span style='background-color: #723122'></span>10%</div>
+                            <div><span style='background-color: #8B4225'></span>8%</div>
+                            <div><span style='background-color: #A25626'></span>7%</div>
+                            <div><span style='background-color: #B86B25'></span>6%</div>
+                            <div><span style='background-color: #CA8323'></span>5%</div>
+                            <div><span style='background-color: #DA9C20'></span>4%</div>
+                            <div><span style='background-color: #E6B71E'></span>3%</div>
+                            <div><span style='background-color: #EED322'></span>2%</div>
+                            <div><span style='background-color: #F2F12D'></span>1%</div>
+                            <div><span style='background-color: #ddd'></span>No data</div>
+                        </div>
+
+                        <div id='state-density-legend' class='legend' style="display: none">
+                            <h4>Population density</h4>
+                            <div><span style='background-color: #723122'></span>200</div>
+                            <div><span style='background-color: #8B4225'></span>50</div>
+                            <div><span style='background-color: #A25626'></span>20</div>
+                            <div><span style='background-color: #B86B25'></span>8</div>
+                            <div><span style='background-color: #CA8323'></span>5</div>
+                            <div><span style='background-color: #E6B71E'></span>3</div>
+                            <div><span style='background-color: #EED322'></span>1</div>
+                            <div><span style='background-color: #F2F12D'></span>0-1</div>
+                            <div><span style='background-color: #ddd'></span>No data</div>
+                        </div>
+                    </div>
+
+
+                    <div id='list' class="list-group">
+
+                    </div>
+
+
+                    <div id='slist' class="list-group">
+
+                    </div>
+
+                    <div id='recomd-list' class="list-group">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -967,71 +599,7 @@
 
 
     <section>
-        <div class="container" style="height:800px">
-            <div id="map" class="mmap" style="height:800px"></div>
-            <div class='map-overlay' id='features' style="display: block"><div class='block-content' id='pd'><p></p></div></div>
-
-            <div id="info-card" class="absolute pin-t pin-l mt-4 ml-4 rounded shadow-lg bg-white" style="max-width: 400px; display: block;">
-                <div>
-                    <span class="absolute pin-t pin-r px-4 py-3">
-                        <i id="info-card-close-button" class="fa fa-times" role="button" aria-hidden="true"></i>
-                    </span>
-                    <img class="" src="http://via.placeholder.com/400x200?text=No+Picture+Found" />
-                </div>
-                <div class="px-6 py-4">
-                    <div id="airport-name" class="font-bold text-l">Airport Name goes here</div>
-                </div>
-            </div>
-            <div id='state-legend' class='legend' style="display: none">
-                <h4>House price</h4>
-                <div><span style='background-color: #723122'></span>550</div>
-                <div><span style='background-color: #8B4225'></span>450</div>
-                <div><span style='background-color: #A25626'></span>350</div>
-                <div><span style='background-color: #B86B25'></span>300</div>
-                <div><span style='background-color: #CA8323'></span>250</div>
-                <div><span style='background-color: #E6B71E'></span>200</div>
-                <div><span style='background-color: #EED322'></span>150</div>
-                <div><span style='background-color: #F2F12D'></span>50</div>
-                <div><span style='background-color: #ddd'></span>No data</div>
-            </div>
-
-            <div id='state-crime-legend' class='legend' style="display: none">
-                <h4>Criminal rate</h4>
-                <div><span style='background-color: #723122'></span>10%</div>
-                <div><span style='background-color: #8B4225'></span>8%</div>
-                <div><span style='background-color: #A25626'></span>7%</div>
-                <div><span style='background-color: #B86B25'></span>6%</div>
-                <div><span style='background-color: #CA8323'></span>5%</div>
-                <div><span style='background-color: #DA9C20'></span>4%</div>
-                <div><span style='background-color: #E6B71E'></span>3%</div>
-                <div><span style='background-color: #EED322'></span>2%</div>
-                <div><span style='background-color: #F2F12D'></span>1%</div>
-                <div><span style='background-color: #ddd'></span>No data</div>
-            </div>
-
-            <div id='state-density-legend' class='legend' style="display: none">
-                <h4>Population density</h4>
-                <div><span style='background-color: #723122'></span>200</div>
-                <div><span style='background-color: #8B4225'></span>50</div>
-                <div><span style='background-color: #A25626'></span>20</div>
-                <div><span style='background-color: #B86B25'></span>8</div>
-                <div><span style='background-color: #CA8323'></span>5</div>
-                <div><span style='background-color: #E6B71E'></span>3</div>
-                <div><span style='background-color: #EED322'></span>1</div>
-                <div><span style='background-color: #F2F12D'></span>0-1</div>
-                <div><span style='background-color: #ddd'></span>No data</div>
-            </div>
-        </div>
-
-
-        <div id='list' class="list-group">
-
-        </div>
-
-
-        <div id='recomd-list' class="list-group">
-
-        </div>
+        
     </section>
 
     <section id="chart">
@@ -1596,19 +1164,20 @@
             //    .addTo(map);
 
             // Create a popup, but don't add it to the map yet.
-            var popup = new mapboxgl.Popup({
-                closeButton: false,
-                closeOnClick: true
-            });
+            //var popup = new mapboxgl.Popup({
+            //    closeButton: false,
+            //    closeOnClick: true
+            //});
 
-            popup.setLngLat(e.lngLat)
-                .setHTML(name)
-                .addTo(map);
+            //popup.setLngLat(e.lngLat)
+            //    .setHTML(name)
+            //    .addTo(map);
 
 
             // Display airport info
-            document.querySelector('#airport-name').innerText = name + " (" + lgaCode + ")";
-
+            document.querySelector('#card-title').innerText = name;
+            document.querySelector('#card-subtitle').innerText = lgaCode;
+            
             // Ensure the info box is visible
             document.querySelector('#info-card').style.display = 'block';
         });
