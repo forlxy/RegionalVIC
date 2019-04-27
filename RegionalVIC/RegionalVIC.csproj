@@ -21,11 +21,6 @@
 
   <ItemGroup>
     <Folder Include="Models\NewFolder\" />
-<<<<<<< HEAD
-=======
-    <Folder Include="Views\Movie\" />
-    <Folder Include="Views\Chart\" />
->>>>>>> db
   </ItemGroup>
 
 </Project>

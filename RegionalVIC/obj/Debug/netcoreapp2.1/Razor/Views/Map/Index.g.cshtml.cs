@@ -677,19 +677,11 @@ using RegionalVIC.Controllers;
 
 <!DOCTYPE html>
 <html lang=""en"">
-<<<<<<< HEAD
 ");
             EndContext();
             BeginContext(15012, 2849, false);
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8c9f62e929a0405a89a4885442d7cd3d", async() => {
                 BeginContext(15018, 2836, true);
-=======
-");
-            EndContext();
-            BeginContext(13870, 2241, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4a110745fd664e40a3f4ff6e8a3c9aa4", async() => {
-                BeginContext(13876, 2228, true);
->>>>>>> db
                 WriteLiteral(@"
 
     <meta charset=""utf-8"">
@@ -727,7 +719,6 @@ using RegionalVIC.Controllers;
     <script src=""/js/polylabel.js""></script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
     <script src=""https://cdn.jsdelivr.net/npm/chart.js@2.8.0""></script>
-<<<<<<< HEAD
     <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.min.js'></script>
     <script src=""/Scripts/ion.rangeSlider.min.js""></script>
     <script src=""/Scripts/covervid.min.js""></script>
@@ -758,29 +749,6 @@ using RegionalVIC.Controllers;
             BeginContext(17865, 70152, false);
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d68f1879b28144a0b7db1eb28a709684", async() => {
                 BeginContext(17871, 1528, true);
-=======
-    ");
-                WriteLiteral("<script src=\'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.min.js\'></script>\r\n\r\n    <link href=\"/css/rangeslider.css\" rel=\"stylesheet\">\r\n");
-                EndContext();
-            }
-            );
-            __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_HeadTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.HeadTagHelper>();
-            __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_Razor_TagHelpers_HeadTagHelper);
-            await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
-            if (!__tagHelperExecutionContext.Output.IsContentModified)
-            {
-                await __tagHelperExecutionContext.SetOutputContentAsync();
-            }
-            Write(__tagHelperExecutionContext.Output);
-            __tagHelperExecutionContext = __tagHelperScopeManager.End();
-            EndContext();
-            BeginContext(16111, 4, true);
-            WriteLiteral("\r\n\r\n");
-            EndContext();
-            BeginContext(16115, 52754, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d65893fd94444b549f5c0bf18d31485c", async() => {
-                BeginContext(16121, 8465, true);
->>>>>>> db
                 WriteLiteral(@"
     <nav class=""navbar navbar-expand-lg navbar-dark fixed-top"" id=""mainNav"">
         <div class=""container"">

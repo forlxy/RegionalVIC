@@ -1,27 +1,23 @@
 ﻿<Properties StartupConfiguration="{37DCFD75-BDF2-4C1E-9545-3FFC382D4681}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/RtrtblsController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Models/DB/RegionalVICContext.cs">
     <Files>
-      <File FileName="Controllers/DbController.cs" Line="102" Column="1" />
-      <File FileName="Controllers/RtrtblsController.cs" Line="21" Column="15" />
-      <File FileName="Models/DB/RegionalVICContext.cs" Line="589" Column="1" />
-      <File FileName="Models/DB/Lgamas.cs" Line="25" Column="45" />
+      <File FileName="Controllers/DbController.cs" Line="27" Column="52" />
+      <File FileName="Views/Map/Index.cshtml" Line="961" Column="1" />
+      <File FileName="Controllers/RtrtblsController.cs" Line="22" Column="15" />
+      <File FileName="Models/DB/RegionalVICContext.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RegionalVIC" expanded="True">
             <Node name="RegionalVIC" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="RtrtblsController.cs" selected="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
               <Node name="Models" expanded="True">
-                <Node name="DB" expanded="True" />
+                <Node name="DB" expanded="True">
+                  <Node name="RegionalVICContext.cs" selected="True" />
+                </Node>
               </Node>
-              <Node name="Views" expanded="True">
-                <Node name="Chart" expanded="True" />
-                <Node name="Home" expanded="True" />
-                <Node name="Map" expanded="True" />
-              </Node>
+              <Node name="Views" expanded="True" />
               <Node name="wwwroot" expanded="True" />
             </Node>
           </Node>
