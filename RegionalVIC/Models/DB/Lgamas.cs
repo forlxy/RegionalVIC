@@ -21,6 +21,10 @@ namespace RegionalVIC.Models.DB
         public string LgaBdesc { get; set; }
         public string LgaDesc { get; set; }
         public decimal LgaArea { get; set; }
+        public string LgaImage { get; set; }
+        public string LgaVideo { get; set; }
+        public float LgaLongitude { get; set; }
+        public float LgaLatitude { get; set; }
         public string State { get; set; }
         public string Status { get; set; }
 
