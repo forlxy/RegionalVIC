@@ -10,18 +10,22 @@ namespace RegionalVIC.Models
         public int code;
         public string color;
         public string display;
+        public double value;
         public colorDisplay()
         {
             code = 0;
             color = "#ddd";
             display = "No record";
+            value = 0;
         }
-        public colorDisplay(int code, string color, string display)
+        public colorDisplay(int code, string color, string display, double value = 0)
         {
             this.code = code;
             this.color = color;
             this.display = display;
+            this.value = value;
         }
+
 
         // get color depending on house price value
         public static string getAcomColor(int d)

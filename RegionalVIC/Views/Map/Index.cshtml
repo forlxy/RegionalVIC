@@ -119,7 +119,7 @@
         position: absolute;
         left: 0;
         top: 0;
-        height: 800px;
+        height: 700px;
         min-width: 500px;
         overflow-y: auto;
         overflow-x: hidden;
@@ -141,7 +141,7 @@
         position: absolute;
         left: 0;
         top: 0;
-        height: 800px;
+        height: 700px;
         min-width: 350px;
         overflow-y: auto;
         overflow-x: hidden;
@@ -225,6 +225,10 @@
         border: 4px solid #F2A02A !important
     }
 
+    #wrapper, img {
+        width: 100%;
+        height: 100%;
+    }
 </style>
 
 <!DOCTYPE html>
@@ -300,16 +304,10 @@
         </div>
     </nav>
     <!-- Header -->
-    <header class="masthead">
-        <div class="vidheader">
-            <div class='vidContain'>
-                <video poster="/img/river-poster.jpg" id="bgvid" playsinline autoplay muted loop>
-                    <source src="/video/river.mp4" type="video/mp4">
-                </video>
-            </div>
+    <header class="masthead" style="background-image: url('/img/map1.jpg');background-size: cover;">
+        <div class="container">
             <div class="intro-normal">
 
-                <div class="intro-lead-in">Welcome To RegionalVIC!</div>
             </div>
         </div>
     </header>
@@ -326,13 +324,12 @@
 
                     <ul class="nav nav-tabs justify-content-center " id="mapTab" role="tablist">
                         <li class="nav-item" onclick="resetAll()">
-                            <a class="nav-link pl-5 pr-5 active" id="reccomendation-tab" data-toggle="tab"
-                               href="#reccomendation" role="tab" aria-controls="reccomendation"
-                               aria-selected="true">Reccomendation</a>
+                            <a class="nav-link pl-5 pr-5 active" id="description-tab" data-toggle="tab" href="#description"
+                               role="tab" aria-controls="description" aria-selected="false">Regional Details</a>
                         </li>
                         <li class="nav-item" onclick="resetAll()">
                             <a class="nav-link pl-5 pr-5" id="living-tab" data-toggle="tab" href="#living"
-                               role="tab" aria-controls="living" aria-selected="false">Living</a>
+                               role="tab" aria-controls="living" aria-selected="false">Rent</a>
                         </li>
                         <li class="nav-item" onclick="resetAll()">
                             <a class="nav-link pl-5 pr-5" id="safety-tab" data-toggle="tab" href="#safety"
@@ -342,14 +339,25 @@
                             <a class="nav-link pl-5 pr-5" id="culture-tab" data-toggle="tab" href="#culture"
                                role="tab" aria-controls="culture" aria-selected="false">Cultural Background</a>
                         </li>
+                        <li class="nav-item" onclick="resetAll()">
+                            <a class="nav-link pl-5 pr-5" id="recommendation-tab" data-toggle="tab"
+                               href="#recommendation" role="tab" aria-controls="recommendation"
+                               aria-selected="true">Recommendation</a>
+                        </li>
                     </ul>
 
                     <div class="tab-content">
 
+                        <div class="tab-pane active" id="description" role="tabpanel"
+                             aria-labelledby="description-tab">
+                            <br>
+
+                        </div>
+
                         <!-- Reccomendation Pane -->
 
-                        <div class="tab-pane active" id="reccomendation" role="tabpanel"
-                             aria-labelledby="reccomendation-tab">
+                        <div class="tab-pane" id="recommendation" role="tabpanel"
+                             aria-labelledby="recommendation-tab">
 
                             <div class="filter" id="selectAbleFilter">
                                 <div class="row">
@@ -392,7 +400,6 @@
                                                         Population score
                                                     </p>
                                                     <div class="mt-3">
-                                                        <span class="font--18 font--bold hand text--lebel">Cancel</span>&nbsp;&nbsp;
                                                         <span class="font--18 font--bold hand text--colored float-right"
                                                               onclick="recommendation()">Confirm</span>
                                                     </div>
@@ -416,7 +423,6 @@
                                                         </div>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <span class="font--18 font--bold hand text--lebel">Cancel</span>&nbsp;&nbsp;
                                                         <span class="font--18 font--bold hand text--colored float-right"
                                                               onclick="recommendation()">Confirm</span>
                                                     </div>
@@ -430,7 +436,6 @@
                         </div>
 
                         <!-- Living Pane -->
-
                         <div class="tab-pane" id="living" role="tabpanel" aria-labelledby="living-tab">
                             <div class="filter">
                                 <div class="row">
@@ -439,7 +444,7 @@
                                             <button class="button w-100 dropdown-toggle" type="button"
                                                     id="budgetDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
                                                     aria-expanded="false">
-                                                Rent(per week)
+                                                Rent (per week)
                                             </button>
                                             <div class="dropdown-menu importance-of-factors"
                                                  aria-labelledby="budgetDropdownMenu">
@@ -472,7 +477,6 @@
                                                     </div>
 
                                                     <div class="mt-3">
-                                                        <span class="font--18 font--bold hand text--lebel">Cancel</span>&nbsp;&nbsp;
                                                         <span class="font--18 font--bold hand text--colored float-right"
                                                               onclick="choropleth('a')">Confirm</span>
                                                     </div>
@@ -485,7 +489,7 @@
                                             <button class="button w-100 dropdown-toggle" type="button"
                                                     id="budgetDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
                                                     aria-expanded="false">
-                                                Budget (per week)
+                                                Your Budget (per week)
                                             </button>
                                             <div class="dropdown-menu importance-of-factors"
                                                  aria-labelledby="budgetDropdownMenu">
@@ -496,7 +500,6 @@
                                                         </div>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <span class="font--18 font--bold hand text--lebel">Cancel</span>&nbsp;&nbsp;
                                                         <span class="font--18 font--bold hand text--colored float-right"
                                                               onclick="filter()">Confirm</span>
                                                     </div>
@@ -529,18 +532,30 @@
                             <div class="filter">
                                 <div class="row">
                                     <div class="col-12 col-md-12 col-lg-5">
-                                        <button class="button mt-3 w-100" id="country"
-                                                onclick="show('countrywithpopulation')">
-                                            Birth Country &
-                                            Population
-                                        </button>
+                                        <div class="dropdown mt-3 w-100">
+                                            <button class="button w-100 dropdown-toggle" type="button"
+                                                    id="budgetDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                Country & Language of Region
+                                            </button>
+                                            <div class="dropdown-menu importance-of-factors"
+                                                 aria-labelledby="budgetDropdownMenu">
+                                                <form class="px-4 py-3">
+                                                    <label for="inputRegion" class="font--18 text--lebel">
+                                                        Select region
+                                                    </label>
+                                                    <select id="inputRegion" class="form-control">
+                                                        <option selected>Choose from List</option>
+                                                    </select>
+                                                    <div class="mt-3">
+                                                        <span class="font--18 font--bold hand text--colored" onclick="show('countrywithpopulation')">Birth Country</span>&nbsp;&nbsp;
+                                                        <span class="font--18 font--bold hand text--colored float-right" onclick="show('languagewithpopulation')">Language Use</span>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-md-6 col-lg-4">
-                                        <button class="button mt-3 w-100" id="language"
-                                                onclick="show('languagewithpopulation')">
-                                            Language Use
-                                        </button>
-                                    </div>
+
                                     <div class="col-12 col-md-6 col-lg-3">
                                         <div class="dropdown mt-3 w-100">
                                             <button class="button w-100 dropdown-toggle" type="button"
@@ -559,8 +574,6 @@
                                                         <option selected>Choose from List</option>
                                                     </select>
                                                     <div class="mt-3">
-                                                        <span class="font--18 font--bold hand text--lebel">Cancel</span>&nbsp;&nbsp;
-                                                        <span class="font--18 font--bold hand text--lebel">Reset</span>&nbsp;&nbsp;
                                                         <span class="font--18 font--bold hand text--colored float-right" onclick="show('autocountry')">Confirm</span>
                                                     </div>
                                                 </form>
@@ -574,7 +587,7 @@
 
 
                     <div class="mapcontainer">
-                        <div id="map" class="mmap" style="height:800px"></div>
+                        <div id="map" class="mmap" style="height:700px"></div>
                         <div class='map-overlay' id='features' style="display: none"><div class='block-content' id='pd'><p></p></div></div>
 
 
@@ -622,10 +635,10 @@
                                     </span>
                                     <img class="" width="348" height="200" id="card-image" src="http://via.placeholder.com/350x200?text=No+Picture+Found" />
                                 </div>
-                                <div class="px-2 pb-4" id="more-content">
+                                <div class="px-2 pb-2" id="more-content">
                                     <div class="row">
                                         <div class="col-12">
-                                            <h2 class="font--22 text--lebel font--bold mt-4" id="card-title"></h2>
+                                            <h2 class="font--20 text--lebel font--bold mt-4" id="card-title"></h2>
                                             <p class="font--18 subtitle--color mt-1" id="card-subtitle">
 
                                             </p>
@@ -734,7 +747,7 @@
         </div>
     </footer>
     <!-- Load the File-->>
-    <script type="text/javascript" src="/lga.js.gz"></script>
+    <script type="text/javascript" src="/lga48.js.gz"></script>
     <script>
     var lga
     var lines;
@@ -771,12 +784,14 @@
             $('#culture-list-content').empty();
             if (option === 'countrywithpopulation') {
 
+                selected = $("#inputRegion").val();
                 if (selected != "")
                     initCountryCharts(selected);
 
             }
             else if (option === 'languagewithpopulation') {
 
+                selected = $("#inputRegion").val();
                 if (selected != "")
                     initLanguageCharts(selected);
             }
@@ -1022,25 +1037,43 @@
         //map.setFilter('state-fills', ['==', ['number', ['get', 'LGA_CODE18']], LGA_Code]);
         if (features) {
             if (features.length) {
-                var p;
+
                 var feat;
                 features.forEach(function (feature) {
                     if (parseInt(feature.properties.LGA_CODE18) === LGA_Code) {
 
                         feat = feature;
-                        var coords = feature.geometry.coordinates;
-                        p = polylabel(coords, 1.0);
+                        $.ajax({
+                            /**/
+                            url: '@Url.Action("getLngLat", "Map")',
+                            /**/
+                            type: 'POST',
+                            data: { code: LGA_Code },
+                            success: function (data) {
+                                var item = JSON.parse(data);
+                                var lat = item["latitude"]
+                                var lng = item["longitude"]
+                                var p = [lng - 0.5, lat]
+                                map.flyTo({
+                                    center: p,
+                                    zoom: 8
+                                });
+                                var deltaDistance = 300;
+                            },
+                        });
+
+                        if (hoveredStateId) {
+                            map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                        }
+                        hoveredStateId = feat.id;
+                        map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
+
+                        //        feat = feature;
+                        //        var coords = feature.geometry.coordinates;
+                        //        p = polylabel(coords, 1.0);
                     }
                 });
-                map.flyTo({
-                    center: p,
-                    zoom: 9
-                });
-                if (hoveredStateId) {
-                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
-                }
-                hoveredStateId = feat.id;
-                map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
+
             }
         }
 
@@ -1067,6 +1100,31 @@
             });
 
         }
+
+        
+        function initRegionList() {
+            $("#inputRegion").empty();
+            $.ajax({
+                /**/
+                url: '@Url.Action("getAllRegions", "Map")',
+                /**/
+                type: 'POST',
+                data: {},
+                success: function (data) {
+                    var list = JSON.parse(data);
+                    for (var i = 0; i < list.length; i++) {
+                        var item = list[i];
+                        var value = item["code"];
+                        var label = item["name"];
+                        var o = new Option(value, value);
+                        /// jquerify the DOM object 'o' so we can use the html method
+                        $(o).html(label);
+                        $("#inputRegion").append(o);
+                    }
+                },
+            });
+
+        }
     //Generate Color
         formRegionColorMap();
         var moved = false;
@@ -1084,12 +1142,20 @@
             selected = "";
             list.innerHTML = slist.innerHTML = recomdList.innerHTML = "";
         }
+
+        $(document).click(function () {
+            $("#dropdown").hide();
+        });
+
+
     $(document).ready(function () {
         initCountryList();
+        initRegionList();
         for (var i = 0; i < allCode.length; i++) {
             cheo[allCode[i]] = "#ddd";
             textColor[allCode[i]] = "#333";
         }
+
 
         //Reset as tab changed
         //$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -1289,8 +1355,7 @@
         map.on('click', 'state-fills', function (e) {
             
             var lgaCode = e.features[0].properties.LGA_CODE18;
-
-            selected = lgaCode;
+            
 
             var content2 = document.querySelector('#card-content-2');
             content2.style.display = "none";
@@ -1495,7 +1560,7 @@
         //Rent
         if (option == "a") {
 
-            document.querySelector('#list-name').innerHTML = "Type Filter List";
+            document.querySelector('#list-name').innerHTML = "Rent";
             list.style.display = "block";
             slist.style.display = "none";
             var sel1 = jQuery("#sel1 option:selected").val();
@@ -1529,9 +1594,11 @@
                     {
                         shrinkMap();
                         $('#info-card').fadeIn(300);
-                        $('#culture-card').fadeOut(300);
+                        //$('#culture-card').fadeOut(300);
                     }
+                    $('#culture-card').fadeOut(300);
                     $('#card-content-2').fadeIn(300);
+                    $('#card-content').fadeOut(200);
                     var displayText = tmpObj["displayText"];
                     list.innerHTML = displayText;
                     stateLegend.style.display = "block"
@@ -1584,9 +1651,11 @@
                     {
                         shrinkMap();
                         $('#info-card').fadeIn(300);
-                        $('#culture-card').fadeOut(300);
+                        //$('#culture-card').fadeOut(300);
                     }
+                    $('#culture-card').fadeOut(300);
                     $('#card-content-2').fadeIn(300);
+                    $('#card-content').fadeOut(200);
                     var displayText = tmpObj["displayText"];
                     slist.innerHTML = displayText;
                     stateCrimeLegend.style.display = "block"
@@ -1638,9 +1707,10 @@
                     {
                         shrinkMap();
                         $('#info-card').fadeIn(300);
-                        $('#culture-card').fadeOut(300);
                     }
+                    $('#culture-card').fadeOut(300);
                     $('#card-content-2').fadeIn(300);
+                    $('#card-content').fadeOut(200);
                     var displayText = tmpObj["displayText"];
                     slist.innerHTML = displayText;
 
@@ -1717,6 +1787,9 @@
 
     function initLanguageCharts(lgaCode) {
 
+        stateLegend.style.display = 'none';
+        stateCrimeLegend.style.display = 'none';
+        stateDesyLegend.style.display = 'none';
         $('#info-card').fadeOut(300);
 
         $.ajax({
@@ -1736,6 +1809,12 @@
                 document.querySelector('#culture-title').innerHTML = "Top 10 Languages";
                 resetChartjs();
 
+                for (var i = 0; i < allCode.length; i++) {
+                    cheo[allCode[i]] = "#ddd";
+                    textColor[allCode[i]] = '#999';
+                }
+                cheo[lgaCode] = myData[lgaCode];
+                textColor[lgaCode] = '#333'
                 for (var i = 0; i < result.length; i++) {
                     var item = result[i];
                     var label = item["label"];
@@ -1746,6 +1825,13 @@
 
                     $('#culture-list-content').append(newElement);
 
+                    showCheoBlock = false;
+
+                    map.setPaintProperty("region-label", 'text-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]]);
+
+                    map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
+                    map.setLayoutProperty("state-fills", 'visibility', 'none');
+                    map.setLayoutProperty("cheo", 'visibility', 'visible');
                     showChart(i, label, value);
                 }
 
@@ -1760,6 +1846,9 @@
     //initCountryCharts("20110");
     function initCountryCharts(lgaCode) {
 
+        stateLegend.style.display = 'none';
+        stateCrimeLegend.style.display = 'none';
+        stateDesyLegend.style.display = 'none';
         $('#info-card').fadeOut(300);
 
         $.ajax({
@@ -1773,13 +1862,20 @@
 
                 resetChartjs();
 
+                for (var i = 0; i < allCode.length; i++) {
+                    cheo[allCode[i]] = "#ddd";
+                    textColor[allCode[i]] = '#999';
+                }
+                cheo[lgaCode] = myData[lgaCode];
+                textColor[lgaCode] = '#333'
+
                 if ($('#culture-card').filter(':visible').length == 0) // all hidden
                 {
                     shrinkMap();
                     $('#culture-card').fadeIn(300);
                 }
-                document.querySelector('#culture-title').innerHTML = "Top 15 Birth Countries";
-                for (var i = 0; i < result.length; i++) {
+                document.querySelector('#culture-title').innerHTML = "Top 10 Birth Countries";
+                for (var i = 0; i < (result.length < 10 ? result.length : 10); i++) {
                     var item = result[i];
                     var label = item["label"];
                     var value = item["value"];
@@ -1788,6 +1884,13 @@
                     
                     $('#culture-list-content').append(newElement);
 
+                    showCheoBlock = false;
+
+                    map.setPaintProperty("region-label", 'text-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]]);
+
+                    map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
+                    map.setLayoutProperty("state-fills", 'visibility', 'none');
+                    map.setLayoutProperty("cheo", 'visibility', 'visible');
 
                     showChart(i, label, value);
                 }
@@ -1802,6 +1905,9 @@
 
         $('#info-card').fadeOut(300);
 
+        stateLegend.style.display = 'none';
+        stateCrimeLegend.style.display = 'none';
+        stateDesyLegend.style.display = 'none';
         $.ajax({
             /**/
             url: '@Url.Action("getRegions", "Map")',
@@ -1818,20 +1924,42 @@
                     shrinkMap();
                     $('#culture-card').fadeIn(300);
                 }
-                document.querySelector('#culture-title').innerHTML = "Top 20 Regions";
+                document.querySelector('#culture-title').innerHTML = "Top 10 Regions<div class='text--very--small'><p><small>See which region has the most population from your country</small></p></div>";
 
-                for (var i = 0; i < result.length; i++) {
+                for (var i = 0; i < allCode.length; i++) {
+                    cheo[allCode[i]] = "#ddd";
+                    textColor[allCode[i]] = '#999';
+                }
+
+                for (var i = 0; i < (result.length < 10 ? result.length : 10); i++) {
                     var item = result[i];
                     var label = item["label"];
                     var value = item["value"];
                     var code = item["code"];
-                    
-                    var newElement = '<a style="text-decoration:none" href="javascript:flytoPoly(' + code + ')" class="ml-1 row"><div class="col-12 col-md-7 mt-2"> <h2 class="font--26 text--lebel">TOP ' + (i + 1)
-                        + '</h2>' + '<h2 class="font--20 text--lebel font--bold mt-2 ml-1">' + label +
-                        ' </h2> </div> <div class="col-12 col-md-5"> <canvas id="myChart' + i + '"></canvas></div></a><hr>';
+                    var extra = "";
+                    if (code === "-1") {
+                        extra = "Not Regional Area";
+                    }
+                    else {
+                        cheo[code] = myData[code];
+                        textColor[code] = '#333';
+                    }
+
+                    var newElement = '<a style="text-decoration:none" href="javascript:flytoPoly(' + code + ')" class="ml-1 row"><div class="col-12 col-md-7 mt-2"> <h2 class="font--26 text--lebel">TOP '
+                        + (i + 1)
+                        + '</h2>' + '<h2 class="font--20 text--lebel font--bold mt-2 ml-1">' + label + '</h2>' +
+                        '<div class="text--very--small text--lebel p-1"><p><small>' + extra +
+                        ' </small></p></div> </div> <div class="col-12 col-md-5"> <canvas id="myChart' + i + '"></canvas></div></a><hr>';
 
                     $('#culture-list-content').append(newElement);
 
+                    showCheoBlock = false;
+
+                    map.setPaintProperty("region-label", 'text-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]]);
+
+                    map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
+                    map.setLayoutProperty("state-fills", 'visibility', 'none');
+                    map.setLayoutProperty("cheo", 'visibility', 'visible');
 
                     showChart(i, label, value);
                 }
@@ -2032,6 +2160,10 @@
         slist.style.display = "none";
         list.style.display = "none";
         recomdList.style.display = "block";
+
+        stateLegend.style.display = 'none';
+        stateCrimeLegend.style.display = 'none';
+        stateDesyLegend.style.display = 'none';
         //Loader
         $("#loader").addClass("is-active");
         recomdList.innerHTML = "";
@@ -2082,6 +2214,7 @@
                     $('#culture-card').fadeOut(300);
                 }
                 $('#card-content-2').fadeIn(300);
+                $('#card-content').fadeOut(200);
                 recomdList.innerHTML = result["display"];
 
                 showCheoBlock = false;
@@ -2139,6 +2272,11 @@
         list.style.display = "block";
         recomdList.style.display = "none";
 
+
+        stateLegend.style.display = 'none';
+        stateCrimeLegend.style.display = 'none';
+        stateDesyLegend.style.display = 'none';
+
         var filterList = document.getElementById('list');
         filterList.innerHTML = "";
         //var minBudget = parseInt(document.getElementById("min-bgt").value);
@@ -2147,7 +2285,7 @@
         maxFBudget = isNaN(maxFBudget) ? 1000 : maxFBudget;
 
         document.querySelector('#card-content').style.display = "none";
-        document.querySelector('#list-name').innerHTML = "Filter result";
+        document.querySelector('#list-name').innerHTML = "Regions";
         
         $("#loader").addClass("is-active");
         $.ajax({
@@ -2185,6 +2323,7 @@
                     $('#culture-card').fadeOut(300);
                 }
                 $('#card-content-2').fadeIn(200);
+                $('#card-content').fadeOut(200);
 
                 filterList.innerHTML = result["display"];
                 showCheoBlock = false;

@@ -8,7 +8,11 @@ body {
 }
 
 /*Main Structure*/
-
+.text-muted {
+    width: 100px;
+    text-align: right;
+    margin-top: 3px;
+}
 /* Common */
 
 .button {
@@ -66,6 +70,11 @@ body {
     color: #666666;
 }
 
+.font--14 {
+    font-size: 14px;
+    line-height: 18px;
+}
+
 .font--18 {
     font-size: 18px;
     line-height: 22px;
@@ -74,6 +83,10 @@ body {
 .font--20 {
     font-size: 20px;
     line-height: 24px;
+}
+.font--22 {
+    font-size: 22px;
+    line-height: 26px;
 }
 
 .font--26 {

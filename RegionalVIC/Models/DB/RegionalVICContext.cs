@@ -116,6 +116,16 @@ namespace RegionalVIC.Models.DB
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.LgaLatitude)
+                    .HasColumnName("LGA_latitude")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LgaLongitude)
+                    .HasColumnName("LGA_longitude")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.State)
                     .IsRequired()
                     .HasColumnName("state")

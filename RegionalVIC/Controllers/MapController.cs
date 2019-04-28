@@ -11,6 +11,22 @@ using Newtonsoft.Json.Linq;
 
 namespace RegionalVIC.Controllers
 {
+    public class regionItem
+    {
+        public string code;
+        public string name;
+
+        public regionItem()
+        {
+
+        }
+
+        public regionItem(string code, string name)
+        {
+            this.code = code;
+            this.name = name;
+        }
+    }
     public class chartItem
     {
         public string label;
@@ -231,6 +247,21 @@ namespace RegionalVIC.Controllers
 
         }
 
+        [HttpPost]
+        public string getAllRegions()
+        {
+            var list = _context.Lgatbl.Where(r => r.LgaCode != "00000" && r.Status == "R").ToList();
+
+
+            List<regionItem> result = new List<regionItem>();
+            foreach (var i in list)
+            {
+                result.Add(new regionItem(i.LgaCode, i.NameRent));
+            }
+
+            var json = JsonConvert.SerializeObject(result);
+            return json;
+        }
 
         [HttpPost]
         public string getInfo(string code)
@@ -239,7 +270,7 @@ namespace RegionalVIC.Controllers
 
             var item = (from r in _context.Lgamas
                         join l in _context.Lgatbl on r.LgaCode equals l.LgaCode
-                        where r.LgaCode.Contains(code)
+                        where r.LgaCode.Contains(code) && l.Status == "R"
                         select new
                         {
                             LgaName = r.LgaBdesc,
@@ -284,7 +315,8 @@ namespace RegionalVIC.Controllers
 
                 var list = (from r in _context.Rtrtbl
                             join l in _context.Lgatbl on r.LgaCode equals l.LgaCode
-                            where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3) && r.Typ.Contains(type) && (int)r.NoOfBedrm == bedno
+                            where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3) 
+                            && r.Typ.Contains(type) && (int)r.NoOfBedrm == bedno && l.Status == "R"
                             select new
                             {
                                 LgaCode = r.LgaCode,
@@ -335,7 +367,7 @@ namespace RegionalVIC.Controllers
 
                 var list = (from r in _context.Critbl
                             join l in _context.Lgatbl on r.LgaCode equals l.LgaCode
-                            where r.LgaCode != "00000" && r.YrEnd.Equals(2018)
+                            where r.LgaCode != "00000" && r.YrEnd.Equals(2018) && l.Status == "R"
                             select new
                             {
                                 LgaCode = r.LgaCode,
@@ -386,7 +418,7 @@ namespace RegionalVIC.Controllers
 
                 var list = (from r in _context.Ppltbl
                             join l in _context.Lgatbl on r.LgaCode equals l.LgaCode
-                            where r.LgaCode != "00000" 
+                            where r.LgaCode != "00000" && l.Status == "R"
                             select new
                             {
                                 LgaCode = r.LgaCode,
@@ -455,7 +487,8 @@ namespace RegionalVIC.Controllers
                             LgaCode = t.LgaCode,
                             LgaName = t.LgaName,
                             Percnt = r.Percnt,
-                            Cob = l.Cob
+                            Cob = l.Cob,
+                            Status = t.Status
                         }).ToList();
 
 
@@ -466,7 +499,16 @@ namespace RegionalVIC.Controllers
             //string[] value = new string[list.Count];
             for (var i = 0; i < list.Count; i++)
             {
-                var code = list[i].LgaCode;
+                string code;
+                if (list[i].Status == "R")
+                {
+
+                    code = list[i].LgaCode;
+                }
+                else
+                {
+                    code = "-1";
+                }
                 var label = list[i].LgaName;
                 var value = list[i].Percnt.ToString();
 
@@ -513,6 +555,24 @@ namespace RegionalVIC.Controllers
         }
 
 
+
+        [HttpPost]
+        public string getLngLat(string code)
+        {
+            var item = (from r in _context.Lgamas
+                        where r.LgaCode == code
+                        select new
+                        {
+                            LgaCode = r.LgaCode,
+                            Lat = r.LgaLatitude,
+                            Lng = r.LgaLongitude
+                        }).First();
+
+
+            return "{ \"latitude\":" + item.Lat + ",\"longitude\": " + item.Lng + "}";
+
+        }
+
         [HttpPost]
         public string getLan(string code)
         {
@@ -552,8 +612,10 @@ namespace RegionalVIC.Controllers
             string display = "";
             var list = (from r in _context.Rtrtbl
                 join l in _context.Lgatbl on r.LgaCode equals l.LgaCode
-                where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3) && r.Median > 0 && (r.Median >= min && r.Median <= max) && !r.Typ.Contains("all")
-                        select new
+                where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3) 
+                && r.Median > 0 && (r.Median >= min && r.Median <= max) && !r.Typ.Contains("all")
+                && l.Status == "R"
+                select new
                 {
                     LgaCode = r.LgaCode,
                     Median = r.Median,
@@ -606,7 +668,7 @@ namespace RegionalVIC.Controllers
                         where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3) && !r.Typ.Contains("all") &&
                             r.Median > 0 && (r.Median >= min && r.Median <= max) &&
                             c.YrEnd.Equals(2018) && c.Rate > 0 &&
-                            p.Density > 0
+                            p.Density > 0 && l.Status == "R"
                         select new
                         {
                             LgaCode = r.LgaCode,
@@ -646,10 +708,10 @@ namespace RegionalVIC.Controllers
 
             rates = rates.OrderByDescending(t => t.rate).ToList();
 
-            string[] areas = new string[10];
+            List<string> areas = new List<string>();
             for (var j = 0; j < ((rates.Count < 10)? rates.Count : 10); j++)
             {
-                areas[j] = rates[j].code;
+                areas.Add(rates[j].code);
                 display += "<a href=\"javascript:flytoPoly(" + rates[j].code + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
                     "<div class=\"d-flex w-100 justify-content-between\" > " +
                     "<h4 class=\"mb-1\">"
