@@ -69,13 +69,14 @@ namespace RegionalVIC.Controllers
         public string region;
         public string type;
         public byte bedroom;
+        public string median;
 
         public recommendationItem()
         {
 
         }
 
-        public recommendationItem(string code, double rate, string name, string region, string type, byte bedroom)
+        public recommendationItem(string code, double rate, string name, string region, string type, byte bedroom, string median)
         {
             this.code = code;
             this.rate = rate;
@@ -83,6 +84,7 @@ namespace RegionalVIC.Controllers
             this.region = region;
             this.type = type;
             this.bedroom = bedroom;
+            this.median = median;
         }
 
         //Get acommondation rating
@@ -315,7 +317,7 @@ namespace RegionalVIC.Controllers
 
                 var list = (from r in _context.Rtrtbl
                             join l in _context.Lgatbl on r.LgaCode equals l.LgaCode
-                            where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3) 
+                            where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3)
                             && r.Typ.Contains(type) && (int)r.NoOfBedrm == bedno && l.Status == "R"
                             select new
                             {
@@ -330,34 +332,42 @@ namespace RegionalVIC.Controllers
 
                 list = list.OrderBy(t => t.Median).ToList();
 
-                foreach (var t in regionsList)
+                foreach (var l in list)
                 {
                     int median = 0;
 
                     string display = "No record";
-                    foreach (var l in list)
                     {
-                        if (l.LgaCode.Contains(t.LgaCode))
-                        {
-                            //Need ore task sort for years
-                            median = l.Median ?? default(int);
-                            display = median != 0 ? "The median rent is <strong>$" + median + "/week</strong>." : "No record";
-                            
-                            displayText += (median != 0) ? "<a href=\"javascript:flytoPoly(" + l.LgaCode + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
-                                "<div class=\"d-flex w-100 justify-content-between\" > " +
-                                "<h4 class=\"mb-1\">"
-                                + l.LgaName + " - " + l.Region + "</h4> <small class=\"text-muted\" >$"
-                                + l.Median + "</small> </div>" +
-                                "<div class=\"d-flex w-100 justify-content-between\" > " +
-                                "<div>" + l.NoOfBedrm + " bedroom(s) " + FirstCharToUpper(l.Typ) + "</div> " +
-                                "<div class=\"color-box\" style=\"background-color:" + colorDisplay.getAcomColor(median) + ";\"></div>" +
-                                "</div></a>": "";
+                        //Need ore task sort for years
+                        median = l.Median ?? default(int);
+                        display = median != 0 ? "The median rent is <strong>$" + median + "/week</strong>." : "No record";
 
-                            break;
-                        }
+                        displayText += (median != 0) ? "<a href=\"javascript:flytoPoly(" + l.LgaCode + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
+                            "<div class=\"d-flex w-100 justify-content-between\" > " +
+                            "<h4 class=\"mb-1\">"
+                            + l.LgaName + " - " + l.Region + "</h4> <small class=\"text-muted\" >$"
+                            + l.Median + "</small> </div>" +
+                            "<div class=\"d-flex w-100 justify-content-between\" > " +
+                            "<div>" + l.NoOfBedrm + " bedroom(s) " + FirstCharToUpper(l.Typ) + "</div> " +
+                            "</div></a>" : "";
+
                     }
-                    colorDisplay cd = new colorDisplay(Int32.Parse(t.LgaCode), colorDisplay.getAcomColor(median), display);
+
+                    colorDisplay cd = new colorDisplay(Int32.Parse(l.LgaCode), colorDisplay.getAcomColor(median), display);
                     result.Add(cd);
+
+                }
+
+                foreach (var t in regionsList)
+                {
+
+                    colorDisplay cd = result.FirstOrDefault(d => d.code == Int32.Parse(t.LgaCode));
+
+                    if (cd == null)
+                    {
+                        colorDisplay newone = new colorDisplay(Int32.Parse(t.LgaCode), "#ddd", "No record");
+                        result.Add(newone);
+                    }
                 }
             }
             else if (require == 99)//99 'c'
@@ -380,34 +390,41 @@ namespace RegionalVIC.Controllers
 
 
                 list = list.OrderBy(t => t.Rate).ToList();
-                foreach (var t in regionsList)
+                foreach (var l in list)
                 {
                     decimal rate = 0;
                     int icdNum = 0;
                     string display = "No record";
-                    foreach (var l in list)
-                    {
 
-                        if (l.LgaCode.Contains(t.LgaCode))
-                        {
-                            rate = Math.Round(l.Rate, 2);
-                            icdNum = l.IncdRcd;
-                            display = rate != 0 ? "Criminal Rate: <strong>" + rate + "%</strong>." : "No record";
 
-                            displayText += "<a href=\"javascript:flytoPoly(" + l.LgaCode + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
-                                "<div class=\"d-flex w-100 justify-content-between\" > " +
-                                "<h4 class=\"list-group-item-heading name\">"
-                                + l.LgaName + " - " + l.Region + "</h4> <small class=\"text-muted number\">"
-                                + rate + "%</small> </div>" +
-                                "<div class=\"d-flex w-100 justify-content-between\" > " +
-                                "<div>Criminal Rate: " + rate + "%." + "</div> " +
-                                "<div class=\"color-box\" style=\"background-color:" + colorDisplay.getCrimeColor(rate) + ";\"></div>" +
-                                "</div></a>";
-                            break;
-                        }
-                    }
-                    colorDisplay cd = new colorDisplay(Int32.Parse(t.LgaCode), colorDisplay.getCrimeColor(rate), display);
+                    rate = Math.Round(l.Rate, 2);
+                    icdNum = l.IncdRcd;
+                    display = rate != 0 ? "Criminal Rate: <strong>" + rate + "%</strong>." : "No record";
+
+                    displayText += "<a href=\"javascript:flytoPoly(" + l.LgaCode + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
+                        "<div class=\"d-flex w-100 justify-content-between\" > " +
+                        "<h4 class=\"list-group-item-heading name\">"
+                        + l.LgaName + " - " + l.Region + "</h4> <small class=\"text-muted number\">"
+                        + rate + "%</small> </div>" +
+                        "<div class=\"d-flex w-100 justify-content-between\" > " +
+                        "<div>Criminal Rate: " + rate + "%." + "</div> " +
+                        "</div></a>";
+
+                    colorDisplay cd = new colorDisplay(Int32.Parse(l.LgaCode), colorDisplay.getCrimeColor(rate), display);
                     result.Add(cd);
+                }
+
+
+                foreach (var t in regionsList)
+                {
+
+                    colorDisplay cd = result.FirstOrDefault(d => d.code == Int32.Parse(t.LgaCode));
+
+                    if (cd == null)
+                    {
+                        colorDisplay newone = new colorDisplay(Int32.Parse(t.LgaCode), "#ddd", "No record");
+                        result.Add(newone);
+                    }
                 }
             }
             else if (require == 100)//100 'd'
@@ -429,35 +446,41 @@ namespace RegionalVIC.Controllers
                             }).ToList();
 
                 list = list.OrderBy(t => t.Density).ToList();
-                foreach (var t in regionsList)
+
+                foreach (var l in list)
                 {
                     decimal density = 0;
                     int population = 0;
 
                     string display = "No record";
-                    foreach (var l in list)
-                    {
-                        if (l.LgaCode.Contains(t.LgaCode))
-                        {
-                            density = Math.Round(l.Density, 2);
-                            population = l.Popul;
-                            display = density != 0 ? "Density: <strong>" + density + "</strong>. <p>Population: <strong>" + population + "</strong></p>" : "No record";
 
-                            displayText += "<a href=\"javascript:flytoPoly(" + l.LgaCode + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
-                                "<div class=\"d-flex w-100 justify-content-between\" > " +
-                                "<h4 class=\"mb-1\">"
-                                + l.LgaName + " - " + l.Region + "</h4> <small class=\"text-muted\">"
-                                + density + "</small> </div>" +
-                                "<div class=\"d-flex w-100 justify-content-between\" > " +
-                                "<div>Density: " + density + ". Population: " + population + "</div> " +
-                                "<div class=\"color-box\" style=\"background-color:" + colorDisplay.getDesyColor(density) + ";\"></div>" +
-                                "</div></a>";
+                    density = Math.Round(l.Density, 2);
+                    population = l.Popul;
+                    display = density != 0 ? "Density: <strong>" + density + "</strong>. <p>Population: <strong>" + population + "</strong></p>" : "No record";
 
-                            break;
-                        }
-                    }
-                    colorDisplay cd = new colorDisplay(Int32.Parse(t.LgaCode), colorDisplay.getDesyColor(density), display);
+                    displayText += "<a href=\"javascript:flytoPoly(" + l.LgaCode + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
+                        "<div class=\"d-flex w-100 justify-content-between\" > " +
+                        "<h4 class=\"mb-1\">"
+                        + l.LgaName + " - " + l.Region + "</h4> <small class=\"text-muted\">"
+                        + density + "</small> </div>" +
+                        "<div class=\"d-flex w-100 justify-content-between\" > " +
+                        "<div>Density: " + density + ". Population: " + population + "</div> " +
+                        "</div></a>";
+
+                    colorDisplay cd = new colorDisplay(Int32.Parse(l.LgaCode), colorDisplay.getDesyColor(density), display);
                     result.Add(cd);
+                }
+
+                foreach (var t in regionsList)
+                {
+
+                    colorDisplay cd = result.FirstOrDefault(d => d.code == Int32.Parse(t.LgaCode));
+
+                    if (cd == null)
+                    {
+                        colorDisplay newone = new colorDisplay(Int32.Parse(t.LgaCode), "#ddd", "No record");
+                        result.Add(newone);
+                    }
                 }
             }
 
@@ -645,7 +668,6 @@ namespace RegionalVIC.Controllers
                     "<div class=\"d-flex w-100 justify-content-between\" > " +
                     "<p class=\"mb-1\">"
                     + i.Bedroom + " bedroom(s) " + FirstCharToUpper(i.Type) + "</p> " +
-                    "<div class=\"color-box\" style=\"background-color:" + codeColors[i.LgaCode] + ";\"></div>" +
                     "</div></a>";
             }
             string[] areas = tmpAreas.Distinct().ToArray();
@@ -700,7 +722,7 @@ namespace RegionalVIC.Controllers
                     crmWeight * recommendationItem.getRatingByCrime(i.Rate) +
                     pouWeight * recommendationItem.getRatingByDensity(i.Density);
 
-                recommendationItem item = new recommendationItem(i.LgaCode, rate, i.LgaName, i.Region, i.Type, i.Bedroom ?? default(byte));
+                recommendationItem item = new recommendationItem(i.LgaCode, rate, i.LgaName, i.Region, i.Type, i.Bedroom ?? default(byte), i.Median.ToString());
                 rates.Add(item);
 
             }
@@ -719,7 +741,7 @@ namespace RegionalVIC.Controllers
                     + (j+1) + "</small> </div>" +
                     "<div class=\"d-flex w-100 justify-content-between\" > " +
                     "<div>" + rates[j].bedroom + " bedroom(s) " + FirstCharToUpper(rates[j].type) + "</div> " +
-                    "<div class=\"color-box\" style=\"background-color:" + codeColors[rates[j].code] + ";\"></div>" +
+                    "<small class=\"text-muted\"><b>$" + rates[j].median + "</b></small> " +
                     "</div></a>";
                 
             }
