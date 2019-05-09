@@ -56,6 +56,33 @@ namespace RegionalVIC.Models
         }
 
         // get color depending on population density value
+        public static string getUnempColor(decimal d)
+        {
+            return d > 8 ? "#723122" :
+                d > 7 ? "#8B4225" :
+                    d > 6 ? "#A25626" :
+                        d > 5 ? "#B86B25" :
+                            d > 4 ? "#CA8323" :
+                                d > 3 ? "#E6B71E" :
+                                    d > 2 ? "#EED322" :
+                                        d > 0 ? "#F2F12D" :
+                                            "#ddd";
+        }
+
+        // get color depending on population density value
+        public static string getIncomeColor(decimal d)
+        {
+            return d > 60000 ? "#723122" :
+                d > 55000 ? "#8B4225" :
+                    d > 50000 ? "#A25626" :
+                        d > 48000 ? "#B86B25" :
+                            d > 440000 ? "#CA8323" :
+                                d > 40000 ? "#E6B71E" :
+                                    d > 35000 ? "#EED322" :
+                                        d > 0 ? "#F2F12D" :
+                                            "#ddd";
+        }
+        // get color depending on population density value
         public static string getDesyColor(decimal d)
         {
             return d > 200 ? "#723122" :
@@ -68,7 +95,6 @@ namespace RegionalVIC.Models
                                         d > 0 ? "#F2F12D" :
                                             "#ddd";
         }
-        
     }
 
 }

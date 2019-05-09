@@ -137,13 +137,34 @@ namespace RegionalVIC.Controllers
                                                                 d > 2 ? 2 :
                                                                     d > 1 ? 1 : 0;
         }
+
+        public static double getRatingByCulture(int d)
+        {
+            return (11 - d) > 0 ? 11 - d : 0;
+        }
+
+        //Get job rating
+        public static double getRatingByJob(int d)
+        {
+            return d > 1000 ? 10 :
+                d > 500 ? 9 :
+                    d > 200 ? 8 :
+                        d > 150 ? 7 :
+                            d > 100 ? 6 :
+                                d > 50 ? 5 :
+                                    d > 35 ? 4 :
+                                        d > 20 ? 3 :
+                                            d > 15 ? 2 :
+                                                d > 5 ? 1 : 0;
+        }
+
     }
     public class MapController : Controller
     {
         private static JObject codeColors;
 
-        private regionalVICContext _context;
-        public MapController(regionalVICContext context)
+        private RegionalVICContext _context;
+        public MapController(RegionalVICContext context)
         {
             _context = context;
         }
@@ -548,7 +569,7 @@ namespace RegionalVIC.Controllers
         public string getCountry(string code)
         {
             var list = (from r in _context.Cobtbl
-                        join l in _context.Cobmas on r.CobCode equals l.Seq
+                        join l in _context.Cobmas on r.Cob equals l.Seq
                         where r.LgaCode == code
                         select new
                         {
@@ -606,7 +627,7 @@ namespace RegionalVIC.Controllers
                         {
                             LgaCode = r.LgaCode,
                             Percnt = r.Percnt,
-                            Lang = l.Lang
+                            Lang = l.Language
                         }).ToList();
 
 
@@ -680,17 +701,23 @@ namespace RegionalVIC.Controllers
         }
 
         [HttpPost]
-        public string getRecommendation(int min, int max, float acmWeight, float crmWeight, float pouWeight)
+        public string getRecommendation(int min, int max, float acmWeight, float crmWeight, float pouWeight, float culWeight, float jobWeight, string country, string industry)
         {
             string display = "";
             var list = (from r in _context.Rtrtbl
                         join l in _context.Lgatbl on r.LgaCode equals l.LgaCode
                         join p in _context.Ppltbl on r.LgaCode equals p.LgaCode
                         join c in _context.Critbl on r.LgaCode equals c.LgaCode
+                        join d in _context.Cobtbl on r.LgaCode equals d.LgaCode
+                        join m in _context.Cobmas on d.Cob equals m.Seq
+                        join i in _context.Nbitbl on r.LgaCode equals i.LgaCode
+                        join s in _context.Idsmas on i.IdsCode equals s.IdsCode
                         where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3) && !r.Typ.Contains("all") &&
                             r.Median > 0 && (r.Median >= min && r.Median <= max) &&
                             c.YrEnd.Equals(2018) && c.Rate > 0 &&
-                            p.Density > 0 && l.Status == "R"
+                            p.Density > 0 && l.Status == "R" &&
+                            m.Cob.Contains(country) &&
+                            s.IdsName.Contains(industry)
                         select new
                         {
                             LgaCode = r.LgaCode,
@@ -702,7 +729,9 @@ namespace RegionalVIC.Controllers
                             Rate = c.Rate,
                             IciNum = c.IncdRcd,
                             Density = p.Density,
-                            Population = p.Popul
+                            Population = p.Popul,
+                            Rank = d.Rank,
+                            NoOfBsn = i.NoOfBsn
                         }).ToList();
 
             if (list.Count == 0)
@@ -720,7 +749,9 @@ namespace RegionalVIC.Controllers
 
                 var rate = acmWeight * recommendationItem.getRatingByPrice(i.Median) +
                     crmWeight * recommendationItem.getRatingByCrime(i.Rate) +
-                    pouWeight * recommendationItem.getRatingByDensity(i.Density);
+                    pouWeight * recommendationItem.getRatingByDensity(i.Density) +
+                    culWeight * recommendationItem.getRatingByCulture(i.Rank) +
+                    jobWeight * recommendationItem.getRatingByJob(i.NoOfBsn);
 
                 recommendationItem item = new recommendationItem(i.LgaCode, rate, i.LgaName, i.Region, i.Type, i.Bedroom ?? default(byte), i.Median.ToString());
                 rates.Add(item);

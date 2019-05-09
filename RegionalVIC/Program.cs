@@ -24,7 +24,7 @@ namespace RegionalVIC
 
                 try
                 {
-                    var context = services.GetRequiredService<regionalVICContext>();
+                    var context = services.GetRequiredService<RegionalVICContext>();
                     context.Database.EnsureCreated();
                 }
                 catch (Exception ex)

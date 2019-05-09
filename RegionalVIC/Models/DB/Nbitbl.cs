@@ -5,21 +5,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RegionalVIC.Models.DB
 {
-    [Table("PPLTBL")]
-    public partial class Ppltbl
+    [Table("NBITBL")]
+    public partial class Nbitbl
     {
         [Column("yr")]
         public short Yr { get; set; }
         [Column("LGA_code")]
         [StringLength(5)]
         public string LgaCode { get; set; }
-        [Column("popul")]
-        public int Popul { get; set; }
-        [Column("density", TypeName = "decimal(18, 4)")]
-        public decimal Density { get; set; }
+        [Column("ids_code")]
+        public short IdsCode { get; set; }
+        [Column("no_of_bsn")]
+        public int NoOfBsn { get; set; }
 
+        [ForeignKey("IdsCode")]
+        [InverseProperty("Nbitbl")]
+        public Idsmas IdsCodeNavigation { get; set; }
         [ForeignKey("LgaCode")]
-        [InverseProperty("Ppltbl")]
+        [InverseProperty("Nbitbl")]
         public Lgamas LgaCodeNavigation { get; set; }
     }
 }

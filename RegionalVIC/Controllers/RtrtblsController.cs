@@ -11,9 +11,9 @@ namespace RegionalVIC.Controllers
 {
     public class RtrtblsController : Controller
     {
-        private readonly regionalVICContext _context;
+        private readonly RegionalVICContext _context;
 
-        public RtrtblsController(regionalVICContext context)
+        public RtrtblsController(RegionalVICContext context)
         {
             _context = context;
 

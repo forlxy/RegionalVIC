@@ -3,6 +3,17 @@
 @*@model IEnumerable<Rtrtbl>*@
 <style>
 
+    .n {
+        opacity: .8;
+        font-size: 10px;
+        margin-left: 4px;
+        font-family: sans-serif;
+        color: white;
+        padding: 6px;
+        background-color: #3C3176;
+    }
+
+
     .legend {
         background-color: #fff;
         border-radius: 3px;
@@ -62,10 +73,6 @@
     }
 
 
-    .i-am-centered {
-        margin: auto;
-        max-width: 300px;
-    }
 
     .drop-placeholder {
         background-color: lightgray;
@@ -268,6 +275,10 @@
 
     <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.min.js'></script>
 
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js'></script>
+
     <script src="/Scripts/ion.rangeSlider.min.js"></script>
     <script src="/Scripts/covervid.min.js"></script>
     <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js"></script>
@@ -393,26 +404,40 @@
                                                             <input type="text" class="pouSlider" value="" />
                                                         </div>
                                                     </div>
-                                                    @*<div class="form-group">
+                                                    <div class="form-group">
                                                         <label for="culSlider"
                                                                class="font--18 text--lebel">Culture Background (d)</label>
-                                                        <label for="inputCountry2" class="font--18 text--lebel">
-                                                            
+                                                        <label for="inputCountryR" class="font--18 text--lebel">
+
                                                         </label>
-                                                        <select id="inputCountry2" class="form-control">
+                                                        <select id="inputCountryR" class="form-control">
                                                             <option selected>Choose from List</option>
                                                         </select>
                                                         <div class="range-slider">
                                                             <input type="text" class="culSlider" value="" />
                                                         </div>
-                                                    </div>*@
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="jobSlider"
+                                                               class="font--18 text--lebel">Job Oportunity (e)</label>
+                                                        <label for="inputIndustryR" class="font--18 text--lebel">
+
+                                                        </label>
+                                                        <select id="inputIndustryR" class="form-control">
+                                                            <option selected>Choose from List</option>
+                                                        </select>
+                                                        <div class="range-slider">
+                                                            <input type="text" class="jobSlider" value="" />
+                                                        </div>
+                                                    </div>
                                                     
+
                                                     <p class="text-sm-left">
                                                         Final Score = a * Rent score + b
                                                         * Safety
                                                         score + c *
-                                                        Population score @*+ d *
-                                                        Culture score*@
+                                                        Population score + d *
+            Culture score + e * Job score
                                                     </p>
                                                     <div class="mt-3">
                                                         <span class="font--18 font--bold hand text--colored float-right"
@@ -719,7 +744,14 @@
         </div>
 
     </section>
-
+    <section>
+        <div>
+            <button id="byKey"> Sort by Key</button>
+            <button id="byValue"> Sort by Value</button>
+        </div>
+        <br>
+        <div id="barchart"></div>
+    </section>
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -761,6 +793,7 @@
             </div>
         </div>
     </footer>
+
     <!-- Load the File-->
     <script type="text/javascript" src="/lga48.js.gz"></script>
     <script>
@@ -1099,7 +1132,7 @@
 
                 var feat;
                 features.forEach(function (feature) {
-                    if (parseInt(feature.properties.LGA_CODE18) === LGA_Code) {
+                    if (parseInt(feature.properties.LGA_CODE18) === parseInt(LGA_Code)) {
 
                         feat = feature;
                         $.ajax({
@@ -1211,6 +1244,8 @@
     $(document).ready(function () {
         initCountryList();
         initRegionList();
+        initialCountryListR();
+        initialIndustryListR();
         for (var i = 0; i < allCode.length; i++) {
             cheo[allCode[i]] = "#ddd";
             textColor[allCode[i]] = "#333";
@@ -1796,10 +1831,72 @@
 
     }
 
+        
+        function showUnemployRate() {
+            list.style.display = "none";
+            slist.style.display = "none";
+            $("#loader").addClass("is-active");
+            $.ajax({
+                /**/
+                url: '@Url.Action("getUnemployment", "Job")',
+                /**/
+                type: 'POST',
+                data: {},
+                success: function (data) {
+                    var showData = [];
+                    var tmpObj = JSON.parse(data);
 
-    //var myChart;
-    //var canvas = document.getElementById("myChart");
-    //var ctx = canvas.getContext("2d");
+                    for (var i = 0; i < tmpObj.length; i++) {
+
+                        var dataObj = new Object;
+                        dataObj["key"] = tmpObj[i]["LgaName"]
+                        dataObj["value"] = tmpObj[i]["Rate"]
+                        dataObj["color"] = tmpObj[i]["Color"]
+                        dataObj["code"] = tmpObj[i]["LgaCode"]
+                        
+                        showData.push(dataObj);
+                    }
+
+                    displayData(showData, 'Unemployment rate')
+                    $("#loader").removeClass("is-active");
+
+                },
+            });
+        }
+
+        showIncome();
+        function showIncome() {
+
+            list.style.display = "none";
+            slist.style.display = "none";
+            $("#loader").addClass("is-active");
+            $.ajax({
+                /**/
+                url: '@Url.Action("getIncome", "Job")',
+                /**/
+                type: 'POST',
+                data: {},
+                success: function (data) {
+                    var showData = [];
+                    var tmpObj = JSON.parse(data);
+
+                    for (var i = 0; i < tmpObj.length; i++) {
+
+                        var dataObj = new Object;
+                        dataObj["key"] = tmpObj[i]["LgaName"]
+                        dataObj["value"] = tmpObj[i]["Income"]
+                        dataObj["color"] = tmpObj[i]["Color"]
+                        dataObj["code"] = tmpObj[i]["LgaCode"]
+
+                        showData.push(dataObj);
+                    }
+
+                    displayData(showData, 'Income')
+                    $("#loader").removeClass("is-active");
+
+                },
+            });
+        }
 
     function showChart(count, label, value) {
 
@@ -1844,9 +1941,8 @@
 
         //dmbChart(150, 150, 125, 25, values, colors, labels, 0);
 
-    }
-    //test
-    //initLanguageCharts("20110");
+        }
+        
 
     function initLanguageCharts(lgaCode) {
 
@@ -1907,6 +2003,280 @@
     }
 
 
+        function displayData(data, name) {
+            data.sort(function (a, b) {
+                return d3.descending(a.value, b.value)
+            })
+
+            var tmpData = data.slice(0, 10);
+            tmpData.sort(function (a, b) {
+                return d3.ascending(a.value, b.value)
+            })
+
+            const tip = d3.tip().html(d => d.value);
+            // set the dimensions and margins of the graph
+            var margin = { top: 20, right: 20, bottom: 30, left: 120 },
+                width = 960 - margin.left - margin.right,
+                height = 600 - margin.top - margin.bottom;
+
+            // set the ranges
+            var y = d3.scaleBand()
+                .range([height, 0])
+                .padding(0.1);
+
+            var x = d3.scaleLinear()
+                .range([0, width]);
+
+            var color = tmpData.map(a => a.color);
+            var z = d3.scaleOrdinal()
+                .range(color);
+
+            var code = tmpData.map(a => a.code);
+            c = d3.scaleOrdinal().range(code);
+            // append the svg object to the body of the page
+            // append a 'group' element to 'svg'
+            // moves the 'group' element to the top left margin
+            var svg = d3.select("#barchart").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            svg.call(tip)
+            // Scale the range of the data in the domains
+            x.domain([0, d3.max(tmpData, function (d) { return d.value; })])
+            y.domain(tmpData.map(function (d) { return d.key; }));
+            //y.domain([0, d3.max(data, function(d) { return d.sales; })]);
+
+            // append the rectangles for the bar chart
+            svg.selectAll(".bar")
+                .data(tmpData)
+                .enter().append("rect")
+                .attr("class", "bar")
+                //.attr("x", function(d) { return x(d.sales); })
+                .attr("width", function (d) { return x(d.value); })
+                .attr("y", function (d) {
+                    return y(d.key);
+                })
+                .attr("height", y.bandwidth())
+                .attr('fill', d => z(d.key))
+                .on("mouseover", function () {
+                    d3.select(this)
+                        .attr("fill", "red")
+                })
+                .on("mouseout", function () {
+                    d3.select(this)
+                        .transition("colorfade")
+                        .duration(250)
+                        .attr("fill", d => z(d.key));
+                }) 
+
+
+               //.on('mouseover', tip.show)
+               //.on('mouseout', tip.hide)
+
+
+            svg.selectAll(".bar").on("click", function (d) {
+                //alert(c(d.key))
+                flytoPoly(c(d.key));
+            })
+
+            // add the x Axis
+            svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + 0 + ")")
+                .call(d3.axisTop(x));
+
+            //// add the y Axis
+            //svg.append("g")
+            //    .call(d3.axisLeft(y));
+
+
+            svg.selectAll(".bar-label")
+                .data(tmpData)
+                .enter()
+                .append("text")
+                .classed("bar-label", true)
+
+                //.attr("transform", function (d, i) {
+                //    var w = this.getComputedTextLength();
+                //    return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
+                //})
+
+                .attr("text-anchor", "right")
+                .text(function (d) { return d.key })
+                .each(function (d) {
+                    var item = d3.select(this);
+
+                    var w = this.getComputedTextLength();
+                    item.attr('transform', function () {
+                        return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
+                    })
+                });
+            d3.select("#byKey").on("click", function () {
+                data.sort(function (a, b) {
+                    return d3.ascending(a.value, b.value)
+                })
+                tmpData = data.slice(0, 10);
+
+                tmpData.sort(function (a, b) {
+                    return d3.descending(a.value, b.value)
+                })
+                x.domain([0, d3.max(tmpData, function (d) { return d.value; })])
+                y.domain(tmpData.map(function (d) { return d.key; }));
+                color = tmpData.map(a => a.color);
+
+                z = d3.scaleOrdinal()
+                    .range(color);
+
+
+                var dot = svg.selectAll(".bar")
+                    .data(tmpData)
+                    //.attr("x", function(d) { return x(d.sales); })
+                    .attr("height", y.bandwidth())
+                    .attr("y", function (d, i) {
+                        return y(d.key);
+                    })
+
+
+                dot.transition()
+                    .duration(500)
+                    .attr("width", function (d) { return x(d.value); })
+                    .attr('fill', d => z(d.key))
+                
+
+                svg.selectAll(".bar-label")
+                    .data(tmpData)
+                    .text(function (d) { return d.key })
+                    .each(function (d) {
+                        var item = d3.select(this);
+                        //item
+                        //    .transition()
+                        //    .duration(250)
+                        //    .style("opacity", 0)
+
+                        var w = this.getComputedTextLength();
+                        item.attr("transform", function (d, i) {
+                                return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
+                        });
+
+                        //item
+                        //    .transition()
+                        //    .duration(250)
+                        //    .style("opacity", 1)
+                    })
+                    //.append("text")
+                    //.style("font", "13px")
+                    //.classed("bar-label", true)
+                    //.text(function (d) { return d.key })
+
+                    //.each(function (d) {
+                    //    var item = d3.select(this);
+
+                    //    var w = this.getComputedTextLength();
+                    //    item
+                    //    .attr("transform", function (d, i) {
+                    //        return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
+                    //    });
+                    //    item.attr('startOffset', 0)
+                    //        .each('end', function () {
+                    //            d3.select(this)
+                    //                .style('opacity', 0)
+                    //                .text(transText)
+                    //                .transition()
+                    //                .style('opacity', 1);
+                    //        })
+                    //})
+                //.attr("transform", function (d, i) {
+                //    return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
+                //});
+
+                svg.select(".x.axis") // change the x axis
+                    .transition().duration(750)
+                    .call(d3.axisTop(x));
+            })
+            d3.select("#byValue").on("click", function () {
+                data.sort(function (a, b) {
+                    return d3.descending(a.value, b.value)
+                })
+                tmpData = data.slice(0, 10);
+                tmpData.sort(function (a, b) {
+                    return d3.ascending(a.value, b.value)
+                })
+                x.domain([0, d3.max(tmpData, function (d) { return d.value; })])
+                y.domain(tmpData.map(function (d) { return d.key; }));
+                color = tmpData.map(a => a.color);
+
+                z = d3.scaleOrdinal()
+                    .range(color);
+
+                var dot = svg.selectAll(".bar")
+                    .data(tmpData)
+                    //.attr("x", function(d) { return x(d.sales); })
+                    .attr("height", y.bandwidth())
+                    .attr("y", function (d, i) {
+                        return y(d.key);
+                    })
+
+
+                dot.transition()
+                    .duration(500)
+                    .attr("width", function (d) { return x(d.value); })
+                    .attr('fill', d => z(d.key))
+
+
+                svg.selectAll(".bar-label")
+                    .data(tmpData)
+                    .text(function (d) { return d.key })
+                    .each(function (d) {
+                        var item = d3.select(this);
+                        //item
+                        //    .transition()
+                        //    .duration(250)
+                        //    .style("opacity", 0)
+
+                        var w = this.getComputedTextLength();
+                        item.attr("transform", function (d, i) {
+                            return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
+                        });
+
+                        //item
+                        //    .transition()
+                        //    .duration(250)
+                        //    .style("opacity", 1)
+                    })
+                //.append("text")
+                //.style("font", "13px")
+                //.classed("bar-label", true)
+                //.text(function (d) { return d.key })
+
+                //.each(function (d) {
+                //    var item = d3.select(this);
+
+                //    var w = this.getComputedTextLength();
+                //    item
+                //    .attr("transform", function (d, i) {
+                //        return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
+                //    });
+                //    item.attr('startOffset', 0)
+                //        .each('end', function () {
+                //            d3.select(this)
+                //                .style('opacity', 0)
+                //                .text(transText)
+                //                .transition()
+                //                .style('opacity', 1);
+                //        })
+                //})
+                //.attr("transform", function (d, i) {
+                //    return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
+                //});
+
+                svg.select(".x.axis") // change the x axis
+                    .transition().duration(750)
+                    .call(d3.axisTop(x));
+            })
+        }
     //test
     //initCountryCharts("20110");
     function initCountryCharts(lgaCode) {
@@ -2103,6 +2473,7 @@
     var crmWeight;
         var pouWeight;
         var culWeight;
+        var jobWeight;
 
     var $acmrange = $(".acmSlider"),
         instance,
@@ -2114,7 +2485,7 @@
         type: "single",
         min: min,
         max: max,
-        from: 0,
+        from: 2,
         values: [
             "Not important", "Less important", "Average", "Important", "Very Important"
         ],
@@ -2142,7 +2513,7 @@
         type: "single",
         min: min,
         max: max,
-        from: 0,
+        from: 2,
         values: [
             "Not important", "Less important", "Average", "Important", "Very Important"
         ],
@@ -2170,7 +2541,7 @@
         type: "single",
         min: min,
         max: max,
-        from: 0,
+        from: 2,
         values: [
             "Not important", "Less important", "Average", "Important", "Very Important"
         ],
@@ -2187,33 +2558,60 @@
         }
     }
 
-        //var $culrange = $(".culSlider"),
-        //    instance,
-        //    min = 1,
-        //    max = 5
+        var $culrange = $(".culSlider"),
+            instance,
+            min = 1,
+            max = 5
 
-        //$culrange.ionRangeSlider({
-        //    skin: "round",
-        //    type: "single",
-        //    min: min,
-        //    max: max,
-        //    from: 0,
-        //    values: [
-        //        "Not important", "Less important", "Average", "Important", "Very Important"
-        //    ],
-        //    onStart: updateU,
-        //    onFinish: updateU
-        //});
-        //instance = $culrange.data("ionRangeSlider");
+        $culrange.ionRangeSlider({
+            skin: "round",
+            type: "single",
+            min: min,
+            max: max,
+            from: 2,
+            values: [
+                "Not important", "Less important", "Average", "Important", "Very Important"
+            ],
+            onStart: updateU,
+            onFinish: updateU
+        });
+        instance = $culrange.data("ionRangeSlider");
 
-        //function updateU(data) {
-        //    culWeight = data.from;
-        //    if (toggleRecomd) {
-        //        //acmslider.disabled = true;
-        //        recommendation();
-        //    }
-        //}
+        function updateU(data) {
+            culWeight = data.from;
+            if (toggleRecomd) {
+                //acmslider.disabled = true;
+                recommendation();
+            }
+        }
 
+
+        var $jobrange = $(".jobSlider"),
+            instance,
+            min = 1,
+            max = 5
+
+        $jobrange.ionRangeSlider({
+            skin: "round",
+            type: "single",
+            min: min,
+            max: max,
+            from: 2,
+            values: [
+                "Not important", "Less important", "Average", "Important", "Very Important"
+            ],
+            onStart: updateI,
+            onFinish: updateI
+        });
+        instance = $jobrange.data("ionRangeSlider");
+
+        function updateI(data) {
+            jobWeight = data.from;
+            if (toggleRecomd) {
+                //acmslider.disabled = true;
+                recommendation();
+            }
+        }
 
 
 
@@ -2245,8 +2643,50 @@
         to = data.to;
         minRBudget = from;
         maxRBudget = to;
-    }
+        }
 
+        
+        function initialIndustryListR() {
+            $("#inputIndustryR").empty();
+             $.ajax({
+            /**/
+                url: '@Url.Action("getAllIndustry", "Job")',
+            /**/
+            type: 'POST',
+            data: { },
+                 success: function (data) {
+                     var list = JSON.parse(data);
+                     for (var i = 0; i < list.length; i++){
+                         var value = list[i];
+                         var o = new Option(value, value);
+                        /// jquerify the DOM object 'o' so we can use the html method
+                         $(o).html(value);
+                         $("#inputIndustryR").append(o);
+            }
+            },
+            });
+        }
+
+        function initialCountryListR() {
+            $("#inputCountryR").empty();
+             $.ajax({
+            /**/
+            url: '@Url.Action("getAllCountry", "Map")',
+            /**/
+            type: 'POST',
+            data: { },
+                 success: function (data) {
+                     var list = JSON.parse(data);
+                     for (var i = 0; i < list.length; i++){
+                         var value = list[i];
+                         var o = new Option(value, value);
+                        /// jquerify the DOM object 'o' so we can use the html method
+                         $(o).html(value);
+                        $("#inputCountryR").append(o);
+            }
+            },
+            });
+        }
     //Recommendation
 
     function recommendation() {
@@ -2271,11 +2711,17 @@
         var calCrmWeight = crmWeight;
         var calPouWeight = pouWeight;
         var calCulWeight = culWeight;
-        var sum = calAcmWeight + calCrmWeight + calPouWeight + calCulWeight;
+        var calJobWeight = jobWeight;
+        var sum = calAcmWeight + calCrmWeight + calPouWeight + calCulWeight + calJobWeight;
         calAcmWeight /= sum
         calCrmWeight /= sum
         calPouWeight /= sum
         calCulWeight /= sum
+        calJobWeight /= sum
+
+        var country = $("#inputCountryR").val();
+
+        var industry = $("#inputIndustryR").val();
 
 
         document.querySelector('#card-content').style.display = "none";
@@ -2286,7 +2732,7 @@
             url: '@Url.Action("getRecommendation", "Map")',
             /**/
             type: 'POST',
-            data: { min: minRBudget, max: maxRBudget, acmWeight: calAcmWeight, crmWeight: calCrmWeight, pouWeight: calPouWeight },
+            data: { min: minRBudget, max: maxRBudget, acmWeight: calAcmWeight, crmWeight: calCrmWeight, pouWeight: calPouWeight, culWeight: calCulWeight, jobWeight: calJobWeight, country: country, industry: industry },
             success: function (data) {
                 toggleRecomd = true;
 

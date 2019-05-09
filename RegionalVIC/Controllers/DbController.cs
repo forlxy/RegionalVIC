@@ -12,9 +12,9 @@ namespace RegionalVIC.Controllers
 {
     public class DbController : Controller
     {
-        private readonly regionalVICContext _context;
+        private readonly RegionalVICContext _context;
 
-        public DbController(regionalVICContext context)
+        public DbController(RegionalVICContext context)
         {
             _context = context;
         }
