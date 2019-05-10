@@ -236,6 +236,21 @@
         width: 100%;
         height: 100%;
     }
+
+    .axis {
+        font: 14px sans-serif;
+    }
+    
+    .color-panel {
+        background-color: #ffee58;
+        padding: 5px;
+    }
+
+    .panel-button {
+        background-color: #F0B20B !important;
+        color: #101010;
+        height: 70px;
+    }
 </style>
 
 <!DOCTYPE html>
@@ -282,6 +297,7 @@
     <script src="/Scripts/ion.rangeSlider.min.js"></script>
     <script src="/Scripts/covervid.min.js"></script>
     <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js"></script>
+    
 
     <link href="/css/rangeslider.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/css-loader.css">
@@ -437,7 +453,7 @@
                                                         * Safety
                                                         score + c *
                                                         Population score + d *
-            Culture score + e * Job score
+                                                        Culture score + e * Job score
                                                     </p>
                                                     <div class="mt-3">
                                                         <span class="font--18 font--bold hand text--colored float-right"
@@ -475,11 +491,67 @@
 
                         </div>
 
-                        <!-- Living Pane -->
+                        <!-- Rent Pane -->
                         <div class="tab-pane" id="living" role="tabpanel" aria-labelledby="living-tab">
                             <div class="filter">
-                                <div class="row">
-                                    <div class="col-12 col-md-7 col-lg-4">
+                                <div class="col-12">
+                                    <div class="card-panel color-panel">
+                                        <div class="d-flex align-items-center justify-content-between flex-row ">
+                                            <!-- First -->
+                                            <div class="form-group">
+                                                <div class="col-12">
+                                                    <label for="sel2"><b>1. Type of house</b></label>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <select class="form-control" id="sel2" onchange="changeSelect()">
+                                                        <option>Flat</option>
+                                                        <option>House</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <!-- Second -->
+                                            <div class="form-group">
+                                                <div class="col-12">
+                                                    <label for="sel1"><b>2. How many bedrooms?</b></label>
+                                                </div>
+                                                <div class="col-12">
+                                                    <select class="form-control" id="sel1">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option disabled>4</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <!-- Third -->
+                                            <div class="form-group col-5 mt-3">
+                                                <div class="col-12 ">
+                                                    <label><b>3. Your rent budget:(per week)</b></label>
+                                                </div>
+                                                <div class="col-12">
+                                                        <div class="range-slider">
+                                                            <input type="text" class="filterRanger" value="" />
+                                                        </div>
+
+                                                </div>
+                                            </div>
+                                            <!--Forth -->
+
+                                            <div class="form-group  mr-4">
+                                                    <button class="btn panel-button"
+                                                            id="fll-confirm">
+                                                        Confirm
+                                                    </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    @*<div class="col-12 col-md-7 col-lg-4">
                                         <div class="dropdown mt-3 w-100">
                                             <button class="button w-100 dropdown-toggle" type="button"
                                                     id="budgetDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
@@ -546,7 +618,7 @@
                                                 </form>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>*@
                                 </div>
                             </div>
                         </div>
@@ -625,119 +697,123 @@
                         </div>
                     </div>
 
+                    <div class="container row">
+                            <div class="mapcontainer col-12" id="mapcontainer">
+                                <div id="map" class="mmap" style="height:700px"></div>
+                                <div class='map-overlay' id='features' style="display: none"><div class='block-content' id='pd'><p></p></div></div>
 
-                    <div class="mapcontainer">
-                        <div id="map" class="mmap" style="height:700px"></div>
-                        <div class='map-overlay' id='features' style="display: none"><div class='block-content' id='pd'><p></p></div></div>
 
-
-                        <div id="culture-card" class="culture-card rounded shadow-lg bg-white" style="max-width: 500px; display: none;">
-                            <div class="card" id="culture-card-content" style="display:block">
-                                <div width="350" height="30" id="culture-info-content">
-                                    <h2 class="font--20 text--lebel font--bold p-4" id="culture-title"></h2>
-                                    <span class="info-close">
-                                        <i id="culture-card-close-button" class="fa fa-times" role="button" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                                <hr>
-                                <div id="culture-list-content">
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div id="info-card" class="info-card rounded shadow-lg bg-white" style="max-width: 350px; display: none;">
-                            <div class="card" id="card-content-2" style="display:none">
-                                <div width="350" height="30" id="info-content-2">
-                                    <h2 class="font--20 text--lebel font--bold p-4" id="list-name"></h2>
-                                    <span class="info-close">
-                                        <i id="info-card-close-button-2" class="fa fa-times" role="button" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                                <div id='list' class="list-group">
+                                <div id="culture-card" class="culture-card rounded shadow-lg bg-white" style="max-width: 500px; display: none;">
+                                    <div class="card" id="culture-card-content" style="display:block">
+                                        <div width="350" height="30" id="culture-info-content">
+                                            <h2 class="font--20 text--lebel font--bold p-4" id="culture-title"></h2>
+                                            <span class="info-close">
+                                                <i id="culture-card-close-button" class="fa fa-times" role="button" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                        <hr>
+                                        <div id="culture-list-content">
+                                        </div>
+                                    </div>
 
                                 </div>
 
+                                <div id="info-card" class="info-card rounded shadow-lg bg-white" style="max-width: 350px; display: none;">
+                                    <div class="card" id="card-content-2" style="display:none">
+                                        <div width="350" height="30" id="info-content-2">
+                                            <h2 class="font--20 text--lebel font--bold p-4" id="list-name"></h2>
+                                            <span class="info-close">
+                                                <i id="info-card-close-button-2" class="fa fa-times" role="button" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                        <div id='list' class="list-group">
 
-                                <div id='slist' class="list-group">
+                                        </div>
 
-                                </div>
 
-                                <div id='recomd-list' class="list-group">
+                                        <div id='slist' class="list-group">
 
-                                </div>
-                            </div>
+                                        </div>
 
-                            <div class="card" id="card-content">
-                                <div width="350" height="200" id="image-container">
-                                    <span class="info-close">
-                                        <i id="info-card-close-button" class="fa fa-times" role="button" aria-hidden="true"></i>
-                                    </span>
-                                    <img class="" width="348" height="200" id="card-image" src="" />
-                                </div>
-                                <div class="px-2 pb-2" id="more-content">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <h2 class="font--20 text--lebel font--bold mt-4" id="card-title"></h2>
-                                            <p class="font--18 subtitle--color mt-1" id="card-subtitle">
+                                        <div id='recomd-list' class="list-group">
 
-                                            </p>
-                                            <hr>
-                                            <p class="font--18 subtitle--color" id="card-description">
+                                        </div>
+                                    </div>
 
-                                            </p>
-                                            <hr>
+                                    <div class="card" id="card-content">
+                                        <div width="350" height="200" id="image-container">
+                                            <span class="info-close">
+                                                <i id="info-card-close-button" class="fa fa-times" role="button" aria-hidden="true"></i>
+                                            </span>
+                                            <img class="" width="348" height="200" id="card-image" src="" />
+                                        </div>
+                                        <div class="px-2 pb-2" id="more-content">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h2 class="font--20 text--lebel font--bold mt-4" id="card-title"></h2>
+                                                    <p class="font--18 subtitle--color mt-1" id="card-subtitle">
+
+                                                    </p>
+                                                    <hr>
+                                                    <p class="font--18 subtitle--color" id="card-description">
+
+                                                    </p>
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div width="350" height="200" id="image-container">
+                                            <iframe id="card-video" width="349" height="200" src=""></iframe>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div width="350" height="200" id="image-container">
-                                    <iframe id="card-video" width="349" height="200" src=""></iframe>
+                                <div id='state-legend' class='legend' style="display: none">
+                                    <h4>Median Rent</h4>
+                                    <div><span style='background-color: #723122'></span>550</div>
+                                    <div><span style='background-color: #8B4225'></span>450</div>
+                                    <div><span style='background-color: #A25626'></span>350</div>
+                                    <div><span style='background-color: #B86B25'></span>300</div>
+                                    <div><span style='background-color: #CA8323'></span>250</div>
+                                    <div><span style='background-color: #E6B71E'></span>200</div>
+                                    <div><span style='background-color: #EED322'></span>150</div>
+                                    <div><span style='background-color: #F2F12D'></span>50</div>
+                                    <div><span style='background-color: #ddd'></span>No data</div>
+                                </div>
+
+                                <div id='state-crime-legend' class='legend' style="display: none">
+                                    <h4>Criminal rate</h4>
+                                    <div><span style='background-color: #723122'></span>10%</div>
+                                    <div><span style='background-color: #8B4225'></span>8%</div>
+                                    <div><span style='background-color: #A25626'></span>7%</div>
+                                    <div><span style='background-color: #B86B25'></span>6%</div>
+                                    <div><span style='background-color: #CA8323'></span>5%</div>
+                                    <div><span style='background-color: #DA9C20'></span>4%</div>
+                                    <div><span style='background-color: #E6B71E'></span>3%</div>
+                                    <div><span style='background-color: #EED322'></span>2%</div>
+                                    <div><span style='background-color: #F2F12D'></span>1%</div>
+                                    <div><span style='background-color: #ddd'></span>No data</div>
+                                </div>
+
+                                <div id='state-density-legend' class='legend' style="display: none">
+                                    <h4>Population density</h4>
+                                    <div><span style='background-color: #723122'></span>200</div>
+                                    <div><span style='background-color: #8B4225'></span>50</div>
+                                    <div><span style='background-color: #A25626'></span>20</div>
+                                    <div><span style='background-color: #B86B25'></span>8</div>
+                                    <div><span style='background-color: #CA8323'></span>5</div>
+                                    <div><span style='background-color: #E6B71E'></span>3</div>
+                                    <div><span style='background-color: #EED322'></span>1</div>
+                                    <div><span style='background-color: #F2F12D'></span>0-1</div>
+                                    <div><span style='background-color: #ddd'></span>No data</div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div id='state-legend' class='legend' style="display: none">
-                            <h4>Median Rent</h4>
-                            <div><span style='background-color: #723122'></span>550</div>
-                            <div><span style='background-color: #8B4225'></span>450</div>
-                            <div><span style='background-color: #A25626'></span>350</div>
-                            <div><span style='background-color: #B86B25'></span>300</div>
-                            <div><span style='background-color: #CA8323'></span>250</div>
-                            <div><span style='background-color: #E6B71E'></span>200</div>
-                            <div><span style='background-color: #EED322'></span>150</div>
-                            <div><span style='background-color: #F2F12D'></span>50</div>
-                            <div><span style='background-color: #ddd'></span>No data</div>
-                        </div>
-
-                        <div id='state-crime-legend' class='legend' style="display: none">
-                            <h4>Criminal rate</h4>
-                            <div><span style='background-color: #723122'></span>10%</div>
-                            <div><span style='background-color: #8B4225'></span>8%</div>
-                            <div><span style='background-color: #A25626'></span>7%</div>
-                            <div><span style='background-color: #B86B25'></span>6%</div>
-                            <div><span style='background-color: #CA8323'></span>5%</div>
-                            <div><span style='background-color: #DA9C20'></span>4%</div>
-                            <div><span style='background-color: #E6B71E'></span>3%</div>
-                            <div><span style='background-color: #EED322'></span>2%</div>
-                            <div><span style='background-color: #F2F12D'></span>1%</div>
-                            <div><span style='background-color: #ddd'></span>No data</div>
-                        </div>
-
-                        <div id='state-density-legend' class='legend' style="display: none">
-                            <h4>Population density</h4>
-                            <div><span style='background-color: #723122'></span>200</div>
-                            <div><span style='background-color: #8B4225'></span>50</div>
-                            <div><span style='background-color: #A25626'></span>20</div>
-                            <div><span style='background-color: #B86B25'></span>8</div>
-                            <div><span style='background-color: #CA8323'></span>5</div>
-                            <div><span style='background-color: #E6B71E'></span>3</div>
-                            <div><span style='background-color: #EED322'></span>1</div>
-                            <div><span style='background-color: #F2F12D'></span>0-1</div>
-                            <div><span style='background-color: #ddd'></span>No data</div>
-                        </div>
+                            <div class="col-6" style="display:none" id="chart-section">
+                                <div id="barchart"></div>
+                            </div>
                     </div>
-
 
                 </div>
             </div>
@@ -750,7 +826,6 @@
             <button id="byValue"> Sort by Value</button>
         </div>
         <br>
-        <div id="barchart"></div>
     </section>
     <!-- Footer -->
     <footer>
@@ -833,8 +908,12 @@
         });
 
         $('#c-confirm').on('click', function () {
-            $(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
+            //$(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
             choropleth('c');
+            $("#mapcontainer").removeClass('col-12').addClass('col-6');
+            //$('#id').hide();
+            $('#chart-section').show();
+            map.resize() 
         });
 
         $('#d-confirm').on('click', function () {
@@ -853,7 +932,8 @@
         });
 
         $('#fll-confirm').on('click', function () {
-            $(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
+            //$(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
+            choropleth('a');
             filter();
         });
         $('#bth-confirm').on('click', function () {
@@ -1145,12 +1225,12 @@
                                 var item = JSON.parse(data);
                                 var lat = item["latitude"]
                                 var lng = item["longitude"]
-                                var p = [lng - 0.5, lat]
+                                var p = [lng /*- 0.5*/, lat]
                                 map.flyTo({
                                     center: p,
                                     zoom: 8
                                 });
-                                var deltaDistance = 300;
+                                //var deltaDistance = 300;
                             },
                         });
 
@@ -2009,15 +2089,18 @@
             })
 
             var tmpData = data.slice(0, 10);
+
             tmpData.sort(function (a, b) {
                 return d3.ascending(a.value, b.value)
             })
 
             const tip = d3.tip().html(d => d.value);
             // set the dimensions and margins of the graph
-            var margin = { top: 20, right: 20, bottom: 30, left: 120 },
-                width = 960 - margin.left - margin.right,
-                height = 600 - margin.top - margin.bottom;
+            var w = $('#chart-section').width();
+            var h = $('#chart-section').height();
+            var margin = { top: 60, right: 20, bottom: 30, left: 150 },
+                width = w - margin.left - margin.right,
+                height = 700 - margin.top - margin.bottom;
 
             // set the ranges
             var y = d3.scaleBand()
@@ -2032,15 +2115,16 @@
                 .range(color);
 
             var code = tmpData.map(a => a.code);
-            c = d3.scaleOrdinal().range(code);
+            var c = d3.scaleOrdinal().range(code);
             // append the svg object to the body of the page
             // append a 'group' element to 'svg'
             // moves the 'group' element to the top left margin
             var svg = d3.select("#barchart").append("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform",
+
+                .append("g").
+                attr("transform",
                     "translate(" + margin.left + "," + margin.top + ")");
 
             svg.call(tip)
@@ -2048,6 +2132,7 @@
             x.domain([0, d3.max(tmpData, function (d) { return d.value; })])
             y.domain(tmpData.map(function (d) { return d.key; }));
             //y.domain([0, d3.max(data, function(d) { return d.sales; })]);
+
 
             // append the rectangles for the bar chart
             svg.selectAll(".bar")
@@ -2060,7 +2145,7 @@
                     return y(d.key);
                 })
                 .attr("height", y.bandwidth())
-                .attr('fill', d => z(d.key))
+                .attr('fill', d => d.color)
                 .on("mouseover", function () {
                     d3.select(this)
                         .attr("fill", "red")
@@ -2069,51 +2154,70 @@
                     d3.select(this)
                         .transition("colorfade")
                         .duration(250)
-                        .attr("fill", d => z(d.key));
+                        .attr("fill", d => d.color);
                 }) 
 
 
-               //.on('mouseover', tip.show)
-               //.on('mouseout', tip.hide)
-
-
             svg.selectAll(".bar").on("click", function (d) {
-                //alert(c(d.key))
-                flytoPoly(c(d.key));
+               
+
+                flytoPoly(d.code);
             })
 
             // add the x Axis
             svg.append("g")
                 .attr("class", "x axis")
                 .attr("transform", "translate(0," + 0 + ")")
-                .call(d3.axisTop(x));
+                .call(d3.axisTop(x).ticks(6));
 
             //// add the y Axis
-            //svg.append("g")
-            //    .call(d3.axisLeft(y));
+            svg.append("g")
+                .attr("class", "y axis")
+                .call(d3.axisLeft(y));
+
+            // text label for the x axis
+            svg.append("text")
+                .attr("transform",
+                    "translate(" + (width / 2) + " ," +
+                    (0 - margin.top / 2) + ")")
+                .style("text-anchor", "middle")
+                .text("Income");
+
+            // text label for the y axis
+            svg.append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 0 - margin.left)
+                .attr("x", 0 - (height / 2))
+                .attr("dy", "1em")
+                .style("text-anchor", "middle")
+                .text("Top Regions");
 
 
-            svg.selectAll(".bar-label")
-                .data(tmpData)
-                .enter()
-                .append("text")
-                .classed("bar-label", true)
+               //.on('mouseover', tip.show)
+               //.on('mouseout', tip.hide)
+    
 
-                //.attr("transform", function (d, i) {
-                //    var w = this.getComputedTextLength();
-                //    return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
-                //})
+            //svg.selectAll(".bar-label")
+            //    .data(tmpData)
+            //    .enter()
+            //    .append("text")
+            //    .classed("bar-label", true)
 
-                .attr("text-anchor", "right")
-                .text(function (d) { return d.key })
-                .each(function (d) {
-                    var item = d3.select(this);
+            //    //.attr("transform", function (d, i) {
+            //    //    var w = this.getComputedTextLength();
+            //    //    return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
+            //    //})
 
-                    var w = this.getComputedTextLength();
-                    item.attr('transform', function () {
-                        return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
-                    })
-                });
+            //    .attr("text-anchor", "right")
+            //    .text(function (d) { return d.key })
+            //    .each(function (d) {
+            //        var item = d3.select(this);
+
+            //        var w = this.getComputedTextLength();
+            //        item.attr('transform', function () {
+            //            return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
+            //        })
+            //    });
             d3.select("#byKey").on("click", function () {
                 data.sort(function (a, b) {
                     return d3.ascending(a.value, b.value)
@@ -2146,55 +2250,59 @@
                     .attr('fill', d => z(d.key))
                 
 
-                svg.selectAll(".bar-label")
-                    .data(tmpData)
-                    .text(function (d) { return d.key })
-                    .each(function (d) {
-                        var item = d3.select(this);
-                        //item
-                        //    .transition()
-                        //    .duration(250)
-                        //    .style("opacity", 0)
+                //svg.selectAll(".bar-label")
+                //    .data(tmpData)
+                //    .text(function (d) { return d.key })
+                //    .each(function (d) {
+                //        var item = d3.select(this);
+                //        //item
+                //        //    .transition()
+                //        //    .duration(250)
+                //        //    .style("opacity", 0)
 
-                        var w = this.getComputedTextLength();
-                        item.attr("transform", function (d, i) {
-                                return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
-                        });
+                //        var w = this.getComputedTextLength();
+                //        item.attr("transform", function (d, i) {
+                //                return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
+                //        });
 
-                        //item
-                        //    .transition()
-                        //    .duration(250)
-                        //    .style("opacity", 1)
-                    })
-                    //.append("text")
-                    //.style("font", "13px")
-                    //.classed("bar-label", true)
-                    //.text(function (d) { return d.key })
+                //        //item
+                //        //    .transition()
+                //        //    .duration(250)
+                //        //    .style("opacity", 1)
+                //    })
+                //    //.append("text")
+                //    //.style("font", "13px")
+                //    //.classed("bar-label", true)
+                //    //.text(function (d) { return d.key })
 
-                    //.each(function (d) {
-                    //    var item = d3.select(this);
+                //    //.each(function (d) {
+                //    //    var item = d3.select(this);
 
-                    //    var w = this.getComputedTextLength();
-                    //    item
-                    //    .attr("transform", function (d, i) {
-                    //        return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
-                    //    });
-                    //    item.attr('startOffset', 0)
-                    //        .each('end', function () {
-                    //            d3.select(this)
-                    //                .style('opacity', 0)
-                    //                .text(transText)
-                    //                .transition()
-                    //                .style('opacity', 1);
-                    //        })
-                    //})
-                //.attr("transform", function (d, i) {
-                //    return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
-                //});
+                //    //    var w = this.getComputedTextLength();
+                //    //    item
+                //    //    .attr("transform", function (d, i) {
+                //    //        return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
+                //    //    });
+                //    //    item.attr('startOffset', 0)
+                //    //        .each('end', function () {
+                //    //            d3.select(this)
+                //    //                .style('opacity', 0)
+                //    //                .text(transText)
+                //    //                .transition()
+                //    //                .style('opacity', 1);
+                //    //        })
+                //    //})
+                ////.attr("transform", function (d, i) {
+                ////    return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
+                ////});
 
                 svg.select(".x.axis") // change the x axis
                     .transition().duration(750)
                     .call(d3.axisTop(x));
+
+                svg.select(".y.axis") // change the x axis
+                    .transition().duration(750)
+                    .call(d3.axisLeft(y));
             })
             d3.select("#byValue").on("click", function () {
                 data.sort(function (a, b) {
@@ -2814,8 +2922,7 @@
         list.style.display = "block";
         recomdList.style.display = "none";
 
-
-        stateLegend.style.display = 'none';
+        
         stateCrimeLegend.style.display = 'none';
         stateDesyLegend.style.display = 'none';
 

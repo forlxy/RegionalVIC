@@ -89,11 +89,11 @@ namespace RegionalVIC.Controllers
         public string getUnemployment()
         {
             var list = (from r in _context.Ueptbl
-                        join t in _context.Lgamas on r.LgaCode equals t.LgaCode
+                        join t in _context.Lgatbl on r.LgaCode equals t.LgaCode
                         select new
                         {
                             LgaCode = t.LgaCode,
-                            LgaName = t.LgaName,
+                            LgaName = t.NameRent,
                             Rate = r.UnempRate,
                             Color = colorDisplay.getUnempColor(r.UnempRate)
                         }).ToList();
@@ -108,11 +108,11 @@ namespace RegionalVIC.Controllers
         public string getIncome()
         {
             var list = (from r in _context.Inctbl
-                        join t in _context.Lgamas on r.LgaCode equals t.LgaCode
+                        join t in _context.Lgatbl on r.LgaCode equals t.LgaCode
                         select new
                         {
                             LgaCode = t.LgaCode,
-                            LgaName = t.LgaName,
+                            LgaName = t.NameRent,
                             Income = r.MeTtlInc,
                             Color = colorDisplay.getIncomeColor(r.MeTtlInc.Value)
                         }).ToList();
