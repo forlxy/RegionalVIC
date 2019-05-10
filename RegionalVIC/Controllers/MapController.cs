@@ -327,14 +327,10 @@ namespace RegionalVIC.Controllers
         [HttpPost]
         public Object getContent(char require, string bedroom = "0", string type = "house")
         {
-            List<colorDisplay> result = new List<colorDisplay>();
-            var regionsList = _context.Lgatbl.ToList();
-            var displayText = "";
+            string json = "";
             if (require == 97)//97 'a' 
             {
                 int bedno = Int32.Parse(bedroom);
-                //var list = _context.Rtrtbl
-                //           .Where(r => r.LgaCode != "00000" && (int)r.NoOfBedrm == bedno && r.Yr.Equals(2018) && r.Quarter.Equals(3) && r.Typ.Contains(type)).ToList();
 
                 var list = (from r in _context.Rtrtbl
                             join l in _context.Lgatbl on r.LgaCode equals l.LgaCode
@@ -347,49 +343,14 @@ namespace RegionalVIC.Controllers
                                 LgaName = l.NameRent,
                                 Region = l.Region,
                                 NoOfBedrm = r.NoOfBedrm,
-                                Typ = r.Typ
+                                Typ = r.Typ,
+                                Color = colorDisplay.getAcomColor(r.Median.Value)
                             }).ToList();
 
 
                 list = list.OrderBy(t => t.Median).ToList();
 
-                foreach (var l in list)
-                {
-                    int median = 0;
-
-                    string display = "No record";
-                    {
-                        //Need ore task sort for years
-                        median = l.Median ?? default(int);
-                        display = median != 0 ? "The median rent is <strong>$" + median + "/week</strong>." : "No record";
-
-                        displayText += (median != 0) ? "<a href=\"javascript:flytoPoly(" + l.LgaCode + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
-                            "<div class=\"d-flex w-100 justify-content-between\" > " +
-                            "<h4 class=\"mb-1\">"
-                            + l.LgaName + " - " + l.Region + "</h4> <small class=\"text-muted\" >$"
-                            + l.Median + "</small> </div>" +
-                            "<div class=\"d-flex w-100 justify-content-between\" > " +
-                            "<div>" + l.NoOfBedrm + " bedroom(s) " + FirstCharToUpper(l.Typ) + "</div> " +
-                            "</div></a>" : "";
-
-                    }
-
-                    colorDisplay cd = new colorDisplay(Int32.Parse(l.LgaCode), colorDisplay.getAcomColor(median), display);
-                    result.Add(cd);
-
-                }
-
-                foreach (var t in regionsList)
-                {
-
-                    colorDisplay cd = result.FirstOrDefault(d => d.code == Int32.Parse(t.LgaCode));
-
-                    if (cd == null)
-                    {
-                        colorDisplay newone = new colorDisplay(Int32.Parse(t.LgaCode), "#ddd", "No record");
-                        result.Add(newone);
-                    }
-                }
+                json = JsonConvert.SerializeObject(list);
             }
             else if (require == 99)//99 'c'
             {
@@ -405,48 +366,13 @@ namespace RegionalVIC.Controllers
                                 LgaName = l.NameRent,
                                 Region = l.Region,
                                 Rate = r.Rate,
-                                IncdRcd = r.IncdRcd
+                                IncdRcd = r.IncdRcd,
+                                Color = colorDisplay.getCrimeColor(r.Rate)
                             }).ToList();
 
-
-
                 list = list.OrderBy(t => t.Rate).ToList();
-                foreach (var l in list)
-                {
-                    decimal rate = 0;
-                    int icdNum = 0;
-                    string display = "No record";
 
-
-                    rate = Math.Round(l.Rate, 2);
-                    icdNum = l.IncdRcd;
-                    display = rate != 0 ? "Criminal Rate: <strong>" + rate + "%</strong>." : "No record";
-
-                    displayText += "<a href=\"javascript:flytoPoly(" + l.LgaCode + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
-                        "<div class=\"d-flex w-100 justify-content-between\" > " +
-                        "<h4 class=\"list-group-item-heading name\">"
-                        + l.LgaName + " - " + l.Region + "</h4> <small class=\"text-muted number\">"
-                        + rate + "%</small> </div>" +
-                        "<div class=\"d-flex w-100 justify-content-between\" > " +
-                        "<div>Criminal Rate: " + rate + "%." + "</div> " +
-                        "</div></a>";
-
-                    colorDisplay cd = new colorDisplay(Int32.Parse(l.LgaCode), colorDisplay.getCrimeColor(rate), display);
-                    result.Add(cd);
-                }
-
-
-                foreach (var t in regionsList)
-                {
-
-                    colorDisplay cd = result.FirstOrDefault(d => d.code == Int32.Parse(t.LgaCode));
-
-                    if (cd == null)
-                    {
-                        colorDisplay newone = new colorDisplay(Int32.Parse(t.LgaCode), "#ddd", "No record");
-                        result.Add(newone);
-                    }
-                }
+                json = JsonConvert.SerializeObject(list);
             }
             else if (require == 100)//100 'd'
             {
@@ -463,58 +389,17 @@ namespace RegionalVIC.Controllers
                                 LgaName = l.NameRent,
                                 Region = l.Region,
                                 Density = r.Density,
-                                Popul = r.Popul
+                                Popul = r.Popul,
+                                Color = colorDisplay.getDesyColor(r.Density)
                             }).ToList();
 
                 list = list.OrderBy(t => t.Density).ToList();
 
-                foreach (var l in list)
-                {
-                    decimal density = 0;
-                    int population = 0;
-
-                    string display = "No record";
-
-                    density = Math.Round(l.Density, 2);
-                    population = l.Popul;
-                    display = density != 0 ? "Density: <strong>" + density + "</strong>. <p>Population: <strong>" + population + "</strong></p>" : "No record";
-
-                    displayText += "<a href=\"javascript:flytoPoly(" + l.LgaCode + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
-                        "<div class=\"d-flex w-100 justify-content-between\" > " +
-                        "<h4 class=\"mb-1\">"
-                        + l.LgaName + " - " + l.Region + "</h4> <small class=\"text-muted\">"
-                        + density + "</small> </div>" +
-                        "<div class=\"d-flex w-100 justify-content-between\" > " +
-                        "<div>Density: " + density + ". Population: " + population + "</div> " +
-                        "</div></a>";
-
-                    colorDisplay cd = new colorDisplay(Int32.Parse(l.LgaCode), colorDisplay.getDesyColor(density), display);
-                    result.Add(cd);
-                }
-
-                foreach (var t in regionsList)
-                {
-
-                    colorDisplay cd = result.FirstOrDefault(d => d.code == Int32.Parse(t.LgaCode));
-
-                    if (cd == null)
-                    {
-                        colorDisplay newone = new colorDisplay(Int32.Parse(t.LgaCode), "#ddd", "No record");
-                        result.Add(newone);
-                    }
-                }
+                json = JsonConvert.SerializeObject(list);
             }
 
 
-            var tmpObject = new
-            {
-                result = result,
-                displayText = displayText
-            };
-
-            var json = JsonConvert.SerializeObject(tmpObject);
             return json;
-
         }
 
 
@@ -651,14 +536,28 @@ namespace RegionalVIC.Controllers
         }
 
         [HttpPost]
-        public string filterRent(int min, int max)
+        public string filterRent(int min, int max, string bedroom = "", string type = "All")
         {
+
             string display = "";
+            int bedno;
+            if (type.Contains("All"))
+            {
+                bedno = 0;
+                bedroom = "";
+            }
+            else
+            {
+                bedno = Int32.Parse(bedroom);
+            }
+
+
             var list = (from r in _context.Rtrtbl
                 join l in _context.Lgatbl on r.LgaCode equals l.LgaCode
-                where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3) 
-                && r.Median > 0 && (r.Median >= min && r.Median <= max) && !r.Typ.Contains("all")
-                && l.Status == "R"
+                where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3)
+                        && l.Status == "R" && r.Median > 0 
+                        && (r.Median >= min && r.Median <= max) 
+                        && (type.Contains("ll") ? r.Typ.Contains("ll"): (r.Typ.Contains(type) && (int)r.NoOfBedrm == bedno))
                 select new
                 {
                     LgaCode = r.LgaCode,
@@ -666,7 +565,8 @@ namespace RegionalVIC.Controllers
                     LgaName = l.NameRent,
                     Region = l.Region,
                     Bedroom = r.NoOfBedrm,
-                    Type = r.Typ
+                    Type = r.Typ,
+                    Color = colorDisplay.getAcomColor(r.Median.Value)
                 }).ToList();
 
             list = list.OrderBy(t => t.Median).ToList();
@@ -678,23 +578,24 @@ namespace RegionalVIC.Controllers
                    "Change your price range and try again</p> </div>";
             }
 
-            List<string> tmpAreas = new List<string>();
+            //List<string> tmpAreas = new List<string>();
             foreach (var i in list)
             {
-                tmpAreas.Add(i.LgaCode);
+                //tmpAreas.Add(i.LgaCode);
                 display += "<a href=\"javascript:flytoPoly(" + i.LgaCode + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
                     "  <div class=\"d-flex w-100 justify-content-between\" > <h4 class=\"mb-1\">"
                     + i.LgaName + " - " + i.Region + "</h4> <small class=\"text-muted\" >$"
                     + i.Median + "</small> </div> " +
                     "<div class=\"d-flex w-100 justify-content-between\" > " +
                     "<p class=\"mb-1\">"
-                    + i.Bedroom + " bedroom(s) " + FirstCharToUpper(i.Type) + "</p> " +
+                    + ((i.Bedroom == 0 ) ? "Average of All types" : (i.Bedroom + " bedroom(s) " + FirstCharToUpper(i.Type)) )
+                    + "</p> " +
                     "</div></a>";
             }
-            string[] areas = tmpAreas.Distinct().ToArray();
+            //string[] areas = tmpAreas.Distinct().ToArray();
             var tmpObject = new
             {
-                areas = areas,
+                areas = list,
                 display = display
             };
             return JsonConvert.SerializeObject(tmpObject);
@@ -712,7 +613,7 @@ namespace RegionalVIC.Controllers
                         join m in _context.Cobmas on d.Cob equals m.Seq
                         join i in _context.Nbitbl on r.LgaCode equals i.LgaCode
                         join s in _context.Idsmas on i.IdsCode equals s.IdsCode
-                        where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3) && !r.Typ.Contains("all") &&
+                        where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3) && r.Typ.Contains("all") &&
                             r.Median > 0 && (r.Median >= min && r.Median <= max) &&
                             c.YrEnd.Equals(2018) && c.Rate > 0 &&
                             p.Density > 0 && l.Status == "R" &&
@@ -771,7 +672,8 @@ namespace RegionalVIC.Controllers
                     + rates[j].name + " - " + rates[j].region + "</h4> <small class=\"text-muted\" >Top "
                     + (j+1) + "</small> </div>" +
                     "<div class=\"d-flex w-100 justify-content-between\" > " +
-                    "<div>" + rates[j].bedroom + " bedroom(s) " + FirstCharToUpper(rates[j].type) + "</div> " +
+                    "<div> Average </div>" +
+                    //"<div>" + rates[j].bedroom + " bedroom(s) " + FirstCharToUpper(rates[j].type) + "</div> " +
                     "<small class=\"text-muted\"><b>$" + rates[j].median + "</b></small> " +
                     "</div></a>";
                 

@@ -37,7 +37,7 @@ namespace RegionalVIC.Models
                             d > 250 ? "#CA8323" :
                                 d > 200 ? "#E6B71E" :
                                     d > 150 ? "#EED322" :
-                                        d > 50 ? "#F2F12D" :
+                                        d > 0 ? "#F2F12D" :
                                             "#ddd";
         }
         // get color depending on criminal rate
@@ -51,7 +51,7 @@ namespace RegionalVIC.Models
                                 d > 4 ? "#DA9C20" :
                                     d > 3 ? "#E6B71E" :
                                         d > 2 ? "#EED322" :
-                                            d > 1 ? "#F2F12D" :
+                                            d > 0 ? "#F2F12D" :
                                                 "#ddd";
         }
 

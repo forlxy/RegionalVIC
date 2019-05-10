@@ -367,6 +367,10 @@
                                role="tab" aria-controls="culture" aria-selected="false">Cultural Background</a>
                         </li>
                         <li class="nav-item" onclick="resetAll()">
+                            <a class="nav-link pl-5 pr-5" id="job-tab" data-toggle="tab" href="#job"
+                               role="tab" aria-controls="job" aria-selected="false">Job</a>
+                        </li>
+                        <li class="nav-item" onclick="resetAll()">
                             <a class="nav-link pl-5 pr-5" id="recommendation-tab" data-toggle="tab"
                                href="#recommendation" role="tab" aria-controls="recommendation"
                                aria-selected="true">Recommendation</a>
@@ -507,6 +511,7 @@
                                                     <select class="form-control" id="sel2" onchange="changeSelect()">
                                                         <option>Flat</option>
                                                         <option>House</option>
+                                                        <option>All</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -518,6 +523,7 @@
                                                 </div>
                                                 <div class="col-12">
                                                     <select class="form-control" id="sel1">
+                                                        <option disabled hidden>All</option>
                                                         <option>1</option>
                                                         <option>2</option>
                                                         <option>3</option>
@@ -529,7 +535,7 @@
                                             <!-- Third -->
                                             <div class="form-group col-5 mt-3">
                                                 <div class="col-12 ">
-                                                    <label><b>3. Your rent budget:(per week)</b></label>
+                                                    <label><b>3. Your rent budget (per week):</b></label>
                                                 </div>
                                                 <div class="col-12">
                                                         <div class="range-slider">
@@ -638,6 +644,21 @@
                             </div>
                         </div>
 
+                        <!-- Job Pane -->
+
+                        <div class="tab-pane" id="job" role="tabpanel" aria-labelledby="job-tab">
+                            <div class="filter">
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <button class="button w-100 mt-3" id="income-confirm">Income comparison</button>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <button class="button w-100 mt-3" id="unemployment-confirm">Umployment rate</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Cultural Pane -->
 
                         <div class="tab-pane" id="culture" role="tabpanel" aria-labelledby="culture-tab">
@@ -698,11 +719,77 @@
                     </div>
 
                     <div class="container row">
-                            <div class="mapcontainer col-12" id="mapcontainer">
-                                <div id="map" class="mmap" style="height:700px"></div>
-                                <div class='map-overlay' id='features' style="display: none"><div class='block-content' id='pd'><p></p></div></div>
+                        <div class="mapcontainer col-12" id="mapcontainer">
+                            <div id="map" class="mmap" style="height:700px"></div>
+                            <div class='map-overlay' id='features' style="display: none"><div class='block-content' id='pd'><p></p></div></div>
 
+                            @*<div id='tlegend' class="form-group">
+                                <div class="row">
 
+                                    <div class="col-4 row">
+                                        <div class="col-4">
+                                            <div class="py-3 border" style='background-color: #ddd'> </div>
+                                            <div class="">No data</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="py-3 border" style='background-color: #F2F12D'> </div>
+
+                                            <div class="">$0 - $50</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="py-3 " style='background-color: #EED322'> </div>
+
+                                            <div class="">$150</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 row">
+                                        <div class="col-4">
+                                            <div class="py-3 " style='background-color: #E6B71E'> </div>
+
+                                            <div class="">$200</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="py-3 " style='background-color: #CA8323'> </div>
+
+                                            <div class="">$250</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="py-3 " style='background-color: #B86B25'> </div>
+
+                                            <div class="">$300</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 row">
+                                        <div class="col-4">
+                                            <div class="py-3 " style='background-color: #A25626'> </div>
+
+                                            <div class="">$350</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="py-3 " style='background-color: #8B4225'> </div>
+
+                                            <div class="">$450</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="py-3 " style='background-color: #723122'> </div>
+
+                                            <div class="">$550</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                    <div class="row">
+            <div class="col">No data</div>
+            <div class="col">$0 - $50</div>
+            <div class="col">$150</div>
+            <div class="col">$200</div>
+            <div class="col">$250</div>
+            <div class="col">$300</div>
+            <div class="col">$350</div>
+            <div class="col">$450</div>
+            <div class="col">$550</div>
+        </div>
+                                </div>*@
                                 <div id="culture-card" class="culture-card rounded shadow-lg bg-white" style="max-width: 500px; display: none;">
                                     <div class="card" id="culture-card-content" style="display:block">
                                         <div width="350" height="30" id="culture-info-content">
@@ -771,14 +858,14 @@
 
                                 <div id='state-legend' class='legend' style="display: none">
                                     <h4>Median Rent</h4>
-                                    <div><span style='background-color: #723122'></span>550</div>
-                                    <div><span style='background-color: #8B4225'></span>450</div>
-                                    <div><span style='background-color: #A25626'></span>350</div>
-                                    <div><span style='background-color: #B86B25'></span>300</div>
-                                    <div><span style='background-color: #CA8323'></span>250</div>
-                                    <div><span style='background-color: #E6B71E'></span>200</div>
-                                    <div><span style='background-color: #EED322'></span>150</div>
-                                    <div><span style='background-color: #F2F12D'></span>50</div>
+                                    <div><span style='background-color: #723122'></span>$550</div>
+                                    <div><span style='background-color: #8B4225'></span>$450</div>
+                                    <div><span style='background-color: #A25626'></span>$350</div>
+                                    <div><span style='background-color: #B86B25'></span>$300</div>
+                                    <div><span style='background-color: #CA8323'></span>$250</div>
+                                    <div><span style='background-color: #E6B71E'></span>$200</div>
+                                    <div><span style='background-color: #EED322'></span>$150</div>
+                                    <div><span style='background-color: #F2F12D'></span>$0 - $50</div>
                                     <div><span style='background-color: #ddd'></span>No data</div>
                                 </div>
 
@@ -792,7 +879,7 @@
                                     <div><span style='background-color: #DA9C20'></span>4%</div>
                                     <div><span style='background-color: #E6B71E'></span>3%</div>
                                     <div><span style='background-color: #EED322'></span>2%</div>
-                                    <div><span style='background-color: #F2F12D'></span>1%</div>
+                                    <div><span style='background-color: #F2F12D'></span>0% - 2%</div>
                                     <div><span style='background-color: #ddd'></span>No data</div>
                                 </div>
 
@@ -805,27 +892,52 @@
                                     <div><span style='background-color: #CA8323'></span>5</div>
                                     <div><span style='background-color: #E6B71E'></span>3</div>
                                     <div><span style='background-color: #EED322'></span>1</div>
-                                    <div><span style='background-color: #F2F12D'></span>0-1</div>
+                                    <div><span style='background-color: #F2F12D'></span>0 - 1</div>
+                                    <div><span style='background-color: #ddd'></span>No data</div>
+                                </div>
+
+                                <div id='state-unemp-legend' class='legend' style="display: none">
+                                    <h4>Umployment rate</h4>
+                                    <div><span style='background-color: #723122'></span>8%</div>
+                                    <div><span style='background-color: #8B4225'></span>7%</div>
+                                    <div><span style='background-color: #A25626'></span>6%</div>
+                                    <div><span style='background-color: #B86B25'></span>5%</div>
+                                    <div><span style='background-color: #CA8323'></span>4%</div>
+                                    <div><span style='background-color: #E6B71E'></span>3%</div>
+                                    <div><span style='background-color: #EED322'></span>2%</div>
+                                    <div><span style='background-color: #F2F12D'></span>0% - 2%</div>
+                                    <div><span style='background-color: #ddd'></span>No data</div>
+                                </div>
+
+                                <div id='state-income-legend' class='legend' style="display: none">
+                                    <h4>Income</h4>
+                                    <div><span style='background-color: #723122'></span>$60,000</div>
+                                    <div><span style='background-color: #8B4225'></span>$55,000</div>
+                                    <div><span style='background-color: #A25626'></span>$50,000</div>
+                                    <div><span style='background-color: #B86B25'></span>$48,000</div>
+                                    <div><span style='background-color: #CA8323'></span>$44,000</div>
+                                    <div><span style='background-color: #E6B71E'></span>$40,000</div>
+                                    <div><span style='background-color: #EED322'></span>$35,000</div>
+                                    <div><span style='background-color: #F2F12D'></span>$0 - $35,000</div>
                                     <div><span style='background-color: #ddd'></span>No data</div>
                                 </div>
                             </div>
 
-                            <div class="col-6" style="display:none" id="chart-section">
-                                <div id="barchart"></div>
+                        <div class="col-6" style="display:none" id="chart-section">
+
+                            <div class="d-flex justify-content-center" id="buttons">
+                                <button id="byKey" class="btn btn-info">Top 10 Min</button>
+                                <button id="byValue" class="btn btn-info"> Top 10 Max</button>
                             </div>
+                            <br>
+                            <div id="barchart"></div>
+                        </div>
                     </div>
 
                 </div>
             </div>
         </div>
 
-    </section>
-    <section>
-        <div>
-            <button id="byKey"> Sort by Key</button>
-            <button id="byValue"> Sort by Value</button>
-        </div>
-        <br>
     </section>
     <!-- Footer -->
     <footer>
@@ -902,23 +1014,34 @@
     var minRBudget;
     var maxRBudget;
 
-        $('#a-confirm').on('click', function () {
-            $(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
-            choropleth('a');
+        $('#income-confirm').on('click', function () {
+            choropleth('i');
+            $("#mapcontainer").removeClass('col-12').addClass('col-6');
+            $('#chart-section').show();
+            map.resize() 
+        });
+
+        $('#unemployment-confirm').on('click', function () {
+            choropleth('u');
+            $("#mapcontainer").removeClass('col-12').addClass('col-6');
+            $('#chart-section').show();
+            map.resize() 
         });
 
         $('#c-confirm').on('click', function () {
             //$(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
             choropleth('c');
             $("#mapcontainer").removeClass('col-12').addClass('col-6');
-            //$('#id').hide();
             $('#chart-section').show();
             map.resize() 
         });
 
         $('#d-confirm').on('click', function () {
-            $(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
+            //$(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
             choropleth('d');
+            $("#mapcontainer").removeClass('col-12').addClass('col-6');
+            $('#chart-section').show();
+            map.resize() 
         });
 
 
@@ -933,7 +1056,7 @@
 
         $('#fll-confirm').on('click', function () {
             //$(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
-            choropleth('a');
+            //choropleth('a');
             filter();
         });
         $('#bth-confirm').on('click', function () {
@@ -1203,7 +1326,7 @@
             }
             moved = false;
         }
-    function flytoPoly(LGA_Code) {
+    function flytoPoly(LGA_Code, option=1) {
 
         var features = lga["features"];
         //map.setFilter('state-fills', ['==', ['number', ['get', 'LGA_CODE18']], LGA_Code]);
@@ -1225,7 +1348,7 @@
                                 var item = JSON.parse(data);
                                 var lat = item["latitude"]
                                 var lng = item["longitude"]
-                                var p = [lng /*- 0.5*/, lat]
+                                var p = [lng - (option == 1 ? 0.5 : 0) , lat]
                                 map.flyTo({
                                     center: p,
                                     zoom: 8
@@ -1310,6 +1433,12 @@
             extendMap();
             $('#info-card').fadeOut(300);
             $('#culture-card').fadeOut(300);
+
+            $("#mapcontainer").removeClass('col-6').addClass('col-12');
+            $('#chart-section').hide();
+
+            map.resize();
+            showCheoBlock = false;
             resetLayer();
             selected = "";
             clicked = "";
@@ -1364,7 +1493,7 @@
                 "fill-opacity": ["case",
                     ["boolean", ["feature-state", "hover"], false],
                     0.9,
-                    0.3
+                    0.7
                 ]
             }
         });
@@ -1381,7 +1510,7 @@
                 "fill-opacity": ["case",
                     ["boolean", ["feature-state", "hover"], false],
                     1,
-                    0.5
+                    0.7
                 ]
             }
         });
@@ -1667,6 +1796,7 @@
 
     });
 
+
         document.querySelector('#info-card-close-button').addEventListener('click', function (event) {
             //document.querySelector('#info-card').style.display = 'none';
             
@@ -1693,14 +1823,33 @@
         var typeSelectValue = $("#sel2").val();
 
         if (typeSelectValue == "House") {
-            $("#sel1").val("2");
-            $('#sel1').find('option:contains(1)').prop('disabled', true);
+            $('#sel1').find('option:contains(2)').prop('disabled', false);
+            $('#sel1').find('option:contains(3)').prop('disabled', false);
             $('#sel1').find('option:contains(4)').prop('disabled', false);
+            $("#sel1").val("2");
+
+            $('#sel1').find('option:contains(1)').prop('disabled', true);
+            $('#sel1').find('option:contains("All")').prop('disabled', true);
+            $('#sel1').find('option:contains("All")').prop('hidden', true);
         }
-        else {
+        else if (typeSelectValue == "Flat"){
 
             $('#sel1').find('option:contains(1)').prop('disabled', false);
+            $('#sel1').find('option:contains(2)').prop('disabled', false);
+            $('#sel1').find('option:contains(3)').prop('disabled', false);
             $("#sel1").val("1");
+            $('#sel1').find('option:contains(4)').prop('disabled', true);
+            $('#sel1').find('option:contains("All")').prop('disabled', true);
+            $('#sel1').find('option:contains("All")').prop('hidden', true);
+        }
+        else if (typeSelectValue == "All") {
+
+            $('#sel1').find('option:contains("All")').prop('disabled', false);
+            $('#sel1').find('option:contains("All")').prop('hidden', false);
+            $("#sel1").val("All");
+            $('#sel1').find('option:contains(1)').prop('disabled', true);
+            $('#sel1').find('option:contains(2)').prop('disabled', true);
+            $('#sel1').find('option:contains(3)').prop('disabled', true);
             $('#sel1').find('option:contains(4)').prop('disabled', true);
         }
     }
@@ -1708,7 +1857,9 @@
 
     var stateLegend = document.getElementById('state-legend');
     var stateCrimeLegend = document.getElementById('state-crime-legend');
-    var stateDesyLegend = document.getElementById('state-density-legend');
+        var stateDesyLegend = document.getElementById('state-density-legend');
+        var stateIncomeLegend = document.getElementById('state-income-legend');
+        var stateUnempLegend = document.getElementById('state-unemp-legend');
     //Reset Layers
     function resetLayer() {
 
@@ -1722,6 +1873,8 @@
         map.setLayoutProperty("state-fills", 'visibility', 'visible');
         map.setLayoutProperty("cheo", 'visibility', 'none');
 
+        stateIncomeLegend.style.display = "none"
+        stateUnempLegend.style.display = "none"
         stateLegend.style.display = 'none';
         stateCrimeLegend.style.display = 'none';
         stateDesyLegend.style.display = 'none';
@@ -1735,28 +1888,30 @@
 
         recomdList.style.display = "none";
         $("#loader").addClass("is-active");
-        //Rent
-        if (option == "a") {
-
-            document.querySelector('#list-name').innerHTML = "Rent";
-            list.style.display = "block";
+        //Income
+        if (option == "i") {
+            
+            list.style.display = "none";
             slist.style.display = "none";
-            var sel1 = jQuery("#sel1 option:selected").val();
-            var sel2 = jQuery("#sel2 option:selected").val();
-
+            document.querySelector('#card-content').style.display = "none";
+            document.querySelector('#list-name').innerHTML = "Criminal Situation";
             $.ajax({
                 /**/
-                url: '@Url.Action("getContent", "Map")',
-                /**/
+                url: '@Url.Action("getIncome", "Job")',
                 type: 'POST',
-                data: { require: "a", bedroom: sel1, type: sel2 },
+                data: {},
                 success: function (data) {
+                    var showData = [];
                     var tmpObj = JSON.parse(data);
-                    for (var i = 0; i < tmpObj["result"].length; i++) {
-                        var item = tmpObj["result"][i];
-                        var code = item["code"];
-                        var color = item["color"];
-                        var display = item["display"]
+
+                    for (var i = 0; i < tmpObj.length; i++) {
+                        var item = tmpObj[i];
+                        var code = item["LgaCode"];
+                        var name = item["LgaName"];
+                        var color = item["Color"];
+                        //var region = item["Region"]
+                        //var incdRcd = item["IncdRcd"];
+                        var income = item["Income"]
                         cheo[code] = color;
                         if (color === '#ddd') {
                             textColor[code] = '#999';
@@ -1764,26 +1919,31 @@
                         else {
                             textColor[code] = '#333';
                         }
+                        var display = income != 0 ? "Income: <strong>$" + income + " per year</strong>." : "No record";
+
                         displayList[code] = display;
 
-                    }
+                        var dataObj = new Object;
+                        dataObj["key"] = name
+                        dataObj["value"] = income
+                        dataObj["color"] = color
+                        dataObj["code"] = code
 
-                    if ($('#info-card').filter(':visible').length == 0) // all hidden
-                    {
-                        shrinkMap();
-                        $('#info-card').fadeIn(300);
-                        //$('#culture-card').fadeOut(300);
+                        showData.push(dataObj);
                     }
+                    displayData(showData, 'Income per year($)', 'Top 10 Regions')
+
                     $('#culture-card').fadeOut(300);
-                    $('#card-content-2').fadeIn(300);
                     $('#card-content').fadeOut(200);
-                    var displayText = tmpObj["displayText"];
-                    list.innerHTML = displayText;
-                    stateLegend.style.display = "block"
+
+                    stateIncomeLegend.style.display = "block"
+                    stateUnempLegend.style.display = "none"
                     stateCrimeLegend.style.display = "none"
+                    stateLegend.style.display = "none"
                     stateDesyLegend.style.display = "none"
 
                     showCheoBlock = true;
+
                     map.setPaintProperty("region-label", 'text-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]]);
 
                     map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
@@ -1791,14 +1951,79 @@
                     map.setLayoutProperty("cheo", 'visibility', 'visible');
 
                     $("#loader").removeClass("is-active");
+                },
+            });
+        }
+        //Unemployment
+        else if (option == "u") {
+            
+            list.style.display = "none";
+            slist.style.display = "none";
+            document.querySelector('#card-content').style.display = "none";
+            document.querySelector('#list-name').innerHTML = "Criminal Situation";
+            $.ajax({
+                /**/
+                url: '@Url.Action("getUnemployment", "Job")',
+                type: 'POST',
+                data: {},
+                success: function (data) {
+                    var showData = [];
+                    var tmpObj = JSON.parse(data);
 
+                    for (var i = 0; i < tmpObj.length; i++) {
+                        var item = tmpObj[i];
+                        var code = item["LgaCode"];
+                        var name = item["LgaName"];
+                        var color = item["Color"];
+                        //var region = item["Region"]
+                        //var incdRcd = item["IncdRcd"];
+                        var rate = item["Rate"]
+                        cheo[code] = color;
+                        if (color === '#ddd') {
+                            textColor[code] = '#999';
+                        }
+                        else {
+                            textColor[code] = '#333';
+                        }
+                        var display = rate != 0 ? "Unemployment rate: <strong>" + rate + "%</strong>." : "No record";
+
+                        displayList[code] = display;
+
+                        var dataObj = new Object;
+                        dataObj["key"] = name
+                        dataObj["value"] = rate
+                        dataObj["color"] = color
+                        dataObj["code"] = code
+
+                        showData.push(dataObj);
+                    }
+                    displayData(showData, 'Unemployment (%)', 'Top 10 Regions')
+
+                    $('#culture-card').fadeOut(300);
+                    $('#card-content').fadeOut(200);
+
+                    stateUnempLegend.style.display = "block"
+                    stateIncomeLegend.style.display = "none"
+                    stateCrimeLegend.style.display = "none"
+                    stateLegend.style.display = "none"
+                    stateDesyLegend.style.display = "none"
+
+                    showCheoBlock = true;
+
+                    map.setPaintProperty("region-label", 'text-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]]);
+
+                    map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
+                    map.setLayoutProperty("state-fills", 'visibility', 'none');
+                    map.setLayoutProperty("cheo", 'visibility', 'visible');
+
+                    $("#loader").removeClass("is-active");
                 },
             });
         }
         //Safety
         else if (option == "c") {
             list.style.display = "none";
-            slist.style.display = "block";
+            slist.style.display = "none";
             document.querySelector('#card-content').style.display = "none";
             document.querySelector('#list-name').innerHTML = "Criminal Situation";
             $.ajax({
@@ -1808,12 +2033,16 @@
                 type: 'POST',
                 data: { require: "c" },
                 success: function (data) {
+                    var showData = [];
                     var tmpObj = JSON.parse(data);
-                    for (var i = 0; i < tmpObj["result"].length; i++) {
-                        var item = tmpObj["result"][i];
-                        var code = item["code"];
-                        var color = item["color"];
-                        var display = item["display"]
+                    for (var i = 0; i < tmpObj.length; i++) {
+                        var item = tmpObj[i];
+                        var code = item["LgaCode"];
+                        var name = item["LgaName"];
+                        var color = item["Color"];
+                        //var region = item["Region"]
+                        //var incdRcd = item["IncdRcd"];
+                        var rate = item["Rate"]
                         cheo[code] = color;
                         if (color === '#ddd') {
                             textColor[code] = '#999';
@@ -1821,21 +2050,25 @@
                         else {
                             textColor[code] = '#333';
                         }
+                        var display = rate != 0 ? "Criminal Rate: <strong>" + rate + "%</strong>." : "No record";
+
                         displayList[code] = display;
-                    }
 
+                        var dataObj = new Object;
+                        dataObj["key"] = name
+                        dataObj["value"] = rate
+                        dataObj["color"] = color
+                        dataObj["code"] = code
 
-                    if ($('#info-card').filter(':visible').length == 0) // all hidden
-                    {
-                        shrinkMap();
-                        $('#info-card').fadeIn(300);
-                        //$('#culture-card').fadeOut(300);
+                        showData.push(dataObj);
                     }
+                    displayData(showData, 'Criminal Rate (%)', 'Top 10 Regions')
+
                     $('#culture-card').fadeOut(300);
-                    $('#card-content-2').fadeIn(300);
                     $('#card-content').fadeOut(200);
-                    var displayText = tmpObj["displayText"];
-                    slist.innerHTML = displayText;
+
+                    stateIncomeLegend.style.display = "none"
+                    stateUnempLegend.style.display = "none"
                     stateCrimeLegend.style.display = "block"
                     stateLegend.style.display = "none"
                     stateDesyLegend.style.display = "none"
@@ -1854,7 +2087,7 @@
         }
         //Population density
         else if (option == "d") {
-            slist.style.display = "block";
+            slist.style.display = "none";
             list.style.display = "none";
             document.querySelector('#card-content').style.display = "none";
             document.querySelector('#list-name').innerHTML = "Population Situation<div class='text--very--small'><p><small>Density: The number of person per km<sup>2</sup> </small></p></div>";
@@ -1865,12 +2098,16 @@
                 type: 'POST',
                 data: { require: "d" },
                 success: function (data) {
+                    var showData = [];
                     var tmpObj = JSON.parse(data);
-                    for (var i = 0; i < tmpObj["result"].length; i++) {
-                        var item = tmpObj["result"][i];
-                        var code = item["code"];
-                        var color = item["color"];
-                        var display = item["display"]
+                    for (var i = 0; i < tmpObj.length; i++) {
+                        var item = tmpObj[i];
+                        var code = item["LgaCode"];
+                        var name = item["LgaName"];
+                        var color = item["Color"];
+
+                        var density = item["Density"]
+                        var population = item["Popul"]
                         cheo[code] = color;
                         if (color === '#ddd') {
                             textColor[code] = '#999';
@@ -1878,23 +2115,29 @@
                         else {
                             textColor[code] = '#333';
                         }
+                        var display = density != 0 ? "Density: <strong>" + density + "</strong>. <p>Population: <strong>" + population + "</strong></p>" : "No record";
+
                         displayList[code] = display;
-                    }
 
-                    if ($('#info-card').filter(':visible').length == 0) // all hidden
-                    {
-                        shrinkMap();
-                        $('#info-card').fadeIn(300);
+                        var dataObj = new Object;
+                        dataObj["key"] = name
+                        dataObj["value"] = density
+                        dataObj["color"] = color
+                        dataObj["code"] = code
+
+                        showData.push(dataObj);
+
                     }
+                    displayData(showData, 'Density(The number of person per square kilometer', 'Top 10 Regions')
+
                     $('#culture-card').fadeOut(300);
-                    $('#card-content-2').fadeIn(300);
                     $('#card-content').fadeOut(200);
-                    var displayText = tmpObj["displayText"];
-                    slist.innerHTML = displayText;
 
-                    stateDesyLegend.style.display = "block"
-                    stateLegend.style.display = "none"
+                    stateIncomeLegend.style.display = "none"
+                    stateUnempLegend.style.display = "none"
                     stateCrimeLegend.style.display = "none"
+                    stateLegend.style.display = "none"
+                    stateDesyLegend.style.display = "block"
 
                     showCheoBlock = true;
 
@@ -1903,7 +2146,6 @@
                     map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
                     map.setLayoutProperty("state-fills", 'visibility', 'none');
                     map.setLayoutProperty("cheo", 'visibility', 'visible');
-
                     $("#loader").removeClass("is-active");
                 },
             });
@@ -1912,7 +2154,7 @@
     }
 
         
-        function showUnemployRate() {
+        @*function showUnemployRate() {
             list.style.display = "none";
             slist.style.display = "none";
             $("#loader").addClass("is-active");
@@ -1942,9 +2184,9 @@
 
                 },
             });
-        }
+        }*@
 
-        showIncome();
+        @*//showIncome();
         function showIncome() {
 
             list.style.display = "none";
@@ -1976,7 +2218,7 @@
 
                 },
             });
-        }
+        }*@
 
     function showChart(count, label, value) {
 
@@ -2026,6 +2268,8 @@
 
     function initLanguageCharts(lgaCode) {
 
+        stateIncomeLegend.style.display = "none"
+        stateUnempLegend.style.display = "none"
         stateLegend.style.display = 'none';
         stateCrimeLegend.style.display = 'none';
         stateDesyLegend.style.display = 'none';
@@ -2082,8 +2326,39 @@
 
     }
 
+        function highlight(code, name) {
+            if (showCheoBlock)
+                features.style.display = "block";
+            else
+                features.style.display = "none";
 
-        function displayData(data, name) {
+
+            var queryFeature = lga["features"];
+            if (queryFeature.length) {
+
+                var feature = queryFeature.find(function (element) {
+                    return parseInt(element.properties.LGA_CODE18) === parseInt(code);
+                });
+                //feature = queryFeature[i];
+                //if (parseInt(feature.properties.LGA_CODE18) === parseInt(code)) {
+
+                document.getElementById('pd').innerHTML = '<h5><strong>' + name + '</strong></h5><div class="content-line">' + displayList[code] + '</div>';
+
+
+                if (hoveredStateId) {
+                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                }
+                hoveredStateId = feature.id;
+                map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
+
+
+            }
+
+
+        }
+            
+        function displayData(data, namex, namey) {
+            $("#barchart").empty();
             data.sort(function (a, b) {
                 return d3.descending(a.value, b.value)
             })
@@ -2097,10 +2372,10 @@
             const tip = d3.tip().html(d => d.value);
             // set the dimensions and margins of the graph
             var w = $('#chart-section').width();
-            var h = $('#chart-section').height();
-            var margin = { top: 60, right: 20, bottom: 30, left: 150 },
+            var h = $('#buttons').height();
+            var margin = { top: 60, right: 20, bottom: 30, left: 160 },
                 width = w - margin.left - margin.right,
-                height = 700 - margin.top - margin.bottom;
+                height = 700 - margin.top - margin.bottom - h;
 
             // set the ranges
             var y = d3.scaleBand()
@@ -2110,21 +2385,18 @@
             var x = d3.scaleLinear()
                 .range([0, width]);
 
-            var color = tmpData.map(a => a.color);
-            var z = d3.scaleOrdinal()
-                .range(color);
+            //var color = tmpData.map(a => a.color);
+            //var z = d3.scaleOrdinal()
+            //    .range(color);
 
-            var code = tmpData.map(a => a.code);
-            var c = d3.scaleOrdinal().range(code);
-            // append the svg object to the body of the page
-            // append a 'group' element to 'svg'
-            // moves the 'group' element to the top left margin
+            //var code = tmpData.map(a => a.code);
+            //var c = d3.scaleOrdinal().range(code);
+
             var svg = d3.select("#barchart").append("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
-
-                .append("g").
-                attr("transform",
+                .append("g")
+                .attr("transform",
                     "translate(" + margin.left + "," + margin.top + ")");
 
             svg.call(tip)
@@ -2146,22 +2418,31 @@
                 })
                 .attr("height", y.bandwidth())
                 .attr('fill', d => d.color)
-                .on("mouseover", function () {
+                .style("opacity", 0.6)
+                .on("mouseover", function (d) {
                     d3.select(this)
-                        .attr("fill", "red")
+                        .style("opacity", 1)
+
+                    highlight(d.code, d.key);
+                
                 })
                 .on("mouseout", function () {
                     d3.select(this)
                         .transition("colorfade")
                         .duration(250)
-                        .attr("fill", d => d.color);
+                        .style("opacity", 0.7)
+
+                    features.style.display = "none"
+
+                    if (hoveredStateId) {
+                        map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                    }
+                    hoveredStateId = null;
                 }) 
 
 
             svg.selectAll(".bar").on("click", function (d) {
-               
-
-                flytoPoly(d.code);
+                flytoPoly(d.code, 0);
             })
 
             // add the x Axis
@@ -2181,7 +2462,7 @@
                     "translate(" + (width / 2) + " ," +
                     (0 - margin.top / 2) + ")")
                 .style("text-anchor", "middle")
-                .text("Income");
+                .text(namex);
 
             // text label for the y axis
             svg.append("text")
@@ -2190,7 +2471,7 @@
                 .attr("x", 0 - (height / 2))
                 .attr("dy", "1em")
                 .style("text-anchor", "middle")
-                .text("Top Regions");
+                .text(namey);
 
 
                //.on('mouseover', tip.show)
@@ -2229,10 +2510,6 @@
                 })
                 x.domain([0, d3.max(tmpData, function (d) { return d.value; })])
                 y.domain(tmpData.map(function (d) { return d.key; }));
-                color = tmpData.map(a => a.color);
-
-                z = d3.scaleOrdinal()
-                    .range(color);
 
 
                 var dot = svg.selectAll(".bar")
@@ -2242,13 +2519,12 @@
                     .attr("y", function (d, i) {
                         return y(d.key);
                     })
+                    .attr('fill', d => d.color)
 
 
                 dot.transition()
                     .duration(500)
                     .attr("width", function (d) { return x(d.value); })
-                    .attr('fill', d => z(d.key))
-                
 
                 //svg.selectAll(".bar-label")
                 //    .data(tmpData)
@@ -2298,7 +2574,7 @@
 
                 svg.select(".x.axis") // change the x axis
                     .transition().duration(750)
-                    .call(d3.axisTop(x));
+                    .call(d3.axisTop(x).ticks(6));
 
                 svg.select(".y.axis") // change the x axis
                     .transition().duration(750)
@@ -2314,10 +2590,6 @@
                 })
                 x.domain([0, d3.max(tmpData, function (d) { return d.value; })])
                 y.domain(tmpData.map(function (d) { return d.key; }));
-                color = tmpData.map(a => a.color);
-
-                z = d3.scaleOrdinal()
-                    .range(color);
 
                 var dot = svg.selectAll(".bar")
                     .data(tmpData)
@@ -2326,69 +2598,30 @@
                     .attr("y", function (d, i) {
                         return y(d.key);
                     })
+                    .attr('fill', d => d.color)
 
 
                 dot.transition()
                     .duration(500)
                     .attr("width", function (d) { return x(d.value); })
-                    .attr('fill', d => z(d.key))
 
-
-                svg.selectAll(".bar-label")
-                    .data(tmpData)
-                    .text(function (d) { return d.key })
-                    .each(function (d) {
-                        var item = d3.select(this);
-                        //item
-                        //    .transition()
-                        //    .duration(250)
-                        //    .style("opacity", 0)
-
-                        var w = this.getComputedTextLength();
-                        item.attr("transform", function (d, i) {
-                            return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
-                        });
-
-                        //item
-                        //    .transition()
-                        //    .duration(250)
-                        //    .style("opacity", 1)
-                    })
-                //.append("text")
-                //.style("font", "13px")
-                //.classed("bar-label", true)
-                //.text(function (d) { return d.key })
-
-                //.each(function (d) {
-                //    var item = d3.select(this);
-
-                //    var w = this.getComputedTextLength();
-                //    item
-                //    .attr("transform", function (d, i) {
-                //        return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
-                //    });
-                //    item.attr('startOffset', 0)
-                //        .each('end', function () {
-                //            d3.select(this)
-                //                .style('opacity', 0)
-                //                .text(transText)
-                //                .transition()
-                //                .style('opacity', 1);
-                //        })
-                //})
-                //.attr("transform", function (d, i) {
-                //    return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
-                //});
+                
 
                 svg.select(".x.axis") // change the x axis
                     .transition().duration(750)
-                    .call(d3.axisTop(x));
+                    .call(d3.axisTop(x).ticks(6));
+
+                svg.select(".y.axis") // change the x axis
+                    .transition().duration(750)
+                    .call(d3.axisLeft(y));
             })
         }
     //test
     //initCountryCharts("20110");
     function initCountryCharts(lgaCode) {
 
+        stateIncomeLegend.style.display = "none"
+        stateUnempLegend.style.display = "none"
         stateLegend.style.display = 'none';
         stateCrimeLegend.style.display = 'none';
         stateDesyLegend.style.display = 'none';
@@ -2450,6 +2683,8 @@
 
         $('#info-card').fadeOut(300);
 
+        stateIncomeLegend.style.display = "none"
+        stateUnempLegend.style.display = "none"
         stateLegend.style.display = 'none';
         stateCrimeLegend.style.display = 'none';
         stateDesyLegend.style.display = 'none';
@@ -2803,6 +3038,8 @@
         list.style.display = "none";
         recomdList.style.display = "block";
 
+        stateIncomeLegend.style.display = "none"
+        stateUnempLegend.style.display = "none"
         stateLegend.style.display = 'none';
         stateCrimeLegend.style.display = 'none';
         stateDesyLegend.style.display = 'none';
@@ -2917,12 +3154,17 @@
 
     //Filter
     function filter() {
+        
+            var sel1 = jQuery("#sel1 option:selected").val();
+            var sel2 = jQuery("#sel2 option:selected").val();
 
+        
         slist.style.display = "none";
         list.style.display = "block";
         recomdList.style.display = "none";
 
-        
+        stateIncomeLegend.style.display = "none"
+        stateUnempLegend.style.display = "none"
         stateCrimeLegend.style.display = 'none';
         stateDesyLegend.style.display = 'none';
 
@@ -2942,7 +3184,7 @@
             url: '@Url.Action("filterRent", "Map")',
             /**/
             type: 'POST',
-            data: { min: minFBudget, max: maxFBudget },
+            data: { min: minFBudget, max: maxFBudget, bedroom: sel1, type: sel2},
             success: function (data) {
                 var result = JSON.parse(data);
                 var areas = result["areas"];
@@ -2951,14 +3193,20 @@
                     displayList[allCode[i]] = "";
                 }
                 for (var i = 0; i < areas.length; i++) {
-                    var code = areas[i];
-                    cheo[code] = myData[code];
-                    if (cheo[code] === '#ddd') {
+                    var item = areas[i];
+                    var code = item["LgaCode"];
+                    var color = item["Color"];
+                    var median = item["Median"];
+                    var display = median != 0 ? "The median rent is <strong>$" + median + "/week</strong>." : "No record";
+                    cheo[code] = color;
+                    if (color === '#ddd') {
                         textColor[code] = '#999';
                     }
                     else {
                         textColor[code] = '#333';
                     }
+                    displayList[code] = display;
+
                 }
 
 
