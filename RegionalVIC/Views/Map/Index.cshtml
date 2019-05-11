@@ -318,11 +318,29 @@
                 <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav text-uppercase ml-auto">
+                <ul class="navbar-nav ml-auto">
+
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="/">Home</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="/Map/Recommendation">Recommendation</a>
+                    </li>
 
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/Map" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            What you concern?
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                            <a class="dropdown-item" href="/Map#description">Regional areas information</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/Map#job">Job opportunity</a>
+                            <a class="dropdown-item" href="/Map#rent">Rent cost</a>
+                            <a class="dropdown-item" href="/Map#safety">Safety</a>
+                            <a class="dropdown-item" href="/Map#culture">Loneliness</a>
+                        </div>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="/News">News</a>
                     </li>
@@ -331,13 +349,13 @@
         </div>
     </nav>
     <!-- Header -->
-    <header class="masthead" style="background-image: url('/img/map1.jpg');background-size: cover;">
+    @*<header class="masthead" style="background-image: url('/img/map1.jpg');background-size: cover;">
         <div class="container">
             <div class="intro-normal">
 
             </div>
         </div>
-    </header>
+    </header>*@
 
     <div class="loader loader-default is-active" data-text id="loader"></div>
 
@@ -370,11 +388,11 @@
                             <a class="nav-link pl-5 pr-5" id="job-tab" data-toggle="tab" href="#job"
                                role="tab" aria-controls="job" aria-selected="false">Job</a>
                         </li>
-                        <li class="nav-item" onclick="resetAll()">
-                            <a class="nav-link pl-5 pr-5" id="recommendation-tab" data-toggle="tab"
-                               href="#recommendation" role="tab" aria-controls="recommendation"
-                               aria-selected="true">Recommendation</a>
-                        </li>
+                        @*<li class="nav-item" onclick="resetAll()">
+                                <a class="nav-link pl-5 pr-5" id="recommendation-tab" data-toggle="tab"
+                                   href="#recommendation" role="tab" aria-controls="recommendation"
+                                   aria-selected="true">Recommendation</a>
+                            </li>*@
                     </ul>
 
                     <div class="tab-content">
@@ -386,114 +404,113 @@
                         </div>
 
                         <!-- Reccomendation Pane -->
+                        @*<div class="tab-pane" id="recommendation" role="tabpanel"
+                                 aria-labelledby="recommendation-tab">
 
-                        <div class="tab-pane" id="recommendation" role="tabpanel"
-                             aria-labelledby="recommendation-tab">
-
-                            <div class="filter" id="selectAbleFilter">
-                                <div class="row">
-                                    <div class="col-12 col-sm-7 col-md-6">
-                                        <div class="dropdown mt-3 w-100">
-                                            <button class="button w-100 dropdown-toggle" type="button"
-                                                    id="factorsDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                Importance of factors
-                                            </button>
-                                            <div class="dropdown-menu importance-of-factors"
-                                                 aria-labelledby="factorsDropdownMenu">
-                                                <form class="px-4 py-3">
-                                                    <div class="form-group">
-                                                        <label for="acmSlider"
-                                                               class="font--18 text--lebel">Rent (a)</label>
-                                                        <div class="range-slider">
-                                                            <input type="text" class="acmSlider" value="" />
+                                <div class="filter" id="selectAbleFilter">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-7 col-md-6">
+                                            <div class="dropdown mt-3 w-100">
+                                                <button class="button w-100 dropdown-toggle" type="button"
+                                                        id="factorsDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                    Importance of factors
+                                                </button>
+                                                <div class="dropdown-menu importance-of-factors"
+                                                     aria-labelledby="factorsDropdownMenu">
+                                                    <form class="px-4 py-3">
+                                                        <div class="form-group">
+                                                            <label for="acmSlider"
+                                                                   class="font--18 text--lebel">Rent (a)</label>
+                                                            <div class="range-slider">
+                                                                <input type="text" class="acmSlider" value="" />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="amrSlider"
-                                                               class="font--18 text--lebel">Safety (b)</label>
-                                                        <div class="range-slider">
-                                                            <input type="text" class="crmSlider" value="" />
+                                                        <div class="form-group">
+                                                            <label for="amrSlider"
+                                                                   class="font--18 text--lebel">Safety (b)</label>
+                                                            <div class="range-slider">
+                                                                <input type="text" class="crmSlider" value="" />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="pouSlider"
-                                                               class="font--18 text--lebel">Population (c)</label>
+                                                        <div class="form-group">
+                                                            <label for="pouSlider"
+                                                                   class="font--18 text--lebel">Population (c)</label>
 
-                                                        <div class="range-slider">
-                                                            <input type="text" class="pouSlider" value="" />
+                                                            <div class="range-slider">
+                                                                <input type="text" class="pouSlider" value="" />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="culSlider"
-                                                               class="font--18 text--lebel">Culture Background (d)</label>
-                                                        <label for="inputCountryR" class="font--18 text--lebel">
+                                                        <div class="form-group">
+                                                            <label for="culSlider"
+                                                                   class="font--18 text--lebel">Culture Background (d)</label>
+                                                            <label for="inputCountryR" class="font--18 text--lebel">
 
-                                                        </label>
-                                                        <select id="inputCountryR" class="form-control">
-                                                            <option selected>Choose from List</option>
-                                                        </select>
-                                                        <div class="range-slider">
-                                                            <input type="text" class="culSlider" value="" />
+                                                            </label>
+                                                            <select id="inputCountryR" class="form-control">
+                                                                <option selected>Choose from List</option>
+                                                            </select>
+                                                            <div class="range-slider">
+                                                                <input type="text" class="culSlider" value="" />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="jobSlider"
-                                                               class="font--18 text--lebel">Job Oportunity (e)</label>
-                                                        <label for="inputIndustryR" class="font--18 text--lebel">
+                                                        <div class="form-group">
+                                                            <label for="jobSlider"
+                                                                   class="font--18 text--lebel">Job Oportunity (e)</label>
+                                                            <label for="inputIndustryR" class="font--18 text--lebel">
 
-                                                        </label>
-                                                        <select id="inputIndustryR" class="form-control">
-                                                            <option selected>Choose from List</option>
-                                                        </select>
-                                                        <div class="range-slider">
-                                                            <input type="text" class="jobSlider" value="" />
+                                                            </label>
+                                                            <select id="inputIndustryR" class="form-control">
+                                                                <option selected>Choose from List</option>
+                                                            </select>
+                                                            <div class="range-slider">
+                                                                <input type="text" class="jobSlider" value="" />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    
 
-                                                    <p class="text-sm-left">
-                                                        Final Score = a * Rent score + b
-                                                        * Safety
-                                                        score + c *
-                                                        Population score + d *
-                                                        Culture score + e * Job score
-                                                    </p>
-                                                    <div class="mt-3">
-                                                        <span class="font--18 font--bold hand text--colored float-right"
-                                                              id="rmd-confirm">Confirm</span>
-                                                    </div>
-                                                </form>
+
+                                                        <p class="text-sm-left">
+                                                            Final Score = a * Rent score + b
+                                                            * Safety
+                                                            score + c *
+                                                            Population score + d *
+                                                            Culture score + e * Job score
+                                                        </p>
+                                                        <div class="mt-3">
+                                                            <span class="font--18 font--bold hand text--colored float-right"
+                                                                  id="rmd-confirm">Confirm</span>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12 col-sm-5 col-md-4">
-                                        <div class="dropdown mt-3 w-100">
-                                            <button class="button w-100 dropdown-toggle" type="button"
-                                                    id="budgetDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                Rent Budget (per week)
-                                            </button>
-                                            <div class="dropdown-menu importance-of-factors"
-                                                 aria-labelledby="budgetDropdownMenu">
-                                                <form class="px-4 py-3">
-                                                    <div class="form-group">
-                                                        <div class="range-slider">
-                                                            <input type="text" class="recommendRanger" value="" />
+                                        <div class="col-12 col-sm-5 col-md-4">
+                                            <div class="dropdown mt-3 w-100">
+                                                <button class="button w-100 dropdown-toggle" type="button"
+                                                        id="budgetDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                    Rent Budget (per week)
+                                                </button>
+                                                <div class="dropdown-menu importance-of-factors"
+                                                     aria-labelledby="budgetDropdownMenu">
+                                                    <form class="px-4 py-3">
+                                                        <div class="form-group">
+                                                            <div class="range-slider">
+                                                                <input type="text" class="recommendRanger" value="" />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="mt-3">
-                                                        <span class="font--18 font--bold hand text--colored float-right"
-                                                              id="rmd-confirm2">Confirm</span>
-                                                    </div>
-                                                </form>
+                                                        <div class="mt-3">
+                                                            <span class="font--18 font--bold hand text--colored float-right"
+                                                                  id="rmd-confirm2">Confirm</span>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                        </div>
+                            </div>*@
 
                         <!-- Rent Pane -->
                         <div class="tab-pane" id="living" role="tabpanel" aria-labelledby="living-tab">
@@ -538,19 +555,19 @@
                                                     <label><b>3. Your rent budget (per week):</b></label>
                                                 </div>
                                                 <div class="col-12">
-                                                        <div class="range-slider">
-                                                            <input type="text" class="filterRanger" value="" />
-                                                        </div>
+                                                    <div class="range-slider">
+                                                        <input type="text" class="filterRanger" value="" />
+                                                    </div>
 
                                                 </div>
                                             </div>
                                             <!--Forth -->
 
                                             <div class="form-group  mr-4">
-                                                    <button class="btn panel-button"
-                                                            id="fll-confirm">
-                                                        Confirm
-                                                    </button>
+                                                <button class="btn panel-button"
+                                                        id="fll-confirm">
+                                                    Confirm
+                                                </button>
                                             </div>
                                         </div>
 
@@ -558,73 +575,73 @@
 
 
                                     @*<div class="col-12 col-md-7 col-lg-4">
-                                        <div class="dropdown mt-3 w-100">
-                                            <button class="button w-100 dropdown-toggle" type="button"
-                                                    id="budgetDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                Rent (per week)
-                                            </button>
-                                            <div class="dropdown-menu importance-of-factors"
-                                                 aria-labelledby="budgetDropdownMenu">
-                                                <form class="px-4 py-3">
+                                            <div class="dropdown mt-3 w-100">
+                                                <button class="button w-100 dropdown-toggle" type="button"
+                                                        id="budgetDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                    Rent (per week)
+                                                </button>
+                                                <div class="dropdown-menu importance-of-factors"
+                                                     aria-labelledby="budgetDropdownMenu">
+                                                    <form class="px-4 py-3">
 
-                                                    <div class="form-group row">
-                                                        <div class="col-md-6">
-                                                            <label for="sel2">Type:</label>
+                                                        <div class="form-group row">
+                                                            <div class="col-md-6">
+                                                                <label for="sel2">Type:</label>
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <select class="form-control" id="sel2" onchange="changeSelect()">
+                                                                    <option>Flat</option>
+                                                                    <option>House</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-md-6">
+                                                                <label for="sel1">Num of bedroom:</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <select class="form-control" id="sel1">
+                                                                    <option>1</option>
+                                                                    <option>2</option>
+                                                                    <option>3</option>
+                                                                    <option disabled>4</option>
+                                                                </select>
+                                                            </div>
                                                         </div>
 
-                                                        <div class="col-md-6">
-                                                            <select class="form-control" id="sel2" onchange="changeSelect()">
-                                                                <option>Flat</option>
-                                                                <option>House</option>
-                                                            </select>
+                                                        <div class="mt-3">
+                                                            <span class="font--18 font--bold hand text--colored float-right"
+                                                                  id="a-confirm">Confirm</span>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-md-6">
-                                                            <label for="sel1">Num of bedroom:</label>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <select class="form-control" id="sel1">
-                                                                <option>1</option>
-                                                                <option>2</option>
-                                                                <option>3</option>
-                                                                <option disabled>4</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="mt-3">
-                                                        <span class="font--18 font--bold hand text--colored float-right"
-                                                              id="a-confirm">Confirm</span>
-                                                    </div>
-                                                </form>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12 col-md-7 col-lg-4">
-                                        <div class="dropdown mt-3 w-100">
-                                            <button class="button w-100 dropdown-toggle" type="button"
-                                                    id="budgetDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                Your Budget (per week)
-                                            </button>
-                                            <div class="dropdown-menu importance-of-factors"
-                                                 aria-labelledby="budgetDropdownMenu">
-                                                <form class="px-4 py-3">
-                                                    <div class="form-group">
-                                                        <div class="range-slider">
-                                                            <input type="text" class="filterRanger" value="" />
+                                        <div class="col-12 col-md-7 col-lg-4">
+                                            <div class="dropdown mt-3 w-100">
+                                                <button class="button w-100 dropdown-toggle" type="button"
+                                                        id="budgetDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                    Your Budget (per week)
+                                                </button>
+                                                <div class="dropdown-menu importance-of-factors"
+                                                     aria-labelledby="budgetDropdownMenu">
+                                                    <form class="px-4 py-3">
+                                                        <div class="form-group">
+                                                            <div class="range-slider">
+                                                                <input type="text" class="filterRanger" value="" />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="mt-3">
-                                                        <span class="font--18 font--bold hand text--colored float-right"
-                                                              id="fll-confirm">Confirm</span>
-                                                    </div>
-                                                </form>
+                                                        <div class="mt-3">
+                                                            <span class="font--18 font--bold hand text--colored float-right"
+                                                                  id="fll-confirm">Confirm</span>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>*@
+                                        </div>*@
                                 </div>
                             </div>
                         </div>
@@ -724,204 +741,204 @@
                             <div class='map-overlay' id='features' style="display: none"><div class='block-content' id='pd'><p></p></div></div>
 
                             @*<div id='tlegend' class="form-group">
-                                <div class="row">
+                                                        <div class="row">
 
-                                    <div class="col-4 row">
-                                        <div class="col-4">
-                                            <div class="py-3 border" style='background-color: #ddd'> </div>
-                                            <div class="">No data</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="py-3 border" style='background-color: #F2F12D'> </div>
+                                                            <div class="col-4 row">
+                                                                <div class="col-4">
+                                                                    <div class="py-3 border" style='background-color: #ddd'> </div>
+                                                                    <div class="">No data</div>
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <div class="py-3 border" style='background-color: #F2F12D'> </div>
 
-                                            <div class="">$0 - $50</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="py-3 " style='background-color: #EED322'> </div>
+                                                                    <div class="">$0 - $50</div>
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <div class="py-3 " style='background-color: #EED322'> </div>
 
-                                            <div class="">$150</div>
-                                        </div>
+                                                                    <div class="">$150</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4 row">
+                                                                <div class="col-4">
+                                                                    <div class="py-3 " style='background-color: #E6B71E'> </div>
+
+                                                                    <div class="">$200</div>
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <div class="py-3 " style='background-color: #CA8323'> </div>
+
+                                                                    <div class="">$250</div>
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <div class="py-3 " style='background-color: #B86B25'> </div>
+
+                                                                    <div class="">$300</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4 row">
+                                                                <div class="col-4">
+                                                                    <div class="py-3 " style='background-color: #A25626'> </div>
+
+                                                                    <div class="">$350</div>
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <div class="py-3 " style='background-color: #8B4225'> </div>
+
+                                                                    <div class="">$450</div>
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <div class="py-3 " style='background-color: #723122'> </div>
+
+                                                                    <div class="">$550</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                            <div class="row">
+                                    <div class="col">No data</div>
+                                    <div class="col">$0 - $50</div>
+                                    <div class="col">$150</div>
+                                    <div class="col">$200</div>
+                                    <div class="col">$250</div>
+                                    <div class="col">$300</div>
+                                    <div class="col">$350</div>
+                                    <div class="col">$450</div>
+                                    <div class="col">$550</div>
+                                </div>
+                                                        </div>*@
+                            <div id="culture-card" class="culture-card rounded shadow-lg bg-white" style="max-width: 500px; display: none;">
+                                <div class="card" id="culture-card-content" style="display:block">
+                                    <div width="350" height="30" id="culture-info-content">
+                                        <h2 class="font--20 text--lebel font--bold p-4" id="culture-title"></h2>
+                                        <span class="info-close">
+                                            <i id="culture-card-close-button" class="fa fa-times" role="button" aria-hidden="true"></i>
+                                        </span>
                                     </div>
-                                    <div class="col-4 row">
-                                        <div class="col-4">
-                                            <div class="py-3 " style='background-color: #E6B71E'> </div>
-
-                                            <div class="">$200</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="py-3 " style='background-color: #CA8323'> </div>
-
-                                            <div class="">$250</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="py-3 " style='background-color: #B86B25'> </div>
-
-                                            <div class="">$300</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-4 row">
-                                        <div class="col-4">
-                                            <div class="py-3 " style='background-color: #A25626'> </div>
-
-                                            <div class="">$350</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="py-3 " style='background-color: #8B4225'> </div>
-
-                                            <div class="">$450</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="py-3 " style='background-color: #723122'> </div>
-
-                                            <div class="">$550</div>
-                                        </div>
+                                    <hr>
+                                    <div id="culture-list-content">
                                     </div>
                                 </div>
 
-                                    <div class="row">
-            <div class="col">No data</div>
-            <div class="col">$0 - $50</div>
-            <div class="col">$150</div>
-            <div class="col">$200</div>
-            <div class="col">$250</div>
-            <div class="col">$300</div>
-            <div class="col">$350</div>
-            <div class="col">$450</div>
-            <div class="col">$550</div>
-        </div>
-                                </div>*@
-                                <div id="culture-card" class="culture-card rounded shadow-lg bg-white" style="max-width: 500px; display: none;">
-                                    <div class="card" id="culture-card-content" style="display:block">
-                                        <div width="350" height="30" id="culture-info-content">
-                                            <h2 class="font--20 text--lebel font--bold p-4" id="culture-title"></h2>
-                                            <span class="info-close">
-                                                <i id="culture-card-close-button" class="fa fa-times" role="button" aria-hidden="true"></i>
-                                            </span>
-                                        </div>
-                                        <hr>
-                                        <div id="culture-list-content">
-                                        </div>
+                            </div>
+
+                            <div id="info-card" class="info-card rounded shadow-lg bg-white" style="max-width: 350px; display: none;">
+                                <div class="card" id="card-content-2" style="display:none">
+                                    <div width="350" height="30" id="info-content-2">
+                                        <h2 class="font--20 text--lebel font--bold p-4" id="list-name"></h2>
+                                        <span class="info-close">
+                                            <i id="info-card-close-button-2" class="fa fa-times" role="button" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <div id='list' class="list-group">
+
                                     </div>
 
+
+                                    <div id='slist' class="list-group">
+
+                                    </div>
+
+                                    <div id='recomd-list' class="list-group">
+
+                                    </div>
                                 </div>
 
-                                <div id="info-card" class="info-card rounded shadow-lg bg-white" style="max-width: 350px; display: none;">
-                                    <div class="card" id="card-content-2" style="display:none">
-                                        <div width="350" height="30" id="info-content-2">
-                                            <h2 class="font--20 text--lebel font--bold p-4" id="list-name"></h2>
-                                            <span class="info-close">
-                                                <i id="info-card-close-button-2" class="fa fa-times" role="button" aria-hidden="true"></i>
-                                            </span>
-                                        </div>
-                                        <div id='list' class="list-group">
-
-                                        </div>
-
-
-                                        <div id='slist' class="list-group">
-
-                                        </div>
-
-                                        <div id='recomd-list' class="list-group">
-
-                                        </div>
+                                <div class="card" id="card-content">
+                                    <div width="350" height="200" id="image-container">
+                                        <span class="info-close">
+                                            <i id="info-card-close-button" class="fa fa-times" role="button" aria-hidden="true"></i>
+                                        </span>
+                                        <img class="" width="348" height="200" id="card-image" src="" />
                                     </div>
+                                    <div class="px-2 pb-2" id="more-content">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="font--20 text--lebel font--bold mt-4" id="card-title"></h2>
+                                                <p class="font--18 subtitle--color mt-1" id="card-subtitle">
 
-                                    <div class="card" id="card-content">
-                                        <div width="350" height="200" id="image-container">
-                                            <span class="info-close">
-                                                <i id="info-card-close-button" class="fa fa-times" role="button" aria-hidden="true"></i>
-                                            </span>
-                                            <img class="" width="348" height="200" id="card-image" src="" />
-                                        </div>
-                                        <div class="px-2 pb-2" id="more-content">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <h2 class="font--20 text--lebel font--bold mt-4" id="card-title"></h2>
-                                                    <p class="font--18 subtitle--color mt-1" id="card-subtitle">
+                                                </p>
+                                                <hr>
+                                                <p class="font--18 subtitle--color" id="card-description">
 
-                                                    </p>
-                                                    <hr>
-                                                    <p class="font--18 subtitle--color" id="card-description">
-
-                                                    </p>
-                                                    <hr>
-                                                </div>
+                                                </p>
+                                                <hr>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div width="350" height="200" id="image-container">
-                                            <iframe id="card-video" width="349" height="200" src=""></iframe>
-                                        </div>
+                                    <div width="350" height="200" id="image-container">
+                                        <iframe id="card-video" width="349" height="200" src=""></iframe>
                                     </div>
                                 </div>
-
-                                <div id='state-legend' class='legend' style="display: none">
-                                    <h4>Median Rent</h4>
-                                    <div><span style='background-color: #723122'></span>$550</div>
-                                    <div><span style='background-color: #8B4225'></span>$450</div>
-                                    <div><span style='background-color: #A25626'></span>$350</div>
-                                    <div><span style='background-color: #B86B25'></span>$300</div>
-                                    <div><span style='background-color: #CA8323'></span>$250</div>
-                                    <div><span style='background-color: #E6B71E'></span>$200</div>
-                                    <div><span style='background-color: #EED322'></span>$150</div>
-                                    <div><span style='background-color: #F2F12D'></span>$0 - $50</div>
-                                    <div><span style='background-color: #ddd'></span>No data</div>
-                                </div>
-
-                                <div id='state-crime-legend' class='legend' style="display: none">
-                                    <h4>Criminal rate</h4>
-                                    <div><span style='background-color: #723122'></span>10%</div>
-                                    <div><span style='background-color: #8B4225'></span>8%</div>
-                                    <div><span style='background-color: #A25626'></span>7%</div>
-                                    <div><span style='background-color: #B86B25'></span>6%</div>
-                                    <div><span style='background-color: #CA8323'></span>5%</div>
-                                    <div><span style='background-color: #DA9C20'></span>4%</div>
-                                    <div><span style='background-color: #E6B71E'></span>3%</div>
-                                    <div><span style='background-color: #EED322'></span>2%</div>
-                                    <div><span style='background-color: #F2F12D'></span>0% - 2%</div>
-                                    <div><span style='background-color: #ddd'></span>No data</div>
-                                </div>
-
-                                <div id='state-density-legend' class='legend' style="display: none">
-                                    <h4>Population density</h4>
-                                    <div><span style='background-color: #723122'></span>200</div>
-                                    <div><span style='background-color: #8B4225'></span>50</div>
-                                    <div><span style='background-color: #A25626'></span>20</div>
-                                    <div><span style='background-color: #B86B25'></span>8</div>
-                                    <div><span style='background-color: #CA8323'></span>5</div>
-                                    <div><span style='background-color: #E6B71E'></span>3</div>
-                                    <div><span style='background-color: #EED322'></span>1</div>
-                                    <div><span style='background-color: #F2F12D'></span>0 - 1</div>
-                                    <div><span style='background-color: #ddd'></span>No data</div>
-                                </div>
-
-                                <div id='state-unemp-legend' class='legend' style="display: none">
-                                    <h4>Umployment rate</h4>
-                                    <div><span style='background-color: #723122'></span>8%</div>
-                                    <div><span style='background-color: #8B4225'></span>7%</div>
-                                    <div><span style='background-color: #A25626'></span>6%</div>
-                                    <div><span style='background-color: #B86B25'></span>5%</div>
-                                    <div><span style='background-color: #CA8323'></span>4%</div>
-                                    <div><span style='background-color: #E6B71E'></span>3%</div>
-                                    <div><span style='background-color: #EED322'></span>2%</div>
-                                    <div><span style='background-color: #F2F12D'></span>0% - 2%</div>
-                                    <div><span style='background-color: #ddd'></span>No data</div>
-                                </div>
-
-                                <div id='state-income-legend' class='legend' style="display: none">
-                                    <h4>Income</h4>
-                                    <div><span style='background-color: #723122'></span>$60,000</div>
-                                    <div><span style='background-color: #8B4225'></span>$55,000</div>
-                                    <div><span style='background-color: #A25626'></span>$50,000</div>
-                                    <div><span style='background-color: #B86B25'></span>$48,000</div>
-                                    <div><span style='background-color: #CA8323'></span>$44,000</div>
-                                    <div><span style='background-color: #E6B71E'></span>$40,000</div>
-                                    <div><span style='background-color: #EED322'></span>$35,000</div>
-                                    <div><span style='background-color: #F2F12D'></span>$0 - $35,000</div>
-                                    <div><span style='background-color: #ddd'></span>No data</div>
-                                </div>
                             </div>
+
+                            <div id='state-legend' class='legend' style="display: none">
+                                <h4>Median Rent</h4>
+                                <div><span style='background-color: #723122'></span>$550</div>
+                                <div><span style='background-color: #8B4225'></span>$450</div>
+                                <div><span style='background-color: #A25626'></span>$350</div>
+                                <div><span style='background-color: #B86B25'></span>$300</div>
+                                <div><span style='background-color: #CA8323'></span>$250</div>
+                                <div><span style='background-color: #E6B71E'></span>$200</div>
+                                <div><span style='background-color: #EED322'></span>$150</div>
+                                <div><span style='background-color: #F2F12D'></span>$0 - $50</div>
+                                <div><span style='background-color: #ddd'></span>No data</div>
+                            </div>
+
+                            <div id='state-crime-legend' class='legend' style="display: none">
+                                <h4>Criminal rate</h4>
+                                <div><span style='background-color: #723122'></span>10%</div>
+                                <div><span style='background-color: #8B4225'></span>8%</div>
+                                <div><span style='background-color: #A25626'></span>7%</div>
+                                <div><span style='background-color: #B86B25'></span>6%</div>
+                                <div><span style='background-color: #CA8323'></span>5%</div>
+                                <div><span style='background-color: #DA9C20'></span>4%</div>
+                                <div><span style='background-color: #E6B71E'></span>3%</div>
+                                <div><span style='background-color: #EED322'></span>2%</div>
+                                <div><span style='background-color: #F2F12D'></span>0% - 2%</div>
+                                <div><span style='background-color: #ddd'></span>No data</div>
+                            </div>
+
+                            <div id='state-density-legend' class='legend' style="display: none">
+                                <h4>Population density</h4>
+                                <div><span style='background-color: #723122'></span>200</div>
+                                <div><span style='background-color: #8B4225'></span>50</div>
+                                <div><span style='background-color: #A25626'></span>20</div>
+                                <div><span style='background-color: #B86B25'></span>8</div>
+                                <div><span style='background-color: #CA8323'></span>5</div>
+                                <div><span style='background-color: #E6B71E'></span>3</div>
+                                <div><span style='background-color: #EED322'></span>1</div>
+                                <div><span style='background-color: #F2F12D'></span>0 - 1</div>
+                                <div><span style='background-color: #ddd'></span>No data</div>
+                            </div>
+
+                            <div id='state-unemp-legend' class='legend' style="display: none">
+                                <h4>Umployment rate</h4>
+                                <div><span style='background-color: #723122'></span>8%</div>
+                                <div><span style='background-color: #8B4225'></span>7%</div>
+                                <div><span style='background-color: #A25626'></span>6%</div>
+                                <div><span style='background-color: #B86B25'></span>5%</div>
+                                <div><span style='background-color: #CA8323'></span>4%</div>
+                                <div><span style='background-color: #E6B71E'></span>3%</div>
+                                <div><span style='background-color: #EED322'></span>2%</div>
+                                <div><span style='background-color: #F2F12D'></span>0% - 2%</div>
+                                <div><span style='background-color: #ddd'></span>No data</div>
+                            </div>
+
+                            <div id='state-income-legend' class='legend' style="display: none">
+                                <h4>Income</h4>
+                                <div><span style='background-color: #723122'></span>$60,000</div>
+                                <div><span style='background-color: #8B4225'></span>$55,000</div>
+                                <div><span style='background-color: #A25626'></span>$50,000</div>
+                                <div><span style='background-color: #B86B25'></span>$48,000</div>
+                                <div><span style='background-color: #CA8323'></span>$44,000</div>
+                                <div><span style='background-color: #E6B71E'></span>$40,000</div>
+                                <div><span style='background-color: #EED322'></span>$35,000</div>
+                                <div><span style='background-color: #F2F12D'></span>$0 - $35,000</div>
+                                <div><span style='background-color: #ddd'></span>No data</div>
+                            </div>
+                        </div>
 
                         <div class="col-6" style="display:none" id="chart-section">
 
@@ -1001,14 +1018,14 @@
         center: [145.045837, -37.876823],
         zoom: 6
     });
-    
-    
+
+
     var nav = new mapboxgl.NavigationControl();
     map.addControl(nav, 'bottom-right');
 
     var hoveredStateId = null;
     var highlightedStateId = null;
-        
+
     var minFBudget;
     var maxFBudget;
     var minRBudget;
@@ -1018,14 +1035,14 @@
             choropleth('i');
             $("#mapcontainer").removeClass('col-12').addClass('col-6');
             $('#chart-section').show();
-            map.resize() 
+            map.resize()
         });
 
         $('#unemployment-confirm').on('click', function () {
             choropleth('u');
             $("#mapcontainer").removeClass('col-12').addClass('col-6');
             $('#chart-section').show();
-            map.resize() 
+            map.resize()
         });
 
         $('#c-confirm').on('click', function () {
@@ -1033,7 +1050,7 @@
             choropleth('c');
             $("#mapcontainer").removeClass('col-12').addClass('col-6');
             $('#chart-section').show();
-            map.resize() 
+            map.resize()
         });
 
         $('#d-confirm').on('click', function () {
@@ -1041,7 +1058,7 @@
             choropleth('d');
             $("#mapcontainer").removeClass('col-12').addClass('col-6');
             $('#chart-section').show();
-            map.resize() 
+            map.resize()
         });
 
 
@@ -1396,7 +1413,7 @@
 
         }
 
-        
+
         function initRegionList() {
             $("#inputRegion").empty();
             $.ajax({
@@ -1450,7 +1467,32 @@
         });
 
 
-    $(document).ready(function () {
+        $(document).ready(function () {
+
+            let url = location.href.replace(/\/$/, "");
+
+            if (location.hash) {
+                const hash = url.split("#");
+                $('#mapTab a[href="#' + hash[1] + '"]').tab("show");
+                url = location.href.replace(/\/#/, "#");
+                history.replaceState(null, null, url);
+                setTimeout(() => {
+                    $(window).scrollTop(0);
+                }, 400);
+            }
+
+            $('a[data-toggle="tab"]').on("click", function () {
+                let newUrl;
+                const hash = $(this).attr("href");
+                if (hash == "#home") {
+                    newUrl = url.split("#")[0];
+                } else {
+                    newUrl = url.split("#")[0] + hash;
+                }
+                newUrl += "/";
+                history.replaceState(null, null, newUrl);
+            });
+
         initCountryList();
         initRegionList();
         initialCountryListR();
@@ -1657,13 +1699,13 @@
         });
         //Popup regions name
         map.on('click', 'state-fills', function (e) {
-            
+
             var lgaCode = e.features[0].properties.LGA_CODE18;
             if (clicked == lgaCode)
                 return;
             clicked = lgaCode;
 
-            
+
             var content2 = document.querySelector('#card-content-2');
             content2.style.display = "none";
             var content1 = document.querySelector('#card-content');
@@ -1695,10 +1737,10 @@
                     document.querySelector('#card-subtitle').innerText = region;
 
                     document.querySelector('#card-description').innerText = description;
-                    
+
                     image.src = image_link;
                     video.src = video_link;
-                    
+
                     $('#more-content').fadeIn(200);
                     {
                     //function loaded() {
@@ -1758,8 +1800,8 @@
                         $('#info-card').fadeIn(300);
                         $('#culture-card').fadeOut(300);
                     }
-                    
-                    
+
+
                     // Ensure the info box is visible
                     document.querySelector('#info-card').style.display = 'block';
 
@@ -1799,7 +1841,7 @@
 
         document.querySelector('#info-card-close-button').addEventListener('click', function (event) {
             //document.querySelector('#info-card').style.display = 'none';
-            
+
             //$('#info-card').fadeOut(300);
             resetAll();
         });
@@ -1890,7 +1932,7 @@
         $("#loader").addClass("is-active");
         //Income
         if (option == "i") {
-            
+
             list.style.display = "none";
             slist.style.display = "none";
             document.querySelector('#card-content').style.display = "none";
@@ -1933,8 +1975,12 @@
                     }
                     displayData(showData, 'Income per year($)', 'Top 10 Regions')
 
+
+                    extendMap();
+                    $('#info-card').fadeOut(300);
                     $('#culture-card').fadeOut(300);
                     $('#card-content').fadeOut(200);
+
 
                     stateIncomeLegend.style.display = "block"
                     stateUnempLegend.style.display = "none"
@@ -1956,7 +2002,7 @@
         }
         //Unemployment
         else if (option == "u") {
-            
+
             list.style.display = "none";
             slist.style.display = "none";
             document.querySelector('#card-content').style.display = "none";
@@ -1999,6 +2045,8 @@
                     }
                     displayData(showData, 'Unemployment (%)', 'Top 10 Regions')
 
+                    extendMap();
+                    $('#info-card').fadeOut(300);
                     $('#culture-card').fadeOut(300);
                     $('#card-content').fadeOut(200);
 
@@ -2064,6 +2112,8 @@
                     }
                     displayData(showData, 'Criminal Rate (%)', 'Top 10 Regions')
 
+                    extendMap();
+                    $('#info-card').fadeOut(300);
                     $('#culture-card').fadeOut(300);
                     $('#card-content').fadeOut(200);
 
@@ -2130,6 +2180,8 @@
                     }
                     displayData(showData, 'Density(The number of person per square kilometer', 'Top 10 Regions')
 
+                    extendMap();
+                    $('#info-card').fadeOut(300);
                     $('#culture-card').fadeOut(300);
                     $('#card-content').fadeOut(200);
 
@@ -2153,7 +2205,7 @@
 
     }
 
-        
+
         @*function showUnemployRate() {
             list.style.display = "none";
             slist.style.display = "none";
@@ -2175,7 +2227,7 @@
                         dataObj["value"] = tmpObj[i]["Rate"]
                         dataObj["color"] = tmpObj[i]["Color"]
                         dataObj["code"] = tmpObj[i]["LgaCode"]
-                        
+
                         showData.push(dataObj);
                     }
 
@@ -2258,13 +2310,13 @@
 
 
         var ctx = document.getElementById("myChart" + count).getContext("2d");
-        
+
         var myChart = new Chart(ctx, config);
 
         //dmbChart(150, 150, 125, 25, values, colors, labels, 0);
 
         }
-        
+
 
     function initLanguageCharts(lgaCode) {
 
@@ -2356,7 +2408,7 @@
 
 
         }
-            
+
         function displayData(data, namex, namey) {
             $("#barchart").empty();
             data.sort(function (a, b) {
@@ -2418,19 +2470,19 @@
                 })
                 .attr("height", y.bandwidth())
                 .attr('fill', d => d.color)
-                .style("opacity", 0.6)
+                .style("opacity", 0.8)
                 .on("mouseover", function (d) {
                     d3.select(this)
                         .style("opacity", 1)
 
                     highlight(d.code, d.key);
-                
+
                 })
                 .on("mouseout", function () {
                     d3.select(this)
                         .transition("colorfade")
                         .duration(250)
-                        .style("opacity", 0.7)
+                        .style("opacity", 0.8)
 
                     features.style.display = "none"
 
@@ -2438,7 +2490,7 @@
                         map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
                     }
                     hoveredStateId = null;
-                }) 
+                })
 
 
             svg.selectAll(".bar").on("click", function (d) {
@@ -2476,7 +2528,7 @@
 
                //.on('mouseover', tip.show)
                //.on('mouseout', tip.hide)
-    
+
 
             //svg.selectAll(".bar-label")
             //    .data(tmpData)
@@ -2605,7 +2657,7 @@
                     .duration(500)
                     .attr("width", function (d) { return x(d.value); })
 
-                
+
 
                 svg.select(".x.axis") // change the x axis
                     .transition().duration(750)
@@ -2658,7 +2710,7 @@
                     var value = item["value"];
                     var newElement = '<div class="ml-1 row"><div class="col-12 col-md-7 mt-2"> <h2 class="font--26 text--lebel">TOP '+ (i+1)
                         + '</h2>' + '<h2 class="font--20 text--lebel font--bold mt-2 ml-1">'+label+' </h2> </div> <div class="col-12 col-md-5"> <canvas id="myChart' + i + '"></canvas></div></div><hr>';
-                    
+
                     $('#culture-list-content').append(newElement);
 
                     showCheoBlock = false;
@@ -2988,7 +3040,7 @@
         maxRBudget = to;
         }
 
-        
+
         function initialIndustryListR() {
             $("#inputIndustryR").empty();
              $.ajax({
@@ -3154,11 +3206,11 @@
 
     //Filter
     function filter() {
-        
+
             var sel1 = jQuery("#sel1 option:selected").val();
             var sel2 = jQuery("#sel2 option:selected").val();
 
-        
+
         slist.style.display = "none";
         list.style.display = "block";
         recomdList.style.display = "none";
@@ -3177,7 +3229,7 @@
 
         document.querySelector('#card-content').style.display = "none";
         document.querySelector('#list-name').innerHTML = "Regions";
-        
+
         $("#loader").addClass("is-active");
         $.ajax({
             /**/
@@ -3261,7 +3313,7 @@
     <script src="/js/jqBootstrapValidation.js"></script>
     <script src="/js/contact_me.js"></script>
     <!-- Custom scripts for this template -->
-    <script src="/js/agency.min.js"></script>
+    <script src="/js/agency.js"></script>
 
 </body>
 

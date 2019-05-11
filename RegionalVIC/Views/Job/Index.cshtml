@@ -87,11 +87,28 @@
                 <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav text-uppercase ml-auto">
+                <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="/">Home</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="/Map/Recommendation">Recommendation</a>
+                    </li>
 
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/Map" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            What you concern?
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                            <a class="dropdown-item" href="/Map#description">Regional areas information</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/Map#job">Job opportunity</a>
+                            <a class="dropdown-item" href="/Map#rent">Rent cost</a>
+                            <a class="dropdown-item" href="/Map#safety">Safety</a>
+                            <a class="dropdown-item" href="/Map#culture">Loneliness</a>
+                        </div>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="/News">News</a>
                     </li>
@@ -317,7 +334,7 @@
 
                 },
             });
-        
+
         });
 
 

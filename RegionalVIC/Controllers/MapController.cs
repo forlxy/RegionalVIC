@@ -178,6 +178,16 @@ namespace RegionalVIC.Controllers
             return View(/*Tuple.Create(first, second, third)*/);
         }
 
+
+        // GET: Map
+        public ActionResult Recommendation()
+        {
+            //var first = _context.Rtrtbl;
+            //var second = _context.Critbl;
+            //var third = _context.Ppltbl;
+
+            return View(/*Tuple.Create(first, second, third)*/);
+        }
         // GET: Map/Details/5
         public ActionResult Details(int id)
         {

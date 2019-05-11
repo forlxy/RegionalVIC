@@ -27,3 +27,4 @@ C:\Users\kasal\Source\Repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcor
 C:\Users\kasal\Source\Repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcoreapp2.1\RegionalVIC.pdb
 C:\Users\kasal\Source\Repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcoreapp2.1\RegionalVIC.csproj.CopyComplete
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcoreapp2.1\Razor\Views\Job\Index.g.cshtml.cs
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcoreapp2.1\Razor\Views\Map\Recommendation.g.cshtml.cs

@@ -25,6 +25,293 @@
         object-position: center;
         object-fit: cover;
     }
+
+    /*From Alan*/
+    .carousel-item {
+        height: 100vh;
+        max-height: 450px;
+        background: no-repeat center center scroll;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    .carousel-indicators li {
+        width: 10px !important;
+        height: 10px !important;
+        background-color: #ddd !important;
+    }
+
+
+    .cta-100 {
+        margin-top: 100px;
+        padding-left: 8%;
+        padding-top: 7%;
+    }
+
+    .col-md-4 {
+        padding-bottom: 20px;
+    }
+
+    .white {
+        color: #fff !important;
+    }
+
+    .mt {
+        float: left;
+        margin-top: -20px;
+        padding-top: 20px;
+    }
+
+    .bg-blue-ui {
+        background-color: #708198 !important;
+    }
+
+    figure img {
+        width: 300px;
+    }
+
+    #blogCarousel {
+        padding-bottom: 100px;
+    }
+
+    .blog .carousel-indicators {
+        left: 0;
+        top: -50px;
+        height: 50%;
+    }
+
+
+        /* The colour of the indicators */
+
+        .blog .carousel-indicators li {
+            background: #708198;
+            border-radius: 50%;
+            width: 8px;
+            height: 8px;
+        }
+
+        .blog .carousel-indicators .active {
+            background: #0fc9af;
+        }
+
+
+
+
+    .item-carousel-blog-block {
+        outline: medium none;
+        padding: 15px;
+    }
+
+    .item-box-blog {
+        border: 1px solid #dadada;
+        text-align: center;
+        z-index: 4;
+        padding: 20px;
+    }
+
+    .item-box-blog-image {
+        position: relative;
+    }
+
+        .item-box-blog-image figure img {
+            width: 100%;
+            height: auto;
+        }
+
+    .item-box-blog-date {
+        position: absolute;
+        z-index: 5;
+        padding: 4px 20px;
+        top: -20px;
+        right: 8px;
+        background-color: #41cb52;
+    }
+
+        .item-box-blog-date span {
+            color: #fff;
+            display: block;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+            .item-box-blog-date span.mon {
+                font-size: 18px;
+            }
+
+            .item-box-blog-date span.day {
+                font-size: 16px;
+            }
+
+    .item-box-blog-body {
+        padding: 10px;
+    }
+
+    .item-heading-blog a h5 {
+        margin: 0;
+        line-height: 1;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .item-box-blog-heading a {
+        text-decoration: none;
+    }
+
+    .item-box-blog-data p {
+        font-size: 13px;
+    }
+
+        .item-box-blog-data p i {
+            font-size: 12px;
+        }
+
+    .item-box-blog-text {
+        max-height: 100px;
+        overflow: hidden;
+    }
+
+    .mt-10 {
+        float: left;
+        margin-top: -10px;
+        padding-top: 10px;
+    }
+
+    .btn.bg-blue-ui.white.read {
+        cursor: pointer;
+        padding: 4px 20px;
+        float: left;
+        margin-top: 10px;
+    }
+
+    .btn.bg-blue-ui.white.read:hover {
+        box-shadow: 0px 5px 15px inset #4d5f77;
+    }
+    /*From Tonya*/
+    .col-center {
+        margin: 0 auto;
+        float: none !important;
+    }
+
+    .carousel {
+        margin: 30px auto 80px;
+        padding: 0 80px;
+    }
+
+        .carousel .item {
+            text-align: center;
+            overflow: hidden;
+        }
+
+            .carousel .item h4 {
+                font-family: 'Varela Round', sans-serif;
+            }
+
+            .carousel .item img {
+                max-width: 100%;
+                display: inline-block;
+            }
+
+            .carousel .item .btn {
+                border-radius: 0;
+                font-size: 12px;
+                text-transform: uppercase;
+                font-weight: bold;
+                border: none;
+                background: #a177ff;
+                padding: 6px 15px;
+                margin-top: 5px;
+            }
+
+                .carousel .item .btn:hover {
+                    background: #8c5bff;
+                }
+
+                .carousel .item .btn i {
+                    font-size: 14px;
+                    font-weight: bold;
+                    margin-left: 5px;
+                }
+
+        .carousel .thumb-wrapper {
+            margin: 5px;
+            text-align: left;
+            background: #fff;
+            height:100%;
+            box-shadow: 0px 2px 2px rgba(0,0,0,0.1);
+        }
+
+        .carousel .thumb-content {
+            padding: 15px;
+            font-size: 13px;
+            height: 190px;
+        }
+
+        .carousel .carousel-control {
+            height: 44px;
+            width: 44px;
+            background: none;
+            margin: auto 0;
+            border-radius: 50%;
+            border: 3px solid rgba(0, 0, 0, 0.8);
+        }
+
+            .carousel .carousel-control i {
+                font-size: 36px;
+                position: absolute;
+                top: 50%;
+                display: inline-block;
+                margin: -19px 0 0 0;
+                z-index: 5;
+                left: 0;
+                right: 0;
+                color: rgba(0, 0, 0, 0.8);
+                text-shadow: none;
+                font-weight: bold;
+            }
+
+            .carousel .carousel-control.left i {
+                margin-left: -3px;
+            }
+
+            .carousel .carousel-control.right i {
+                margin-right: -3px;
+            }
+
+        .carousel .carousel-indicators {
+            bottom: -50px;
+        }
+
+    .carousel-indicators li, .carousel-indicators li.active {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin: 4px;
+        border-color: transparent;
+    }
+
+    .carousel-indicators li {
+        background: #ababab;
+        border-top: 0px solid transparent !important;
+        border-bottom: 0px solid transparent !important;
+    }
+
+
+        .carousel-indicators li.active {
+            background: #555 !important;
+        }
+    .row {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+        .row > [class*='col-'] {
+            display: flex;
+            flex-direction: column;
+        }
 </style>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +322,7 @@
     <meta name="author" content="">
     <title>RegionalVIC - A guide to moving to regional Victoria</title>
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -55,20 +342,39 @@
                 <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav text-uppercase ml-auto">
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="/Map/Recommendation">Recommendation</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/Map" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            What you concern?
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/Map#description">Regional areas information</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/Map#living">Rent cost</a>
+                            <a class="dropdown-item" href="/Map#job">Job opportunity</a>
+                            <a class="dropdown-item" href="/Map#safety">Safety</a>
+                            <a class="dropdown-item" href="/Map#culture">Loneliness</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="/News">News</a>
+                    </li>
+
+                    @*<li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#function">Function</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="#about">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="#team">Team</a>
-                    </li>
+                    </li>*@
 
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="/Map">Map</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="/News">News</a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -88,68 +394,176 @@
             </div>
         </div>
     </header>
+    <!-- Function-->
+    <section id="function">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading text-uppercase"><font color="black">Functions</font></h2>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-center m-auto">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                            <!-- Carousel indicators -->
+                            <ol class="carousel-indicators">
+                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#myCarousel" data-slide-to="1"></li>
+                            </ol>
+                            <!-- Wrapper for carousel items -->
+                            <div class="carousel-inner">
+                                <div class="item carousel-item active">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="thumb-wrapper">
+                                                <div class="img-box">
+                                                    <img src="img/carousel/housing.jpeg" class="img-responsive img-fluid" alt="">
+                                                </div>
+                                                <div class="thumb-content d-flex align-items-start flex-column">
+                                                    <h4>Housing</h4>
+                                                    <p>Flat or house, one bedroom or more, find the regions under your budget!</p>
+                                                    <a href="/Map#living" class="btn btn-primary mt-auto">More <i class="fa fa-angle-right"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="thumb-wrapper">
+                                                <div class="img-box">
+                                                    <img src="img/carousel/safety.png" class="img-responsive img-fluid" alt="">
+                                                </div>
+                                                <div class="thumb-content d-flex align-items-start flex-column">
+                                                    <h4>Safety</h4>
+                                                    <p>Stay away from areas with high crime rates, keep your family and children safe!</p>
+                                                    <a href="/Map#safety" class="btn btn-primary mt-auto">More <i class="fa fa-angle-right"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="thumb-wrapper">
+                                                <div class="img-box">
+                                                    <img src="img/carousel/job.jpeg" class="img-responsive img-fluid" alt="">
+                                                </div>
+                                                <div class="thumb-content d-flex align-items-start flex-column">
+                                                    <h4>Job</h4>
+                                                    <p>Find your ideal industry and business in that region, avoid high unemployment rate!</p>
+                                                    <a href="/Map#job" class="btn btn-primary mt-auto">More <i class="fa fa-angle-right"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item carousel-item">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="thumb-wrapper">
+                                                <div class="img-box">
+                                                    <img src="img/carousel/culture.jpeg" class="img-responsive img-fluid" alt="">
+                                                </div>
+                                                <div class="thumb-content d-flex align-items-start flex-column">
+                                                    <h4>Culture</h4>
+                                                    <p>Find the region with the most friends from the same country as you, get affiliation!</p>
+                                                    <a href="/Map#culture" class="btn btn-primary mt-auto">More <i class="fa fa-angle-right"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="thumb-wrapper">
+                                                <div class="img-box">
+                                                    <img src="img/carousel/recommendation.jpeg" class="img-responsive img-fluid" alt="">
+                                                </div>
+                                                <div class="thumb-content d-flex align-items-start flex-column">
+                                                    <h4>Recommendation</h4>
+                                                    <p>
+                                                        There are too may aspect to consider perfectly, we help you to make a comprehensive analysis!
+                                                    </p>
+
+                                                    <a href="/Map/recommendation" class="btn btn-primary mt-auto">More <i class="fa fa-angle-right"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- Carousel controls -->
+                            <a class="carousel-control left carousel-control-prev" href="#myCarousel" data-slide="prev">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a class="carousel-control right carousel-control-next" href="#myCarousel" data-slide="next">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- About -->
     <section id="about">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading text-uppercase">About</h2>
+                    <h2 class="section-heading text-uppercase"><font color="black">About</font></h2>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <ul class="timeline">
-                        <li>
-                            <div class="timeline-image">
+
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    <!-- Slide One - Set the background image for this slide in the line below -->
+                    <div class="carousel-item active">
+                        <div class="carousel-caption row">
+                            <div class="col-sm-4 align-self-center">
                                 <img class="rounded-circle img-fluid" src="img/about/a1.jpg" alt="">
                             </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4 class="subheading">Background</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Over-population is one of the issues in Melbourne. Besides, for international graduates, many competitors are in the application of skilled immigration visa. As a result, it becomes more challenging for international graduates who want to live in Australia permanently. </p>
-                                </div>
+                            <div class="col-sm-8 align-self-center">
+                                <h2 class="display-4"><font color="black">Background</font></h2>
+                                <p class="lead"><font color="black">Over-population is one of the issues in Melbourne. Besides, for international graduates, many competitors are in the application of skilled immigration visa. As a result, it becomes more challenging for international graduates who want to live in Australia permanently.</font></p>
                             </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
+                        </div>
+                    </div>
+                    <!-- Slide Two - Set the background image for this slide in the line below -->
+                    <div class="carousel-item">
+                        <div class="carousel-caption row">
+                            <div class="col-sm-4 align-self-center">
                                 <img class="rounded-circle img-fluid" src="img/about/a2.jpg" alt="">
                             </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    
-                                    <h4 class="subheading">What we provide</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">RegionalVIC - provides the key information for international graduates who consider moving to regional Victoria. Our website analyzes their requirements such as accommodation and safety to provide the suggestion of suitable areas to live in. </p>
-                                </div>
+                            <div class="col-sm-8 align-self-center">
+                                <h2 class="display-4"><font color="black">What we provided</font></h2>
+                                <p class="lead"><font color="black">RegionalVIC - provides the key information for international graduates who consider moving to regional Victoria. Our website analyzes their requirements such as accommodation and safety to provide the suggestion of suitable areas to live in.</font></p>
                             </div>
-                        </li>
-                        <li>
-                            <div class="timeline-image">
+                        </div>
+                    </div>
+                    <!-- Slide Three - Set the background image for this slide in the line below -->
+                    <div class="carousel-item">
+                        <div class="carousel-caption row">
+                            <div class="col-sm-4 align-self-center">
                                 <img class="rounded-circle img-fluid" src="img/about/a3.jpg" alt="">
                             </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4 class="subheading">Value</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Mitigate the over-population issue in Melbourne. Help international graduates to decide on a suitable region to live. Coordinate with the new immigration policy of Australian government - encourage new immigrants to move to regional areas. </p>
-                                </div>
+                            <div class="col-sm-8 align-self-center">
+                                <h2 class="display-4"><font color="black">Value</font></h2>
+                                <p class="lead"><font color="black">Mitigate the over-population issue in Melbourne. Help international graduates to decide on a suitable region to live. Coordinate with the new immigration policy of Australian government - encourage new immigrants to move to regional areas.</font></p>
                             </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <h4>
-                                    Be Part
-                                    <br>Of Our
-                                    <br>Story!
-                                </h4>
-                            </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
+
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="false"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
         </div>
     </section>
@@ -172,7 +586,7 @@
                 </div>
                 <div class="col">
                     <div class="team-member">
-                        <img class="mx-auto rounded-circle" src="img/team/2.png" style="width:200px;height:200px;"  alt="">
+                        <img class="mx-auto rounded-circle" src="img/team/2.png" style="width:200px;height:200px;" alt="">
                         <h4>Mahi</h4>
                         <p class="text-muted">Business Analyst</p>
                     </div>
@@ -211,34 +625,34 @@
                     </span>
                 </div>
                 @*<div class="col-md-4">
-                    <ul class="list-inline social-buttons">
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <ul class="list-inline quicklinks">
-                        <li class="list-inline-item">
-                            <a href="#">Privacy Policy</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">Terms of Use</a>
-                        </li>
-                    </ul>
-                </div>*@
+                        <ul class="list-inline social-buttons">
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="list-inline quicklinks">
+                            <li class="list-inline-item">
+                                <a href="#">Privacy Policy</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">Terms of Use</a>
+                            </li>
+                        </ul>
+                    </div>*@
             </div>
         </div>
     </footer>
