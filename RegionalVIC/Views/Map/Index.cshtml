@@ -276,6 +276,8 @@
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6/css/select2.min.css" rel="stylesheet" />
+
     <!-- Bootstrap core JavaScript -->
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -297,7 +299,9 @@
     <script src="/Scripts/ion.rangeSlider.min.js"></script>
     <script src="/Scripts/covervid.min.js"></script>
     <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js"></script>
-    
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6/js/select2.min.js"></script>
 
     <link href="/css/rangeslider.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/css-loader.css">
@@ -403,114 +407,6 @@
 
                         </div>
 
-                        <!-- Reccomendation Pane -->
-                        @*<div class="tab-pane" id="recommendation" role="tabpanel"
-                                 aria-labelledby="recommendation-tab">
-
-                                <div class="filter" id="selectAbleFilter">
-                                    <div class="row">
-                                        <div class="col-12 col-sm-7 col-md-6">
-                                            <div class="dropdown mt-3 w-100">
-                                                <button class="button w-100 dropdown-toggle" type="button"
-                                                        id="factorsDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                    Importance of factors
-                                                </button>
-                                                <div class="dropdown-menu importance-of-factors"
-                                                     aria-labelledby="factorsDropdownMenu">
-                                                    <form class="px-4 py-3">
-                                                        <div class="form-group">
-                                                            <label for="acmSlider"
-                                                                   class="font--18 text--lebel">Rent (a)</label>
-                                                            <div class="range-slider">
-                                                                <input type="text" class="acmSlider" value="" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="amrSlider"
-                                                                   class="font--18 text--lebel">Safety (b)</label>
-                                                            <div class="range-slider">
-                                                                <input type="text" class="crmSlider" value="" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="pouSlider"
-                                                                   class="font--18 text--lebel">Population (c)</label>
-
-                                                            <div class="range-slider">
-                                                                <input type="text" class="pouSlider" value="" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="culSlider"
-                                                                   class="font--18 text--lebel">Culture Background (d)</label>
-                                                            <label for="inputCountryR" class="font--18 text--lebel">
-
-                                                            </label>
-                                                            <select id="inputCountryR" class="form-control">
-                                                                <option selected>Choose from List</option>
-                                                            </select>
-                                                            <div class="range-slider">
-                                                                <input type="text" class="culSlider" value="" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="jobSlider"
-                                                                   class="font--18 text--lebel">Job Oportunity (e)</label>
-                                                            <label for="inputIndustryR" class="font--18 text--lebel">
-
-                                                            </label>
-                                                            <select id="inputIndustryR" class="form-control">
-                                                                <option selected>Choose from List</option>
-                                                            </select>
-                                                            <div class="range-slider">
-                                                                <input type="text" class="jobSlider" value="" />
-                                                            </div>
-                                                        </div>
-
-
-                                                        <p class="text-sm-left">
-                                                            Final Score = a * Rent score + b
-                                                            * Safety
-                                                            score + c *
-                                                            Population score + d *
-                                                            Culture score + e * Job score
-                                                        </p>
-                                                        <div class="mt-3">
-                                                            <span class="font--18 font--bold hand text--colored float-right"
-                                                                  id="rmd-confirm">Confirm</span>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-sm-5 col-md-4">
-                                            <div class="dropdown mt-3 w-100">
-                                                <button class="button w-100 dropdown-toggle" type="button"
-                                                        id="budgetDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                    Rent Budget (per week)
-                                                </button>
-                                                <div class="dropdown-menu importance-of-factors"
-                                                     aria-labelledby="budgetDropdownMenu">
-                                                    <form class="px-4 py-3">
-                                                        <div class="form-group">
-                                                            <div class="range-slider">
-                                                                <input type="text" class="recommendRanger" value="" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="mt-3">
-                                                            <span class="font--18 font--bold hand text--colored float-right"
-                                                                  id="rmd-confirm2">Confirm</span>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>*@
 
                         <!-- Rent Pane -->
                         <div class="tab-pane" id="living" role="tabpanel" aria-labelledby="living-tab">
@@ -672,6 +568,10 @@
                                     <div class="col-12 col-md-6 col-lg-4">
                                         <button class="button w-100 mt-3" id="unemployment-confirm">Umployment rate</button>
                                     </div>
+
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <button class="button w-100 mt-3" id="job-compare-confirm">Job comparison</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -735,7 +635,7 @@
                         </div>
                     </div>
 
-                    <div class="container row">
+                    <div class="container row" id="mapp">
                         <div class="mapcontainer col-12" id="mapcontainer">
                             <div id="map" class="mmap" style="height:700px"></div>
                             <div class='map-overlay' id='features' style="display: none"><div class='block-content' id='pd'><p></p></div></div>
@@ -951,6 +851,36 @@
                         </div>
                     </div>
 
+                    <div class="container" id="job-compare">
+
+
+                        <div id="first">
+                            <div class="container">
+                                <br>
+                                <div class="form-group">
+
+                                    <h3>1. Please select 1 - 3 industry you want be occupied. </h3>
+                                    <select class="js-example-basic-multiple col-12" name="industry[]" multiple="multiple" id="industry-list"></select>
+
+                                    <h3>2. Please choose 2 - 3 regions in the dropdown menu below you want to compare </h3>
+                                    <select class="js-example-basic-multiple col-12" name="region[]" multiple="multiple" id="region-list"></select>
+                                </div>
+                                <div class="form-group">
+
+                                    <h3>3. Please choose one button below: you more concern in the industries you selected above </h3>
+                                    <div class="row">
+                                        <button class="btn btn-primary" id="nob-button">Number of business</button>
+                                        <button class="btn btn-primary" id="poe-button">Proportion of employess</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div id="second">
+                            <div id="barchart2"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1032,6 +962,8 @@
     var maxRBudget;
 
         $('#income-confirm').on('click', function () {
+            $("#mapp").show();
+            $('#job-compare').hide();
             choropleth('i');
             $("#mapcontainer").removeClass('col-12').addClass('col-6');
             $('#chart-section').show();
@@ -1039,10 +971,18 @@
         });
 
         $('#unemployment-confirm').on('click', function () {
+            $("#mapp").show();
+            $('#job-compare').hide();
             choropleth('u');
             $("#mapcontainer").removeClass('col-12').addClass('col-6');
             $('#chart-section').show();
             map.resize()
+        });
+
+
+        $('#job-compare-confirm').on('click', function () {
+            $("#mapp").hide();
+            $('#job-compare').show();
         });
 
         $('#c-confirm').on('click', function () {
@@ -1091,7 +1031,285 @@
             show('autocountry');
         });
 
+        
+        function generateChart(data, name) {
+            //if( $('#leftmenu').is(':empty') ) {
+            $('#barchart2').empty()
+            const keys = Object.keys(data[0]).slice(1);
 
+            const tip = d3.tip().html(d => d.value);
+
+            const margin = {
+                top: 40,
+                right: 80,
+                bottom: 20,
+                left: 240
+            },
+                width = 800,
+                height = 480,
+                innerWidth = width - margin.left - margin.right,
+                innerHeight = height - margin.top - margin.bottom;
+
+            svg = d3.select('#barchart2').append('svg').attr('width', width).attr('height', height)
+            g = svg.append('g').attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+            svg.call(tip)
+
+            const x0 = d3.scaleBand()
+                .rangeRound([0, innerWidth])
+                .paddingInner(.1);
+
+            const x1 = d3.scaleBand()
+                .padding(.05);
+
+            const y = d3.scaleLinear()
+                .rangeRound([innerHeight, 0]);
+
+            //const z = d3.scaleOrdinal()
+            //    .range(['#AA8139', '#AA9439', '#3C3176', '#2C4770', '#96A537', '#68266F', '#492E74']);
+
+            const z = d3.scaleOrdinal()
+                .range(["#ca0020", "#f4a582", "#92c5de", "#0571b0", '#68266F', '#492E74']);
+
+            x0.domain(data.map(d => d.industry));
+            x1.domain(keys).rangeRound([0, x0.bandwidth()]);
+            y.domain([0, d3.max(data, d => d3.max(keys, key => d[key]))]).nice();
+
+            g.append('g')
+                .selectAll('g')
+                .data(data)
+                .enter()
+                .append('g')
+                .attr('transform', d => 'translate(' + x0(d.industry) + ',0)')
+                .selectAll('rect')
+                .data(d => keys.map(key => { return { key: key, value: d[key] } }))
+                .enter().append('rect')
+                .attr('x', d => x1(d.key))
+                .attr('y', d => y(d.value))
+                .attr('width', x1.bandwidth())
+                .attr('height', d => innerHeight - y(d.value))
+                .attr('fill', d => z(d.key))
+                .on('mouseover', tip.show)
+                .on('mouseout', tip.hide)
+
+            g.append('g')
+                .attr('class', 'axis-bottom')
+                .attr('transform', 'translate(0,' + innerHeight + ')')
+                .call(d3.axisBottom(x0));
+
+            g.append('g')
+                .attr('class', 'axis-left')
+                .call(d3.axisLeft(y).ticks(null, 's'))
+                .append('text')
+                .attr('x', 10)
+                .attr('y', y(y.ticks().pop()) + 10)
+                .attr('dy', '0.32em')
+                .attr('fill', '#000')
+                .style('transform', 'rotate(-90deg)')
+                .attr('font-weight', 'bold')
+                .attr('text-anchor', 'end')
+                .text(name);
+
+            const legend = g.append('g')
+                .attr('font-family', 'sans-serif')
+                .attr('font-size', 10)
+                .attr('text-anchor', 'end')
+                .selectAll('g')
+                .data(keys.slice().reverse())
+                .enter().append('g')
+                .attr('transform', (d, i) => 'translate(0,' + i * 20 + ')');
+
+            legend.append('rect')
+                .attr('x', innerWidth - 19)
+                .attr('width', 10)
+                .attr('height', 10)
+                .attr('fill', z);
+
+            legend.append('text')
+                .attr('x', innerWidth - 32)
+                .attr('y', 6)
+                .attr('dy', '0.32em')
+                .text(d => d);
+        }
+
+        $("#nob-button").click(function () {
+            $("#loader").addClass("is-active");
+
+            //document.querySelector('#list-name').innerHTML = "Rent";
+            //list.style.display = "block";
+            //slist.style.display = "none";
+
+            var industry = $("#industry-list").select2("val");
+            var region = $("#region-list").select2("val");
+
+            $.ajax({
+                /**/
+                url: '@Url.Action("getBarchartData", "Job")',
+                /**/
+                type: 'POST',
+                data: { industries: industry, regions: region, option: "0" },
+                success: function (data) {
+                    var tmpObj = JSON.parse(data);
+                    var data = [];
+
+
+                    var industries = [...new Set(tmpObj.map(x => x.IdsName))]
+
+                    for (var i = 0; i < industries.length; i++) {
+
+                        var dataObj = new Object;
+                        dataObj["industry"] = industries[i]
+
+                        for (var j = 0; j < tmpObj.length; j++) {
+                            var item = tmpObj[j];
+                            if (item["IdsName"] === industries[i]) {
+                                dataObj[item["LgaName"]] = item["NoOfBsn"]
+                            }
+                        }
+
+                        data.push(dataObj);
+                    }
+
+                    generateChart(data, 'Number of Business')
+                    $("#loader").removeClass("is-active");
+
+                },
+            });
+
+        });
+
+
+        $("#poe-button").click(function () {
+            $("#loader").addClass("is-active");
+
+            //document.querySelector('#list-name').innerHTML = "Rent";
+            //list.style.display = "block";
+            //slist.style.display = "none";
+
+            var industry = $("#industry-list").select2("val");
+            var region = $("#region-list").select2("val");
+
+            $.ajax({
+                /**/
+                url: '@Url.Action("getBarchartData", "Job")',
+                /**/
+                type: 'POST',
+                data: { industries: industry, regions: region, option: "1" },
+                success: function (data) {
+                    var tmpObj = JSON.parse(data);
+                    var data = [];
+
+
+                    var industries = [...new Set(tmpObj.map(x => x.IdsName))]
+
+                    for (var i = 0; i < industries.length; i++) {
+
+                        var dataObj = new Object;
+                        dataObj["industry"] = industries[i]
+
+                        for (var j = 0; j < tmpObj.length; j++) {
+                            var item = tmpObj[j];
+                            if (item["IdsName"] === industries[i]) {
+                                dataObj[item["LgaName"]] = item["Proportion"]
+                            }
+                        }
+
+                        data.push(dataObj);
+                    }
+
+                    generateChart(data, 'Proportion of Employee')
+                    $("#loader").removeClass("is-active");
+
+                },
+            });
+        });
+
+        $("#industry-list").change(function () {
+            var ele = $(this);
+            if (ele.val().length == 3) {
+                ele.select2('close');
+            }
+        });
+        $("#region-list").change(function () {
+            var ele = $(this);
+            if (ele.val().length == 3) {
+                ele.select2('close');
+            }
+        });
+        // In your Javascript (external .js resource or <script> tag)
+        $(document).ready(function () {
+
+
+            $('#region-list').select2({
+                maximumSelectionLength: 3,
+                minimumSelectionLength: 2,
+                closeOnSelect: false
+            });
+
+            $('#industry-list').select2({
+                maximumSelectionLength: 3,
+                closeOnSelect: false
+            });
+
+
+
+            initIndustryListJ();
+            initRegionListJ();
+
+            resetAll();
+        });
+
+
+        function initRegionListJ() {
+            $("#region-list").empty();
+            $.ajax({
+                /**/
+                url: '@Url.Action("getAllRegions", "Map")',
+                /**/
+                type: 'POST',
+                data: {},
+                success: function (data) {
+                    var list = JSON.parse(data);
+                    for (var i = 0; i < list.length; i++) {
+                        var item = list[i];
+                        var value = item["code"];
+                        var label = item["name"];
+                        var o = new Option(value, value);
+                        /// jquerify the DOM object 'o' so we can use the html method
+                        $(o).html(label);
+                        $("#region-list").append(o);
+                    }
+                },
+            });
+
+        }
+
+        function initIndustryListJ() {
+            $("#industry-list").empty();
+            $.ajax({
+                /**/
+                url: '@Url.Action("getAllIndustry", "Job")',
+                /**/
+                type: 'POST',
+                data: {},
+                success: function (data) {
+                    var list = JSON.parse(data);
+                    for (var i = 0; i < list.length; i++) {
+                        var value = list[i];
+
+                        var o = new Option(value, value);
+                        /// jquerify the DOM object 'o' so we can use the html method
+                        $(o).html(value);
+                        $("#industry-list").append(o);
+
+                    }
+                    
+
+
+                },
+            });
+
+        }
 
         function show(option) {
             $('#culture-list-content').empty();
@@ -1450,6 +1668,9 @@
             extendMap();
             $('#info-card').fadeOut(300);
             $('#culture-card').fadeOut(300);
+
+            $("#mapp").show();
+            $('#job-compare').hide();
 
             $("#mapcontainer").removeClass('col-6').addClass('col-12');
             $('#chart-section').hide();

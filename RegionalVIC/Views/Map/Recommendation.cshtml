@@ -1544,6 +1544,12 @@
             type: 'POST',
             data: { },
                  success: function (data) {
+                     var value = " ";
+                     var o = new Option(value, value);
+                     /// jquerify the DOM object 'o' so we can use the html method
+                     $(o).html(value);
+                     $("#inputIndustryR").append(o);
+
                      var list = JSON.parse(data);
                      for (var i = 0; i < list.length; i++){
                          var value = list[i];
@@ -1565,6 +1571,13 @@
             type: 'POST',
             data: { },
                  success: function (data) {
+
+                     var value = " ";
+                     var o = new Option(value, value);
+                     /// jquerify the DOM object 'o' so we can use the html method
+                     $(o).html(value);
+                     $("#inputCountryR").append(o);
+
                      var list = JSON.parse(data);
                      for (var i = 0; i < list.length; i++){
                          var value = list[i];
@@ -1593,11 +1606,16 @@
         minRBudget = isNaN(minRBudget) ? 0 : minRBudget;
         maxRBudget = isNaN(maxRBudget) ? 1000 : maxRBudget;
 
+
+        var country = $("#inputCountryR").val();
+
+        var industry = $("#inputIndustryR").val();
+
         var calAcmWeight = acmWeight;
         var calCrmWeight = crmWeight;
         var calPouWeight = pouWeight;
-        var calCulWeight = culWeight;
-        var calJobWeight = jobWeight;
+        var calCulWeight = (country == " " ? 0 : culWeight);
+        var calJobWeight = (industry == " " ? 0 : jobWeight);
         var sum = calAcmWeight + calCrmWeight + calPouWeight + calCulWeight + calJobWeight;
         calAcmWeight /= sum
         calCrmWeight /= sum
@@ -1605,9 +1623,6 @@
         calCulWeight /= sum
         calJobWeight /= sum
 
-        var country = $("#inputCountryR").val();
-
-        var industry = $("#inputIndustryR").val();
 
 
         document.querySelector('#card-content').style.display = "none";

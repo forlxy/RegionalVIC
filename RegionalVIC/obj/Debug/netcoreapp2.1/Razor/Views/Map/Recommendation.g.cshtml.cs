@@ -307,7 +307,7 @@ namespace AspNetCore
             WriteLiteral("lor: #F0B20B !important;\r\n        color: #101010;\r\n        height: 70px;\r\n    }\r\n</style>\r\n<!DOCTYPE html>\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(5267, 2765, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4174eb0784ed4d438a9b0cccd95735ce", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ca951dae68074ad382fa4ba40d28d737", async() => {
                 BeginContext(5273, 2752, true);
                 WriteLiteral(@"
 
@@ -381,7 +381,7 @@ namespace AspNetCore
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(8034, 60077, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b17c1f3532344f76a8ef0a1f79dff66d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e3ff0c5290474490a5ef254515b68bc4", async() => {
                 BeginContext(8040, 8878, true);
                 WriteLiteral(@"
 

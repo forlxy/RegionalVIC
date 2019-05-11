@@ -612,10 +612,11 @@ namespace RegionalVIC.Controllers
         }
 
         [HttpPost]
-        public string getRecommendation(int min, int max, float acmWeight, float crmWeight, float pouWeight, float culWeight, float jobWeight, string country, string industry)
+        public string getRecommendation(int min, int max, float acmWeight, float crmWeight, float pouWeight, float culWeight, float jobWeight, string country = " ", string industry = " ")
         {
             string display = "";
-            var list = (from r in _context.Rtrtbl
+
+            var query = (from r in _context.Rtrtbl
                         join l in _context.Lgatbl on r.LgaCode equals l.LgaCode
                         join p in _context.Ppltbl on r.LgaCode equals p.LgaCode
                         join c in _context.Critbl on r.LgaCode equals c.LgaCode
@@ -626,9 +627,7 @@ namespace RegionalVIC.Controllers
                         where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3) && r.Typ.Contains("all") &&
                             r.Median > 0 && (r.Median >= min && r.Median <= max) &&
                             c.YrEnd.Equals(2018) && c.Rate > 0 &&
-                            p.Density > 0 && l.Status == "R" &&
-                            m.Cob.Contains(country) &&
-                            s.IdsName.Contains(industry)
+                            p.Density > 0 && l.Status == "R"
                         select new
                         {
                             LgaCode = r.LgaCode,
@@ -642,8 +641,19 @@ namespace RegionalVIC.Controllers
                             Density = p.Density,
                             Population = p.Popul,
                             Rank = d.Rank,
-                            NoOfBsn = i.NoOfBsn
-                        }).ToList();
+                            NoOfBsn = i.NoOfBsn,
+                            Cob = m.Cob,
+                            IdsName = s.IdsName
+                        });
+
+            if (!String.IsNullOrEmpty(country))
+                query = query.Where(i => i.Cob.Contains(country));
+
+            if (!String.IsNullOrEmpty(industry))
+                query = query.Where(i => i.IdsName.Contains(industry));
+
+            
+            var list = query.ToList();
 
             if (list.Count == 0)
             {
@@ -669,6 +679,9 @@ namespace RegionalVIC.Controllers
 
             }
 
+            rates = rates.GroupBy(x => x.code)
+                         .Select(g => g.First())
+                         .ToList();
 
             rates = rates.OrderByDescending(t => t.rate).ToList();
 
