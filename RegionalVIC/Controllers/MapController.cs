@@ -660,7 +660,7 @@ namespace RegionalVIC.Controllers
                 display = "<div class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
                    "<div class=\"d-flex w-100 justify-content-between\" > <h4 class=\"mb-1\">" +
                    "No record within this price range</h4> <small class=\"text-muted\" ></small> </div> <p class=\"mb-1\">" +
-                   "Change your price range and try again</p> </div>";
+                   "Change your preference and try again</p> </div>";
             }
 
             var regionsList = _context.Lgatbl.ToList();
@@ -695,7 +695,7 @@ namespace RegionalVIC.Controllers
                     + rates[j].name + " - " + rates[j].region + "</h4> <small class=\"text-muted\" >Top "
                     + (j+1) + "</small> </div>" +
                     "<div class=\"d-flex w-100 justify-content-between\" > " +
-                    "<div> Average </div>" +
+                    "<div> Rent </div>" +
                     //"<div>" + rates[j].bedroom + " bedroom(s) " + FirstCharToUpper(rates[j].type) + "</div> " +
                     "<small class=\"text-muted\"><b>$" + rates[j].median + "</b></small> " +
                     "</div></a>";

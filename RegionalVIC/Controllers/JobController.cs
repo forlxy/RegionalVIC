@@ -51,11 +51,11 @@ namespace RegionalVIC.Controllers
             {
                 var list = (from r in _context.Idsmas
                             join l in _context.Nbitbl on r.IdsCode equals l.IdsCode
-                            join t in _context.Lgamas on l.LgaCode equals t.LgaCode
+                            join t in _context.Lgatbl on l.LgaCode equals t.LgaCode
                             where industries.Contains(r.IdsName) && regions.Contains(l.LgaCode)
                             select new
                             {
-                                LgaName = t.LgaName,
+                                LgaName = t.NameRent,
                                 IdsName = r.IdsName,
                                 Year = l.Yr,
                                 NoOfBsn = l.NoOfBsn
@@ -69,11 +69,11 @@ namespace RegionalVIC.Controllers
             {
                 var list = (from r in _context.Idsmas
                             join l in _context.Poetbl on r.IdsCode equals l.IdsCode
-                            join t in _context.Lgamas on l.LgaCode equals t.LgaCode
+                            join t in _context.Lgatbl on l.LgaCode equals t.LgaCode
                             where industries.Contains(r.IdsName) && regions.Contains(l.LgaCode)
                             select new
                             {
-                                LgaName = t.LgaName,
+                                LgaName = t.NameRent,
                                 IdsName = r.IdsName,
                                 Year = l.Yr,
                                 Proportion = l.Proportion

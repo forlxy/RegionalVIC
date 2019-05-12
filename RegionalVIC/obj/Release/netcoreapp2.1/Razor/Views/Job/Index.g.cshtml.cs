@@ -73,7 +73,7 @@ using RegionalVIC.Controllers;
 ");
             EndContext();
             BeginContext(481, 2974, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d11e1e946f1c4d8eb65b2bdb01b773d3", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1e2db416e501428ba6a851738b9c92e4", async() => {
                 BeginContext(487, 2961, true);
                 WriteLiteral(@"
 
@@ -148,7 +148,7 @@ using RegionalVIC.Controllers;
             WriteLiteral("\r\n\r\n");
             EndContext();
             BeginContext(3459, 17285, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9f8977fcd56f4707aec3044e47d47489", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "da29df358f5c4e82a1ddc9d88a8f1101", async() => {
                 BeginContext(3465, 3973, true);
                 WriteLiteral(@"
     <nav class=""navbar navbar-expand-lg navbar-dark fixed-top"" id=""mainNav"">
