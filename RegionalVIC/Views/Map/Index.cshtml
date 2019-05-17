@@ -1,7 +1,490 @@
 ﻿@using RegionalVIC.Controllers;
 @*@model Tuple<Rtrtbl, Critbl, Ppltbl>*@
 @*@model IEnumerable<Rtrtbl>*@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>RegionalVIC - Explore Regional Victoria</title>
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="/fontawesome/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+    <link rel='/stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.css' type='text/css' />
+
+    <link href="/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="https://unpkg.com/tinyqueue@2.0.0/tinyqueue.min.js"></script>
+    <script src="/js/polylabel.js"></script>
+
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.min.js'></script>
+
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js'></script>
+
+    <script src="/Scripts/ion.rangeSlider.min.js"></script>
+    <script src="/Scripts/covervid.min.js"></script>
+    <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js"></script>
+
+
+    <script src="/Scripts/select2.min.js"></script>
+
+    <link href="/css/rangeslider.css" rel="stylesheet">
+    @*<link rel="stylesheet" href="/css/css-loader.css">*@
+
+    <link rel="stylesheet" href="/css/ion.rangeSlider.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/agency.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+
+    <script>
+        var lga = new Object
+        lga["type"] = "FeatureCollection"
+        lga["features"] = []
+        window.onload = function () {
+
+
+        function ajax1() {
+            // NOTE:  This function must return the value
+            //        from calling the $.ajax() method.
+            return $.ajax({
+                url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_1.json", // path to file
+
+                dataType: 'text',
+                success: function (data) { // callback for successful completion
+                    var tmpObj = JSON.parse(data);
+                    lga["features"] = lga["features"].concat(tmpObj["features"]);
+                },
+                error: function () { // callback if there's an error
+                    alert("error");
+                }
+            });
+        }
+
+        function ajax2() {
+            // NOTE:  This function must return the value
+            //        from calling the $.ajax() method.
+            return $.ajax({
+                url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_2.json", // path to file
+
+                dataType: 'text',
+                success: function (data) { // callback for successful completion
+                    var tmpObj = JSON.parse(data);
+                    lga["features"] = lga["features"].concat(tmpObj["features"]);
+                },
+                error: function () { // callback if there's an error
+                    alert("error");
+                }
+            });
+        }
+
+        function ajax3() {
+            // NOTE:  This function must return the value
+            //        from calling the $.ajax() method.
+            return $.ajax({
+                url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_3.json", // path to file
+
+                dataType: 'text',
+                success: function (data) { // callback for successful completion
+                    var tmpObj = JSON.parse(data);
+                    lga["features"] = lga["features"].concat(tmpObj["features"]);
+                },
+                error: function () { // callback if there's an error
+                    alert("error");
+                }
+            });
+        }
+
+        function ajax4() {
+            // NOTE:  This function must return the value
+            //        from calling the $.ajax() method.
+            return $.ajax({
+                url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_4.json", // path to file
+
+                dataType: 'text',
+                success: function (data) { // callback for successful completion
+                    var tmpObj = JSON.parse(data);
+                    lga["features"] = lga["features"].concat(tmpObj["features"]);
+                },
+                error: function () { // callback if there's an error
+                    alert("error");
+                }
+            });
+        }
+
+        function ajax5() {
+            // NOTE:  This function must return the value
+            //        from calling the $.ajax() method.
+            return $.ajax({
+                url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_5.json", // path to file
+
+                dataType: 'text',
+                success: function (data) { // callback for successful completion
+                    var tmpObj = JSON.parse(data);
+                    lga["features"] = lga["features"].concat(tmpObj["features"]);
+                },
+                error: function () { // callback if there's an error
+                    alert("error");
+                }
+            });
+        }
+
+        function ajax6() {
+            // NOTE:  This function must return the value
+            //        from calling the $.ajax() method.
+            return $.ajax({
+                url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_6.json", // path to file
+
+                dataType: 'text',
+                success: function (data) { // callback for successful completion
+                    var tmpObj = JSON.parse(data);
+                    lga["features"] = lga["features"].concat(tmpObj["features"]);
+                },
+                error: function () { // callback if there's an error
+                    alert("error");
+                }
+            });
+        }
+
+        $.when(ajax1(), ajax2(), ajax3(), ajax4(), ajax5(), ajax6()).done(function (a1, a2, a3, a4, a5, a6) {
+            // Add a layer showing the places.
+            map.addSource("states", {
+                "type": "geojson",
+                "data": lga
+            });
+            //All colored states layer
+            map.addLayer({
+                "id": "state-fills",
+                "type": "fill",
+                "source": "states",
+                "layout": { 'visibility': 'visible' },
+                "paint": {
+                    "fill-color":
+                        ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", myData]],
+                    "fill-opacity": ["case",
+                        ["boolean", ["feature-state", "hover"], false],
+                        0.9,
+                        0.7
+                    ]
+                }
+            });
+            //Generated layer
+            map.addLayer({
+                "id": "cheo",
+                "type": "fill",
+                "source": "states",
+                "layout": { 'visibility': 'none' },
+                "paint": {
+                    "fill-color":
+                        ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]],
+                    "fill-opacity": ["case",
+                        ["boolean", ["feature-state", "hover"], false],
+                        1,
+                        0.7
+                    ]
+                }
+            });
+            var featureCollection = {
+                "type": "FeatureCollection",
+
+                "features": [
+
+                ]
+            }
+            lga.features.forEach(function (feature) {
+                //draw.add(feature);
+                if (feature.geometry != null) {
+
+                    var centroidPt = turf.center(feature);
+                    centroidPt.properties.title = feature.properties.LGA_NAME18;
+                    centroidPt.properties.LGA_CODE18 = feature.properties.LGA_CODE18;
+                    featureCollection.features.push(centroidPt);
+                }
+            })
+            map.addSource('label', {
+                'type': 'geojson',
+                'data': featureCollection
+            });
+            map.addLayer({
+                "id": "region-label",
+                "type": "symbol",
+                "source": "label",
+                "layout": {
+                    'text-field': '{title}',
+                    'text-font': ["Lato Bold"],
+                    'text-size': {
+                        "base": 2,
+                        "stops": [
+                            [12, 12],
+                            [16, 16]
+                        ]
+                    },
+                    "text-padding": 3,
+                    "text-letter-spacing": 0.1,
+                    "text-max-width": 7
+                },
+                "paint": {
+                    "text-color":
+                        ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]],
+                    "text-halo-color": "hsl(0, 0%, 100%)",
+                    "text-halo-width": 1.5,
+                    "text-halo-blur": 1
+                }
+            });
+            // When the user moves their mouse over the state-fill layer, we'll update the
+            // feature state for the feature under the mouse.
+            map.on("mousemove", "state-fills", function (e) {
+                map.getCanvas().style.cursor = e.point.length ? 'pointer' : '';
+
+                if (e.features.length > 0) {
+                    if (hoveredStateId) {
+                        map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                    }
+                    hoveredStateId = e.features[0].id;
+                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
+                }
+
+                var coordinates = e.features[0].geometry.coordinates.slice();
+                var code = e.features[0].properties.LGA_CODE18;
+
+                // Ensure that if the map is zoomed out such that multiple
+                // copies of the feature are visible, the popup appears
+                // over the copy being pointed to.
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+
+                // Populate the popup and set its coordinates
+                // based on the feature found.
+                //popup.setLngLat([e.lngLat.lng, e.lngLat.lat])
+                //    .setHTML(code + ', ' + e.lngLat.lat + ', ' + e.lngLat.lng)
+                //    .addTo(map);
+            });
+
+            // When the mouse leaves the state-fill layer, update the feature state of the
+            // previously hovered feature.
+            map.on("mouseleave", "state-fills", function (e) {
+
+                //map.getCanvas().style.cursor = e.point.length ? 'default' : '';
+
+                map.getCanvas().style.cursor = '';
+                //popup.remove();
+
+                if (hoveredStateId) {
+                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                }
+                hoveredStateId = null;
+            });
+
+            //Show information block and hover effect
+            map.on('mousemove', "cheo", function (e) {
+                var over = document.getElementById('features');
+                if (showCheoBlock)
+                    features.style.display = "block";
+                else
+                    features.style.display = "none";
+
+                var states = map.queryRenderedFeatures(e.point);
+                if (states.length > 0) {
+                    for (var i = 0; i < states.length; i++) {
+                        if (states[0].layer.id == "cheo") {
+                            var name = states[0].properties.LGA_NAME18.substring(0, states[0].properties.LGA_NAME18.indexOf(" ("));
+                            document.getElementById('pd').innerHTML = '<h5><strong>' + name + '</strong></h5><div class="content-line">' + displayList[states[0].properties.LGA_CODE18] + '</div>';
+                            break;
+                        }
+                    }
+                } else {
+                    document.getElementById('pd').innerHTML = '<p>Hover over a state!</p>';
+                }
+
+                if (e.features.length > 0) {
+                    if (hoveredStateId) {
+                        map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                    }
+                    hoveredStateId = e.features[0].id;
+                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
+                }
+            });
+
+            //Reset information block and hover effect
+            map.on('mouseleave', "cheo", function (e) {
+                var over = document.getElementById('features');
+                features.style.display = "none"
+
+                if (hoveredStateId) {
+                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                }
+                hoveredStateId = null;
+            });
+
+            //Popup regions name
+            map.on('click', 'state-fills', function (e) {
+
+                var lgaCode = e.features[0].properties.LGA_CODE18;
+                if (clicked == lgaCode)
+                    return;
+                clicked = lgaCode;
+
+
+                var content2 = document.querySelector('#card-content-2');
+                content2.style.display = "none";
+                var content1 = document.querySelector('#card-content');
+                content1.style.display = "block";
+
+                var content = document.querySelector('#more-content');
+
+                content.style.display = "none";
+                var image = document.querySelector('#card-image');
+                image.style.display = "none";
+                var video = document.querySelector('#card-video');
+                video.style.display = "none";
+                $.ajax({
+                    /**/
+                    url: '@Url.Action("getInfo", "Map")',
+                    /**/
+                    type: 'POST',
+                    data: { code: lgaCode },
+                    success: function (data) {
+                        var item = JSON.parse(data);
+                        var description = item["descrption"];
+                        var image_link = item["image"];
+                        var video_link = item["video"];
+                        var name = item["name"];
+                        var region = item["region"];
+
+                        // Display airport info
+                        document.querySelector('#card-title').innerText = name;
+                        document.querySelector('#card-subtitle').innerText = region;
+
+                        document.querySelector('#card-description').innerText = description;
+
+                        image.src = image_link;
+                        video.src = video_link;
+
+                        $('#more-content').fadeIn(200);
+                        {
+                        //function loaded() {
+
+                        //    // Display airport info
+                        //    document.querySelector('#card-title').innerText = name;
+                        //    document.querySelector('#card-subtitle').innerText = region;
+
+                        //    document.querySelector('#card-description').innerText = description;
+
+
+                        //    if ($('#info-card').filter(':visible').length == 0) // all hidden
+                        //    {
+                        //        $('#info-card').fadeIn(300);
+                        //    }
+
+
+                        //    // Ensure the info box is visible
+                        //    document.querySelector('#info-card').style.display = 'block';
+
+                        //}
+
+                        //if (video.complete) {
+                        //    loaded()
+                        //} else {
+                        //    video.addEventListener('load', loaded)
+                        //    video.addEventListener('error', function () {
+                        //        alert('error')
+                        //    })
+                        //}
+                        }
+                        function iloaded() {
+                            //image.style.display = "block";
+                            $('#card-image').fadeIn(200);
+                        }
+
+                        function vloaded() {
+                            //video.style.display = "block";
+                            $('#card-video').fadeIn(200);
+                        }
+
+                        if (image.complete) {
+                            iloaded()
+                        } else {
+                            image.addEventListener('load', iloaded)
+                        }
+
+                        if (video.complete) {
+                            vloaded()
+                        } else {
+                            video.addEventListener('load', vloaded)
+                        }
+
+                        if ($('#info-card').filter(':visible').length == 0) // all hidden
+                        {
+                            shrinkMap();
+                            $('#info-card').fadeIn(300);
+                            $('#culture-card').fadeOut(300);
+                        }
+
+
+                        // Ensure the info box is visible
+                        document.querySelector('#info-card').style.display = 'block';
+
+                    },
+                });
+
+
+            });
+
+            map.on('idle', function () {
+                initMap = true;
+                if (initCodeColor && initMap) {
+                    //Loader
+                    $("#loader").hide();
+
+                    enableAllButton();
+                }
+            });
+            //map.on('load', function () {
+
+
+            //});
+        });
+        }
+    </script>
+
+</head>
+
 <style>
+
+    .loader-svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7) url(/spinner.svg) center center no-repeat;
+        z-index: 5;
+    }
+
 
     .n {
         opacity: .8;
@@ -10,7 +493,7 @@
         font-family: sans-serif;
         color: white;
         padding: 6px;
-        background-color: #3C3176;
+        background-color: #2E9CCA;
     }
 
 
@@ -165,9 +648,10 @@
             padding: 4px;
         }
 
-    .mapcontainer{
+    .mapcontainer {
         position: relative;
     }
+
     #control-panel {
         display: none;
         width: 350px;
@@ -206,11 +690,12 @@
         min-width: 340px;
         min-height: 200px;
     }
-    
+
     #more-content {
         min-width: 348px;
         min-height: 286px;
     }
+
     .chartProgress {
         min-width: 100px;
         min-height: 100px;
@@ -228,6 +713,7 @@
     .irs--round .irs-bar {
         background-color: #F2A02A !important
     }
+
     .irs--round .irs-handle {
         border: 4px solid #F2A02A !important
     }
@@ -240,7 +726,7 @@
     .axis {
         font: 14px sans-serif;
     }
-    
+
     .color-panel {
         background-color: #ffee58;
         padding: 5px;
@@ -248,8 +734,8 @@
 
     .panel-button {
         background-color: #F0B20B !important;
-        color: #101010;
-        height: 70px;
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
 
 
@@ -287,6 +773,7 @@
         width: 0;
         cursor: pointer
     }
+
     .text-title {
         font-size: 20px;
         font-weight: bold;
@@ -304,69 +791,39 @@
     .btn-sort {
         background-color: #2E9CCA !important;
     }
-    
+
+    section {
+        margin-bottom: 0px;
+        padding: 10px 0;
+
+    }
+
+    .content {
+        position: relative;
+    }
+
+    .overlay {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 2;
+        background-color: rgba(255,255,255,0.8);
+    }
+
+    .overlay-content {
+        position: absolute;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        top: 50%;
+        left: 0;
+        right: 0;
+        text-align: center;
+        color: #555;
+    }
 </style>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>RegionalVIC - Explore Regional Victoria</title>
-    <!-- Fontawesome -->
-    <link rel="stylesheet" href="/fontawesome/css/font-awesome.min.css">
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- Custom fonts for this template -->
-    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
-    <link rel='/stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.css' type='text/css' />
-
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6/css/select2.min.css" rel="stylesheet" />
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Plugin JavaScript -->
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="https://unpkg.com/tinyqueue@2.0.0/tinyqueue.min.js"></script>
-    <script src="/js/polylabel.js"></script>
-
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
-    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.min.js'></script>
-
-
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js'></script>
-
-    <script src="/Scripts/ion.rangeSlider.min.js"></script>
-    <script src="/Scripts/covervid.min.js"></script>
-    <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js"></script>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6/js/select2.min.js"></script>
-
-    <link href="/css/rangeslider.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/css-loader.css">
-
-    <link rel="stylesheet" href="/css/ion.rangeSlider.min.css">
-
-    <!-- Custom styles for this template -->
-    <link href="/css/agency.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-</head>
-
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
@@ -404,17 +861,7 @@
             </div>
         </div>
     </nav>
-    <!-- Header -->
-    @*<header class="masthead" style="background-image: url('/img/map1.jpg');background-size: cover;">
-            <div class="container">
-                <div class="intro-normal">
-
-                </div>
-            </div>
-        </header>*@
-
-    <div class="loader loader-default is-active" data-text id="loader"></div>
-
+ 
     <br>
     <br>
     <br>
@@ -424,160 +871,96 @@
     </div>
     <section>
         <div class="container">
-            <div class="row">
-                <div class="col">
 
-                    <!-- Tab Section -->
+            <!-- Tab Section -->
 
-                    <ul class="nav nav-tabs justify-content-center " id="mapTab" role="tablist">
-                        <li class="nav-item" onclick="resetAll()">
-                            <a class="nav-link pl-5 pr-5 active" id="description-tab" data-toggle="tab" href="#description"
-                               role="tab" aria-controls="description" aria-selected="false">Regional Details</a>
-                        </li>
-                        <li class="nav-item" onclick="resetAll()">
-                            <a class="nav-link pl-5 pr-5" id="living-tab" data-toggle="tab" href="#living"
-                               role="tab" aria-controls="living" aria-selected="false">Rent</a>
-                        </li>
-                        <li class="nav-item" onclick="resetAll()">
-                            <a class="nav-link pl-5 pr-5" id="job-tab" data-toggle="tab" href="#job"
-                               role="tab" aria-controls="job" aria-selected="false">Job</a>
-                        </li>
-                        <li class="nav-item" onclick="resetAll()">
-                            <a class="nav-link pl-5 pr-5" id="safety-tab" data-toggle="tab" href="#safety"
-                               role="tab" aria-controls="safety" aria-selected="false">Safety</a>
-                        </li>
-                        <li class="nav-item" onclick="resetAll()">
-                            <a class="nav-link pl-5 pr-5" id="culture-tab" data-toggle="tab" href="#culture"
-                               role="tab" aria-controls="culture" aria-selected="false">Cultural Background</a>
-                        </li>
-                        @*<li class="nav-item" onclick="resetAll()">
-            <a class="nav-link pl-5 pr-5" id="recommendation-tab" data-toggle="tab"
-               href="#recommendation" role="tab" aria-controls="recommendation"
-               aria-selected="true">Recommendation</a>
-        </li>*@
-                    </ul>
+            <ul class="nav nav-tabs justify-content-center " id="mapTab" role="tablist">
+                <li class="nav-item" onclick="resetAll()">
+                    <a class="nav-link pl-5 pr-5 active" id="description-tab" data-toggle="tab" href="#description"
+                       role="tab" aria-controls="description" aria-selected="false">Regional Details</a>
+                </li>
+                <li class="nav-item" onclick="resetAll()">
+                    <a class="nav-link pl-5 pr-5" id="living-tab" data-toggle="tab" href="#living"
+                       role="tab" aria-controls="living" aria-selected="false">Rent</a>
+                </li>
+                <li class="nav-item" onclick="resetAll()">
+                    <a class="nav-link pl-5 pr-5" id="job-tab" data-toggle="tab" href="#job"
+                       role="tab" aria-controls="job" aria-selected="false">Job</a>
+                </li>
+                <li class="nav-item" onclick="resetAll()">
+                    <a class="nav-link pl-5 pr-5" id="safety-tab" data-toggle="tab" href="#safety"
+                       role="tab" aria-controls="safety" aria-selected="false">Safety</a>
+                </li>
+                <li class="nav-item" onclick="resetAll()">
+                    <a class="nav-link pl-5 pr-5" id="culture-tab" data-toggle="tab" href="#culture"
+                       role="tab" aria-controls="culture" aria-selected="false">Cultural Background</a>
+                </li>
+                @*<li class="nav-item" onclick="resetAll()">
+                        <a class="nav-link pl-5 pr-5" id="recommendation-tab" data-toggle="tab"
+                           href="#recommendation" role="tab" aria-controls="recommendation"
+                           aria-selected="true">Recommendation</a>
+                    </li>*@
+            </ul>
 
-                    <div class="tab-content">
+            <div class="tab-content">
 
-                        <div class="tab-pane active" id="description" role="tabpanel"
-                             aria-labelledby="description-tab">
+                <div class="tab-pane active" id="description" role="tabpanel"
+                     aria-labelledby="description-tab">
 
-                            <div class="filter">
-                                <div class="col-12">
+                    <div class="filter">
+                        <div class="col-12">
 
-                                    <p class="text-center font--18">
-                                        Select an area below to learn more about Victoria’s diverse regional areas.
-                                    </p>
+                            <p class="text-center font--18">
+                                Select an area below to learn more about Victoria’s diverse regional areas.
+                            </p>
 
-                                    <br>
-                                </div>
-                            </div>
+                            <br>
                         </div>
+                    </div>
+                </div>
 
 
-                            <!-- Rent Pane -->
-                            <div class="tab-pane" id="living" role="tabpanel" aria-labelledby="living-tab">
-                                <div class="filter">
-                                    <div class="col-12">
+                <!-- Rent Pane -->
+                <div class="tab-pane" id="living" role="tabpanel" aria-labelledby="living-tab">
+                    <div class="filter">
+                        <div class="col-12">
 
-                                        <p class="text-center font--18">
-                                            Find the weekly median rent price in different regions.
-                                        </p>
+                            <p class="text-center font--18">
+                                Find the weekly median rent price in different regions.
+                            </p>
 
-                                        <p class="text-center font--18">
-                                            Select the type of house you are looking for and set your budget to see the result.
-                                        </p>
+                            <p class="text-center font--18">
+                                Select the type of house you are looking for and set your budget to see the result.
+                            </p>
 
-                                        <br>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="card-panel">
-                                            <div class="d-flex align-items-center justify-content-between flex-row ">
-                                                <!-- First -->
-                                                <div class="form-group">
-                                                    <div class="col-12">
-                                                        <label for="sel2"><b>1. Type of house</b></label>
-                                                    </div>
-
-                                                    <div class="col-12">
-                                                        <select class="form-control" id="sel2" onchange="changeSelect()">
-                                                            <option>Flat</option>
-                                                            <option>House</option>
-                                                            <option>All</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Second -->
-                                                <div class="form-group">
-                                                    <div class="col-12">
-                                                        <label for="sel1"><b>2. How many bedrooms?</b></label>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <select class="form-control" id="sel1">
-                                                            <option disabled hidden>All</option>
-                                                            <option>1</option>
-                                                            <option>2</option>
-                                                            <option>3</option>
-                                                            <option disabled>4</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Third -->
-                                                <div class="form-group col-5 mt-3">
-                                                    <div class="col-12 ">
-                                                        <label><b>3. Your rent budget (per week):</b></label>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="range-slider">
-                                                            <input type="text" class="filterRanger" value="" />
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                                <!--Forth -->
-
-                                                <div class="form-group  mr-4">
-                                                    <button class="btn panel-button"
-                                                            id="fll-confirm">
-                                                        Confirm
-                                                    </button>
-                                                </div>
-                                            </div>
-
+                            <br>
+                        </div>
+                        <div class="col-12">
+                            <div class="card-panel">
+                                <div class="d-flex align-items-center justify-content-between flex-row ">
+                                    <!-- First -->
+                                    <div class="form-group">
+                                        <div class="col-12">
+                                            <label for="sel2"><b>1. Type of house</b></label>
                                         </div>
 
-
-                                        @*<div class="col-12 col-md-7 col-lg-4">
-                        <div class="dropdown mt-3 w-100">
-                            <button class="button w-100 dropdown-toggle" type="button"
-                                    id="budgetDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                Rent (per week)
-                            </button>
-                            <div class="dropdown-menu importance-of-factors"
-                                 aria-labelledby="budgetDropdownMenu">
-                                <form class="px-4 py-3">
-
-                                    <div class="form-group row">
-                                        <div class="col-md-6">
-                                            <label for="sel2">Type:</label>
-                                        </div>
-
-                                        <div class="col-md-6">
+                                        <div class="col-12">
                                             <select class="form-control" id="sel2" onchange="changeSelect()">
                                                 <option>Flat</option>
                                                 <option>House</option>
+                                                <option>All</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-6">
-                                            <label for="sel1">Num of bedroom:</label>
+
+                                    <!-- Second -->
+                                    <div class="form-group">
+                                        <div class="col-12">
+                                            <label for="sel1"><b>2. How many bedrooms?</b></label>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-12">
                                             <select class="form-control" id="sel1">
+                                                <option disabled hidden>All</option>
                                                 <option>1</option>
                                                 <option>2</option>
                                                 <option>3</option>
@@ -586,431 +969,427 @@
                                         </div>
                                     </div>
 
-                                    <div class="mt-3">
-                                        <span class="font--18 font--bold hand text--colored float-right"
-                                              id="a-confirm">Confirm</span>
+                                    <!-- Third -->
+                                    <div class="form-group col-5 mt-3">
+                                        <div class="col-12 ">
+                                            <label><b>3. Your rent budget (per week):</b></label>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="range-slider">
+                                                <input type="text" class="filterRanger" value="" />
+                                            </div>
+
+                                        </div>
                                     </div>
-                                </form>
+                                    <!--Forth -->
+
+                                    <div class="form-group mr-4">
+                                        <a class="btn panel-button js-scroll-trigger" id="fll-confirm" href="#mapsection">Confirm</a>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-7 col-lg-4">
-                        <div class="dropdown mt-3 w-100">
-                            <button class="button w-100 dropdown-toggle" type="button"
-                                    id="budgetDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                Your Budget (per week)
-                            </button>
-                            <div class="dropdown-menu importance-of-factors"
-                                 aria-labelledby="budgetDropdownMenu">
-                                <form class="px-4 py-3">
-                                    <div class="form-group">
-                                        <div class="range-slider">
-                                            <input type="text" class="filterRanger" value="" />
-                                        </div>
-                                    </div>
-                                    <div class="mt-3">
-                                        <span class="font--18 font--bold hand text--colored float-right"
-                                              id="fll-confirm">Confirm</span>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>*@
-                                    </div>
-                                </div>
-                            </div>
+                </div>
 
-                            <!-- Safety Pane -->
+                <!-- Safety Pane -->
 
-                            <div class="tab-pane" id="safety" role="tabpanel" aria-labelledby="safety-tab">
-                                <div class="filter">
-                                    <div class="col-12">
+                <div class="tab-pane" id="safety" role="tabpanel" aria-labelledby="safety-tab">
+                    <div class="filter">
+                        <div class="col-12">
 
-                                        <p class="text-center font--18">
-                                            Find out how safe regional areas are based on the criminal rate and population density.
-                                        </p>
+                            <p class="text-center font--18">
+                                Find out how safe regional areas are based on the criminal rate and population density.
+                            </p>
 
-                                        <br>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 col-md-6 col-lg-4">
-                                            <button class="button w-100 mt-3" id="c-confirm">Criminal Rate</button>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-lg-4">
-                                            <button class="button w-100 mt-3" id="d-confirm">Population Density</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Job Pane -->
-
-                            <div class="tab-pane" id="job" role="tabpanel" aria-labelledby="job-tab">
-                                <div class="filter">
-                                    <div class="col-12">
-
-                                        <p class="text-center font--18">
-                                            Compare the yearly income and unemployment rate among the regional areas.
-                                        </p>
-
-                                        <br>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 col-md-6 col-lg-4">
-                                            <button class="button w-100 mt-3" id="job-compare-confirm">Job comparison</button>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-lg-4">
-                                            <button class="button w-100 mt-3" id="income-confirm">Income comparison</button>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-lg-4">
-                                            <button class="button w-100 mt-3" id="unemployment-confirm">Umployment rate</button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Cultural Pane -->
-
-                            <div class="tab-pane" id="culture" role="tabpanel" aria-labelledby="culture-tab">
-                                <div class="filter">
-                                    <div class="col-12">
-
-                                        <p class="text-center font--18">
-                                            Find out the areas where people from your home country are currently
-                                            lining in.
-
-                                        </p>
-                                        <p class="text-center font--18">
-                                            Also find the top 10 mostly spoken languages other than English in different regional
-                                            areas.
-                                        </p>
-
-                                        <br>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 col-md-12 col-lg-5">
-                                            <div class="dropdown mt-3 w-100">
-                                                <button class="button w-100 dropdown-toggle" type="button"
-                                                        id="budgetDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                    Country & Language of Region
-                                                </button>
-                                                <div class="dropdown-menu importance-of-factors"
-                                                     aria-labelledby="budgetDropdownMenu">
-                                                    <form class="px-4 py-3">
-                                                        <label for="inputRegion" class="font--18 text--lebel">
-                                                            Select region
-                                                        </label>
-                                                        <select id="inputRegion" class="form-control">
-                                                            <option selected>Choose from List</option>
-                                                        </select>
-                                                        <div class="mt-3">
-                                                            <span class="font--18 font--bold hand text--colored" id="bth-confirm">Birth Country</span>&nbsp;&nbsp;
-                                                            <span class="font--18 font--bold hand text--colored float-right" id="lag-confirm">Language Use</span>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-6 col-lg-3">
-                                            <div class="dropdown mt-3 w-100">
-                                                <button class="button w-100 dropdown-toggle" type="button"
-                                                        id="budgetDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                    Your Country
-                                                </button>
-                                                <div class="dropdown-menu importance-of-factors"
-                                                     aria-labelledby="budgetDropdownMenu">
-                                                    <form class="px-4 py-3">
-                                                        <label for="inputCountry" class="font--18 text--lebel">
-                                                            Select your
-                                                            country
-                                                        </label>
-                                                        <select id="inputCountry" class="form-control">
-                                                            <option selected>Choose from List</option>
-                                                        </select>
-                                                        <div class="mt-3">
-                                                            <span class="font--18 font--bold hand text--colored float-right" id="reg-confirm">Confirm</span>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    <div class="container row" id="mapp">
-                        <div class="mapcontainer col-12" id="mapcontainer">
-                            <div id="map" class="mmap" style="height:700px"></div>
-                            <div class='map-overlay' id='features' style="display: none"><div class='block-content' id='pd'><p></p></div></div>
-
-                            @*<div id='tlegend' class="form-group">
-                                                        <div class="row">
-
-                                                            <div class="col-4 row">
-                                                                <div class="col-4">
-                                                                    <div class="py-3 border" style='background-color: #ddd'> </div>
-                                                                    <div class="">No data</div>
-                                                                </div>
-                                                                <div class="col-4">
-                                                                    <div class="py-3 border" style='background-color: #F2F12D'> </div>
-
-                                                                    <div class="">$0 - $50</div>
-                                                                </div>
-                                                                <div class="col-4">
-                                                                    <div class="py-3 " style='background-color: #EED322'> </div>
-
-                                                                    <div class="">$150</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-4 row">
-                                                                <div class="col-4">
-                                                                    <div class="py-3 " style='background-color: #E6B71E'> </div>
-
-                                                                    <div class="">$200</div>
-                                                                </div>
-                                                                <div class="col-4">
-                                                                    <div class="py-3 " style='background-color: #CA8323'> </div>
-
-                                                                    <div class="">$250</div>
-                                                                </div>
-                                                                <div class="col-4">
-                                                                    <div class="py-3 " style='background-color: #B86B25'> </div>
-
-                                                                    <div class="">$300</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-4 row">
-                                                                <div class="col-4">
-                                                                    <div class="py-3 " style='background-color: #A25626'> </div>
-
-                                                                    <div class="">$350</div>
-                                                                </div>
-                                                                <div class="col-4">
-                                                                    <div class="py-3 " style='background-color: #8B4225'> </div>
-
-                                                                    <div class="">$450</div>
-                                                                </div>
-                                                                <div class="col-4">
-                                                                    <div class="py-3 " style='background-color: #723122'> </div>
-
-                                                                    <div class="">$550</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                            <div class="row">
-                                    <div class="col">No data</div>
-                                    <div class="col">$0 - $50</div>
-                                    <div class="col">$150</div>
-                                    <div class="col">$200</div>
-                                    <div class="col">$250</div>
-                                    <div class="col">$300</div>
-                                    <div class="col">$350</div>
-                                    <div class="col">$450</div>
-                                    <div class="col">$550</div>
-                                </div>
-                                                        </div>*@
-                            <div id="culture-card" class="culture-card rounded shadow-lg bg-white" style="max-width: 500px; display: none;">
-                                <div class="card" id="culture-card-content" style="display:block">
-                                    <div width="350" height="30" id="culture-info-content">
-                                        <h2 class="font--20 text--lebel font--bold p-4" id="culture-title"></h2>
-                                        <span class="info-close">
-                                            <i id="culture-card-close-button" class="fa fa-times" role="button" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
-                                    <hr>
-                                    <div id="culture-list-content">
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div id="info-card" class="info-card rounded shadow-lg bg-white" style="max-width: 350px; display: none;">
-                                <div class="card" id="card-content-2" style="display:none">
-                                    <div width="350" height="30" id="info-content-2">
-                                        <h2 class="font--20 text--lebel font--bold p-4" id="list-name"></h2>
-                                        <span class="info-close">
-                                            <i id="info-card-close-button-2" class="fa fa-times" role="button" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
-                                    <div id='list' class="list-group">
-
-                                    </div>
-
-
-                                    <div id='slist' class="list-group">
-
-                                    </div>
-
-                                    <div id='recomd-list' class="list-group">
-
-                                    </div>
-                                </div>
-
-                                <div class="card" id="card-content">
-                                    <div width="350" height="200" id="image-container">
-                                        <span class="info-close">
-                                            <i id="info-card-close-button" class="fa fa-times" role="button" aria-hidden="true"></i>
-                                        </span>
-                                        <img class="" width="348" height="200" id="card-image" src="" />
-                                    </div>
-                                    <div class="px-2 pb-2" id="more-content">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <h2 class="font--20 text--lebel font--bold mt-4" id="card-title"></h2>
-                                                <p class="font--18 subtitle--color mt-1" id="card-subtitle">
-
-                                                </p>
-                                                <hr>
-                                                <p class="font--18 subtitle--color" id="card-description">
-
-                                                </p>
-                                                <hr>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div width="350" height="200" id="image-container">
-                                        <iframe id="card-video" width="349" height="200" src=""></iframe>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id='state-legend' class='legend' style="display: none">
-                                <h4>Median Rent</h4>
-                                <div><span style='background-color: #723122'></span>$550</div>
-                                <div><span style='background-color: #8B4225'></span>$450</div>
-                                <div><span style='background-color: #A25626'></span>$350</div>
-                                <div><span style='background-color: #B86B25'></span>$300</div>
-                                <div><span style='background-color: #CA8323'></span>$250</div>
-                                <div><span style='background-color: #E6B71E'></span>$200</div>
-                                <div><span style='background-color: #EED322'></span>$150</div>
-                                <div><span style='background-color: #F2F12D'></span>$0 - $50</div>
-                                <div><span style='background-color: #ddd'></span>No data</div>
-                            </div>
-
-                            <div id='state-crime-legend' class='legend' style="display: none">
-                                <h4>Criminal rate</h4>
-                                <div><span style='background-color: #723122'></span>10%</div>
-                                <div><span style='background-color: #8B4225'></span>8%</div>
-                                <div><span style='background-color: #A25626'></span>7%</div>
-                                <div><span style='background-color: #B86B25'></span>6%</div>
-                                <div><span style='background-color: #CA8323'></span>5%</div>
-                                <div><span style='background-color: #DA9C20'></span>4%</div>
-                                <div><span style='background-color: #E6B71E'></span>3%</div>
-                                <div><span style='background-color: #EED322'></span>2%</div>
-                                <div><span style='background-color: #F2F12D'></span>0% - 2%</div>
-                                <div><span style='background-color: #ddd'></span>No data</div>
-                            </div>
-
-                            <div id='state-density-legend' class='legend' style="display: none">
-                                <h4>Population density</h4>
-                                <div><span style='background-color: #723122'></span>200</div>
-                                <div><span style='background-color: #8B4225'></span>50</div>
-                                <div><span style='background-color: #A25626'></span>20</div>
-                                <div><span style='background-color: #B86B25'></span>8</div>
-                                <div><span style='background-color: #CA8323'></span>5</div>
-                                <div><span style='background-color: #E6B71E'></span>3</div>
-                                <div><span style='background-color: #EED322'></span>1</div>
-                                <div><span style='background-color: #F2F12D'></span>0 - 1</div>
-                                <div><span style='background-color: #ddd'></span>No data</div>
-                            </div>
-
-                            <div id='state-unemp-legend' class='legend' style="display: none">
-                                <h4>Umployment rate</h4>
-                                <div><span style='background-color: #723122'></span>8%</div>
-                                <div><span style='background-color: #8B4225'></span>7%</div>
-                                <div><span style='background-color: #A25626'></span>6%</div>
-                                <div><span style='background-color: #B86B25'></span>5%</div>
-                                <div><span style='background-color: #CA8323'></span>4%</div>
-                                <div><span style='background-color: #E6B71E'></span>3%</div>
-                                <div><span style='background-color: #EED322'></span>2%</div>
-                                <div><span style='background-color: #F2F12D'></span>0% - 2%</div>
-                                <div><span style='background-color: #ddd'></span>No data</div>
-                            </div>
-
-                            <div id='state-income-legend' class='legend' style="display: none">
-                                <h4>Income</h4>
-                                <div><span style='background-color: #723122'></span>$60,000</div>
-                                <div><span style='background-color: #8B4225'></span>$55,000</div>
-                                <div><span style='background-color: #A25626'></span>$50,000</div>
-                                <div><span style='background-color: #B86B25'></span>$48,000</div>
-                                <div><span style='background-color: #CA8323'></span>$44,000</div>
-                                <div><span style='background-color: #E6B71E'></span>$40,000</div>
-                                <div><span style='background-color: #EED322'></span>$35,000</div>
-                                <div><span style='background-color: #F2F12D'></span>$0 - $35,000</div>
-                                <div><span style='background-color: #ddd'></span>No data</div>
-                            </div>
-                        </div>
-
-                        <div class="col-6" style="display:none" id="chart-section">
-
-                            <div class="d-flex justify-content-center" id="buttons">
-                                <button id="byKey" class="btn btn-info btn-sort">Top 10 Min</button>
-                                <div style="width:10px"></div>
-                                <button id="byValue" class="btn btn-info btn-sort"> Top 10 Max</button>
-                            </div>
                             <br>
-                            <div id="barchart"></div>
                         </div>
-                    </div>
-
-                    <div class="container" id="job-compare">
-
-
-                        <div id="first">
-                            <div class="container">
-                                <br>
-                                <div class="form-group">
-
-                                    <p style="font-size: 26px" class="lead">1. Please select up to 3 industries you want be occupied. </p>
-                                    
-                                    <select class="js-example-basic-multiple col-12" name="industry[]" multiple="multiple" id="industry-list"></select>
-
-                                    <br>
-                                </div>
-                                <div class="form-group">
-                                    <p style="font-size: 26px" class="lead">
-                                        2. Please select up to 3 regions you want to compare </p>
-                                        
-                                        <select class="js-example-basic-multiple col-12" name="region[]" multiple="multiple" id="region-list"></select>
-
-                                        <br>
-</div>
-                                <div class="form-group">
-
-                                    <p style="font-size: 26px" class="lead">
-                                        3. Please click one button below: you more concern in the industries you selected above
-                                    </p>
-<br>
-                                    <div class="row">
-                                        <div class="col-2"></div>
-                                        <button class="btn btn-primary col-3" id="nob-button">Number of business</button>
-                                        <div class="col-2"></div>
-                                        <button class="btn btn-primary col-3" id="poe-button">Proportion of employess</button>
-                                        <div class="col-2"></div>
-                                    </div>
-
-                                    <br>
-                                </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <button class="button w-100 mt-3" id="c-confirm">Criminal Rate</button>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <button class="button w-100 mt-3" id="d-confirm">Population Density</button>
                             </div>
                         </div>
+                    </div>
+                </div>
 
+                <!-- Job Pane -->
 
-                        <div id="second" class="text-center">
-                            <div id="barchart2"></div>
+                <div class="tab-pane" id="job" role="tabpanel" aria-labelledby="job-tab">
+                    <div class="filter">
+                        <div class="col-12">
+
+                            <p class="text-center font--18">
+                                Compare the yearly income and unemployment rate among the regional areas.
+                            </p>
+
+                            <br>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <button class="button w-100 mt-3" id="job-compare-confirm">Job comparison</button>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <button class="button w-100 mt-3" id="income-confirm">Income comparison</button>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <button class="button w-100 mt-3" id="unemployment-confirm">Umployment rate</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cultural Pane -->
+
+                <div class="tab-pane" id="culture" role="tabpanel" aria-labelledby="culture-tab">
+                    <div class="filter">
+                        <div class="col-12">
+
+                            <p class="text-center font--18">
+                                Find out the areas where people from your home country are currently
+                                lining in.
+
+                            </p>
+                            <p class="text-center font--18">
+                                Also find the top 10 mostly spoken languages other than English in different regional
+                                areas.
+                            </p>
+
+                            <br>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-12 col-lg-5">
+                                <div class="dropdown mt-3 w-100">
+                                    <button class="button w-100 dropdown-toggle" type="button"
+                                            id="budgetDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                        Country & Language of Region
+                                    </button>
+                                    <div class="dropdown-menu importance-of-factors"
+                                         aria-labelledby="budgetDropdownMenu">
+                                        <form class="px-4 py-3">
+                                            <label for="inputRegion" class="font--18 text--lebel">
+                                                Select region
+                                            </label>
+                                            <select id="inputRegion" class="form-control">
+                                                <option selected>Choose from List</option>
+                                            </select>
+                                            <div class="mt-3">
+                                                <span class="font--18 font--bold hand text--colored" id="bth-confirm">Birth Country</span>&nbsp;&nbsp;
+                                                <span class="font--18 font--bold hand text--colored float-right" id="lag-confirm">Language Use</span>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3">
+                                <div class="dropdown mt-3 w-100">
+                                    <button class="button w-100 dropdown-toggle" type="button"
+                                            id="budgetDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                        Your Country
+                                    </button>
+                                    <div class="dropdown-menu importance-of-factors"
+                                         aria-labelledby="budgetDropdownMenu">
+                                        <form class="px-4 py-3">
+                                            <label for="inputCountry" class="font--18 text--lebel">
+                                                Select your
+                                                country
+                                            </label>
+                                            <select id="inputCountry" class="form-control">
+                                                <option selected>Choose from List</option>
+                                            </select>
+                                            <div class="mt-3">
+                                                <span class="font--18 font--bold hand text--colored float-right" id="reg-confirm">Confirm</span>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
+    </section>
+
+    <section id="mapsection">
+        <div class="container-fluid">
+            <div class="container-fluid row" id="mapp">
+                <div class="mapcontainer col-12" id="mapcontainer">
+                    @*<div class="loader loader-default is-active" data-text id="loader"></div>*@
+                    <div class="loader-svg" id="loader"></div>
+                    
+                    <div id="map" class="mmap" style="height:700px"></div>
+                    <div class='map-overlay' id='features' style="display: none"><div class='block-content' id='pd'><p></p></div></div>
+
+                    @*<div id='tlegend' class="form-group">
+                                <div class="row">
+
+                                    <div class="col-4 row">
+                                        <div class="col-4">
+                                            <div class="py-3 border" style='background-color: #ddd'> </div>
+                                            <div class="">No data</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="py-3 border" style='background-color: #F2F12D'> </div>
+
+                                            <div class="">$0 - $50</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="py-3 " style='background-color: #EED322'> </div>
+
+                                            <div class="">$150</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 row">
+                                        <div class="col-4">
+                                            <div class="py-3 " style='background-color: #E6B71E'> </div>
+
+                                            <div class="">$200</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="py-3 " style='background-color: #CA8323'> </div>
+
+                                            <div class="">$250</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="py-3 " style='background-color: #B86B25'> </div>
+
+                                            <div class="">$300</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 row">
+                                        <div class="col-4">
+                                            <div class="py-3 " style='background-color: #A25626'> </div>
+
+                                            <div class="">$350</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="py-3 " style='background-color: #8B4225'> </div>
+
+                                            <div class="">$450</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="py-3 " style='background-color: #723122'> </div>
+
+                                            <div class="">$550</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                    <div class="row">
+            <div class="col">No data</div>
+            <div class="col">$0 - $50</div>
+            <div class="col">$150</div>
+            <div class="col">$200</div>
+            <div class="col">$250</div>
+            <div class="col">$300</div>
+            <div class="col">$350</div>
+            <div class="col">$450</div>
+            <div class="col">$550</div>
+        </div>
+                                </div>*@
+                    <div id="culture-card" class="culture-card rounded shadow-lg bg-white" style="max-width: 500px; display: none;">
+                        <div class="card" id="culture-card-content" style="display:block">
+                            <div width="350" height="30" id="culture-info-content">
+                                <h2 class="font--20 text--lebel font--bold p-4" id="culture-title"></h2>
+                                <span class="info-close">
+                                    <i id="culture-card-close-button" class="fa fa-times" role="button" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <hr>
+                            <div id="culture-list-content">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="info-card" class="info-card rounded shadow-lg bg-white" style="max-width: 350px; display: none;">
+                        <div class="card" id="card-content-2" style="display:none">
+                            <div width="350" height="30" id="info-content-2">
+                                <h2 class="font--20 text--lebel font--bold p-4" id="list-name"></h2>
+                                <span class="info-close">
+                                    <i id="info-card-close-button-2" class="fa fa-times" role="button" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <div id='list' class="list-group">
+
+                            </div>
+
+
+                            <div id='slist' class="list-group">
+
+                            </div>
+
+                            <div id='recomd-list' class="list-group">
+
+                            </div>
+                        </div>
+
+                        <div class="card" id="card-content">
+                            <div width="350" height="200" id="image-container">
+                                <span class="info-close">
+                                    <i id="info-card-close-button" class="fa fa-times" role="button" aria-hidden="true"></i>
+                                </span>
+                                <img class="" width="348" height="200" id="card-image" src="" />
+                            </div>
+                            <div class="px-2 pb-2" id="more-content">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h2 class="font--20 text--lebel font--bold mt-4" id="card-title"></h2>
+                                        <p class="font--18 subtitle--color mt-1" id="card-subtitle">
+
+                                        </p>
+                                        <hr>
+                                        <p class="font--18 subtitle--color" id="card-description">
+
+                                        </p>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div width="350" height="200" id="image-container">
+                                <iframe id="card-video" width="349" height="200" src=""></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id='state-legend' class='legend' style="display: none">
+                        <h4>Median Rent</h4>
+                        <div><span style='background-color: #723122'></span>$550</div>
+                        <div><span style='background-color: #8B4225'></span>$450</div>
+                        <div><span style='background-color: #A25626'></span>$350</div>
+                        <div><span style='background-color: #B86B25'></span>$300</div>
+                        <div><span style='background-color: #CA8323'></span>$250</div>
+                        <div><span style='background-color: #E6B71E'></span>$200</div>
+                        <div><span style='background-color: #EED322'></span>$150</div>
+                        <div><span style='background-color: #F2F12D'></span>$0 - $50</div>
+                        <div><span style='background-color: #ddd'></span>No data</div>
+                    </div>
+
+                    <div id='state-crime-legend' class='legend' style="display: none">
+                        <h4>Criminal rate</h4>
+                        <div><span style='background-color: #723122'></span>10%</div>
+                        <div><span style='background-color: #8B4225'></span>8%</div>
+                        <div><span style='background-color: #A25626'></span>7%</div>
+                        <div><span style='background-color: #B86B25'></span>6%</div>
+                        <div><span style='background-color: #CA8323'></span>5%</div>
+                        <div><span style='background-color: #DA9C20'></span>4%</div>
+                        <div><span style='background-color: #E6B71E'></span>3%</div>
+                        <div><span style='background-color: #EED322'></span>2%</div>
+                        <div><span style='background-color: #F2F12D'></span>0% - 2%</div>
+                        <div><span style='background-color: #ddd'></span>No data</div>
+                    </div>
+
+                    <div id='state-density-legend' class='legend' style="display: none">
+                        <h4>Population density</h4>
+                        <div><span style='background-color: #723122'></span>200</div>
+                        <div><span style='background-color: #8B4225'></span>50</div>
+                        <div><span style='background-color: #A25626'></span>20</div>
+                        <div><span style='background-color: #B86B25'></span>8</div>
+                        <div><span style='background-color: #CA8323'></span>5</div>
+                        <div><span style='background-color: #E6B71E'></span>3</div>
+                        <div><span style='background-color: #EED322'></span>1</div>
+                        <div><span style='background-color: #F2F12D'></span>0 - 1</div>
+                        <div><span style='background-color: #ddd'></span>No data</div>
+                    </div>
+
+                    <div id='state-unemp-legend' class='legend' style="display: none">
+                        <h4>Umployment rate</h4>
+                        <div><span style='background-color: #723122'></span>8%</div>
+                        <div><span style='background-color: #8B4225'></span>7%</div>
+                        <div><span style='background-color: #A25626'></span>6%</div>
+                        <div><span style='background-color: #B86B25'></span>5%</div>
+                        <div><span style='background-color: #CA8323'></span>4%</div>
+                        <div><span style='background-color: #E6B71E'></span>3%</div>
+                        <div><span style='background-color: #EED322'></span>2%</div>
+                        <div><span style='background-color: #F2F12D'></span>0% - 2%</div>
+                        <div><span style='background-color: #ddd'></span>No data</div>
+                    </div>
+
+                    <div id='state-income-legend' class='legend' style="display: none">
+                        <h4>Income</h4>
+                        <div><span style='background-color: #723122'></span>$60,000</div>
+                        <div><span style='background-color: #8B4225'></span>$55,000</div>
+                        <div><span style='background-color: #A25626'></span>$50,000</div>
+                        <div><span style='background-color: #B86B25'></span>$48,000</div>
+                        <div><span style='background-color: #CA8323'></span>$44,000</div>
+                        <div><span style='background-color: #E6B71E'></span>$40,000</div>
+                        <div><span style='background-color: #EED322'></span>$35,000</div>
+                        <div><span style='background-color: #F2F12D'></span>$0 - $35,000</div>
+                        <div><span style='background-color: #ddd'></span>No data</div>
+                    </div>
+                </div>
+
+                <div class="col-6" style="display:none" id="chart-section">
+
+                    <div class="d-flex justify-content-center" id="buttons">
+                        <button id="byKey" class="btn btn-info btn-sort">Top 10 Min</button>
+                        <div style="width:10px"></div>
+                        <button id="byValue" class="btn btn-info btn-sort"> Top 10 Max</button>
+                    </div>
+                    <br>
+                    <div id="barchart"></div>
+                </div>
+            </div>
+
+            <div class="container" style="display: none; width: 100%" id="job-compare">
+
+
+                <div id="first">
+                    <div class="container">
+                        <br>
+                        <div class="form-group">
+
+                            <p style="font-size: 26px" class="lead">1. Please select up to 3 industries you want be occupied. </p>
+
+                            <select class="js-example-basic-multiple col-12" name="industry[]" multiple="multiple" id="industry-list"></select>
+
+                            <br>
+                        </div>
+                        <div class="form-group">
+                            <p style="font-size: 26px" class="lead">
+                                2. Please select up to 3 regions you want to compare
+                            </p>
+
+                            <select class="js-example-basic-multiple col-12" name="region[]" multiple="multiple" id="region-list"></select>
+
+                            <br>
+                        </div>
+                        <div class="form-group">
+
+                            <p style="font-size: 26px" class="lead">
+                                3. Please click one button below: you more concern in the industries you selected above
+                            </p>
+                            <br>
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <button class="btn btn-primary col-3" id="nob-button">Number of business</button>
+                                <div class="col-2"></div>
+                                <button class="btn btn-primary col-3" id="poe-button">Proportion of employess</button>
+                                <div class="col-2"></div>
+                            </div>
+
+                            <br>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="second" class="text-center">
+                    <div id="barchart2"></div>
+                </div>
+            </div>
+        </div>
     </section>
     <!-- Footer -->
     <footer>
@@ -1055,10 +1434,11 @@
     </footer>
 
     <!-- Load the File-->
-    <script type="text/javascript" src="/lga48.js.gz"></script>
+    @*<script type="text/javascript" src="https://raw.githubusercontent.com/kasaluoqi/root/master/lga.js"></script>*@
+
     <script>
-    var lga
-    var lines;
+        var lines;
+        var spanDisabled = false;
     var toggleRecomd = false;
 
         var selected = "";
@@ -1087,6 +1467,50 @@
     var minRBudget;
     var maxRBudget;
 
+
+        $('body').on('click', 'a.disabled', function (event) {
+            event.preventDefault();
+        });
+
+        jQuery.fn.extend({
+            disable: function (state) {
+                return this.each(function () {
+                    var $this = $(this);
+                    $this.toggleClass('disabled', state);
+                });
+            }
+        }); 
+        
+
+
+        function disableAllButton() {
+            $("#income-confirm").attr("disabled", true);
+            $("#unemployment-confirm").attr("disabled", true);
+            $("#job-compare-confirm").attr("disabled", true);
+            $("#c-confirm").attr("disabled", true);
+            $("#d-confirm").attr("disabled", true);
+
+            $("#fll-confirm").disable(true);
+            $('#fll-confirm').html('<i id="button-spinner" class="fa fa-circle-o-notch fa-spin"></i>&nbsp;Loading')
+
+            spanDisabled = false;
+        }
+
+
+        function enableAllButton() {
+            $("#income-confirm").attr("disabled", false);
+            $("#unemployment-confirm").attr("disabled", false);
+            $("#job-compare-confirm").attr("disabled", false);
+            $("#c-confirm").attr("disabled", false);
+            $("#d-confirm").attr("disabled", false);
+            
+            $("#fll-confirm").disable(false);
+            $('#fll-confirm').html('Confirm')
+
+            spanDisabled = true;
+
+
+        }
         $('#income-confirm').on('click', function () {
             $("#mapp").slideDown("500", function () {
                 // Animation complete.
@@ -1116,7 +1540,6 @@
             map.resize()
         });
 
-
         $('#job-compare-confirm').on('click', function () {
             $("#mapp").slideUp("500", function () {
                 // Animation complete.
@@ -1124,6 +1547,21 @@
             $('#job-compare').slideDown("500", function () {
                 // Animation complete.
             });
+
+            $("#loader").show();
+            $('#region-list').select2({
+                maximumSelectionLength: 3,
+                minimumSelectionLength: 2,
+                closeOnSelect: false
+            });
+
+            $('#industry-list').select2({
+                maximumSelectionLength: 3,
+                closeOnSelect: false
+            });
+
+            initIndustryListJ();
+            initRegionListJ();
         });
 
         $('#c-confirm').on('click', function () {
@@ -1141,35 +1579,32 @@
             $('#chart-section').show();
             map.resize()
         });
-
-
-        $('#rmd-confirm').on('click', function () {
-            $(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
-            recommendation();
-        });
-        $('#rmd-confirm2').on('click', function () {
-            $(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
-            recommendation();
-        });
-
+        
         $('#fll-confirm').on('click', function () {
             //$(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
             //choropleth('a');
             filter();
         });
+
         $('#bth-confirm').on('click', function () {
-            $(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
-            show('countrywithpopulation');
+            if (spanDisabled) {
+                $(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
+                show('countrywithpopulation');
+            }
         });
 
         $('#lag-confirm').on('click', function () {
-            $(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
-            show('languagewithpopulation');
+            if (spanDisabled) {
+                $(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
+                show('languagewithpopulation');
+            }
         });
 
         $('#reg-confirm').on('click', function () {
-            $(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
-            show('autocountry');
+            if (spanDisabled) {
+                $(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
+                show('autocountry');
+            }
         });
 
 
@@ -1298,7 +1733,7 @@
         }
 
         $("#nob-button").click(function () {
-            $("#loader").addClass("is-active");
+            $("#loader").show();
 
             //document.querySelector('#list-name').innerHTML = "Rent";
             //list.style.display = "block";
@@ -1310,9 +1745,9 @@
             if (industry.length == 0 || region.length == 0) {
 
                 $('#barchart2').empty()
-                $("#loader").removeClass("is-active");
+                $("#loader").hide();
                 return;
-            } 
+            }
 
             $.ajax({
                 /**/
@@ -1343,7 +1778,7 @@
                     }
 
                     generateChart(data, 'Number of Business')
-                    $("#loader").removeClass("is-active");
+                    $("#loader").hide();
 
                 },
             });
@@ -1352,7 +1787,7 @@
 
 
         $("#poe-button").click(function () {
-            $("#loader").addClass("is-active");
+            $("#loader").show();
 
             //document.querySelector('#list-name').innerHTML = "Rent";
             //list.style.display = "block";
@@ -1362,11 +1797,11 @@
             var region = $("#region-list").select2("val");
 
             if (industry.length == 0 || region.length == 0) {
-                
+
             $('#barchart2').empty()
-                $("#loader").removeClass("is-active");
+                $("#loader").hide();
                 return;
-            } 
+            }
             $.ajax({
                 /**/
                 url: '@Url.Action("getBarchartData", "Job")',
@@ -1396,7 +1831,7 @@
                     }
 
                     generateChart(data, 'Proportion of Employee (%)')
-                    $("#loader").removeClass("is-active");
+                    $("#loader").hide();
 
                 },
             });
@@ -1419,22 +1854,7 @@
         // In your Javascript (external .js resource or <script> tag)
         $(document).ready(function () {
 
-
-            $('#region-list').select2({
-                maximumSelectionLength: 3,
-                minimumSelectionLength: 2,
-                closeOnSelect: false
-            });
-
-            $('#industry-list').select2({
-                maximumSelectionLength: 3,
-                closeOnSelect: false
-            });
-
-
-
-            initIndustryListJ();
-            initRegionListJ();
+            disableAllButton()
 
             resetAll();
         });
@@ -1458,6 +1878,13 @@
                         /// jquerify the DOM object 'o' so we can use the html method
                         $(o).html(label);
                         $("#region-list").append(o);
+                    }
+                    initRegion = true
+                    if (initCodeColor && initMap && initRegion && initIndusty) {
+                        //Loader
+                        $("#loader").hide();
+                        enableAllButton();
+
                     }
                 },
             });
@@ -1485,6 +1912,13 @@
                     }
 
 
+                    initIndusty = true
+                    if (initCodeColor && initMap && initRegion && initIndusty) {
+                        //Loader
+                        $("#loader").hide();
+
+                        enableAllButton();
+                    }
 
                 },
             });
@@ -1531,7 +1965,9 @@
     var crimeCheo = new Object;
     var desyCheo = new Object;
     var initCodeColor = false;
-    var initMap = false;
+        var initMap = false;
+        var initRegion = false;
+        var initIndusty = false;
         function formRegionColorMap() {
             rcMap = new Map();
             rcMap.set('20110', getRandomColor());
@@ -1714,8 +2150,10 @@
                 success: function (data) {
                     initCodeColor = true;
                     if (initCodeColor && initMap) {
-                        //loader
-                        $("#loader").removeClass("is-active");
+                        //Loader
+                        $("#loader").hide();
+
+                        enableAllButton();
                     }
                 },
             });
@@ -1939,350 +2377,19 @@
                 history.replaceState(null, null, newUrl);
             });
 
-        initCountryList();
-        initRegionList();
-        initialCountryListR();
-        initialIndustryListR();
-        for (var i = 0; i < allCode.length; i++) {
-            cheo[allCode[i]] = "#ddd";
-            textColor[allCode[i]] = "#333";
-        }
-
-
-        //Reset as tab changed
-        //$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        //});
-
-        //$(window).scroll(function () {
-        //    if ($(window).scrollTop <= 50) {
-        //        $(".mmap").css("bottom", 50 - $(window).scrollTop() ); //I want this value to change dynamically as the scrollbar moves down, so that the div stays on top of screen
-        //    } else {
-        //        $(".mmap").css("bottom", 100 - $(window).scrollTop() );
-        //    }
-        //});
-
-    });
-
-    map.on('load', function () {
-        // Add a layer showing the places.
-        map.addSource("states", {
-            "type": "geojson",
-            "data": lga
-        });
-        //All colored states layer
-        map.addLayer({
-            "id": "state-fills",
-            "type": "fill",
-            "source": "states",
-            "layout": { 'visibility': 'visible' },
-            "paint": {
-                "fill-color":
-                    ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", myData]],
-                "fill-opacity": ["case",
-                    ["boolean", ["feature-state", "hover"], false],
-                    0.9,
-                    0.7
-                ]
-            }
-        });
-
-        //Generated layer
-        map.addLayer({
-            "id": "cheo",
-            "type": "fill",
-            "source": "states",
-            "layout": { 'visibility': 'none' },
-            "paint": {
-                "fill-color":
-                    ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]],
-                "fill-opacity": ["case",
-                    ["boolean", ["feature-state", "hover"], false],
-                    1,
-                    0.7
-                ]
-            }
-        });
-
-
-        var featureCollection = {
-            "type": "FeatureCollection",
-
-            "features": [
-
-            ]
-        }
-        lga.features.forEach(function (feature) {
-            //draw.add(feature);
-            if (feature.geometry != null) {
-
-                var centroidPt = turf.center(feature);
-                centroidPt.properties.title = feature.properties.LGA_NAME18;
-                centroidPt.properties.LGA_CODE18 = feature.properties.LGA_CODE18;
-                featureCollection.features.push(centroidPt);
-            }
-        })
-
-        map.addSource('label', {
-            'type': 'geojson',
-            'data': featureCollection
-        });
-
-        map.addLayer({
-            "id": "region-label",
-            "type": "symbol",
-            "source": "label",
-            "layout": {
-                'text-field': '{title}',
-                'text-font': ["Lato Bold"],
-                'text-size': {
-                    "base": 2,
-                    "stops": [
-                        [12, 12],
-                        [16, 16]
-                    ]
-                },
-                "text-padding": 3,
-                "text-letter-spacing": 0.1,
-                "text-max-width": 7
-            },
-            "paint": {
-                "text-color":
-                    ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]],
-                "text-halo-color": "hsl(0, 0%, 100%)",
-                "text-halo-width": 1.5,
-                "text-halo-blur": 1
-            }
-        });
-        //var popup = new mapboxgl.Popup({
-        //    closeButton: false,
-        //    closeOnClick: false
-        //});
-
-        // When the user moves their mouse over the state-fill layer, we'll update the
-        // feature state for the feature under the mouse.
-        map.on("mousemove", "state-fills", function (e) {
-            map.getCanvas().style.cursor = e.point.length ? 'pointer' : '';
-
-            if (e.features.length > 0) {
-                if (hoveredStateId) {
-                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
-                }
-                hoveredStateId = e.features[0].id;
-                map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
-            }
-
-            var coordinates = e.features[0].geometry.coordinates.slice();
-            var code = e.features[0].properties.LGA_CODE18;
-
-            // Ensure that if the map is zoomed out such that multiple
-            // copies of the feature are visible, the popup appears
-            // over the copy being pointed to.
-            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-            }
-
-            // Populate the popup and set its coordinates
-            // based on the feature found.
-            //popup.setLngLat([e.lngLat.lng, e.lngLat.lat])
-            //    .setHTML(code + ', ' + e.lngLat.lat + ', ' + e.lngLat.lng)
-            //    .addTo(map);
-        });
-
-        // When the mouse leaves the state-fill layer, update the feature state of the
-        // previously hovered feature.
-        map.on("mouseleave", "state-fills", function (e) {
-
-            //map.getCanvas().style.cursor = e.point.length ? 'default' : '';
-
-            map.getCanvas().style.cursor = '';
-            //popup.remove();
-
-            if (hoveredStateId) {
-                map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
-            }
-            hoveredStateId = null;
-        });
-
-        //Show information block and hover effect
-        map.on('mousemove', "cheo", function (e) {
-            var over = document.getElementById('features');
-            if (showCheoBlock)
-                features.style.display = "block";
-            else
-                features.style.display = "none";
-
-            var states = map.queryRenderedFeatures(e.point);
-            if (states.length > 0) {
-                for (var i = 0; i < states.length; i++) {
-                    if (states[0].layer.id == "cheo") {
-                        var name = states[0].properties.LGA_NAME18.substring(0, states[0].properties.LGA_NAME18.indexOf(" ("));
-                        document.getElementById('pd').innerHTML = '<h5><strong>' + name + '</strong></h5><div class="content-line">' + displayList[states[0].properties.LGA_CODE18] + '</div>';
-                        break;
-                    }
-                }
-            } else {
-                document.getElementById('pd').innerHTML = '<p>Hover over a state!</p>';
-            }
-
-            if (e.features.length > 0) {
-                if (hoveredStateId) {
-                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
-                }
-                hoveredStateId = e.features[0].id;
-                map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
-            }
-        });
-
-        //Reset information block and hover effect
-        map.on('mouseleave', "cheo", function (e) {
-            var over = document.getElementById('features');
-            features.style.display = "none"
-
-            if (hoveredStateId) {
-                map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
-            }
-            hoveredStateId = null;
-        });
-        //Popup regions name
-        map.on('click', 'state-fills', function (e) {
-
-            var lgaCode = e.features[0].properties.LGA_CODE18;
-            if (clicked == lgaCode)
-                return;
-            clicked = lgaCode;
-
-
-            var content2 = document.querySelector('#card-content-2');
-            content2.style.display = "none";
-            var content1 = document.querySelector('#card-content');
-            content1.style.display = "block";
-
-            var content = document.querySelector('#more-content');
-
-            content.style.display = "none";
-            var image = document.querySelector('#card-image');
-            image.style.display = "none";
-            var video = document.querySelector('#card-video');
-            video.style.display = "none";
-            $.ajax({
-                /**/
-                url: '@Url.Action("getInfo", "Map")',
-                /**/
-                type: 'POST',
-                data: { code: lgaCode },
-                success: function (data) {
-                    var item = JSON.parse(data);
-                    var description = item["descrption"];
-                    var image_link = item["image"];
-                    var video_link = item["video"];
-                    var name = item["name"];
-                    var region = item["region"];
-
-                    // Display airport info
-                    document.querySelector('#card-title').innerText = name;
-                    document.querySelector('#card-subtitle').innerText = region;
-
-                    document.querySelector('#card-description').innerText = description;
-
-                    image.src = image_link;
-                    video.src = video_link;
-
-                    $('#more-content').fadeIn(200);
-                    {
-                    //function loaded() {
-
-                    //    // Display airport info
-                    //    document.querySelector('#card-title').innerText = name;
-                    //    document.querySelector('#card-subtitle').innerText = region;
-
-                    //    document.querySelector('#card-description').innerText = description;
-
-
-                    //    if ($('#info-card').filter(':visible').length == 0) // all hidden
-                    //    {
-                    //        $('#info-card').fadeIn(300);
-                    //    }
-
-
-                    //    // Ensure the info box is visible
-                    //    document.querySelector('#info-card').style.display = 'block';
-
-                    //}
-
-                    //if (video.complete) {
-                    //    loaded()
-                    //} else {
-                    //    video.addEventListener('load', loaded)
-                    //    video.addEventListener('error', function () {
-                    //        alert('error')
-                    //    })
-                    //}
-                    }
-                    function iloaded() {
-                        //image.style.display = "block";
-                        $('#card-image').fadeIn(200);
-                    }
-
-                    function vloaded() {
-                        //video.style.display = "block";
-                        $('#card-video').fadeIn(200);
-                    }
-
-                    if (image.complete) {
-                        iloaded()
-                    } else {
-                        image.addEventListener('load', iloaded)
-                    }
-
-                    if (video.complete) {
-                        vloaded()
-                    } else {
-                        video.addEventListener('load', vloaded)
-                    }
-
-                    if ($('#info-card').filter(':visible').length == 0) // all hidden
-                    {
-                        shrinkMap();
-                        $('#info-card').fadeIn(300);
-                        $('#culture-card').fadeOut(300);
-                    }
-
-
-                    // Ensure the info box is visible
-                    document.querySelector('#info-card').style.display = 'block';
-
-                },
-            });
-            {
-            //new mapboxgl.Popup()
-            //    .setLngLat(e.lngLat)
-            //    .setHTML(name)
-            //    .addTo(map);
-
-            // Create a popup, but don't add it to the map yet.
-            //var popup = new mapboxgl.Popup({
-            //    closeButton: false,
-            //    closeOnClick: true
-            //});
-
-            //popup.setLngLat(e.lngLat)
-            //    .setHTML(name)
-            //    .addTo(map);
+            initCountryList();
+            initRegionList();
+            initialCountryListR();
+            initialIndustryListR();
+            for (var i = 0; i < allCode.length; i++) {
+                cheo[allCode[i]] = "#ddd";
+                textColor[allCode[i]] = "#333";
             }
 
         });
 
-        map.on('idle', function () {
-            initMap = true;
-            if (initCodeColor && initMap) {
-                //Loader
-                $("#loader").removeClass("is-active");
-
-            }
-        });
 
 
-    });
 
 
         document.querySelector('#info-card-close-button').addEventListener('click', function (event) {
@@ -2375,7 +2482,7 @@
     function choropleth(option) {
 
         recomdList.style.display = "none";
-        $("#loader").addClass("is-active");
+        $("#loader").show();
         //Income
         if (option == "i") {
 
@@ -2442,7 +2549,7 @@
                     map.setLayoutProperty("state-fills", 'visibility', 'none');
                     map.setLayoutProperty("cheo", 'visibility', 'visible');
 
-                    $("#loader").removeClass("is-active");
+                    $("#loader").hide();
                 },
             });
         }
@@ -2510,7 +2617,7 @@
                     map.setLayoutProperty("state-fills", 'visibility', 'none');
                     map.setLayoutProperty("cheo", 'visibility', 'visible');
 
-                    $("#loader").removeClass("is-active");
+                    $("#loader").hide();
                 },
             });
         }
@@ -2577,7 +2684,7 @@
                     map.setLayoutProperty("state-fills", 'visibility', 'none');
                     map.setLayoutProperty("cheo", 'visibility', 'visible');
 
-                    $("#loader").removeClass("is-active");
+                    $("#loader").hide();
                 },
             });
         }
@@ -2644,7 +2751,7 @@
                     map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
                     map.setLayoutProperty("state-fills", 'visibility', 'none');
                     map.setLayoutProperty("cheo", 'visibility', 'visible');
-                    $("#loader").removeClass("is-active");
+                    $("#loader").hide();
                 },
             });
         }
@@ -2655,7 +2762,7 @@
         @*function showUnemployRate() {
             list.style.display = "none";
             slist.style.display = "none";
-            $("#loader").addClass("is-active");
+            $("#loader").show();
             $.ajax({
                 /**/
                 url: '@Url.Action("getUnemployment", "Job")',
@@ -2678,7 +2785,7 @@
                     }
 
                     displayData(showData, 'Unemployment rate')
-                    $("#loader").removeClass("is-active");
+                    $("#loader").hide();
 
                 },
             });
@@ -2689,7 +2796,7 @@
 
             list.style.display = "none";
             slist.style.display = "none";
-            $("#loader").addClass("is-active");
+            $("#loader").show();
             $.ajax({
                 /**/
                 url: '@Url.Action("getIncome", "Job")',
@@ -2712,7 +2819,7 @@
                     }
 
                     displayData(showData, 'Income')
-                    $("#loader").removeClass("is-active");
+                    $("#loader").hide();
 
                 },
             });
@@ -2773,7 +2880,7 @@
         stateDesyLegend.style.display = 'none';
         $('#info-card').fadeOut(300);
 
-        $("#loader").addClass("is-active");
+        $("#loader").show();
         $.ajax({
             /**/
             url: '@Url.Action("getLan", "Map")',
@@ -2815,7 +2922,7 @@
                     map.setLayoutProperty("state-fills", 'visibility', 'none');
                     map.setLayoutProperty("cheo", 'visibility', 'visible');
                     showChart(i, label, value);
-                    $("#loader").removeClass("is-active");
+                    $("#loader").hide();
                 }
 
             },
@@ -3125,7 +3232,7 @@
         stateDesyLegend.style.display = 'none';
         $('#info-card').fadeOut(300);
 
-        $("#loader").addClass("is-active");
+        $("#loader").show();
         $.ajax({
             /**/
             url: '@Url.Action("getCountry", "Map")',
@@ -3168,7 +3275,7 @@
                     map.setLayoutProperty("cheo", 'visibility', 'visible');
 
                     showChart(i, label, value);
-                    $("#loader").removeClass("is-active");
+                    $("#loader").hide();
                 }
 
             },
@@ -3186,7 +3293,7 @@
         stateLegend.style.display = 'none';
         stateCrimeLegend.style.display = 'none';
         stateDesyLegend.style.display = 'none';
-        $("#loader").addClass("is-active");
+        $("#loader").show();
         $.ajax({
             /**/
             url: '@Url.Action("getRegions", "Map")',
@@ -3241,7 +3348,7 @@
                     map.setLayoutProperty("cheo", 'visibility', 'visible');
 
                     showChart(i, label, value);
-                    $("#loader").removeClass("is-active");
+                    $("#loader").hide();
                 }
 
             },
@@ -3528,98 +3635,7 @@
             },
             });
         }
-    //Recommendation
 
-    function recommendation() {
-
-        slist.style.display = "none";
-        list.style.display = "none";
-        recomdList.style.display = "block";
-
-        stateIncomeLegend.style.display = "none"
-        stateUnempLegend.style.display = "none"
-        stateLegend.style.display = 'none';
-        stateCrimeLegend.style.display = 'none';
-        stateDesyLegend.style.display = 'none';
-        //Loader
-        $("#loader").addClass("is-active");
-        recomdList.innerHTML = "";
-
-        //var minBudget = parseInt(document.getElementById("min-bgt-recom").value);
-        //var maxBudget = parseInt(document.getElementById("max-bgt-recom").value);
-        minRBudget = isNaN(minRBudget) ? 0 : minRBudget;
-        maxRBudget = isNaN(maxRBudget) ? 1000 : maxRBudget;
-
-        var calAcmWeight = acmWeight;
-        var calCrmWeight = crmWeight;
-        var calPouWeight = pouWeight;
-        var calCulWeight = culWeight;
-        var calJobWeight = jobWeight;
-        var sum = calAcmWeight + calCrmWeight + calPouWeight + calCulWeight + calJobWeight;
-        calAcmWeight /= sum
-        calCrmWeight /= sum
-        calPouWeight /= sum
-        calCulWeight /= sum
-        calJobWeight /= sum
-
-        var country = $("#inputCountryR").val();
-
-        var industry = $("#inputIndustryR").val();
-
-
-        document.querySelector('#card-content').style.display = "none";
-        document.querySelector('#list-name').innerHTML = "Recommendation result";
-
-        $.ajax({
-            /**/
-            url: '@Url.Action("getRecommendation", "Map")',
-            /**/
-            type: 'POST',
-            data: { min: minRBudget, max: maxRBudget, acmWeight: calAcmWeight, crmWeight: calCrmWeight, pouWeight: calPouWeight, culWeight: calCulWeight, jobWeight: calJobWeight, country: country, industry: industry },
-            success: function (data) {
-                toggleRecomd = true;
-
-                var result = JSON.parse(data);
-                var areas = result["areas"];
-                for (var i = 0; i < allCode.length; i++) {
-                    cheo[allCode[i]] = "#ddd";
-                    displayList[allCode[i]] = "";
-                    textColor[allCode[i]] = '#999';
-                }
-                for (var i = 0; i < areas.length; i++) {
-                    var code = areas[i];
-                    cheo[code] = myData[code];
-                    textColor[code] = '#333';
-                }
-
-                if ($('#info-card').filter(':visible').length == 0) // all hidden
-                {
-                    shrinkMap();
-                    $('#info-card').fadeIn(300);
-                    $('#culture-card').fadeOut(300);
-                }
-                $('#card-content-2').fadeIn(300);
-                $('#card-content').fadeOut(200);
-                recomdList.innerHTML = result["display"];
-
-                showCheoBlock = false;
-
-                map.setPaintProperty("region-label", 'text-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]]);
-
-                map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
-                map.setLayoutProperty("state-fills", 'visibility', 'none');
-                map.setLayoutProperty("cheo", 'visibility', 'visible');
-
-                //acmslider.disabled = false;
-                //crmSlider.disabled = false;
-                //pouSlider.disabled = false;
-
-                //Loader
-                $("#loader").removeClass("is-active");
-            },
-        });
-
-    }
 
     var $frange = $(".filterRanger"),
         instance,
@@ -3677,7 +3693,7 @@
         document.querySelector('#card-content').style.display = "none";
         document.querySelector('#list-name').innerHTML = "Regions";
 
-        $("#loader").addClass("is-active");
+        $("#loader").show();
         $.ajax({
             /**/
             url: '@Url.Action("filterRent", "Map")',
@@ -3729,7 +3745,7 @@
                 map.setLayoutProperty("state-fills", 'visibility', 'none');
                 map.setLayoutProperty("cheo", 'visibility', 'visible');
 
-                $("#loader").removeClass("is-active");
+                $("#loader").hide();
             },
         });
 
