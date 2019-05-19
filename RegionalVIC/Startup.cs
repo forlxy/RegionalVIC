@@ -88,14 +88,7 @@ namespace RegionalVIC
                     name: "default",
                     template: "{controller=News}/{action=Index}/{id?}");
             });
-
-
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Job}/{action=Index}/{id?}");
-            });
+            
         }
     }
 }

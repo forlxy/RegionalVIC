@@ -28,71 +28,82 @@ namespace RegionalVIC.Models
 
 
         // get color depending on house price value
+        //public static string getAcomColor(int d)
+        //{
+        //    return d > 550 ? "#BF360C" :
+        //        d > 450 ? "#E64A19" :
+        //            d > 350 ? "#FF5722" :
+        //                d > 300 ? "#FF8A65" :
+        //                    d > 250 ? "#FFCCBC" :
+        //                        d > 200 ? "#81C784" :
+        //                            d > 150 ? "#4CAF50" :
+        //                                d > 0 ? "#388E3C" :
+        //                                    "#ddd";
+        //}
         public static string getAcomColor(int d)
         {
-            return d > 550 ? "#723122" :
-                d > 450 ? "#8B4225" :
-                    d > 350 ? "#A25626" :
-                        d > 300 ? "#B86B25" :
-                            d > 250 ? "#CA8323" :
-                                d > 200 ? "#E6B71E" :
-                                    d > 150 ? "#EED322" :
-                                        d > 0 ? "#F2F12D" :
+            return d > 550 ? "#001D4B" :
+                d > 450 ? "#003664" :
+                    d > 350 ? "#00507E" :
+                        d > 300 ? "#1583B1" :
+                            d > 250 ? "#2E9CCA" :
+                                d > 200 ? "#61CFFD" :
+                                    d > 150 ? "#94FFFF" :
+                                        d > 0 ? "#C7FFFF" :
                                             "#ddd";
         }
         // get color depending on criminal rate
         public static string getCrimeColor(decimal d)
         {
-            return d > 10 ? "#723122" :
-                d > 8 ? "#8B4225" :
-                    d > 7 ? "#A25626" :
-                        d > 6 ? "#B86B25" :
-                            d > 5 ? "#CA8323" :
-                                d > 4 ? "#DA9C20" :
-                                    d > 3 ? "#E6B71E" :
-                                        d > 2 ? "#EED322" :
-                                            d > 0 ? "#F2F12D" :
+            return d > 10 ? "#001D4B" :
+                d > 8 ? "#003664" :
+                    d > 7 ? "#00507E" :
+                        d > 6 ? "#1583B1" :
+                            d > 5 ? "#2E9CCA" :
+                                    d > 3 ? "#61CFFD" :
+                                        d > 1 ? "#94FFFF" :
+                                            d > 0 ? "#C7FFFF" :
                                                 "#ddd";
         }
 
         // get color depending on population density value
         public static string getUnempColor(decimal d)
         {
-            return d > 8 ? "#723122" :
-                d > 7 ? "#8B4225" :
-                    d > 6 ? "#A25626" :
-                        d > 5 ? "#B86B25" :
-                            d > 4 ? "#CA8323" :
-                                d > 3 ? "#E6B71E" :
-                                    d > 2 ? "#EED322" :
-                                        d > 0 ? "#F2F12D" :
+            return d > 8 ? "#001D4B" :
+                d > 7 ? "#003664" :
+                    d > 6 ? "#00507E" :
+                        d > 5 ? "#1583B1" :
+                            d > 4 ? "#2E9CCA" :
+                                d > 3 ? "#61CFFD" :
+                                    d > 2 ? "#94FFFF" :
+                                        d > 0 ? "#C7FFFF" :
                                             "#ddd";
         }
 
         // get color depending on population density value
         public static string getIncomeColor(decimal d)
         {
-            return d > 60000 ? "#723122" :
-                d > 55000 ? "#8B4225" :
-                    d > 50000 ? "#A25626" :
-                        d > 48000 ? "#B86B25" :
-                            d > 440000 ? "#CA8323" :
-                                d > 40000 ? "#E6B71E" :
-                                    d > 35000 ? "#EED322" :
-                                        d > 0 ? "#F2F12D" :
+            return d > 60000 ? "#001D4B" :
+                d > 55000 ? "#003664" :
+                    d > 50000 ? "#00507E" :
+                        d > 48000 ? "#1583B1" :
+                            d > 440000 ? "#2E9CCA" :
+                                d > 40000 ? "#61CFFD" :
+                                    d > 35000 ? "#94FFFF" :
+                                        d > 0 ? "#C7FFFF" :
                                             "#ddd";
         }
         // get color depending on population density value
         public static string getDesyColor(decimal d)
         {
-            return d > 200 ? "#723122" :
-                d > 50 ? "#8B4225" :
-                    d > 20 ? "#A25626" :
-                        d > 8 ? "#B86B25" :
-                            d > 5 ? "#CA8323" :
-                                d > 3 ? "#E6B71E" :
-                                    d > 1 ? "#EED322" :
-                                        d > 0 ? "#F2F12D" :
+            return d > 200 ? "#001D4B" :
+                d > 50 ? "#003664" :
+                    d > 20 ? "#00507E" :
+                        d > 8 ? "#1583B1" :
+                            d > 5 ? "#2E9CCA" :
+                                d > 3 ? "#61CFFD" :
+                                    d > 1 ? "#94FFFF" :
+                                        d > 0 ? "#C7FFFF" :
                                             "#ddd";
         }
     }

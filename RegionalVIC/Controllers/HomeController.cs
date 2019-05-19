@@ -15,25 +15,14 @@ namespace RegionalVIC
         {
             return View();
         }
-
-        public IActionResult About()
+        //Disclaimer page
+        public IActionResult Disclaimer()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Your disclaimer page.";
 
             return View();
         }
 
-        public IActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-        public IActionResult Map()
-        {
-            ViewBag.Message = "Your map page.";
-
-            return View();
-        }
+        
     }
 }

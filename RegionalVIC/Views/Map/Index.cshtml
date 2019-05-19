@@ -1,7 +1,4 @@
 ﻿@using RegionalVIC.Controllers;
-@*@model Tuple<Rtrtbl, Critbl, Ppltbl>*@
-@*@model IEnumerable<Rtrtbl>*@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>RegionalVIC - Explore Regional Victoria</title>
+    <title>RegionalVIC Insight  - Explore Regional Victoria</title>
     <!-- Fontawesome -->
     <link rel="stylesheet" href="/fontawesome/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
@@ -23,7 +20,6 @@
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
     <link rel='/stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.css' type='text/css' />
 
-    <link href="/css/select2.min.css" rel="stylesheet" />
 
     <!-- Bootstrap core JavaScript -->
     <script src="/vendor/jquery/jquery.min.js"></script>
@@ -32,33 +28,25 @@
     <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="https://unpkg.com/tinyqueue@2.0.0/tinyqueue.min.js"></script>
     <script src="/js/polylabel.js"></script>
+    <script src="/Scripts/ion.rangeSlider.min.js"></script>
+    <script src="/Scripts/select2.min.js"></script>
 
+    <!-- Map and chart JavaScript -->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.min.js'></script>
+    <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
-    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.min.js'></script>
-
-
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js'></script>
 
-    <script src="/Scripts/ion.rangeSlider.min.js"></script>
-    <script src="/Scripts/covervid.min.js"></script>
-    <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js"></script>
-
-
-    <script src="/Scripts/select2.min.js"></script>
-
+    <link href="/css/select2.min.css" rel="stylesheet" />
     <link href="/css/rangeslider.css" rel="stylesheet">
-    @*<link rel="stylesheet" href="/css/css-loader.css">*@
-
     <link rel="stylesheet" href="/css/ion.rangeSlider.min.css">
 
-    <!-- Custom styles for this template -->
+    <!-- Custom styles -->
     <link href="/css/agency.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-
 
     <script>
         var lga = new Object
@@ -66,408 +54,365 @@
         lga["features"] = []
         window.onload = function () {
 
+            //Load geojson file thread 1
+            function ajax1() {
+                return $.ajax({
+                    url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_1.json", // path to file
 
-        function ajax1() {
-            // NOTE:  This function must return the value
-            //        from calling the $.ajax() method.
-            return $.ajax({
-                url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_1.json", // path to file
-
-                dataType: 'text',
-                success: function (data) { // callback for successful completion
-                    var tmpObj = JSON.parse(data);
-                    lga["features"] = lga["features"].concat(tmpObj["features"]);
-                },
-                error: function () { // callback if there's an error
-                    alert("error");
-                }
-            });
-        }
-
-        function ajax2() {
-            // NOTE:  This function must return the value
-            //        from calling the $.ajax() method.
-            return $.ajax({
-                url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_2.json", // path to file
-
-                dataType: 'text',
-                success: function (data) { // callback for successful completion
-                    var tmpObj = JSON.parse(data);
-                    lga["features"] = lga["features"].concat(tmpObj["features"]);
-                },
-                error: function () { // callback if there's an error
-                    alert("error");
-                }
-            });
-        }
-
-        function ajax3() {
-            // NOTE:  This function must return the value
-            //        from calling the $.ajax() method.
-            return $.ajax({
-                url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_3.json", // path to file
-
-                dataType: 'text',
-                success: function (data) { // callback for successful completion
-                    var tmpObj = JSON.parse(data);
-                    lga["features"] = lga["features"].concat(tmpObj["features"]);
-                },
-                error: function () { // callback if there's an error
-                    alert("error");
-                }
-            });
-        }
-
-        function ajax4() {
-            // NOTE:  This function must return the value
-            //        from calling the $.ajax() method.
-            return $.ajax({
-                url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_4.json", // path to file
-
-                dataType: 'text',
-                success: function (data) { // callback for successful completion
-                    var tmpObj = JSON.parse(data);
-                    lga["features"] = lga["features"].concat(tmpObj["features"]);
-                },
-                error: function () { // callback if there's an error
-                    alert("error");
-                }
-            });
-        }
-
-        function ajax5() {
-            // NOTE:  This function must return the value
-            //        from calling the $.ajax() method.
-            return $.ajax({
-                url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_5.json", // path to file
-
-                dataType: 'text',
-                success: function (data) { // callback for successful completion
-                    var tmpObj = JSON.parse(data);
-                    lga["features"] = lga["features"].concat(tmpObj["features"]);
-                },
-                error: function () { // callback if there's an error
-                    alert("error");
-                }
-            });
-        }
-
-        function ajax6() {
-            // NOTE:  This function must return the value
-            //        from calling the $.ajax() method.
-            return $.ajax({
-                url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_6.json", // path to file
-
-                dataType: 'text',
-                success: function (data) { // callback for successful completion
-                    var tmpObj = JSON.parse(data);
-                    lga["features"] = lga["features"].concat(tmpObj["features"]);
-                },
-                error: function () { // callback if there's an error
-                    alert("error");
-                }
-            });
-        }
-
-        $.when(ajax1(), ajax2(), ajax3(), ajax4(), ajax5(), ajax6()).done(function (a1, a2, a3, a4, a5, a6) {
-            // Add a layer showing the places.
-            map.addSource("states", {
-                "type": "geojson",
-                "data": lga
-            });
-            //All colored states layer
-            map.addLayer({
-                "id": "state-fills",
-                "type": "fill",
-                "source": "states",
-                "layout": { 'visibility': 'visible' },
-                "paint": {
-                    "fill-color":
-                        ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", myData]],
-                    "fill-opacity": ["case",
-                        ["boolean", ["feature-state", "hover"], false],
-                        0.9,
-                        0.7
-                    ]
-                }
-            });
-            //Generated layer
-            map.addLayer({
-                "id": "cheo",
-                "type": "fill",
-                "source": "states",
-                "layout": { 'visibility': 'none' },
-                "paint": {
-                    "fill-color":
-                        ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]],
-                    "fill-opacity": ["case",
-                        ["boolean", ["feature-state", "hover"], false],
-                        1,
-                        0.7
-                    ]
-                }
-            });
-            var featureCollection = {
-                "type": "FeatureCollection",
-
-                "features": [
-
-                ]
+                    dataType: 'text',
+                    success: function (data) { // callback for successful completion
+                        var tmpObj = JSON.parse(data);
+                        lga["features"] = lga["features"].concat(tmpObj["features"]);
+                    },
+                    error: function () { // callback if there's an error
+                        alert("error");
+                    }
+                });
             }
-            lga.features.forEach(function (feature) {
-                //draw.add(feature);
-                if (feature.geometry != null) {
 
-                    var centroidPt = turf.center(feature);
-                    centroidPt.properties.title = feature.properties.LGA_NAME18;
-                    centroidPt.properties.LGA_CODE18 = feature.properties.LGA_CODE18;
-                    featureCollection.features.push(centroidPt);
-                }
-            })
-            map.addSource('label', {
-                'type': 'geojson',
-                'data': featureCollection
-            });
-            map.addLayer({
-                "id": "region-label",
-                "type": "symbol",
-                "source": "label",
-                "layout": {
-                    'text-field': '{title}',
-                    'text-font': ["Lato Bold"],
-                    'text-size': {
-                        "base": 2,
-                        "stops": [
-                            [12, 12],
-                            [16, 16]
+            //Load geojson file thread 2
+            function ajax2() {
+                return $.ajax({
+                    url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_2.json", // path to file
+
+                    dataType: 'text',
+                    success: function (data) { // callback for successful completion
+                        var tmpObj = JSON.parse(data);
+                        lga["features"] = lga["features"].concat(tmpObj["features"]);
+                    },
+                    error: function () { // callback if there's an error
+                        alert("error");
+                    }
+                });
+            }
+
+            //Load geojson file thread 3
+            function ajax3() {
+                return $.ajax({
+                    url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_3.json", // path to file
+
+                    dataType: 'text',
+                    success: function (data) { // callback for successful completion
+                        var tmpObj = JSON.parse(data);
+                        lga["features"] = lga["features"].concat(tmpObj["features"]);
+                    },
+                    error: function () { // callback if there's an error
+                        alert("error");
+                    }
+                });
+            }
+
+            //Load geojson file thread 4
+            function ajax4() {
+                return $.ajax({
+                    url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_4.json", // path to file
+
+                    dataType: 'text',
+                    success: function (data) { // callback for successful completion
+                        var tmpObj = JSON.parse(data);
+                        lga["features"] = lga["features"].concat(tmpObj["features"]);
+                    },
+                    error: function () { // callback if there's an error
+                        alert("error");
+                    }
+                });
+            }
+
+            //Load geojson file thread 5
+            function ajax5() {
+                return $.ajax({
+                    url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_5.json", // path to file
+
+                    dataType: 'text',
+                    success: function (data) { // callback for successful completion
+                        var tmpObj = JSON.parse(data);
+                        lga["features"] = lga["features"].concat(tmpObj["features"]);
+                    },
+                    error: function () { // callback if there's an error
+                        alert("error");
+                    }
+                });
+            }
+
+            //Load geojson file thread 6
+            function ajax6() {
+                return $.ajax({
+                    url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_6.json", // path to file
+
+                    dataType: 'text',
+                    success: function (data) { // callback for successful completion
+                        var tmpObj = JSON.parse(data);
+                        lga["features"] = lga["features"].concat(tmpObj["features"]);
+                    },
+                    error: function () { // callback if there's an error
+                        alert("error");
+                    }
+                });
+            }
+
+            //Call functions and trigger when all of them are done.
+            $.when(ajax1(), ajax2(), ajax3(), ajax4(), ajax5(), ajax6()).done(function (a1, a2, a3, a4, a5, a6) {
+                // Add a layer showing the places.
+                map.addSource("states", {
+                    "type": "geojson",
+                    "data": lga
+                });
+                //All colored states layer
+                map.addLayer({
+                    "id": "state-fills",
+                    "type": "fill",
+                    "source": "states",
+                    "layout": { 'visibility': 'visible' },
+                    "paint": {
+                        "fill-color":
+                            ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", myData]],
+                        "fill-opacity": ["case",
+                            ["boolean", ["feature-state", "hover"], false],
+                            0.9,
+                            0.7
                         ]
+                    }
+                });
+                //Generated layer
+                map.addLayer({
+                    "id": "cheo",
+                    "type": "fill",
+                    "source": "states",
+                    "layout": { 'visibility': 'none' },
+                    "paint": {
+                        "fill-color":
+                            ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]],
+                        "fill-opacity": ["case",
+                            ["boolean", ["feature-state", "hover"], false],
+                            1,
+                            0.7
+                        ]
+                    }
+                });
+                //Label
+                var featureCollection = {
+                    "type": "FeatureCollection",
+
+                    "features": [
+
+                    ]
+                }
+                //Center point of label
+                lga.features.forEach(function (feature) {
+                    //draw.add(feature);
+                    if (feature.geometry != null) {
+
+                        var centroidPt = turf.center(feature);
+                        centroidPt.properties.title = feature.properties.LGA_NAME18;
+                        centroidPt.properties.LGA_CODE18 = feature.properties.LGA_CODE18;
+                        featureCollection.features.push(centroidPt);
+                    }
+                })
+                //Add label in map
+                map.addSource('label', {
+                    'type': 'geojson',
+                    'data': featureCollection
+                });
+                map.addLayer({
+                    "id": "region-label",
+                    "type": "symbol",
+                    "source": "label",
+                    "layout": {
+                        'text-field': '{title}',
+                        'text-font': ["Lato Bold"],
+                        'text-size': {
+                            "base": 2,
+                            "stops": [
+                                [12, 12],
+                                [16, 16]
+                            ]
+                        },
+                        "text-padding": 3,
+                        "text-letter-spacing": 0.1,
+                        "text-max-width": 7
                     },
-                    "text-padding": 3,
-                    "text-letter-spacing": 0.1,
-                    "text-max-width": 7
-                },
-                "paint": {
-                    "text-color":
-                        ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]],
-                    "text-halo-color": "hsl(0, 0%, 100%)",
-                    "text-halo-width": 1.5,
-                    "text-halo-blur": 1
-                }
-            });
-            // When the user moves their mouse over the state-fill layer, we'll update the
-            // feature state for the feature under the mouse.
-            map.on("mousemove", "state-fills", function (e) {
-                map.getCanvas().style.cursor = e.point.length ? 'pointer' : '';
-
-                if (e.features.length > 0) {
-                    if (hoveredStateId) {
-                        map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                    "paint": {
+                        "text-color":
+                            ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]],
+                        "text-halo-color": "hsl(0, 0%, 100%)",
+                        "text-halo-width": 1.5,
+                        "text-halo-blur": 1
                     }
-                    hoveredStateId = e.features[0].id;
-                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
-                }
+                });
+                // When the user moves their mouse over the state-fill layer, update the feature state for the feature under the mouse.
+                map.on("mousemove", "state-fills", function (e) {
+                    map.getCanvas().style.cursor = e.point.length ? 'pointer' : '';
 
-                var coordinates = e.features[0].geometry.coordinates.slice();
-                var code = e.features[0].properties.LGA_CODE18;
-
-                // Ensure that if the map is zoomed out such that multiple
-                // copies of the feature are visible, the popup appears
-                // over the copy being pointed to.
-                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-                }
-
-                // Populate the popup and set its coordinates
-                // based on the feature found.
-                //popup.setLngLat([e.lngLat.lng, e.lngLat.lat])
-                //    .setHTML(code + ', ' + e.lngLat.lat + ', ' + e.lngLat.lng)
-                //    .addTo(map);
-            });
-
-            // When the mouse leaves the state-fill layer, update the feature state of the
-            // previously hovered feature.
-            map.on("mouseleave", "state-fills", function (e) {
-
-                //map.getCanvas().style.cursor = e.point.length ? 'default' : '';
-
-                map.getCanvas().style.cursor = '';
-                //popup.remove();
-
-                if (hoveredStateId) {
-                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
-                }
-                hoveredStateId = null;
-            });
-
-            //Show information block and hover effect
-            map.on('mousemove', "cheo", function (e) {
-                var over = document.getElementById('features');
-                if (showCheoBlock)
-                    features.style.display = "block";
-                else
-                    features.style.display = "none";
-
-                var states = map.queryRenderedFeatures(e.point);
-                if (states.length > 0) {
-                    for (var i = 0; i < states.length; i++) {
-                        if (states[0].layer.id == "cheo") {
-                            var name = states[0].properties.LGA_NAME18.substring(0, states[0].properties.LGA_NAME18.indexOf(" ("));
-                            document.getElementById('pd').innerHTML = '<h5><strong>' + name + '</strong></h5><div class="content-line">' + displayList[states[0].properties.LGA_CODE18] + '</div>';
-                            break;
+                    if (e.features.length > 0) {
+                        if (hoveredStateId) {
+                            map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
                         }
+                        hoveredStateId = e.features[0].id;
+                        map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
                     }
-                } else {
-                    document.getElementById('pd').innerHTML = '<p>Hover over a state!</p>';
-                }
 
-                if (e.features.length > 0) {
-                    if (hoveredStateId) {
-                        map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                    var coordinates = e.features[0].geometry.coordinates.slice();
+                    var code = e.features[0].properties.LGA_CODE18;
+
+                    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
                     }
-                    hoveredStateId = e.features[0].id;
-                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
-                }
-            });
 
-            //Reset information block and hover effect
-            map.on('mouseleave', "cheo", function (e) {
-                var over = document.getElementById('features');
-                features.style.display = "none"
-
-                if (hoveredStateId) {
-                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
-                }
-                hoveredStateId = null;
-            });
-
-            //Popup regions name
-            map.on('click', 'state-fills', function (e) {
-
-                var lgaCode = e.features[0].properties.LGA_CODE18;
-                if (clicked == lgaCode)
-                    return;
-                clicked = lgaCode;
-
-
-                var content2 = document.querySelector('#card-content-2');
-                content2.style.display = "none";
-                var content1 = document.querySelector('#card-content');
-                content1.style.display = "block";
-
-                var content = document.querySelector('#more-content');
-
-                content.style.display = "none";
-                var image = document.querySelector('#card-image');
-                image.style.display = "none";
-                var video = document.querySelector('#card-video');
-                video.style.display = "none";
-                $.ajax({
-                    /**/
-                    url: '@Url.Action("getInfo", "Map")',
-                    /**/
-                    type: 'POST',
-                    data: { code: lgaCode },
-                    success: function (data) {
-                        var item = JSON.parse(data);
-                        var description = item["descrption"];
-                        var image_link = item["image"];
-                        var video_link = item["video"];
-                        var name = item["name"];
-                        var region = item["region"];
-
-                        // Display airport info
-                        document.querySelector('#card-title').innerText = name;
-                        document.querySelector('#card-subtitle').innerText = region;
-
-                        document.querySelector('#card-description').innerText = description;
-
-                        image.src = image_link;
-                        video.src = video_link;
-
-                        $('#more-content').fadeIn(200);
-                        {
-                        //function loaded() {
-
-                        //    // Display airport info
-                        //    document.querySelector('#card-title').innerText = name;
-                        //    document.querySelector('#card-subtitle').innerText = region;
-
-                        //    document.querySelector('#card-description').innerText = description;
-
-
-                        //    if ($('#info-card').filter(':visible').length == 0) // all hidden
-                        //    {
-                        //        $('#info-card').fadeIn(300);
-                        //    }
-
-
-                        //    // Ensure the info box is visible
-                        //    document.querySelector('#info-card').style.display = 'block';
-
-                        //}
-
-                        //if (video.complete) {
-                        //    loaded()
-                        //} else {
-                        //    video.addEventListener('load', loaded)
-                        //    video.addEventListener('error', function () {
-                        //        alert('error')
-                        //    })
-                        //}
-                        }
-                        function iloaded() {
-                            //image.style.display = "block";
-                            $('#card-image').fadeIn(200);
-                        }
-
-                        function vloaded() {
-                            //video.style.display = "block";
-                            $('#card-video').fadeIn(200);
-                        }
-
-                        if (image.complete) {
-                            iloaded()
-                        } else {
-                            image.addEventListener('load', iloaded)
-                        }
-
-                        if (video.complete) {
-                            vloaded()
-                        } else {
-                            video.addEventListener('load', vloaded)
-                        }
-
-                        if ($('#info-card').filter(':visible').length == 0) // all hidden
-                        {
-                            shrinkMap();
-                            $('#info-card').fadeIn(300);
-                            $('#culture-card').fadeOut(300);
-                        }
-
-
-                        // Ensure the info box is visible
-                        document.querySelector('#info-card').style.display = 'block';
-
-                    },
+                    // Populate the popup and set its coordinates based on the feature found.
+                    //popup.setLngLat([e.lngLat.lng, e.lngLat.lat])
+                    //    .setHTML(code + ', ' + e.lngLat.lat + ', ' + e.lngLat.lng)
+                    //    .addTo(map);
                 });
 
+                // When the mouse leaves the state-fill layer, update the feature state of the previously hovered feature.
+                map.on("mouseleave", "state-fills", function (e) {
 
+                    //map.getCanvas().style.cursor = e.point.length ? 'default' : '';
+
+                    map.getCanvas().style.cursor = '';
+                    //popup.remove();
+
+                    if (hoveredStateId) {
+                        map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                    }
+                    hoveredStateId = null;
+                });
+
+                //Show information block and hover effect
+                map.on('mousemove', "cheo", function (e) {
+                    var over = document.getElementById('features');
+                    if (showCheoBlock)
+                        features.style.display = "block";
+                    else
+                        features.style.display = "none";
+
+                    var states = map.queryRenderedFeatures(e.point);
+                    if (states.length > 0) {
+                        for (var i = 0; i < states.length; i++) {
+                            if (states[0].layer.id == "cheo") {
+                                var name = states[0].properties.LGA_NAME18.substring(0, states[0].properties.LGA_NAME18.indexOf(" ("));
+                                document.getElementById('pd').innerHTML = '<h5><strong>' + name + '</strong></h5><div class="content-line">' + displayList[states[0].properties.LGA_CODE18] + '</div>';
+                                break;
+                            }
+                        }
+                    } else {
+                        document.getElementById('pd').innerHTML = '<p>Hover over a state!</p>';
+                    }
+
+                    if (e.features.length > 0) {
+                        if (hoveredStateId) {
+                            map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                        }
+                        hoveredStateId = e.features[0].id;
+                        map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
+                    }
+                });
+
+                //Reset information block and hover effect
+                map.on('mouseleave', "cheo", function (e) {
+                    var over = document.getElementById('features');
+                    features.style.display = "none"
+
+                    if (hoveredStateId) {
+                        map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                    }
+                    hoveredStateId = null;
+                });
+
+                //Popup regions name
+                map.on('click', 'state-fills', function (e) {
+
+                    var lgaCode = e.features[0].properties.LGA_CODE18;
+                    if (clicked == lgaCode)
+                        return;
+                    clicked = lgaCode;
+
+
+                    var content2 = document.querySelector('#card-content-2');
+                    content2.style.display = "none";
+                    var content1 = document.querySelector('#card-content');
+                    content1.style.display = "block";
+
+                    var content = document.querySelector('#more-content');
+
+                    content.style.display = "none";
+                    var image = document.querySelector('#card-image');
+                    image.style.display = "none";
+                    var video = document.querySelector('#card-video');
+                    video.style.display = "none";
+                    $.ajax({
+                        /**/
+                        url: '@Url.Action("getInfo", "Map")',
+                        /**/
+                        type: 'POST',
+                        data: { code: lgaCode },
+                        success: function (data) {
+                            var item = JSON.parse(data);
+                            var description = item["descrption"];
+                            var image_link = item["image"];
+                            var video_link = item["video"];
+                            var name = item["name"];
+                            var region = item["region"];
+
+                            // Display airport info
+                            document.querySelector('#card-title').innerText = name;
+                            document.querySelector('#card-subtitle').innerText = region;
+
+                            document.querySelector('#card-description').innerText = description;
+
+                            image.src = image_link;
+                            video.src = video_link;
+
+                            $('#more-content').fadeIn(200);
+
+                            function iloaded() {
+                                //image.style.display = "block";
+                                $('#card-image').fadeIn(200);
+                            }
+
+                            function vloaded() {
+                                //video.style.display = "block";
+                                $('#card-video').fadeIn(200);
+                            }
+
+                            if (image.complete) {
+                                iloaded()
+                            } else {
+                                image.addEventListener('load', iloaded)
+                            }
+
+                            if (video.complete) {
+                                vloaded()
+                            } else {
+                                video.addEventListener('load', vloaded)
+                            }
+
+                            if ($('#info-card').filter(':visible').length == 0) // all hidden
+                            {
+                                shrinkMap();
+                                $('#info-card').fadeIn(300);
+                                $('#culture-card').fadeOut(300);
+                            }
+
+                            // Ensure the info box is visible
+                            document.querySelector('#info-card').style.display = 'block';
+
+                        },
+                    });
+
+
+                });
+                //When map is done loading
+                map.on('idle', function () {
+                    initMap = true;
+                    if (initCodeColor && initMap) {
+                        //Loader
+                        $("#loader").hide();
+
+                        enableAllButton();
+                    }
+                });
             });
-
-            map.on('idle', function () {
-                initMap = true;
-                if (initCodeColor && initMap) {
-                    //Loader
-                    $("#loader").hide();
-
-                    enableAllButton();
-                }
-            });
-            //map.on('load', function () {
-
-
-            //});
-        });
         }
     </script>
 
@@ -475,6 +420,10 @@
 
 <style>
 
+    .content-font-link {
+        font-family: Montserrat,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';
+        color: #0085A1;
+    }
     .loader-svg {
         position: absolute;
         top: 0;
@@ -505,7 +454,7 @@
         font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
         padding: 10px;
         position: absolute;
-        right: 30px;
+        right: 50px;
         z-index: 1;
     }
 
@@ -617,8 +566,8 @@
 
         .culture-card .info-close {
             position: absolute;
-            right: 0;
-            top: 0;
+            right: 2px;
+            top: 2px;
             padding: 4px;
         }
 
@@ -639,8 +588,8 @@
 
         .info-card .info-close {
             position: absolute;
-            right: 0;
-            top: 0;
+            right: 2px;
+            top: 2px;
             padding: 4px;
         }
 
@@ -827,7 +776,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="/">RegionalVIC</a>
+            <a class="navbar-brand js-scroll-trigger" href="/">RegionalVIC&nbsp;Insight</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
@@ -848,7 +797,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item content-font-family" href="/Map#description">Regional Areas Information</a>
-                            <a class="dropdown-item content-font-family" href="/Map#living">Rent Cost</a>
+                            <a class="dropdown-item content-font-family" href="/Map#living">Rent</a>
                             <a class="dropdown-item content-font-family" href="/Map#job">Job Opportunity</a>
                             <a class="dropdown-item content-font-family" href="/Map#safety">Safety</a>
                             <a class="dropdown-item content-font-family" href="/Map#culture">Culture</a>
@@ -861,7 +810,7 @@
             </div>
         </div>
     </nav>
- 
+
     <br>
     <br>
     <br>
@@ -871,9 +820,7 @@
     </div>
     <section>
         <div class="container">
-
             <!-- Tab Section -->
-
             <ul class="nav nav-tabs justify-content-center " id="mapTab" role="tablist">
                 <li class="nav-item" onclick="resetAll()">
                     <a class="nav-link pl-5 pr-5 active" id="description-tab" data-toggle="tab" href="#description"
@@ -895,25 +842,16 @@
                     <a class="nav-link pl-5 pr-5" id="culture-tab" data-toggle="tab" href="#culture"
                        role="tab" aria-controls="culture" aria-selected="false">Cultural Background</a>
                 </li>
-                @*<li class="nav-item" onclick="resetAll()">
-                        <a class="nav-link pl-5 pr-5" id="recommendation-tab" data-toggle="tab"
-                           href="#recommendation" role="tab" aria-controls="recommendation"
-                           aria-selected="true">Recommendation</a>
-                    </li>*@
             </ul>
 
             <div class="tab-content">
-
                 <div class="tab-pane active" id="description" role="tabpanel"
                      aria-labelledby="description-tab">
-
                     <div class="filter">
                         <div class="col-12">
-
                             <p class="text-center font--18">
                                 Select an area below to learn more about Victoria’s diverse regional areas.
                             </p>
-
                             <br>
                         </div>
                     </div>
@@ -924,15 +862,12 @@
                 <div class="tab-pane" id="living" role="tabpanel" aria-labelledby="living-tab">
                     <div class="filter">
                         <div class="col-12">
-
                             <p class="text-center font--18">
                                 Find the weekly median rent price in different regions.
                             </p>
-
                             <p class="text-center font--18">
                                 Select the type of house you are looking for and set your budget to see the result.
                             </p>
-
                             <br>
                         </div>
                         <div class="col-12">
@@ -943,7 +878,6 @@
                                         <div class="col-12">
                                             <label for="sel2"><b>1. Type of house</b></label>
                                         </div>
-
                                         <div class="col-12">
                                             <select class="form-control" id="sel2" onchange="changeSelect()">
                                                 <option>Flat</option>
@@ -981,8 +915,8 @@
 
                                         </div>
                                     </div>
-                                    <!--Forth -->
 
+                                    <!--Forth -->
                                     <div class="form-group mr-4">
                                         <a class="btn panel-button js-scroll-trigger" id="fll-confirm" href="#mapsection">Confirm</a>
                                     </div>
@@ -994,15 +928,12 @@
                 </div>
 
                 <!-- Safety Pane -->
-
                 <div class="tab-pane" id="safety" role="tabpanel" aria-labelledby="safety-tab">
                     <div class="filter">
                         <div class="col-12">
-
                             <p class="text-center font--18">
                                 Find out how safe regional areas are based on the criminal rate and population density.
                             </p>
-
                             <br>
                         </div>
                         <div class="row">
@@ -1017,15 +948,12 @@
                 </div>
 
                 <!-- Job Pane -->
-
                 <div class="tab-pane" id="job" role="tabpanel" aria-labelledby="job-tab">
                     <div class="filter">
                         <div class="col-12">
-
                             <p class="text-center font--18">
                                 Compare the yearly income and unemployment rate among the regional areas.
                             </p>
-
                             <br>
                         </div>
                         <div class="row">
@@ -1036,29 +964,24 @@
                                 <button class="button w-100 mt-3" id="income-confirm">Income comparison</button>
                             </div>
                             <div class="col-12 col-md-6 col-lg-4">
-                                <button class="button w-100 mt-3" id="unemployment-confirm">Umployment rate</button>
+                                <button class="button w-100 mt-3" id="unemployment-confirm">Unemployment rate</button>
                             </div>
-
                         </div>
                     </div>
                 </div>
 
                 <!-- Cultural Pane -->
-
                 <div class="tab-pane" id="culture" role="tabpanel" aria-labelledby="culture-tab">
                     <div class="filter">
                         <div class="col-12">
-
                             <p class="text-center font--18">
                                 Find out the areas where people from your home country are currently
                                 lining in.
-
                             </p>
                             <p class="text-center font--18">
                                 Also find the top 10 mostly spoken languages other than English in different regional
                                 areas.
                             </p>
-
                             <br>
                         </div>
                         <div class="row">
@@ -1115,9 +1038,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
     </section>
 
     <section id="mapsection">
@@ -1125,78 +1046,13 @@
             <div class="container-fluid row" id="mapp">
                 <div class="mapcontainer col-12" id="mapcontainer">
                     @*<div class="loader loader-default is-active" data-text id="loader"></div>*@
+                    <!-- Loader -->
                     <div class="loader-svg" id="loader"></div>
-                    
+                    <!-- Map -->
                     <div id="map" class="mmap" style="height:700px"></div>
+                    <!-- Hover box -->
                     <div class='map-overlay' id='features' style="display: none"><div class='block-content' id='pd'><p></p></div></div>
-
-                    @*<div id='tlegend' class="form-group">
-                                <div class="row">
-
-                                    <div class="col-4 row">
-                                        <div class="col-4">
-                                            <div class="py-3 border" style='background-color: #ddd'> </div>
-                                            <div class="">No data</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="py-3 border" style='background-color: #F2F12D'> </div>
-
-                                            <div class="">$0 - $50</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="py-3 " style='background-color: #EED322'> </div>
-
-                                            <div class="">$150</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-4 row">
-                                        <div class="col-4">
-                                            <div class="py-3 " style='background-color: #E6B71E'> </div>
-
-                                            <div class="">$200</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="py-3 " style='background-color: #CA8323'> </div>
-
-                                            <div class="">$250</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="py-3 " style='background-color: #B86B25'> </div>
-
-                                            <div class="">$300</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-4 row">
-                                        <div class="col-4">
-                                            <div class="py-3 " style='background-color: #A25626'> </div>
-
-                                            <div class="">$350</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="py-3 " style='background-color: #8B4225'> </div>
-
-                                            <div class="">$450</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="py-3 " style='background-color: #723122'> </div>
-
-                                            <div class="">$550</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                    <div class="row">
-            <div class="col">No data</div>
-            <div class="col">$0 - $50</div>
-            <div class="col">$150</div>
-            <div class="col">$200</div>
-            <div class="col">$250</div>
-            <div class="col">$300</div>
-            <div class="col">$350</div>
-            <div class="col">$450</div>
-            <div class="col">$550</div>
-        </div>
-                                </div>*@
+                    <!-- Culture panel -->
                     <div id="culture-card" class="culture-card rounded shadow-lg bg-white" style="max-width: 500px; display: none;">
                         <div class="card" id="culture-card-content" style="display:block">
                             <div width="350" height="30" id="culture-info-content">
@@ -1209,9 +1065,8 @@
                             <div id="culture-list-content">
                             </div>
                         </div>
-
                     </div>
-
+                    <!-- Info panel -->
                     <div id="info-card" class="info-card rounded shadow-lg bg-white" style="max-width: 350px; display: none;">
                         <div class="card" id="card-content-2" style="display:none">
                             <div width="350" height="30" id="info-content-2">
@@ -1223,7 +1078,6 @@
                             <div id='list' class="list-group">
 
                             </div>
-
 
                             <div id='slist' class="list-group">
 
@@ -1262,76 +1116,74 @@
                             </div>
                         </div>
                     </div>
-
+                    <!-- Legend -->
                     <div id='state-legend' class='legend' style="display: none">
-                        <h4>Median Rent</h4>
-                        <div><span style='background-color: #723122'></span>$550</div>
-                        <div><span style='background-color: #8B4225'></span>$450</div>
-                        <div><span style='background-color: #A25626'></span>$350</div>
-                        <div><span style='background-color: #B86B25'></span>$300</div>
-                        <div><span style='background-color: #CA8323'></span>$250</div>
-                        <div><span style='background-color: #E6B71E'></span>$200</div>
-                        <div><span style='background-color: #EED322'></span>$150</div>
-                        <div><span style='background-color: #F2F12D'></span>$0 - $50</div>
+                        <h4>Rent</h4>
+                        <div><span style='background-color: #001D4B'></span>$550</div>
+                        <div><span style='background-color: #003664'></span>$450</div>
+                        <div><span style='background-color: #00507E'></span>$350</div>
+                        <div><span style='background-color: #1583B1'></span>$300</div>
+                        <div><span style='background-color: #2E9CCA'></span>$250</div>
+                        <div><span style='background-color: #61CFFD'></span>$200</div>
+                        <div><span style='background-color: #94FFFF'></span>$150</div>
+                        <div><span style='background-color: #C7FFFF'></span>$0 - $50</div>
                         <div><span style='background-color: #ddd'></span>No data</div>
                     </div>
 
                     <div id='state-crime-legend' class='legend' style="display: none">
                         <h4>Criminal rate</h4>
-                        <div><span style='background-color: #723122'></span>10%</div>
-                        <div><span style='background-color: #8B4225'></span>8%</div>
-                        <div><span style='background-color: #A25626'></span>7%</div>
-                        <div><span style='background-color: #B86B25'></span>6%</div>
-                        <div><span style='background-color: #CA8323'></span>5%</div>
-                        <div><span style='background-color: #DA9C20'></span>4%</div>
-                        <div><span style='background-color: #E6B71E'></span>3%</div>
-                        <div><span style='background-color: #EED322'></span>2%</div>
-                        <div><span style='background-color: #F2F12D'></span>0% - 2%</div>
+                        <div><span style='background-color: #001D4B'></span>10%</div>
+                        <div><span style='background-color: #003664'></span>8%</div>
+                        <div><span style='background-color: #00507E'></span>7%</div>
+                        <div><span style='background-color: #1583B1'></span>6%</div>
+                        <div><span style='background-color: #2E9CCA'></span>5%</div>
+                        <div><span style='background-color: #61CFFD'></span>3%</div>
+                        <div><span style='background-color: #94FFFF'></span>1%</div>
+                        <div><span style='background-color: #C7FFFF'></span>0% - 1%</div>
                         <div><span style='background-color: #ddd'></span>No data</div>
                     </div>
 
                     <div id='state-density-legend' class='legend' style="display: none">
                         <h4>Population density</h4>
-                        <div><span style='background-color: #723122'></span>200</div>
-                        <div><span style='background-color: #8B4225'></span>50</div>
-                        <div><span style='background-color: #A25626'></span>20</div>
-                        <div><span style='background-color: #B86B25'></span>8</div>
-                        <div><span style='background-color: #CA8323'></span>5</div>
-                        <div><span style='background-color: #E6B71E'></span>3</div>
-                        <div><span style='background-color: #EED322'></span>1</div>
-                        <div><span style='background-color: #F2F12D'></span>0 - 1</div>
+                        <div><span style='background-color: #001D4B'></span>200</div>
+                        <div><span style='background-color: #003664'></span>50</div>
+                        <div><span style='background-color: #00507E'></span>20</div>
+                        <div><span style='background-color: #1583B1'></span>8</div>
+                        <div><span style='background-color: #2E9CCA'></span>5</div>
+                        <div><span style='background-color: #61CFFD'></span>3</div>
+                        <div><span style='background-color: #94FFFF'></span>1</div>
+                        <div><span style='background-color: #C7FFFF'></span>0 - 1</div>
                         <div><span style='background-color: #ddd'></span>No data</div>
                     </div>
 
                     <div id='state-unemp-legend' class='legend' style="display: none">
-                        <h4>Umployment rate</h4>
-                        <div><span style='background-color: #723122'></span>8%</div>
-                        <div><span style='background-color: #8B4225'></span>7%</div>
-                        <div><span style='background-color: #A25626'></span>6%</div>
-                        <div><span style='background-color: #B86B25'></span>5%</div>
-                        <div><span style='background-color: #CA8323'></span>4%</div>
-                        <div><span style='background-color: #E6B71E'></span>3%</div>
-                        <div><span style='background-color: #EED322'></span>2%</div>
-                        <div><span style='background-color: #F2F12D'></span>0% - 2%</div>
+                        <h4>Unemployment rate</h4>
+                        <div><span style='background-color: #001D4B'></span>8%</div>
+                        <div><span style='background-color: #003664'></span>7%</div>
+                        <div><span style='background-color: #00507E'></span>6%</div>
+                        <div><span style='background-color: #1583B1'></span>5%</div>
+                        <div><span style='background-color: #2E9CCA'></span>4%</div>
+                        <div><span style='background-color: #61CFFD'></span>3%</div>
+                        <div><span style='background-color: #94FFFF'></span>2%</div>
+                        <div><span style='background-color: #C7FFFF'></span>0% - 2%</div>
                         <div><span style='background-color: #ddd'></span>No data</div>
                     </div>
 
                     <div id='state-income-legend' class='legend' style="display: none">
                         <h4>Income</h4>
-                        <div><span style='background-color: #723122'></span>$60,000</div>
-                        <div><span style='background-color: #8B4225'></span>$55,000</div>
-                        <div><span style='background-color: #A25626'></span>$50,000</div>
-                        <div><span style='background-color: #B86B25'></span>$48,000</div>
-                        <div><span style='background-color: #CA8323'></span>$44,000</div>
-                        <div><span style='background-color: #E6B71E'></span>$40,000</div>
-                        <div><span style='background-color: #EED322'></span>$35,000</div>
-                        <div><span style='background-color: #F2F12D'></span>$0 - $35,000</div>
+                        <div><span style='background-color: #001D4B'></span>$60,000</div>
+                        <div><span style='background-color: #003664'></span>$55,000</div>
+                        <div><span style='background-color: #00507E'></span>$50,000</div>
+                        <div><span style='background-color: #1583B1'></span>$48,000</div>
+                        <div><span style='background-color: #2E9CCA'></span>$44,000</div>
+                        <div><span style='background-color: #61CFFD'></span>$40,000</div>
+                        <div><span style='background-color: #94FFFF'></span>$35,000</div>
+                        <div><span style='background-color: #C7FFFF'></span>$0 - $35,000</div>
                         <div><span style='background-color: #ddd'></span>No data</div>
                     </div>
                 </div>
-
+                <!-- Bar chart -->
                 <div class="col-6" style="display:none" id="chart-section">
-
                     <div class="d-flex justify-content-center" id="buttons">
                         <button id="byKey" class="btn btn-info btn-sort">Top 10 Min</button>
                         <div style="width:10px"></div>
@@ -1342,9 +1194,8 @@
                 </div>
             </div>
 
+            <!-- Job chart -->
             <div class="container" style="display: none; width: 100%" id="job-compare">
-
-
                 <div id="first">
                     <div class="container">
                         <br>
@@ -1384,7 +1235,6 @@
                     </div>
                 </div>
 
-
                 <div id="second" class="text-center">
                     <div id="barchart2"></div>
                 </div>
@@ -1395,40 +1245,19 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <span class="copyright">
-                        Copyright &copy; RegionalVIC 2019. Theme is from <a href="https://startbootstrap.com/themes/">Start Bootstrap</a> website under MIT license.
+                        Copyright &copy; RegionalVICInsight 2019.
                     </span>
                 </div>
-                @*<div class="col-md-4">
-                        <ul class="list-inline social-buttons">
-                            <li class="list-inline-item">
-                                <a href="#">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <ul class="list-inline quicklinks">
-                            <li class="list-inline-item">
-                                <a href="#">Privacy Policy</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#">Terms of Use</a>
-                            </li>
-                        </ul>
-                    </div>*@
+
+                <div class="col-md-6">
+                    <ul class="list-inline quicklinks">
+                        <li class="list-inline-item">
+                            <a href="/Home/Disclaimer" class="content-font-link">Disclaimer</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </footer>
@@ -1441,515 +1270,58 @@
         var spanDisabled = false;
     var toggleRecomd = false;
 
+        var hoveredStateId = null;
+        var highlightedStateId = null;
+
+        var minFBudget;
+        var maxFBudget;
+        var minRBudget;
+        var maxRBudget;
         var selected = "";
     var allCode = [20110, 20260, 20570, 20660, 20740, 20830, 20910, 21010, 21110, 21180, 21270, 21370, 21450, 21610, 21670, 21750, 21830, 21890, 22110, 22170, 22250, 22310, 22410, 22490, 22620, 22670, 22750, 22830, 22910, 22980, 23110, 23190, 23270, 23350, 23430, 23670, 23810, 23940, 24130, 24210, 24250, 24330, 24410, 24600, 24650, 24780, 24850, 24900, 24970, 25060, 25150, 25250, 25340, 25430, 25490, 25620, 25710, 25810, 25900, 25990, 26080, 26170, 26260, 26350, 26430, 26490, 26610, 26670, 26700, 26730, 26810, 26890, 26980, 27070, 27170, 27260, 27350, 27450, 27630, 29399, 29499, 29799];
 
     const TOKEN = "pk.eyJ1Ijoia2FzYWx1b3FpIiwiYSI6ImNqbHZ2OW53bTB5aHozcW9kcDJibndycXUifQ.SeWM7HbI0owT-Rwuv14Ntg";
-
+    //Map
     mapboxgl.accessToken = TOKEN;
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/light-v9',
         //style: 'mapbox://styles/mapbox/light-v9',
-        center: [145.045837, -37.876823],
-        zoom: 6
+        center: [145.045837, -37.06823],
+        zoom: 6.5
     });
 
 
     var nav = new mapboxgl.NavigationControl();
     map.addControl(nav, 'bottom-right');
 
-    var hoveredStateId = null;
-    var highlightedStateId = null;
 
-    var minFBudget;
-    var maxFBudget;
-    var minRBudget;
-    var maxRBudget;
 
-
-        $('body').on('click', 'a.disabled', function (event) {
-            event.preventDefault();
-        });
-
-        jQuery.fn.extend({
-            disable: function (state) {
-                return this.each(function () {
-                    var $this = $(this);
-                    $this.toggleClass('disabled', state);
-                });
-            }
-        }); 
-        
-
-
-        function disableAllButton() {
-            $("#income-confirm").attr("disabled", true);
-            $("#unemployment-confirm").attr("disabled", true);
-            $("#job-compare-confirm").attr("disabled", true);
-            $("#c-confirm").attr("disabled", true);
-            $("#d-confirm").attr("disabled", true);
-
-            $("#fll-confirm").disable(true);
-            $('#fll-confirm').html('<i id="button-spinner" class="fa fa-circle-o-notch fa-spin"></i>&nbsp;Loading')
-
-            spanDisabled = false;
-        }
-
-
-        function enableAllButton() {
-            $("#income-confirm").attr("disabled", false);
-            $("#unemployment-confirm").attr("disabled", false);
-            $("#job-compare-confirm").attr("disabled", false);
-            $("#c-confirm").attr("disabled", false);
-            $("#d-confirm").attr("disabled", false);
-            
-            $("#fll-confirm").disable(false);
-            $('#fll-confirm').html('Confirm')
-
-            spanDisabled = true;
-
-
-        }
-        $('#income-confirm').on('click', function () {
-            $("#mapp").slideDown("500", function () {
-                // Animation complete.
-            });
-            $('#job-compare').slideUp("500", function () {
-                // Animation complete.
-            });
-
-            $("#mapp")
-            $('#job-compare')
-            choropleth('i');
-            $("#mapcontainer").removeClass('col-12').addClass('col-6');
-            $('#chart-section').show();
-            map.resize()
-        });
-
-        $('#unemployment-confirm').on('click', function () {
-            $("#mapp").slideDown("500", function () {
-                // Animation complete.
-            });
-            $('#job-compare').slideUp("500", function () {
-                // Animation complete.
-            });
-            choropleth('u');
-            $("#mapcontainer").removeClass('col-12').addClass('col-6');
-            $('#chart-section').show();
-            map.resize()
-        });
-
-        $('#job-compare-confirm').on('click', function () {
-            $("#mapp").slideUp("500", function () {
-                // Animation complete.
-            });
-            $('#job-compare').slideDown("500", function () {
-                // Animation complete.
-            });
-
-            $("#loader").show();
-            $('#region-list').select2({
-                maximumSelectionLength: 3,
-                minimumSelectionLength: 2,
-                closeOnSelect: false
-            });
-
-            $('#industry-list').select2({
-                maximumSelectionLength: 3,
-                closeOnSelect: false
-            });
-
-            initIndustryListJ();
-            initRegionListJ();
-        });
-
-        $('#c-confirm').on('click', function () {
-            //$(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
-            choropleth('c');
-            $("#mapcontainer").removeClass('col-12').addClass('col-6');
-            $('#chart-section').show();
-            map.resize()
-        });
-
-        $('#d-confirm').on('click', function () {
-            //$(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
-            choropleth('d');
-            $("#mapcontainer").removeClass('col-12').addClass('col-6');
-            $('#chart-section').show();
-            map.resize()
-        });
-        
-        $('#fll-confirm').on('click', function () {
-            //$(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
-            //choropleth('a');
-            filter();
-        });
-
-        $('#bth-confirm').on('click', function () {
-            if (spanDisabled) {
-                $(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
-                show('countrywithpopulation');
-            }
-        });
-
-        $('#lag-confirm').on('click', function () {
-            if (spanDisabled) {
-                $(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
-                show('languagewithpopulation');
-            }
-        });
-
-        $('#reg-confirm').on('click', function () {
-            if (spanDisabled) {
-                $(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
-                show('autocountry');
-            }
-        });
-
-
-        function generateChart(data, name) {
-            //if( $('#leftmenu').is(':empty') ) {
-            $('#barchart2').empty()
-            const keys = Object.keys(data[0]).slice(1);
-
-            const tip = d3.tip().html(d => d.value);
-
-            const margin = {
-                top: 40,
-                right: 100,
-                bottom: 40,
-                left: 50
-            },
-                width = 800,
-                height = 480,
-                innerWidth = width - margin.left - margin.right,
-                innerHeight = height - margin.top - margin.bottom;
-
-            svg = d3.select('#barchart2').append('svg').attr('width', width).attr('height', height)
-            g = svg.append('g').attr('transform', `translate(${margin.left}, ${margin.top})`);
-
-            svg.call(tip)
-
-            const x0 = d3.scaleBand()
-                .rangeRound([0, innerWidth])
-                .paddingInner(.1);
-
-            const x1 = d3.scaleBand()
-                .padding(.05);
-
-            const y = d3.scaleLinear()
-                .rangeRound([innerHeight, 0]);
-
-            //const z = d3.scaleOrdinal()
-            //    .range(['#AA8139', '#AA9439', '#3C3176', '#2C4770', '#96A537', '#68266F', '#492E74']);
-
-            const z = d3.scaleOrdinal()
-                .range(["#ca0020", "#f4a582", "#92c5de", "#0571b0", '#68266F', '#492E74']);
-
-            x0.domain(data.map(d => d.industry));
-            x1.domain(keys).rangeRound([0, x0.bandwidth()]);
-            y.domain([0, d3.max(data, d => d3.max(keys, key => d[key]))]).nice();
-
-            g.append('g')
-                .selectAll('g')
-                .data(data)
-                .enter()
-                .append('g')
-                .attr('transform', d => 'translate(' + x0(d.industry) + ',0)')
-                .selectAll('rect')
-                .data(d => keys.map(key => { return { key: key, value: d[key] } }))
-                .enter().append('rect')
-                .attr('x', d => x1(d.key))
-                .attr('y', d => y(d.value))
-                .attr('width', x1.bandwidth())
-                .attr('height', d => innerHeight - y(d.value))
-                .attr('fill', d => z(d.key))
-                .on('mouseover', tip.show)
-                .on('mouseout', tip.hide)
-
-            g.append('g')
-                .attr('class', 'axis-bottom')
-                .attr('transform', 'translate(0,' + innerHeight + ')')
-                .call(d3.axisBottom(x0));
-
-            g.append('g')
-                .attr('class', 'axis-left')
-                .call(d3.axisLeft(y).ticks(null, 's'))
-
-
-            // text label for the x axis
-            g.append("text")
-                .attr("class", "text-title")
-                .attr("transform",
-                "translate(" + (innerWidth / 2) + " ," +
-                    (0 - margin.top / 2) + ")")
-                .style("text-anchor", "middle")
-                .text(name);
-
-
-
-            var legend = svg.selectAll(".legend")
-                .data(keys.slice().reverse())
-                .enter().append("g")
-                .attr("class", "legend")
-                .attr("transform", function (d, i) { return "translate(0,"  + i * 20 + ")"; });
-
-            legend.append("rect")
-                .attr("x", innerWidth + margin.left)
-                .attr("y", height / 2-9)
-                .attr("width", 18)
-                .attr("height", 18)
-                .style("fill", z);
-
-            legend.append("text")
-                .attr("x", innerWidth + margin.left + 22)
-                .attr("y", height/2)
-                .attr("dy", ".35em")
-                .style("text-anchor", "start")
-                .text(function (d) { return d; });
-
-
-            //const legend = g.append('g')
-            //    .attr('font-family', 'sans-serif')
-            //    .attr('font-size', 10)
-            //    .attr('text-anchor', 'end')
-            //    .selectAll('g')
-            //    .data(keys.slice().reverse())
-            //    .enter().append('g')
-            //    .attr('transform', (d, i) => 'translate(0,' + i * 20 + ')');
-
-            //legend.append('rect')
-            //    .attr('x', innerWidth - 19)
-            //    .attr('width', 10)
-            //    .attr('height', 10)
-            //    .attr('fill', z);
-
-            //legend.append('text')
-            //    .attr('x', innerWidth - 32)
-            //    .attr('y', 6)
-            //    .attr('dy', '0.32em')
-            //    .text(d => d);
-        }
-
-        $("#nob-button").click(function () {
-            $("#loader").show();
-
-            //document.querySelector('#list-name').innerHTML = "Rent";
-            //list.style.display = "block";
-            //slist.style.display = "none";
-
-            var industry = $("#industry-list").select2("val");
-            var region = $("#region-list").select2("val");
-
-            if (industry.length == 0 || region.length == 0) {
-
-                $('#barchart2').empty()
-                $("#loader").hide();
-                return;
-            }
-
-            $.ajax({
-                /**/
-                url: '@Url.Action("getBarchartData", "Job")',
-                /**/
-                type: 'POST',
-                data: { industries: industry, regions: region, option: "0" },
-                success: function (data) {
-                    var tmpObj = JSON.parse(data);
-                    var data = [];
-
-
-                    var industries = [...new Set(tmpObj.map(x => x.IdsName))]
-
-                    for (var i = 0; i < industries.length; i++) {
-
-                        var dataObj = new Object;
-                        dataObj["industry"] = industries[i]
-
-                        for (var j = 0; j < tmpObj.length; j++) {
-                            var item = tmpObj[j];
-                            if (item["IdsName"] === industries[i]) {
-                                dataObj[item["LgaName"]] = item["NoOfBsn"]
-                            }
-                        }
-
-                        data.push(dataObj);
-                    }
-
-                    generateChart(data, 'Number of Business')
-                    $("#loader").hide();
-
-                },
-            });
-
-        });
-
-
-        $("#poe-button").click(function () {
-            $("#loader").show();
-
-            //document.querySelector('#list-name').innerHTML = "Rent";
-            //list.style.display = "block";
-            //slist.style.display = "none";
-
-            var industry = $("#industry-list").select2("val");
-            var region = $("#region-list").select2("val");
-
-            if (industry.length == 0 || region.length == 0) {
-
-            $('#barchart2').empty()
-                $("#loader").hide();
-                return;
-            }
-            $.ajax({
-                /**/
-                url: '@Url.Action("getBarchartData", "Job")',
-                /**/
-                type: 'POST',
-                data: { industries: industry, regions: region, option: "1" },
-                success: function (data) {
-                    var tmpObj = JSON.parse(data);
-                    var data = [];
-
-
-                    var industries = [...new Set(tmpObj.map(x => x.IdsName))]
-
-                    for (var i = 0; i < industries.length; i++) {
-
-                        var dataObj = new Object;
-                        dataObj["industry"] = industries[i]
-
-                        for (var j = 0; j < tmpObj.length; j++) {
-                            var item = tmpObj[j];
-                            if (item["IdsName"] === industries[i]) {
-                                dataObj[item["LgaName"]] = item["Proportion"]
-                            }
-                        }
-
-                        data.push(dataObj);
-                    }
-
-                    generateChart(data, 'Proportion of Employee (%)')
-                    $("#loader").hide();
-
-                },
-            });
-        });
-
-        $("#industry-list").change(function () {
-            $('#barchart2').empty()
-            var ele = $(this);
-            if (ele.val().length == 3) {
-                ele.select2('close');
-            }
-        });
-        $("#region-list").change(function () {
-            $('#barchart2').empty()
-            var ele = $(this);
-            if (ele.val().length == 3) {
-                ele.select2('close');
-            }
-        });
-        // In your Javascript (external .js resource or <script> tag)
-        $(document).ready(function () {
-
-            disableAllButton()
-
-            resetAll();
-        });
-
-
-        function initRegionListJ() {
-            $("#region-list").empty();
-            $.ajax({
-                /**/
-                url: '@Url.Action("getAllRegions", "Map")',
-                /**/
-                type: 'POST',
-                data: {},
-                success: function (data) {
-                    var list = JSON.parse(data);
-                    for (var i = 0; i < list.length; i++) {
-                        var item = list[i];
-                        var value = item["code"];
-                        var label = item["name"];
-                        var o = new Option(value, value);
-                        /// jquerify the DOM object 'o' so we can use the html method
-                        $(o).html(label);
-                        $("#region-list").append(o);
-                    }
-                    initRegion = true
-                    if (initCodeColor && initMap && initRegion && initIndusty) {
-                        //Loader
-                        $("#loader").hide();
-                        enableAllButton();
-
-                    }
-                },
-            });
-
-        }
-
-        function initIndustryListJ() {
-            $("#industry-list").empty();
-            $.ajax({
-                /**/
-                url: '@Url.Action("getAllIndustry", "Job")',
-                /**/
-                type: 'POST',
-                data: {},
-                success: function (data) {
-                    var list = JSON.parse(data);
-                    for (var i = 0; i < list.length; i++) {
-                        var value = list[i];
-
-                        var o = new Option(value, value);
-                        /// jquerify the DOM object 'o' so we can use the html method
-                        $(o).html(value);
-                        $("#industry-list").append(o);
-
-                    }
-
-
-                    initIndusty = true
-                    if (initCodeColor && initMap && initRegion && initIndusty) {
-                        //Loader
-                        $("#loader").hide();
-
-                        enableAllButton();
-                    }
-
-                },
-            });
-
-        }
-
-        function show(option) {
-            $('#culture-list-content').empty();
-            if (option === 'countrywithpopulation') {
-
-                selected = $("#inputRegion").val();
-                if (selected != "") {
-                    initCountryCharts(selected);
-                    flytoPoly(selected);
-                }
-            }
-            else if (option === 'languagewithpopulation') {
-
-                selected = $("#inputRegion").val();
-                if (selected != "") {
-                    initLanguageCharts(selected);
-                flytoPoly(selected);
-            }
-            }
-            else if (option === 'autocountry') {
-
-                var selectedCountry = $("#inputCountry").val();
-                if (selectedCountry!="")
-                    initRegionCharts(selectedCountry);
-            }
-        }
+        var myData;
+        var rcMap;
+        var cheo = new Object;
+        var textColor = new Object;
+        var crimeCheo = new Object;
+        var desyCheo = new Object;
+        var initCodeColor = false;
+        var initMap = false;
+        var initRegion = false;
+        var initIndusty = false;
+
+        var moved = false;
+        var clicked = "";
+        var list = document.getElementById('list');
+        var slist = document.getElementById('slist');
+        var recomdList = document.getElementById('recomd-list');
+
+
+
+        var stateLegend = document.getElementById('state-legend');
+        var stateCrimeLegend = document.getElementById('state-crime-legend');
+        var stateDesyLegend = document.getElementById('state-density-legend');
+        var stateIncomeLegend = document.getElementById('state-income-legend');
+        var stateUnempLegend = document.getElementById('state-unemp-legend');
+        //Random color of map
     function getRandomColor() {
         var letters = '0123456789ABCDEF';
         var color = '#';
@@ -1958,16 +1330,6 @@
         }
         return color;
     }
-    var myData;
-    var rcMap;
-    var cheo = new Object;
-    var textColor = new Object;
-    var crimeCheo = new Object;
-    var desyCheo = new Object;
-    var initCodeColor = false;
-        var initMap = false;
-        var initRegion = false;
-        var initIndusty = false;
         function formRegionColorMap() {
             rcMap = new Map();
             rcMap.set('20110', getRandomColor());
@@ -2159,6 +1521,561 @@
             });
         }
 
+
+        //Generate Color
+        formRegionColorMap();
+
+        function resetAll() {
+
+            var video = document.querySelector('#card-video');
+            video.src = "";
+            extendMap();
+            $('#info-card').fadeOut(300);
+            $('#culture-card').fadeOut(300);
+
+            $("#mapp").slideDown("500", function () {
+                // Animation complete.
+            });
+            $('#job-compare').slideUp("500", function () {
+                // Animation complete.
+            });
+
+            $("#mapcontainer").removeClass('col-6').addClass('col-12');
+            $('#chart-section').hide();
+
+            map.resize();
+            showCheoBlock = false;
+            resetLayer();
+            selected = "";
+            clicked = "";
+            list.innerHTML = slist.innerHTML = recomdList.innerHTML = "";
+        }
+        //Disable archor button
+        $('body').on('click', 'a.disabled', function (event) {
+            event.preventDefault();
+        });
+
+        jQuery.fn.extend({
+            disable: function (state) {
+                return this.each(function () {
+                    var $this = $(this);
+                    $this.toggleClass('disabled', state);
+                });
+            }
+        });
+
+
+        //Disable all buttons
+        function disableAllButton() {
+            $("#income-confirm").attr("disabled", true);
+            $("#unemployment-confirm").attr("disabled", true);
+            $("#job-compare-confirm").attr("disabled", true);
+            $("#c-confirm").attr("disabled", true);
+            $("#d-confirm").attr("disabled", true);
+
+            $("#fll-confirm").disable(true);
+            $('#fll-confirm').html('<i id="button-spinner" class="fa fa-circle-o-notch fa-spin"></i>&nbsp;Loading')
+
+            spanDisabled = false;
+        }
+
+        //Enable all buttons
+        function enableAllButton() {
+            $("#income-confirm").attr("disabled", false);
+            $("#unemployment-confirm").attr("disabled", false);
+            $("#job-compare-confirm").attr("disabled", false);
+            $("#c-confirm").attr("disabled", false);
+            $("#d-confirm").attr("disabled", false);
+
+            $("#fll-confirm").disable(false);
+            $('#fll-confirm').html('Confirm')
+
+            spanDisabled = true;
+
+
+        }
+        //Income button
+        $('#income-confirm').on('click', function () {
+            $("#mapp").slideDown("500", function () {
+                // Animation complete.
+            });
+            $('#job-compare').slideUp("500", function () {
+                // Animation complete.
+            });
+
+            $("#mapp")
+            $('#job-compare')
+            choropleth('i');
+            $("#mapcontainer").removeClass('col-12').addClass('col-6');
+            $('#chart-section').show();
+            map.resize()
+        });
+
+        //Unemployment button
+        $('#unemployment-confirm').on('click', function () {
+            $("#mapp").slideDown("500", function () {
+                // Animation complete.
+            });
+            $('#job-compare').slideUp("500", function () {
+                // Animation complete.
+            });
+            choropleth('u');
+            $("#mapcontainer").removeClass('col-12').addClass('col-6');
+            $('#chart-section').show();
+            map.resize()
+        });
+
+        //Job compare button
+        $('#job-compare-confirm').on('click', function () {
+            $("#mapp").slideUp("500", function () {
+                // Animation complete.
+            });
+            $('#job-compare').slideDown("500", function () {
+                // Animation complete.
+            });
+
+            $("#loader").show();
+            $('#region-list').select2({
+                maximumSelectionLength: 3,
+                minimumSelectionLength: 2,
+                closeOnSelect: false
+            });
+
+            $('#industry-list').select2({
+                maximumSelectionLength: 3,
+                closeOnSelect: false
+            });
+
+            initIndustryListJ();
+            initRegionListJ();
+        });
+
+        //Safety button
+        $('#c-confirm').on('click', function () {
+            //$(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
+            choropleth('c');
+            $("#mapcontainer").removeClass('col-12').addClass('col-6');
+            $('#chart-section').show();
+            map.resize()
+        });
+
+        //Density button
+        $('#d-confirm').on('click', function () {
+            //$(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
+            choropleth('d');
+            $("#mapcontainer").removeClass('col-12').addClass('col-6');
+            $('#chart-section').show();
+            map.resize()
+        });
+
+        //Rent button
+        $('#fll-confirm').on('click', function () {
+            //$(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
+            //choropleth('a');
+            filter();
+        });
+
+        //Birth of country button
+        $('#bth-confirm').on('click', function () {
+            if (spanDisabled) {
+                $(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
+                show('countrywithpopulation');
+            }
+        });
+
+        //Language button
+        $('#lag-confirm').on('click', function () {
+            if (spanDisabled) {
+                $(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
+                show('languagewithpopulation');
+            }
+        });
+
+        //Auto country button
+        $('#reg-confirm').on('click', function () {
+            if (spanDisabled) {
+                $(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
+                show('autocountry');
+            }
+        });
+
+
+        //Generate chart in job comparison
+        function generateChart(data, name) {
+            $('#barchart2').empty()
+            const keys = Object.keys(data[0]).slice(1);
+
+            const tip = d3.tip().html(d => d.value);
+
+            const margin = {
+                top: 40,
+                right: 100,
+                bottom: 40,
+                left: 50
+            },
+                width = 800,
+                height = 480,
+                innerWidth = width - margin.left - margin.right,
+                innerHeight = height - margin.top - margin.bottom;
+
+            svg = d3.select('#barchart2').append('svg').attr('width', width).attr('height', height)
+            g = svg.append('g').attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+            svg.call(tip)
+
+            const x0 = d3.scaleBand()
+                .rangeRound([0, innerWidth])
+                .paddingInner(.1);
+
+            const x1 = d3.scaleBand()
+                .padding(.05);
+
+            const y = d3.scaleLinear()
+                .rangeRound([innerHeight, 0]);
+
+            //const z = d3.scaleOrdinal()
+            //    .range(['#AA8139', '#AA9439', '#3C3176', '#2C4770', '#96A537', '#68266F', '#492E74']);
+
+            const z = d3.scaleOrdinal()
+                .range(["#ff6e54", "#2E9CCA", "#ffa600", "#dd5182", '#955196', '#003f5c']);
+
+            x0.domain(data.map(d => d.industry));
+            x1.domain(keys).rangeRound([0, x0.bandwidth()]);
+            y.domain([0, d3.max(data, d => d3.max(keys, key => d[key]))]).nice();
+
+            g.append('g')
+                .selectAll('g')
+                .data(data)
+                .enter()
+                .append('g')
+                .attr('transform', d => 'translate(' + x0(d.industry) + ',0)')
+                .selectAll('rect')
+                .data(d => keys.map(key => { return { key: key, value: d[key] } }))
+                .enter().append('rect')
+                .attr('x', d => x1(d.key))
+                .attr('y', d => y(d.value))
+                .attr('width', x1.bandwidth())
+                .attr('height', d => innerHeight - y(d.value))
+                .attr('fill', d => z(d.key))
+                .on('mouseover', tip.show)
+                .on('mouseout', tip.hide)
+
+            g.append('g')
+                .attr('class', 'axis-bottom')
+                .attr('transform', 'translate(0,' + innerHeight + ')')
+                .call(d3.axisBottom(x0));
+
+            g.append('g')
+                .attr('class', 'axis-left')
+                .call(d3.axisLeft(y).ticks(null, 's'))
+
+
+            // text label for the x axis
+            g.append("text")
+                .attr("class", "text-title")
+                .attr("transform",
+                "translate(" + (innerWidth / 2) + " ," +
+                    (0 - margin.top / 2) + ")")
+                .style("text-anchor", "middle")
+                .text(name);
+
+
+
+            var legend = svg.selectAll(".legend")
+                .data(keys.slice().reverse())
+                .enter().append("g")
+                .attr("class", "legend")
+                .attr("transform", function (d, i) { return "translate(0,"  + i * 20 + ")"; });
+
+            legend.append("rect")
+                .attr("x", innerWidth + margin.left)
+                .attr("y", height / 2-9)
+                .attr("width", 18)
+                .attr("height", 18)
+                .style("fill", z);
+
+            legend.append("text")
+                .attr("x", innerWidth + margin.left + 22)
+                .attr("y", height/2)
+                .attr("dy", ".35em")
+                .style("text-anchor", "start")
+                .text(function (d) { return d; });
+
+
+            //const legend = g.append('g')
+            //    .attr('font-family', 'sans-serif')
+            //    .attr('font-size', 10)
+            //    .attr('text-anchor', 'end')
+            //    .selectAll('g')
+            //    .data(keys.slice().reverse())
+            //    .enter().append('g')
+            //    .attr('transform', (d, i) => 'translate(0,' + i * 20 + ')');
+
+            //legend.append('rect')
+            //    .attr('x', innerWidth - 19)
+            //    .attr('width', 10)
+            //    .attr('height', 10)
+            //    .attr('fill', z);
+
+            //legend.append('text')
+            //    .attr('x', innerWidth - 32)
+            //    .attr('y', 6)
+            //    .attr('dy', '0.32em')
+            //    .text(d => d);
+        }
+
+        //No of business button
+        $("#nob-button").click(function () {
+            $("#loader").show();
+
+            //document.querySelector('#list-name').innerHTML = "Rent";
+            //list.style.display = "block";
+            //slist.style.display = "none";
+
+            var industry = $("#industry-list").select2("val");
+            var region = $("#region-list").select2("val");
+
+            if (industry.length == 0 || region.length == 0) {
+
+                $('#barchart2').empty()
+                $("#loader").hide();
+                return;
+            }
+
+            $.ajax({
+                /**/
+                url: '@Url.Action("getBarchartData", "Map")',
+                /**/
+                type: 'POST',
+                data: { industries: industry, regions: region, option: "0" },
+                success: function (data) {
+                    var tmpObj = JSON.parse(data);
+                    var data = [];
+
+
+                    var industries = [...new Set(tmpObj.map(x => x.IdsName))]
+
+                    for (var i = 0; i < industries.length; i++) {
+
+                        var dataObj = new Object;
+                        dataObj["industry"] = industries[i]
+
+                        for (var j = 0; j < tmpObj.length; j++) {
+                            var item = tmpObj[j];
+                            if (item["IdsName"] === industries[i]) {
+                                dataObj[item["LgaName"]] = item["NoOfBsn"]
+                            }
+                        }
+
+                        data.push(dataObj);
+                    }
+
+                    generateChart(data, 'Number of Business')
+                    $("#loader").hide();
+
+                },
+            });
+
+        });
+
+
+        //Porpotion of regions button
+        $("#poe-button").click(function () {
+            $("#loader").show();
+
+            //document.querySelector('#list-name').innerHTML = "Rent";
+            //list.style.display = "block";
+            //slist.style.display = "none";
+
+            var industry = $("#industry-list").select2("val");
+            var region = $("#region-list").select2("val");
+
+            if (industry.length == 0 || region.length == 0) {
+
+            $('#barchart2').empty()
+                $("#loader").hide();
+                return;
+            }
+            $.ajax({
+                /**/
+                url: '@Url.Action("getBarchartData", "Map")',
+                /**/
+                type: 'POST',
+                data: { industries: industry, regions: region, option: "1" },
+                success: function (data) {
+                    var tmpObj = JSON.parse(data);
+                    var data = [];
+
+
+                    var industries = [...new Set(tmpObj.map(x => x.IdsName))]
+
+                    for (var i = 0; i < industries.length; i++) {
+
+                        var dataObj = new Object;
+                        dataObj["industry"] = industries[i]
+
+                        for (var j = 0; j < tmpObj.length; j++) {
+                            var item = tmpObj[j];
+                            if (item["IdsName"] === industries[i]) {
+                                dataObj[item["LgaName"]] = item["Proportion"]
+                            }
+                        }
+
+                        data.push(dataObj);
+                    }
+
+                    generateChart(data, 'Proportion of Employee (%)')
+                    $("#loader").hide();
+
+                },
+            });
+        });
+        //Monitor changes of selector
+        $("#industry-list").change(function () {
+            $('#barchart2').empty()
+            var ele = $(this);
+            if (ele.val().length == 3) {
+                ele.select2('close');
+            }
+        });
+        $("#region-list").change(function () {
+            $('#barchart2').empty()
+            var ele = $(this);
+            if (ele.val().length == 3) {
+                ele.select2('close');
+            }
+        });
+
+        //When start
+        $(document).ready(function () {
+
+            let url = location.href.replace(/\/$/, "");
+
+            if (location.hash) {
+                const hash = url.split("#");
+                $('#mapTab a[href="#' + hash[1] + '"]').tab("show");
+                url = location.href.replace(/\/#/, "#");
+                history.replaceState(null, null, url);
+                setTimeout(() => {
+                    $(window).scrollTop(0);
+                }, 400);
+            }
+
+            $('a[data-toggle="tab"]').on("click", function () {
+                let newUrl;
+                const hash = $(this).attr("href");
+                if (hash == "#home") {
+                    newUrl = url.split("#")[0];
+                } else {
+                    newUrl = url.split("#")[0] + hash;
+                }
+                newUrl += "/";
+                history.replaceState(null, null, newUrl);
+            });
+
+            initCountryList();
+            initRegionList();
+            for (var i = 0; i < allCode.length; i++) {
+                cheo[allCode[i]] = "#ddd";
+                textColor[allCode[i]] = "#333";
+            }
+
+            disableAllButton()
+            resetAll();
+        });
+
+        //Get all regions
+        function initRegionListJ() {
+            $("#region-list").empty();
+            $.ajax({
+                /**/
+                url: '@Url.Action("getAllRegions", "Map")',
+                /**/
+                type: 'POST',
+                data: {},
+                success: function (data) {
+                    var list = JSON.parse(data);
+                    for (var i = 0; i < list.length; i++) {
+                        var item = list[i];
+                        var value = item["code"];
+                        var label = item["name"];
+                        var o = new Option(value, value);
+                        $(o).html(label);
+                        $("#region-list").append(o);
+                    }
+                    initRegion = true
+                    if (initCodeColor && initMap && initRegion && initIndusty) {
+                        //Loader
+                        $("#loader").hide();
+                        enableAllButton();
+
+                    }
+                },
+            });
+
+        }
+
+        //Get all industries
+        function initIndustryListJ() {
+            $("#industry-list").empty();
+            $.ajax({
+                /**/
+                url: '@Url.Action("getAllIndustry", "Map")',
+                /**/
+                type: 'POST',
+                data: {},
+                success: function (data) {
+                    var list = JSON.parse(data);
+                    for (var i = 0; i < list.length; i++) {
+                        var value = list[i];
+
+                        var o = new Option(value, value);
+                        $(o).html(value);
+                        $("#industry-list").append(o);
+
+                    }
+
+
+                    initIndusty = true
+                    if (initCodeColor && initMap && initRegion && initIndusty) {
+                        //Loader
+                        $("#loader").hide();
+
+                        enableAllButton();
+                    }
+
+                },
+            });
+
+        }
+
+        //show in Culture panel
+        function show(option) {
+            $('#culture-list-content').empty();
+            if (option === 'countrywithpopulation') {
+
+                selected = $("#inputRegion").val();
+                if (selected != "") {
+                    initCountryCharts(selected);
+                    flytoPoly(selected);
+                }
+            }
+            else if (option === 'languagewithpopulation') {
+
+                selected = $("#inputRegion").val();
+                if (selected != "") {
+                    initLanguageCharts(selected);
+                flytoPoly(selected);
+            }
+            }
+            else if (option === 'autocountry') {
+
+                var selectedCountry = $("#inputCountry").val();
+                if (selectedCountry!="")
+                    initRegionCharts(selectedCountry);
+            }
+        }
+        //Shrink map
         function easing(t) {
             return t * (2 - t);
         }
@@ -2172,7 +2089,7 @@
             moved = true;
         }
 
-
+        //Extend map
         function extendMap() {
             if (moved) {
                 var deltaDistance = 300;
@@ -2182,6 +2099,7 @@
             }
             moved = false;
         }
+        //fly to the poly(center of it) option = 1 don't shrink the map.
     function flytoPoly(LGA_Code, option=1) {
 
         var features = lga["features"];
@@ -2229,7 +2147,7 @@
         }
 
     }
-
+        //Get country list
         function initCountryList() {
             $("#inputCountry").empty();
              $.ajax({
@@ -2261,6 +2179,7 @@
         }
 
 
+        //Get region list
         function initRegionList() {
             $("#inputRegion").empty();
             $.ajax({
@@ -2284,42 +2203,11 @@
             });
 
         }
-    //Generate Color
-        formRegionColorMap();
-        var moved = false;
-    //showChart();
-        var clicked = "";
-        var list = document.getElementById('list');
-        var slist = document.getElementById('slist');
-        var recomdList = document.getElementById('recomd-list');
-
-        function resetAll() {
-            extendMap();
-            $('#info-card').fadeOut(300);
-            $('#culture-card').fadeOut(300);
-
-            $("#mapp").slideDown("500", function () {
-                // Animation complete.
-            });
-            $('#job-compare').slideUp("500", function () {
-                // Animation complete.
-            });
-
-            $("#mapcontainer").removeClass('col-6').addClass('col-12');
-            $('#chart-section').hide();
-
-            map.resize();
-            showCheoBlock = false;
-            resetLayer();
-            selected = "";
-            clicked = "";
-            list.innerHTML = slist.innerHTML = recomdList.innerHTML = "";
-        }
-
+        //close dropdown when click outside of the panel
         $(document).click(function () {
             $("#dropdown").hide();
         });
-
+        //redirect for the # in address
         $(window).on('hashchange', function (e) {
 
             let url = location.href.replace(/\/$/, "");
@@ -2346,51 +2234,6 @@
                 history.replaceState(null, null, newUrl);
             });
         });
-
-        //function activaTab(tab) {
-        //    $('.nav-tabs a[href="#' + tab + '"]').tab('show');
-        //};
-
-        $(document).ready(function () {
-
-            let url = location.href.replace(/\/$/, "");
-
-            if (location.hash) {
-                const hash = url.split("#");
-                $('#mapTab a[href="#' + hash[1] + '"]').tab("show");
-                url = location.href.replace(/\/#/, "#");
-                history.replaceState(null, null, url);
-                setTimeout(() => {
-                    $(window).scrollTop(0);
-                }, 400);
-            }
-
-            $('a[data-toggle="tab"]').on("click", function () {
-                let newUrl;
-                const hash = $(this).attr("href");
-                if (hash == "#home") {
-                    newUrl = url.split("#")[0];
-                } else {
-                    newUrl = url.split("#")[0] + hash;
-                }
-                newUrl += "/";
-                history.replaceState(null, null, newUrl);
-            });
-
-            initCountryList();
-            initRegionList();
-            initialCountryListR();
-            initialIndustryListR();
-            for (var i = 0; i < allCode.length; i++) {
-                cheo[allCode[i]] = "#ddd";
-                textColor[allCode[i]] = "#333";
-            }
-
-        });
-
-
-
-
 
         document.querySelector('#info-card-close-button').addEventListener('click', function (event) {
             //document.querySelector('#info-card').style.display = 'none';
@@ -2449,12 +2292,6 @@
         }
     }
 
-
-    var stateLegend = document.getElementById('state-legend');
-    var stateCrimeLegend = document.getElementById('state-crime-legend');
-        var stateDesyLegend = document.getElementById('state-density-legend');
-        var stateIncomeLegend = document.getElementById('state-income-legend');
-        var stateUnempLegend = document.getElementById('state-unemp-legend');
     //Reset Layers
     function resetLayer() {
 
@@ -2492,7 +2329,7 @@
             document.querySelector('#list-name').innerHTML = "Criminal Situation";
             $.ajax({
                 /**/
-                url: '@Url.Action("getIncome", "Job")',
+                url: '@Url.Action("getIncome", "Map")',
                 type: 'POST',
                 data: {},
                 success: function (data) {
@@ -2562,7 +2399,7 @@
             document.querySelector('#list-name').innerHTML = "Criminal Situation";
             $.ajax({
                 /**/
-                url: '@Url.Action("getUnemployment", "Job")',
+                url: '@Url.Action("getUnemployment", "Map")',
                 type: 'POST',
                 data: {},
                 success: function (data) {
@@ -2758,73 +2595,7 @@
 
     }
 
-
-        @*function showUnemployRate() {
-            list.style.display = "none";
-            slist.style.display = "none";
-            $("#loader").show();
-            $.ajax({
-                /**/
-                url: '@Url.Action("getUnemployment", "Job")',
-                /**/
-                type: 'POST',
-                data: {},
-                success: function (data) {
-                    var showData = [];
-                    var tmpObj = JSON.parse(data);
-
-                    for (var i = 0; i < tmpObj.length; i++) {
-
-                        var dataObj = new Object;
-                        dataObj["key"] = tmpObj[i]["LgaName"]
-                        dataObj["value"] = tmpObj[i]["Rate"]
-                        dataObj["color"] = tmpObj[i]["Color"]
-                        dataObj["code"] = tmpObj[i]["LgaCode"]
-
-                        showData.push(dataObj);
-                    }
-
-                    displayData(showData, 'Unemployment rate')
-                    $("#loader").hide();
-
-                },
-            });
-        }*@
-
-        @*//showIncome();
-        function showIncome() {
-
-            list.style.display = "none";
-            slist.style.display = "none";
-            $("#loader").show();
-            $.ajax({
-                /**/
-                url: '@Url.Action("getIncome", "Job")',
-                /**/
-                type: 'POST',
-                data: {},
-                success: function (data) {
-                    var showData = [];
-                    var tmpObj = JSON.parse(data);
-
-                    for (var i = 0; i < tmpObj.length; i++) {
-
-                        var dataObj = new Object;
-                        dataObj["key"] = tmpObj[i]["LgaName"]
-                        dataObj["value"] = tmpObj[i]["Income"]
-                        dataObj["color"] = tmpObj[i]["Color"]
-                        dataObj["code"] = tmpObj[i]["LgaCode"]
-
-                        showData.push(dataObj);
-                    }
-
-                    displayData(showData, 'Income')
-                    $("#loader").hide();
-
-                },
-            });
-        }*@
-
+        //Show doughnut chart
     function showChart(count, label, value) {
 
         var values = [parseFloat(value), 100 - parseFloat(value)];
@@ -2866,11 +2637,9 @@
 
         var myChart = new Chart(ctx, config);
 
-        //dmbChart(150, 150, 125, 25, values, colors, labels, 0);
-
         }
 
-
+        //Show chart for language function
     function initLanguageCharts(lgaCode) {
 
         stateIncomeLegend.style.display = "none"
@@ -2930,7 +2699,7 @@
 
 
     }
-
+        //Hightlight the feature when hover in barchart
         function highlight(code, name) {
             if (showCheoBlock)
                 features.style.display = "block";
@@ -2962,6 +2731,7 @@
 
         }
 
+        //Show bar chart
         function displayData(data, namex, namey) {
             $("#barchart").empty();
             data.sort(function (a, b) {
@@ -2990,13 +2760,6 @@
             var x = d3.scaleLinear()
                 .range([0, width]);
 
-            //var color = tmpData.map(a => a.color);
-            //var z = d3.scaleOrdinal()
-            //    .range(color);
-
-            //var code = tmpData.map(a => a.code);
-            //var c = d3.scaleOrdinal().range(code);
-
             var svg = d3.select("#barchart").append("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
@@ -3009,7 +2772,6 @@
             x.domain([0, d3.max(tmpData, function (d) { return d.value; })])
             y.domain(tmpData.map(function (d) { return d.key; }));
             //y.domain([0, d3.max(data, function(d) { return d.sales; })]);
-
 
             // append the rectangles for the bar chart
             svg.selectAll(".bar")
@@ -3078,32 +2840,6 @@
                 .style("text-anchor", "middle")
                 .text(namey);
 
-
-               //.on('mouseover', tip.show)
-               //.on('mouseout', tip.hide)
-
-
-            //svg.selectAll(".bar-label")
-            //    .data(tmpData)
-            //    .enter()
-            //    .append("text")
-            //    .classed("bar-label", true)
-
-            //    //.attr("transform", function (d, i) {
-            //    //    var w = this.getComputedTextLength();
-            //    //    return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
-            //    //})
-
-            //    .attr("text-anchor", "right")
-            //    .text(function (d) { return d.key })
-            //    .each(function (d) {
-            //        var item = d3.select(this);
-
-            //        var w = this.getComputedTextLength();
-            //        item.attr('transform', function () {
-            //            return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
-            //        })
-            //    });
             d3.select("#byKey").on("click", function () {
                 data.sort(function (a, b) {
                     return d3.ascending(a.value, b.value)
@@ -3130,52 +2866,6 @@
                 dot.transition()
                     .duration(500)
                     .attr("width", function (d) { return x(d.value); })
-
-                //svg.selectAll(".bar-label")
-                //    .data(tmpData)
-                //    .text(function (d) { return d.key })
-                //    .each(function (d) {
-                //        var item = d3.select(this);
-                //        //item
-                //        //    .transition()
-                //        //    .duration(250)
-                //        //    .style("opacity", 0)
-
-                //        var w = this.getComputedTextLength();
-                //        item.attr("transform", function (d, i) {
-                //                return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
-                //        });
-
-                //        //item
-                //        //    .transition()
-                //        //    .duration(250)
-                //        //    .style("opacity", 1)
-                //    })
-                //    //.append("text")
-                //    //.style("font", "13px")
-                //    //.classed("bar-label", true)
-                //    //.text(function (d) { return d.key })
-
-                //    //.each(function (d) {
-                //    //    var item = d3.select(this);
-
-                //    //    var w = this.getComputedTextLength();
-                //    //    item
-                //    //    .attr("transform", function (d, i) {
-                //    //        return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
-                //    //    });
-                //    //    item.attr('startOffset', 0)
-                //    //        .each('end', function () {
-                //    //            d3.select(this)
-                //    //                .style('opacity', 0)
-                //    //                .text(transText)
-                //    //                .transition()
-                //    //                .style('opacity', 1);
-                //    //        })
-                //    //})
-                ////.attr("transform", function (d, i) {
-                ////    return "translate(" + (0 - w) + "," + (y(d.key) + y.bandwidth() / 2) + ")"
-                ////});
 
                 svg.select(".x.axis") // change the x axis
                     .transition().duration(750)
@@ -3221,8 +2911,7 @@
                     .call(d3.axisLeft(y));
             })
         }
-    //test
-    //initCountryCharts("20110");
+        //Show chart for birth of country function
     function initCountryCharts(lgaCode) {
 
         stateIncomeLegend.style.display = "none"
@@ -3284,6 +2973,7 @@
 
     }
 
+        //Show chart for auto region function
     function initRegionCharts(country) {
 
         $('#info-card').fadeOut(300);
@@ -3357,7 +3047,7 @@
 
         }
 
-
+        //Reset chartjs
         function resetChartjs() {
 
             Chart.pluginService.register({
@@ -3404,239 +3094,8 @@
         }
 
 
-    //window.onscroll = function () { myFunction() };
 
-    //// Get the offset position of the navbar
-    //var sticky = map.offsetTop;
-
-    //// Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
-    //function myFunction() {
-    //    if (window.pageYOffset > sticky) {
-    //        map.classList.add("sticky");
-    //    } else {
-    //        map.classList.remove("sticky");
-    //    }
-    //}
-    var acmWeight;
-    var crmWeight;
-        var pouWeight;
-        var culWeight;
-        var jobWeight;
-
-    var $acmrange = $(".acmSlider"),
-        instance,
-        min = 1,
-        max = 5
-
-    $acmrange.ionRangeSlider({
-        skin: "round",
-        type: "single",
-        min: min,
-        max: max,
-        from: 2,
-        values: [
-            "Not important", "Less important", "Average", "Important", "Very Important"
-        ],
-        onStart: updateA,
-        onFinish: updateA
-    });
-    instance = $acmrange.data("ionRangeSlider");
-
-    function updateA(data) {
-        acmWeight = data.from;
-        if (toggleRecomd) {
-            //acmslider.disabled = true;
-            recommendation();
-        }
-    }
-
-
-    var $crmrange = $(".crmSlider"),
-        instance,
-        min = 1,
-        max = 5
-
-    $crmrange.ionRangeSlider({
-        skin: "round",
-        type: "single",
-        min: min,
-        max: max,
-        from: 2,
-        values: [
-            "Not important", "Less important", "Average", "Important", "Very Important"
-        ],
-        onStart: updateC,
-        onFinish: updateC
-    });
-    instance = $crmrange.data("ionRangeSlider");
-
-    function updateC(data) {
-        crmWeight = data.from;
-        if (toggleRecomd) {
-            //acmslider.disabled = true;
-            recommendation();
-        }
-    }
-
-
-    var $pourange = $(".pouSlider"),
-        instance,
-        min = 1,
-        max = 5
-
-    $pourange.ionRangeSlider({
-        skin: "round",
-        type: "single",
-        min: min,
-        max: max,
-        from: 2,
-        values: [
-            "Not important", "Less important", "Average", "Important", "Very Important"
-        ],
-        onStart: updateP,
-        onFinish: updateP
-    });
-    instance = $pourange.data("ionRangeSlider");
-
-    function updateP(data) {
-        pouWeight = data.from;
-        if (toggleRecomd) {
-            //acmslider.disabled = true;
-            recommendation();
-        }
-    }
-
-        var $culrange = $(".culSlider"),
-            instance,
-            min = 1,
-            max = 5
-
-        $culrange.ionRangeSlider({
-            skin: "round",
-            type: "single",
-            min: min,
-            max: max,
-            from: 2,
-            values: [
-                "Not important", "Less important", "Average", "Important", "Very Important"
-            ],
-            onStart: updateU,
-            onFinish: updateU
-        });
-        instance = $culrange.data("ionRangeSlider");
-
-        function updateU(data) {
-            culWeight = data.from;
-            if (toggleRecomd) {
-                //acmslider.disabled = true;
-                recommendation();
-            }
-        }
-
-
-        var $jobrange = $(".jobSlider"),
-            instance,
-            min = 1,
-            max = 5
-
-        $jobrange.ionRangeSlider({
-            skin: "round",
-            type: "single",
-            min: min,
-            max: max,
-            from: 2,
-            values: [
-                "Not important", "Less important", "Average", "Important", "Very Important"
-            ],
-            onStart: updateI,
-            onFinish: updateI
-        });
-        instance = $jobrange.data("ionRangeSlider");
-
-        function updateI(data) {
-            jobWeight = data.from;
-            if (toggleRecomd) {
-                //acmslider.disabled = true;
-                recommendation();
-            }
-        }
-
-
-
-    var $rrange = $(".recommendRanger"),
-        instance,
-        min = 100,
-        max = 550,
-        from = 0,
-        to = 0;
-
-    $rrange.ionRangeSlider({
-        skin: "round",
-        type: "double",
-        min: min,
-        max: max,
-        from: 100,
-        to: 550,
-        prefix: "$",
-        step: 10,
-        grid: true,             // show/hide grid
-        onStart: updateRecommendInputs,
-        onChange: updateRecommendInputs
-    });
-    instance = $rrange.data("ionRangeSlider");
-
-
-    function updateRecommendInputs(data) {
-        from = data.from;
-        to = data.to;
-        minRBudget = from;
-        maxRBudget = to;
-        }
-
-
-        function initialIndustryListR() {
-            $("#inputIndustryR").empty();
-             $.ajax({
-            /**/
-                url: '@Url.Action("getAllIndustry", "Job")',
-            /**/
-            type: 'POST',
-            data: { },
-                 success: function (data) {
-                     var list = JSON.parse(data);
-                     for (var i = 0; i < list.length; i++){
-                         var value = list[i];
-                         var o = new Option(value, value);
-                        /// jquerify the DOM object 'o' so we can use the html method
-                         $(o).html(value);
-                         $("#inputIndustryR").append(o);
-            }
-            },
-            });
-        }
-
-        function initialCountryListR() {
-            $("#inputCountryR").empty();
-             $.ajax({
-            /**/
-            url: '@Url.Action("getAllCountry", "Map")',
-            /**/
-            type: 'POST',
-            data: { },
-                 success: function (data) {
-                     var list = JSON.parse(data);
-                     for (var i = 0; i < list.length; i++){
-                         var value = list[i];
-                         var o = new Option(value, value);
-                        /// jquerify the DOM object 'o' so we can use the html method
-                         $(o).html(value);
-                        $("#inputCountryR").append(o);
-            }
-            },
-            });
-        }
-
-
+        //ranger for rent page
     var $frange = $(".filterRanger"),
         instance,
         min = 100,
@@ -3666,7 +3125,7 @@
         maxFBudget = to;
     }
 
-    //Filter
+    //Filter rent page
     function filter() {
 
             var sel1 = jQuery("#sel1 option:selected").val();
@@ -3724,10 +3183,6 @@
 
                 }
 
-
-                //document.querySelector('#card-content-2').style.display = "block";
-
-
                 if ($('#info-card').filter(':visible').length == 0) // all hidden
                 {
                     shrinkMap();
@@ -3737,8 +3192,12 @@
                 $('#card-content-2').fadeIn(200);
                 $('#card-content').fadeOut(200);
 
+                var msg = result["msg"];
+                if (msg != "") {
+                    document.querySelector('#list-name').innerHTML += "<hr><div style='color:#f2262d'>" + msg + "</div>";
+                }
                 filterList.innerHTML = result["display"];
-                showCheoBlock = false;
+                showCheoBlock = true;
                 map.setPaintProperty("region-label", 'text-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]]);
 
                 map.setPaintProperty("cheo", 'fill-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]);
@@ -3748,7 +3207,6 @@
                 $("#loader").hide();
             },
         });
-
 
     }
 

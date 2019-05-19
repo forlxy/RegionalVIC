@@ -136,8 +136,8 @@
 
         .culture-card .info-close {
             position: absolute;
-            right: 0;
-            top: 0;
+            right: 2px;
+            top: 2px;
             padding: 4px;
         }
 
@@ -158,14 +158,21 @@
 
         .info-card .info-close {
             position: absolute;
-            right: 0;
-            top: 0;
+            right: 2px;
+            top: 2px;
+            padding: 4px;
+        }
+        .info-card .info-close-r {
+            position: absolute;
+            left: 2px;
+            top: 2px;
             padding: 4px;
         }
 
         .info-card .info-content {
             padding: 4px;
         }
+
 
     .mapcontainer {
         position: relative;
@@ -261,6 +268,10 @@
         font-family: Montserrat,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';
     }
 
+    .content-font-link {
+        font-family: Montserrat,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';
+        color: #0085A1;
+    }
 
     .loader-svg {
         position: absolute;
@@ -271,6 +282,7 @@
         background: rgba(0, 0, 0, 0.8) url(/spinner.svg) center center no-repeat;
         z-index: 5;
     }
+
 </style>
 <!DOCTYPE html>
 
@@ -281,7 +293,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>RegionalVIC - Explore Regional Victoria</title>
+    <title>RegionalVIC Insight  - Explore Regional Victoria</title>
     <!-- Fontawesome -->
     <link rel="stylesheet" href="/fontawesome/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
@@ -302,6 +314,8 @@
     <script src="https://unpkg.com/tinyqueue@2.0.0/tinyqueue.min.js"></script>
     <script src="/js/polylabel.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
@@ -316,17 +330,11 @@
     <script src="/Scripts/covervid.min.js"></script>
     <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js"></script>
 
-
-    <link href="/css/rangeslider.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/css-loader.css">
-
     <link rel="stylesheet" href="/css/ion.rangeSlider.min.css">
 
     <!-- Custom styles for this template -->
     <link href="/css/agency.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
 
     <script>
 
@@ -334,408 +342,366 @@
         lga["type"] = "FeatureCollection"
         lga["features"] = []
         window.onload = function () {
+            
+            //Load geojson file thread 1
+            function ajax1() {
+                return $.ajax({
+                    url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_1.json", // path to file
 
-
-        function ajax1() {
-            // NOTE:  This function must return the value
-            //        from calling the $.ajax() method.
-            return $.ajax({
-                url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_1.json", // path to file
-
-                dataType: 'text',
-                success: function (data) { // callback for successful completion
-                    var tmpObj = JSON.parse(data);
-                    lga["features"] = lga["features"].concat(tmpObj["features"]);
-                },
-                error: function () { // callback if there's an error
-                    alert("error");
-                }
-            });
-        }
-
-        function ajax2() {
-            // NOTE:  This function must return the value
-            //        from calling the $.ajax() method.
-            return $.ajax({
-                url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_2.json", // path to file
-
-                dataType: 'text',
-                success: function (data) { // callback for successful completion
-                    var tmpObj = JSON.parse(data);
-                    lga["features"] = lga["features"].concat(tmpObj["features"]);
-                },
-                error: function () { // callback if there's an error
-                    alert("error");
-                }
-            });
-        }
-
-        function ajax3() {
-            // NOTE:  This function must return the value
-            //        from calling the $.ajax() method.
-            return $.ajax({
-                url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_3.json", // path to file
-
-                dataType: 'text',
-                success: function (data) { // callback for successful completion
-                    var tmpObj = JSON.parse(data);
-                    lga["features"] = lga["features"].concat(tmpObj["features"]);
-                },
-                error: function () { // callback if there's an error
-                    alert("error");
-                }
-            });
-        }
-
-        function ajax4() {
-            // NOTE:  This function must return the value
-            //        from calling the $.ajax() method.
-            return $.ajax({
-                url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_4.json", // path to file
-
-                dataType: 'text',
-                success: function (data) { // callback for successful completion
-                    var tmpObj = JSON.parse(data);
-                    lga["features"] = lga["features"].concat(tmpObj["features"]);
-                },
-                error: function () { // callback if there's an error
-                    alert("error");
-                }
-            });
-        }
-
-        function ajax5() {
-            // NOTE:  This function must return the value
-            //        from calling the $.ajax() method.
-            return $.ajax({
-                url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_5.json", // path to file
-
-                dataType: 'text',
-                success: function (data) { // callback for successful completion
-                    var tmpObj = JSON.parse(data);
-                    lga["features"] = lga["features"].concat(tmpObj["features"]);
-                },
-                error: function () { // callback if there's an error
-                    alert("error");
-                }
-            });
-        }
-
-        function ajax6() {
-            // NOTE:  This function must return the value
-            //        from calling the $.ajax() method.
-            return $.ajax({
-                url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_6.json", // path to file
-
-                dataType: 'text',
-                success: function (data) { // callback for successful completion
-                    var tmpObj = JSON.parse(data);
-                    lga["features"] = lga["features"].concat(tmpObj["features"]);
-                },
-                error: function () { // callback if there's an error
-                    alert("error");
-                }
-            });
-        }
-
-        $.when(ajax1(), ajax2(), ajax3(), ajax4(), ajax5(), ajax6()).done(function (a1, a2, a3, a4, a5, a6) {
-            // Add a layer showing the places.
-            map.addSource("states", {
-                "type": "geojson",
-                "data": lga
-            });
-            //All colored states layer
-            map.addLayer({
-                "id": "state-fills",
-                "type": "fill",
-                "source": "states",
-                "layout": { 'visibility': 'visible' },
-                "paint": {
-                    "fill-color":
-                        ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", myData]],
-                    "fill-opacity": ["case",
-                        ["boolean", ["feature-state", "hover"], false],
-                        0.9,
-                        0.7
-                    ]
-                }
-            });
-            //Generated layer
-            map.addLayer({
-                "id": "cheo",
-                "type": "fill",
-                "source": "states",
-                "layout": { 'visibility': 'none' },
-                "paint": {
-                    "fill-color":
-                        ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]],
-                    "fill-opacity": ["case",
-                        ["boolean", ["feature-state", "hover"], false],
-                        1,
-                        0.7
-                    ]
-                }
-            });
-            var featureCollection = {
-                "type": "FeatureCollection",
-
-                "features": [
-
-                ]
+                    dataType: 'text',
+                    success: function (data) { // callback for successful completion
+                        var tmpObj = JSON.parse(data);
+                        lga["features"] = lga["features"].concat(tmpObj["features"]);
+                    },
+                    error: function () { // callback if there's an error
+                        alert("error");
+                    }
+                });
             }
-            lga.features.forEach(function (feature) {
-                //draw.add(feature);
-                if (feature.geometry != null) {
 
-                    var centroidPt = turf.center(feature);
-                    centroidPt.properties.title = feature.properties.LGA_NAME18;
-                    centroidPt.properties.LGA_CODE18 = feature.properties.LGA_CODE18;
-                    featureCollection.features.push(centroidPt);
-                }
-            })
-            map.addSource('label', {
-                'type': 'geojson',
-                'data': featureCollection
-            });
-            map.addLayer({
-                "id": "region-label",
-                "type": "symbol",
-                "source": "label",
-                "layout": {
-                    'text-field': '{title}',
-                    'text-font': ["Lato Bold"],
-                    'text-size': {
-                        "base": 2,
-                        "stops": [
-                            [12, 12],
-                            [16, 16]
+            //Load geojson file thread 2
+            function ajax2() {
+                return $.ajax({
+                    url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_2.json", // path to file
+
+                    dataType: 'text',
+                    success: function (data) { // callback for successful completion
+                        var tmpObj = JSON.parse(data);
+                        lga["features"] = lga["features"].concat(tmpObj["features"]);
+                    },
+                    error: function () { // callback if there's an error
+                        alert("error");
+                    }
+                });
+            }
+
+            //Load geojson file thread 3
+            function ajax3() {
+                return $.ajax({
+                    url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_3.json", // path to file
+
+                    dataType: 'text',
+                    success: function (data) { // callback for successful completion
+                        var tmpObj = JSON.parse(data);
+                        lga["features"] = lga["features"].concat(tmpObj["features"]);
+                    },
+                    error: function () { // callback if there's an error
+                        alert("error");
+                    }
+                });
+            }
+
+            //Load geojson file thread 4
+            function ajax4() {
+                return $.ajax({
+                    url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_4.json", // path to file
+
+                    dataType: 'text',
+                    success: function (data) { // callback for successful completion
+                        var tmpObj = JSON.parse(data);
+                        lga["features"] = lga["features"].concat(tmpObj["features"]);
+                    },
+                    error: function () { // callback if there's an error
+                        alert("error");
+                    }
+                });
+            }
+
+            //Load geojson file thread 5
+            function ajax5() {
+                return $.ajax({
+                    url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_5.json", // path to file
+
+                    dataType: 'text',
+                    success: function (data) { // callback for successful completion
+                        var tmpObj = JSON.parse(data);
+                        lga["features"] = lga["features"].concat(tmpObj["features"]);
+                    },
+                    error: function () { // callback if there's an error
+                        alert("error");
+                    }
+                });
+            }
+
+            //Load geojson file thread 6
+            function ajax6() {
+                return $.ajax({
+                    url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_6.json", // path to file
+
+                    dataType: 'text',
+                    success: function (data) { // callback for successful completion
+                        var tmpObj = JSON.parse(data);
+                        lga["features"] = lga["features"].concat(tmpObj["features"]);
+                    },
+                    error: function () { // callback if there's an error
+                        alert("error");
+                    }
+                });
+            }
+
+            //Call functions and trigger when all of them are done.
+            $.when(ajax1(), ajax2(), ajax3(), ajax4(), ajax5(), ajax6()).done(function (a1, a2, a3, a4, a5, a6) {
+                // Add a layer showing the places.
+                map.addSource("states", {
+                    "type": "geojson",
+                    "data": lga
+                });
+                //All colored states layer
+                map.addLayer({
+                    "id": "state-fills",
+                    "type": "fill",
+                    "source": "states",
+                    "layout": { 'visibility': 'visible' },
+                    "paint": {
+                        "fill-color":
+                            ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", myData]],
+                        "fill-opacity": ["case",
+                            ["boolean", ["feature-state", "hover"], false],
+                            0.9,
+                            0.7
                         ]
+                    }
+                });
+                //Generated layer
+                map.addLayer({
+                    "id": "cheo",
+                    "type": "fill",
+                    "source": "states",
+                    "layout": { 'visibility': 'none' },
+                    "paint": {
+                        "fill-color":
+                            ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]],
+                        "fill-opacity": ["case",
+                            ["boolean", ["feature-state", "hover"], false],
+                            1,
+                            0.7
+                        ]
+                    }
+                });
+                //Label
+                var featureCollection = {
+                    "type": "FeatureCollection",
+
+                    "features": [
+
+                    ]
+                }
+                //Center point of label
+                lga.features.forEach(function (feature) {
+                    //draw.add(feature);
+                    if (feature.geometry != null) {
+
+                        var centroidPt = turf.center(feature);
+                        centroidPt.properties.title = feature.properties.LGA_NAME18;
+                        centroidPt.properties.LGA_CODE18 = feature.properties.LGA_CODE18;
+                        featureCollection.features.push(centroidPt);
+                    }
+                })
+                //Add label in map
+                map.addSource('label', {
+                    'type': 'geojson',
+                    'data': featureCollection
+                });
+                map.addLayer({
+                    "id": "region-label",
+                    "type": "symbol",
+                    "source": "label",
+                    "layout": {
+                        'text-field': '{title}',
+                        'text-font': ["Lato Bold"],
+                        'text-size': {
+                            "base": 2,
+                            "stops": [
+                                [12, 12],
+                                [16, 16]
+                            ]
+                        },
+                        "text-padding": 3,
+                        "text-letter-spacing": 0.1,
+                        "text-max-width": 7
                     },
-                    "text-padding": 3,
-                    "text-letter-spacing": 0.1,
-                    "text-max-width": 7
-                },
-                "paint": {
-                    "text-color":
-                        ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]],
-                    "text-halo-color": "hsl(0, 0%, 100%)",
-                    "text-halo-width": 1.5,
-                    "text-halo-blur": 1
-                }
-            });
-            // When the user moves their mouse over the state-fill layer, we'll update the
-            // feature state for the feature under the mouse.
-            map.on("mousemove", "state-fills", function (e) {
-                map.getCanvas().style.cursor = e.point.length ? 'pointer' : '';
-
-                if (e.features.length > 0) {
-                    if (hoveredStateId) {
-                        map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                    "paint": {
+                        "text-color":
+                            ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]],
+                        "text-halo-color": "hsl(0, 0%, 100%)",
+                        "text-halo-width": 1.5,
+                        "text-halo-blur": 1
                     }
-                    hoveredStateId = e.features[0].id;
-                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
-                }
+                });
+                // When the user moves their mouse over the state-fill layer, update the feature state for the feature under the mouse.
+                map.on("mousemove", "state-fills", function (e) {
+                    map.getCanvas().style.cursor = e.point.length ? 'pointer' : '';
 
-                var coordinates = e.features[0].geometry.coordinates.slice();
-                var code = e.features[0].properties.LGA_CODE18;
-
-                // Ensure that if the map is zoomed out such that multiple
-                // copies of the feature are visible, the popup appears
-                // over the copy being pointed to.
-                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-                }
-
-                // Populate the popup and set its coordinates
-                // based on the feature found.
-                //popup.setLngLat([e.lngLat.lng, e.lngLat.lat])
-                //    .setHTML(code + ', ' + e.lngLat.lat + ', ' + e.lngLat.lng)
-                //    .addTo(map);
-            });
-
-            // When the mouse leaves the state-fill layer, update the feature state of the
-            // previously hovered feature.
-            map.on("mouseleave", "state-fills", function (e) {
-
-                //map.getCanvas().style.cursor = e.point.length ? 'default' : '';
-
-                map.getCanvas().style.cursor = '';
-                //popup.remove();
-
-                if (hoveredStateId) {
-                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
-                }
-                hoveredStateId = null;
-            });
-
-            //Show information block and hover effect
-            map.on('mousemove', "cheo", function (e) {
-                var over = document.getElementById('features');
-                if (showCheoBlock)
-                    features.style.display = "block";
-                else
-                    features.style.display = "none";
-
-                var states = map.queryRenderedFeatures(e.point);
-                if (states.length > 0) {
-                    for (var i = 0; i < states.length; i++) {
-                        if (states[0].layer.id == "cheo") {
-                            var name = states[0].properties.LGA_NAME18.substring(0, states[0].properties.LGA_NAME18.indexOf(" ("));
-                            document.getElementById('pd').innerHTML = '<h5><strong>' + name + '</strong></h5><div class="content-line">' + displayList[states[0].properties.LGA_CODE18] + '</div>';
-                            break;
+                    if (e.features.length > 0) {
+                        if (hoveredStateId) {
+                            map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
                         }
+                        hoveredStateId = e.features[0].id;
+                        map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
                     }
-                } else {
-                    document.getElementById('pd').innerHTML = '<p>Hover over a state!</p>';
-                }
 
-                if (e.features.length > 0) {
-                    if (hoveredStateId) {
-                        map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                    var coordinates = e.features[0].geometry.coordinates.slice();
+                    var code = e.features[0].properties.LGA_CODE18;
+
+                    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
                     }
-                    hoveredStateId = e.features[0].id;
-                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
-                }
-            });
 
-            //Reset information block and hover effect
-            map.on('mouseleave', "cheo", function (e) {
-                var over = document.getElementById('features');
-                features.style.display = "none"
-
-                if (hoveredStateId) {
-                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
-                }
-                hoveredStateId = null;
-            });
-
-            //Popup regions name
-            map.on('click', 'state-fills', function (e) {
-
-                var lgaCode = e.features[0].properties.LGA_CODE18;
-                if (clicked == lgaCode)
-                    return;
-                clicked = lgaCode;
-
-
-                var content2 = document.querySelector('#card-content-2');
-                content2.style.display = "none";
-                var content1 = document.querySelector('#card-content');
-                content1.style.display = "block";
-
-                var content = document.querySelector('#more-content');
-
-                content.style.display = "none";
-                var image = document.querySelector('#card-image');
-                image.style.display = "none";
-                var video = document.querySelector('#card-video');
-                video.style.display = "none";
-                $.ajax({
-                    /**/
-                    url: '@Url.Action("getInfo", "Map")',
-                    /**/
-                    type: 'POST',
-                    data: { code: lgaCode },
-                    success: function (data) {
-                        var item = JSON.parse(data);
-                        var description = item["descrption"];
-                        var image_link = item["image"];
-                        var video_link = item["video"];
-                        var name = item["name"];
-                        var region = item["region"];
-
-                        // Display airport info
-                        document.querySelector('#card-title').innerText = name;
-                        document.querySelector('#card-subtitle').innerText = region;
-
-                        document.querySelector('#card-description').innerText = description;
-
-                        image.src = image_link;
-                        video.src = video_link;
-
-                        $('#more-content').fadeIn(200);
-                        {
-                        //function loaded() {
-
-                        //    // Display airport info
-                        //    document.querySelector('#card-title').innerText = name;
-                        //    document.querySelector('#card-subtitle').innerText = region;
-
-                        //    document.querySelector('#card-description').innerText = description;
-
-
-                        //    if ($('#info-card').filter(':visible').length == 0) // all hidden
-                        //    {
-                        //        $('#info-card').fadeIn(300);
-                        //    }
-
-
-                        //    // Ensure the info box is visible
-                        //    document.querySelector('#info-card').style.display = 'block';
-
-                        //}
-
-                        //if (video.complete) {
-                        //    loaded()
-                        //} else {
-                        //    video.addEventListener('load', loaded)
-                        //    video.addEventListener('error', function () {
-                        //        alert('error')
-                        //    })
-                        //}
-                        }
-                        function iloaded() {
-                            //image.style.display = "block";
-                            $('#card-image').fadeIn(200);
-                        }
-
-                        function vloaded() {
-                            //video.style.display = "block";
-                            $('#card-video').fadeIn(200);
-                        }
-
-                        if (image.complete) {
-                            iloaded()
-                        } else {
-                            image.addEventListener('load', iloaded)
-                        }
-
-                        if (video.complete) {
-                            vloaded()
-                        } else {
-                            video.addEventListener('load', vloaded)
-                        }
-
-                        if ($('#info-card').filter(':visible').length == 0) // all hidden
-                        {
-                            shrinkMap();
-                            $('#info-card').fadeIn(300);
-                            $('#culture-card').fadeOut(300);
-                        }
-
-
-                        // Ensure the info box is visible
-                        document.querySelector('#info-card').style.display = 'block';
-
-                    },
+                    // Populate the popup and set its coordinates based on the feature found.
+                    //popup.setLngLat([e.lngLat.lng, e.lngLat.lat])
+                    //    .setHTML(code + ', ' + e.lngLat.lat + ', ' + e.lngLat.lng)
+                    //    .addTo(map);
                 });
 
+                // When the mouse leaves the state-fill layer, update the feature state of the previously hovered feature.
+                map.on("mouseleave", "state-fills", function (e) {
 
+                    //map.getCanvas().style.cursor = e.point.length ? 'default' : '';
+
+                    map.getCanvas().style.cursor = '';
+                    //popup.remove();
+
+                    if (hoveredStateId) {
+                        map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                    }
+                    hoveredStateId = null;
+                });
+
+                //Show information block and hover effect
+                map.on('mousemove', "cheo", function (e) {
+                    var over = document.getElementById('features');
+                    if (showCheoBlock)
+                        features.style.display = "block";
+                    else
+                        features.style.display = "none";
+
+                    var states = map.queryRenderedFeatures(e.point);
+                    if (states.length > 0) {
+                        for (var i = 0; i < states.length; i++) {
+                            if (states[0].layer.id == "cheo") {
+                                var name = states[0].properties.LGA_NAME18.substring(0, states[0].properties.LGA_NAME18.indexOf(" ("));
+                                document.getElementById('pd').innerHTML = '<h5><strong>' + name + '</strong></h5><div class="content-line">' + displayList[states[0].properties.LGA_CODE18] + '</div>';
+                                break;
+                            }
+                        }
+                    } else {
+                        document.getElementById('pd').innerHTML = '<p>Hover over a state!</p>';
+                    }
+
+                    if (e.features.length > 0) {
+                        if (hoveredStateId) {
+                            map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                        }
+                        hoveredStateId = e.features[0].id;
+                        map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
+                    }
+                });
+
+                //Reset information block and hover effect
+                map.on('mouseleave', "cheo", function (e) {
+                    var over = document.getElementById('features');
+                    features.style.display = "none"
+
+                    if (hoveredStateId) {
+                        map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                    }
+                    hoveredStateId = null;
+                });
+
+                //Popup regions name
+                map.on('click', 'state-fills', function (e) {
+
+                    var lgaCode = e.features[0].properties.LGA_CODE18;
+                    if (clicked == lgaCode)
+                        return;
+                    clicked = lgaCode;
+
+
+                    var content2 = document.querySelector('#card-content-2');
+                    content2.style.display = "none";
+                    var content1 = document.querySelector('#card-content');
+                    content1.style.display = "block";
+
+                    var content = document.querySelector('#more-content');
+
+                    content.style.display = "none";
+                    var image = document.querySelector('#card-image');
+                    image.style.display = "none";
+                    var video = document.querySelector('#card-video');
+                    video.style.display = "none";
+                    $.ajax({
+                        /**/
+                        url: '@Url.Action("getInfo", "Map")',
+                        /**/
+                        type: 'POST',
+                        data: { code: lgaCode },
+                        success: function (data) {
+                            var item = JSON.parse(data);
+                            var description = item["descrption"];
+                            var image_link = item["image"];
+                            var video_link = item["video"];
+                            var name = item["name"];
+                            var region = item["region"];
+
+                            // Display airport info
+                            document.querySelector('#card-title').innerText = name;
+                            document.querySelector('#card-subtitle').innerText = region;
+
+                            document.querySelector('#card-description').innerText = description;
+
+                            image.src = image_link;
+                            video.src = video_link;
+
+                            $('#more-content').fadeIn(200);
+
+                            function iloaded() {
+                                //image.style.display = "block";
+                                $('#card-image').fadeIn(200);
+                            }
+
+                            function vloaded() {
+                                //video.style.display = "block";
+                                $('#card-video').fadeIn(200);
+                            }
+
+                            if (image.complete) {
+                                iloaded()
+                            } else {
+                                image.addEventListener('load', iloaded)
+                            }
+
+                            if (video.complete) {
+                                vloaded()
+                            } else {
+                                video.addEventListener('load', vloaded)
+                            }
+
+                            if ($('#info-card').filter(':visible').length == 0) // all hidden
+                            {
+                                shrinkMap();
+                                $('#info-card').fadeIn(300);
+                                $('#culture-card').fadeOut(300);
+                            }
+
+                            // Ensure the info box is visible
+                            document.querySelector('#info-card').style.display = 'block';
+
+                        },
+                    });
+
+
+                });
+                //When map is done loading
+                map.on('idle', function () {
+                    initMap = true;
+                    if (initCodeColor && initMap) {
+                        //Loader
+                        $("#loader").hide();
+
+                        enableAllButton();
+                    }
+                });
             });
-
-            map.on('idle', function () {
-                initMap = true;
-                if (initCodeColor && initMap) {
-                    //Loader
-                    $("#loader").hide();
-                    enableAllButton()
-                }
-            });
-            //map.on('load', function () {
-
-
-            //});
-        });
         }
     </script>
 
@@ -752,7 +718,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-shrink" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="/">RegionalVIC</a>
+            <a class="navbar-brand js-scroll-trigger" href="/">RegionalVIC&nbsp;Insight </a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
@@ -772,7 +738,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item content-font-family" href="/Map#description">Regional Areas Information</a>
-                            <a class="dropdown-item content-font-family" href="/Map#living">Rent Cost</a>
+                            <a class="dropdown-item content-font-family" href="/Map#living">Rent</a>
                             <a class="dropdown-item content-font-family" href="/Map#job">Job Opportunity</a>
                             <a class="dropdown-item content-font-family" href="/Map#safety">Safety</a>
                             <a class="dropdown-item content-font-family" href="/Map#culture">Culture</a>
@@ -809,7 +775,7 @@
                 <div class="col-4">
                     <div class="form-group">
                         <label for="acmSlider"
-                               class="font--18 text--lebel">Rent (a)</label>
+                               class="font--18 text--lebel">Rent</label>
                         <div class="range-slider">
                             <input type="text" class="acmSlider" value="" />
                         </div>
@@ -825,14 +791,14 @@
 
                     <div class="form-group">
                         <label for="amrSlider"
-                               class="font--18 text--lebel">Safety (b)</label>
+                               class="font--18 text--lebel">Safety</label>
                         <div class="range-slider">
                             <input type="text" class="crmSlider" value="" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="pouSlider"
-                               class="font--18 text--lebel">Population (c)</label>
+                               class="font--18 text--lebel">Population</label>
 
                         <div class="range-slider">
                             <input type="text" class="pouSlider" value="" />
@@ -854,7 +820,7 @@
                     </div>
                     <div class="form-group">
                         <label for="culSlider"
-                               class="font--18 text--lebel">Culture Background (d)</label>
+                               class="font--18 text--lebel">Culture Background</label>
                         <div class="range-slider">
                             <input type="text" class="culSlider" value="" />
                         </div>
@@ -870,7 +836,7 @@
                     </div>
                     <div class="form-group">
                         <label for="jobSlider"
-                               class="font--18 text--lebel">Job Oportunity (e)</label>
+                               class="font--18 text--lebel">Job Opportunity</label>
                         <div class="range-slider">
                             <input type="text" class="jobSlider" value="" />
                         </div>
@@ -882,13 +848,6 @@
             </div>
             <div class="row">
 
-                <p class="text-sm-center col-12">
-                    Final Score = a * Rent score + b
-                    * Safety
-                    score + c *
-                    Population score + d *
-                    Culture score + e * Job score
-                </p>
                 <div class="mt-3 col-12 text-center">
                     <a class="btn btn-primary btn-xl js-scroll-trigger disabled" id="rmd-confirm" href="#mapsection"><i id="button-spinner" class="fa fa-circle-o-notch fa-spin"></i>&nbsp;Loading</a>
                 </div>
@@ -898,6 +857,7 @@
             </div>
         </div>
     </section>
+    <!-- map -->
     <section id="mapsection">
         <div class="container-fluid">
             <div class="container-fluid">
@@ -907,73 +867,6 @@
                     <div id="map" class="mmap" style="height:700px"></div>
                     <div class='map-overlay' id='features' style="display: none"><div class='block-content' id='pd'><p></p></div></div>
 
-                    @*<div id='tlegend' class="form-group">
-                                <div class="row">
-
-                                    <div class="col-4 row">
-                                        <div class="col-4">
-                                            <div class="py-3 border" style='background-color: #ddd'> </div>
-                                            <div class="">No data</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="py-3 border" style='background-color: #F2F12D'> </div>
-
-                                            <div class="">$0 - $50</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="py-3 " style='background-color: #EED322'> </div>
-
-                                            <div class="">$150</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-4 row">
-                                        <div class="col-4">
-                                            <div class="py-3 " style='background-color: #E6B71E'> </div>
-
-                                            <div class="">$200</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="py-3 " style='background-color: #CA8323'> </div>
-
-                                            <div class="">$250</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="py-3 " style='background-color: #B86B25'> </div>
-
-                                            <div class="">$300</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-4 row">
-                                        <div class="col-4">
-                                            <div class="py-3 " style='background-color: #A25626'> </div>
-
-                                            <div class="">$350</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="py-3 " style='background-color: #8B4225'> </div>
-
-                                            <div class="">$450</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="py-3 " style='background-color: #723122'> </div>
-
-                                            <div class="">$550</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                    <div class="row">
-            <div class="col">No data</div>
-            <div class="col">$0 - $50</div>
-            <div class="col">$150</div>
-            <div class="col">$200</div>
-            <div class="col">$250</div>
-            <div class="col">$300</div>
-            <div class="col">$350</div>
-            <div class="col">$450</div>
-            <div class="col">$550</div>
-        </div>
-                                </div>*@
                     <div id="culture-card" class="culture-card rounded shadow-lg bg-white" style="max-width: 500px; display: none;">
                         <div class="card" id="culture-card-content" style="display:block">
                             <div width="350" height="30" id="culture-info-content">
@@ -985,6 +878,39 @@
                             <hr>
                             <div id="culture-list-content">
                             </div>
+                        </div>
+
+                    </div>
+
+                    <div id="info-card-r" class="info-card rounded shadow-lg bg-white" style="max-width: 350px; display: none;">
+                        <div class="card" id="info-card-content-r" style="display:block">
+                            <div width="350" height="200" id="image-container-r">
+                                <span class="info-close-r">
+                                    <i id="info-card-close-button-r" class="fa fa-arrow-left" role="button" aria-hidden="true"></i>
+                                </span>
+                                <img class="" width="348" height="200" id="card-image-r" src="" />
+                            </div>
+                            <div class="px-2 pb-2" style="height:500px" id="more-content-r">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h2 class="font--20 text--lebel font--bold mt-4" id="card-title-r"></h2>
+                                        <p class="font--18 subtitle--color mt-1" id="card-subtitle-r">
+
+                                        </p>
+                                        <hr>
+                                        <div id="recommendation-rate">
+
+                                        </div>
+                                        <hr>
+
+                                    </div>
+                                </div>
+
+                                <div id="recommendation-rate-chart col-12">
+                                    <canvas id="myChart"></canvas>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>
@@ -1040,71 +966,6 @@
                         </div>
                     </div>
 
-                    <div id='state-legend' class='legend' style="display: none">
-                        <h4>Median Rent</h4>
-                        <div><span style='background-color: #723122'></span>$550</div>
-                        <div><span style='background-color: #8B4225'></span>$450</div>
-                        <div><span style='background-color: #A25626'></span>$350</div>
-                        <div><span style='background-color: #B86B25'></span>$300</div>
-                        <div><span style='background-color: #CA8323'></span>$250</div>
-                        <div><span style='background-color: #E6B71E'></span>$200</div>
-                        <div><span style='background-color: #EED322'></span>$150</div>
-                        <div><span style='background-color: #F2F12D'></span>$0 - $50</div>
-                        <div><span style='background-color: #ddd'></span>No data</div>
-                    </div>
-
-                    <div id='state-crime-legend' class='legend' style="display: none">
-                        <h4>Criminal rate</h4>
-                        <div><span style='background-color: #723122'></span>10%</div>
-                        <div><span style='background-color: #8B4225'></span>8%</div>
-                        <div><span style='background-color: #A25626'></span>7%</div>
-                        <div><span style='background-color: #B86B25'></span>6%</div>
-                        <div><span style='background-color: #CA8323'></span>5%</div>
-                        <div><span style='background-color: #DA9C20'></span>4%</div>
-                        <div><span style='background-color: #E6B71E'></span>3%</div>
-                        <div><span style='background-color: #EED322'></span>2%</div>
-                        <div><span style='background-color: #F2F12D'></span>0% - 2%</div>
-                        <div><span style='background-color: #ddd'></span>No data</div>
-                    </div>
-
-                    <div id='state-density-legend' class='legend' style="display: none">
-                        <h4>Population density</h4>
-                        <div><span style='background-color: #723122'></span>200</div>
-                        <div><span style='background-color: #8B4225'></span>50</div>
-                        <div><span style='background-color: #A25626'></span>20</div>
-                        <div><span style='background-color: #B86B25'></span>8</div>
-                        <div><span style='background-color: #CA8323'></span>5</div>
-                        <div><span style='background-color: #E6B71E'></span>3</div>
-                        <div><span style='background-color: #EED322'></span>1</div>
-                        <div><span style='background-color: #F2F12D'></span>0 - 1</div>
-                        <div><span style='background-color: #ddd'></span>No data</div>
-                    </div>
-
-                    <div id='state-unemp-legend' class='legend' style="display: none">
-                        <h4>Umployment rate</h4>
-                        <div><span style='background-color: #723122'></span>8%</div>
-                        <div><span style='background-color: #8B4225'></span>7%</div>
-                        <div><span style='background-color: #A25626'></span>6%</div>
-                        <div><span style='background-color: #B86B25'></span>5%</div>
-                        <div><span style='background-color: #CA8323'></span>4%</div>
-                        <div><span style='background-color: #E6B71E'></span>3%</div>
-                        <div><span style='background-color: #EED322'></span>2%</div>
-                        <div><span style='background-color: #F2F12D'></span>0% - 2%</div>
-                        <div><span style='background-color: #ddd'></span>No data</div>
-                    </div>
-
-                    <div id='state-income-legend' class='legend' style="display: none">
-                        <h4>Income</h4>
-                        <div><span style='background-color: #723122'></span>$60,000</div>
-                        <div><span style='background-color: #8B4225'></span>$55,000</div>
-                        <div><span style='background-color: #A25626'></span>$50,000</div>
-                        <div><span style='background-color: #B86B25'></span>$48,000</div>
-                        <div><span style='background-color: #CA8323'></span>$44,000</div>
-                        <div><span style='background-color: #E6B71E'></span>$40,000</div>
-                        <div><span style='background-color: #EED322'></span>$35,000</div>
-                        <div><span style='background-color: #F2F12D'></span>$0 - $35,000</div>
-                        <div><span style='background-color: #ddd'></span>No data</div>
-                    </div>
                 </div>
 
                 <div class="col-6" style="display:none" id="chart-section">
@@ -1123,6 +984,25 @@
     </section>
     @*<script type="text/javascript" src="/lga48.js.gz"></script>*@
 
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <span class="copyright">
+                        Copyright &copy; RegionalVICInsight 2019.
+                    </span>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-inline quicklinks">
+                        <li class="list-inline-item">
+                            <a href="/Home/Disclaimer" class="content-font-link">Disclaimer</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script>
         var lines;
@@ -1138,8 +1018,8 @@
             container: 'map',
             style: 'mapbox://styles/mapbox/light-v9',
             //style: 'mapbox://styles/mapbox/light-v9',
-            center: [145.045837, -37.876823],
-            zoom: 6
+            center: [145.045837, -37.06823],
+            zoom: 6.5
         });
 
 
@@ -1153,26 +1033,43 @@
         var maxFBudget;
         var minRBudget;
         var maxRBudget;
+        var myData;
+        var rcMap;
+        var cheo = new Object;
+        var textColor = new Object;
+        var crimeCheo = new Object;
+        var desyCheo = new Object;
+        var initCodeColor = false;
+        var initMap = false;
+        var myChart;
 
+        var moved = false;
+        var clicked = "";
+        var list = document.getElementById('list');
+        var slist = document.getElementById('slist');
+        var recomdList = document.getElementById('recomd-list');
+
+        //Click recommendation confirm button
         $('#rmd-confirm').on('click', function () {
             $(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
             recommendation();
         });
 
 
+        //Enable all buttons
         function disableAllButton() {
             $("#rmd-confirm").disable(true);
             $('#rmd-confirm').html('<i id="button-spinner" class="fa fa-circle-o-notch fa-spin"></i>&nbsp;Loading')
 
         }
 
-
+        //Disable all buttons
         function enableAllButton() {
             $("#rmd-confirm").disable(false);
             $('#rmd-confirm').html('Confirm')
 
         }
-
+        //Random color
         function getRandomColor() {
             var letters = '0123456789ABCDEF';
             var color = '#';
@@ -1181,15 +1078,7 @@
             }
             return color;
         }
-
-    var myData;
-    var rcMap;
-    var cheo = new Object;
-    var textColor = new Object;
-    var crimeCheo = new Object;
-    var desyCheo = new Object;
-    var initCodeColor = false;
-    var initMap = false;
+        //asign color for regions
         function formRegionColorMap() {
             rcMap = new Map();
             rcMap.set('20110', getRandomColor());
@@ -1277,7 +1166,7 @@
 
             initialiseColor();
         }
-
+        //Genrate color
         function initialiseColor() {
             myData = {
                 "20110": rcMap.get('20110'),
@@ -1378,7 +1267,7 @@
                 },
             });
         }
-
+        //Shrink map
         function easing(t) {
             return t * (2 - t);
         }
@@ -1392,7 +1281,7 @@
             moved = true;
         }
 
-
+        //Extend map
         function extendMap() {
             if (moved) {
                 var deltaDistance = 300;
@@ -1402,6 +1291,156 @@
             }
             moved = false;
         }
+
+        //Recommendation more info panel
+        function showMore(LGA_Code, rate1, rate2, rate3, rate4, rate5, noOfBsn) {
+            flytoPoly(LGA_Code);
+
+            var image = document.querySelector('#card-image-r');
+                image.style.display = "none";
+            $.ajax({
+                /**/
+                url: '@Url.Action("getMore", "Map")',
+                /**/
+                type: 'POST',
+                data: { code: LGA_Code },
+                success: function (data) {
+                    var item = JSON.parse(data);
+                    var code = item["LgaCode"];
+                    var image_link = item["LgaImage"];
+                    var name = item["LgaName"];
+                    var region = item["Region"];
+                    var median = item["Median"];
+                    var rate = item["Rate"];
+                    var density = item["Density"];
+
+                    document.querySelector('#card-title-r').innerText = name;
+                    document.querySelector('#card-subtitle-r').innerText = region;
+
+                    image.src = image_link;
+
+                    $('#more-content-r').fadeIn(200);
+
+                    function iloaded() {
+                        //image.style.display = "block";
+                        $('#card-image-r').fadeIn(200);
+                    }
+
+
+                    if (image.complete) {
+                        iloaded()
+                    } else {
+                        image.addEventListener('load', iloaded)
+                    }
+
+                    var rr = document.getElementById('recommendation-rate');
+                    rr.innerHTML =
+                        "<div class='container'>" +
+                    "<span>" +
+                    "<b>Rent: <span style='color:" + getColorByRate(rate1) + "'> " + getTextByRate(rate1) +
+                        "</b></span>. " + "Median rent: $" + median + " pw" +
+                    " </span><br>" +
+
+                    "<span>" +
+                    "<b>Safety: <span style='color:" + getColorByRate(rate2) + "'> " + getTextByRate(rate2) +
+                    "</b></span>. " + "Criminal rate: " + Math.round(rate * 100) / 100 + "%" +
+                    " </span><br>" +
+
+                    "<span>" +
+                    "<b>Density: <span style='color:" + getColorByRate(rate3) + "'> " + getTextByRate(rate3) +
+                    "</b></span>. " + "Density: " + density +
+                    " </span><br>" +
+
+                    "<span>" +
+                    "<b>Culture: <span style='color:" + getColorByRate(rate4) + "'> " + getTextByRate(rate4) +
+                    "</b></span>. " +
+                    " </span><br>" +
+
+                    "<span>" +
+                    "<b>Job: <span style='color:" + getColorByRate(rate5) + "'> " + getTextByRate(rate5) +
+                        "</b></span>. " +
+                    (rate5 != 0 ? "Business (no.): " + noOfBsn : "") +
+                    " </span><br>" +
+
+                        "</div>";
+
+                    if (myChart != null)
+                    myChart.destroy();
+                    var config = {
+                        type: 'radar',
+                        data: {
+                            labels: ['Rent', 'Safety', 'Density', 'Culture', 'Job'],
+                            datasets: [{
+                                backgroundColor: "rgba(0, 188, 212, 0.5)",
+                                borderColor: "#00BCD4",
+                                data: [
+                                    rate1,
+                                    rate2,
+                                    rate3,
+                                    rate4,
+                                    rate5
+                                ]
+                            }]
+                        },
+                        options: {
+                            legend: {
+                                display: false,
+                            },
+                            title: {
+                                display: false,
+                                text: 'Chart.js Radar Chart'
+                            },
+                            scale: {
+                                ticks: {
+                                    beginAtZero: true,
+
+                                    fontSize: 10
+                                },
+                                pointLabels: {
+                                    fontSize: 20,
+                                }
+                            },
+                            tooltips: {
+                                callbacks: {
+                                    label: function (tooltipItem, data) {
+                                        var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                                        return label + " Rating: " + tooltipItem.yLabel ;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    var ctx = document.getElementById("myChart").getContext("2d");
+
+                    myChart = new Chart(ctx, config);
+
+
+                    if ($('#info-card-r').filter(':visible').length == 0) // all hidden
+                    {
+                        $('#info-card-r').fadeIn(300);
+                        $('#info-card').fadeOut(300);
+                        $('#culture-card').fadeOut(300);
+                    }
+
+                    // Ensure the info box is visible
+                    document.querySelector('#info-card-r').style.display = 'block';
+
+                },
+            });
+        }
+        //Red orange green brown
+        function getColorByRate(rate) {
+            return rate == 0 ? "#795548" : rate > 7 ? "#4CAF50" : rate > 3 ? "#FFC107" : "#f44336";
+        }
+
+        //Good bad empty average
+        function getTextByRate(rate) {
+
+            return rate == 0 ? "Empty" : rate > 7 ? "Good" : rate > 3 ? "Average" : "Bad";
+        }
+        //fly to the polygon on map
     function flytoPoly(LGA_Code, option=1) {
 
         var features = lga["features"];
@@ -1439,9 +1478,6 @@
                         hoveredStateId = feat.id;
                         map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
 
-                        //        feat = feature;
-                        //        var coords = feature.geometry.coordinates;
-                        //        p = polylabel(coords, 1.0);
                     }
                 });
 
@@ -1451,14 +1487,8 @@
         }
 
         formRegionColorMap();
-        var moved = false;
-        //showChart();
-        var clicked = "";
-        var list = document.getElementById('list');
-        var slist = document.getElementById('slist');
-        var recomdList = document.getElementById('recomd-list');
 
-
+        //When start
     $(document).ready(function () {
         initialCountryListR();
         initialIndustryListR();
@@ -1470,7 +1500,7 @@
         disableAllButton()
 
     });
-
+        //Disable disabled button
         $('body').on('click', 'a.disabled', function (event) {
             event.preventDefault();
         });
@@ -1482,13 +1512,16 @@
                     $this.toggleClass('disabled', state);
                 });
             }
-        }); 
-            
+        });
 
+        //Reset all
         function resetAll() {
+            var video = document.querySelector('#card-video');
+            video.src = "";
             extendMap();
             $('#info-card').fadeOut(300);
             $('#culture-card').fadeOut(300);
+            $('#info-card-r').fadeOut(300);
 
             $("#mapcontainer").removeClass('col-6').addClass('col-12');
             $('#chart-section').hide();
@@ -1500,26 +1533,27 @@
             clicked = "";
             list.innerHTML = slist.innerHTML = recomdList.innerHTML = "";
         }
-
+        //Buttons on panels
         document.querySelector('#info-card-close-button').addEventListener('click', function (event) {
-            //document.querySelector('#info-card').style.display = 'none';
 
-            //$('#info-card').fadeOut(300);
             resetAll();
         });
 
-        document.querySelector('#culture-card-close-button').addEventListener('click', function (event) {
-            //document.querySelector('#info-card').style.display = 'none';
 
-            //$('#info-card').fadeOut(300);
+        document.querySelector('#info-card-close-button-r').addEventListener('click', function (event) {
+
+            $('#info-card-r').fadeOut(300);
+            $('#info-card').fadeIn(300);
+        });
+
+        document.querySelector('#culture-card-close-button').addEventListener('click', function (event) {
+
             resetAll();
         });
 
         document.querySelector('#info-card-close-button-2').addEventListener('click', function (event) {
-            //document.querySelector('#info-card').style.display = 'none';
 
             resetAll();
-            //$('#info-card').fadeOut(300);
         });
         //Reset Layers
         function resetLayer() {
@@ -1537,9 +1571,10 @@
 
 
         }
+
         var displayList = new Object
 
-
+        //For Recommendation
         var acmWeight;
         var crmWeight;
         var pouWeight;
@@ -1688,7 +1723,7 @@
             }
         }
 
-
+        //Display or disable
         function changeSelect() {
             var typeSelectValue = $("#inputCountryR").val();
 
@@ -1706,6 +1741,7 @@
         }
 
 
+        //Display or disable
         function changeSelect2() {
 
             var typeSelectValue = $("#inputIndustryR").val();
@@ -1753,12 +1789,12 @@
             maxRBudget = to;
         }
 
-
+        //Industry list in recommendation
         function initialIndustryListR() {
             $("#inputIndustryR").empty();
              $.ajax({
             /**/
-                url: '@Url.Action("getAllIndustry", "Job")',
+                url: '@Url.Action("getAllIndustry", "Map")',
             /**/
             type: 'POST',
             data: { },
@@ -1781,6 +1817,7 @@
             });
         }
 
+        //Country list in recommendation
         function initialCountryListR() {
             $("#inputCountryR").empty();
              $.ajax({
@@ -1809,7 +1846,6 @@
             });
         }
     //Recommendation
-
     function recommendation() {
 
         slist.style.display = "none";
@@ -1864,7 +1900,7 @@
                     textColor[allCode[i]] = '#999';
                 }
                 for (var i = 0; i < areas.length; i++) {
-                    var code = areas[i];
+                    var code = areas[i]["code"];
                     cheo[code] = myData[code];
                     textColor[code] = '#333';
                 }
@@ -1873,12 +1909,17 @@
                 {
                     shrinkMap();
                     $('#info-card').fadeIn(300);
+                    $('#info-card-r').fadeOut(300);
                     $('#culture-card').fadeOut(300);
                 }
                 $('#card-content-2').fadeIn(300);
                 $('#card-content').fadeOut(200);
                 recomdList.innerHTML = result["display"];
 
+                var msg = result["msg"];
+                if (msg != "") {
+                    document.querySelector('#list-name').innerHTML += "<hr><div style='color:#f2262d'>" + msg + "</div>";
+                }
                 showCheoBlock = false;
 
                 map.setPaintProperty("region-label", 'text-color', ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", textColor]]);
@@ -1898,34 +1939,6 @@
 
     }
 
-    var $frange = $(".filterRanger"),
-        instance,
-        min = 100,
-        max = 550,
-        from = 0,
-        to = 0;
-
-    $frange.ionRangeSlider({
-        skin: "round",
-        type: "double",
-        min: min,
-        max: max,
-        from: 100,
-        to: 550,
-        step: 10,            // default 1 (set step)
-        prefix: "$",
-        grid: true,             // show/hide grid
-        onStart: updateFilterInputs,
-        onChange: updateFilterInputs
-    });
-    instance = $frange.data("ionRangeSlider");
-
-    function updateFilterInputs(data) {
-        from = data.from;
-        to = data.to;
-        minFBudget = from;
-        maxFBudget = to;
-    }
     </script>
 
     <!-- Contact form JavaScript -->

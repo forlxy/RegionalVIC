@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 
 namespace RegionalVIC.Controllers
 {
+    //Temporate store item
     public class regionItem
     {
         public string code;
@@ -65,26 +66,32 @@ namespace RegionalVIC.Controllers
     {
         public string code;
         public double rate;
+        public double rater;
+        public double rates;
+        public double ratep;
+        public double ratec;
+        public double ratei;
         public string name;
         public string region;
-        public string type;
-        public byte bedroom;
-        public string median;
+        public int NoOfBsn;
 
         public recommendationItem()
         {
 
         }
 
-        public recommendationItem(string code, double rate, string name, string region, string type, byte bedroom, string median)
+        public recommendationItem(string code, double rate, double rater, double rates, double ratep, double ratec, double ratei, string name, string region, int NoOfBsn)
         {
             this.code = code;
             this.rate = rate;
+            this.rater = rater;
+            this.rates = rates;
+            this.ratep = ratep;
+            this.ratec = ratec;
+            this.ratei = ratei;
             this.name = name;
             this.region = region;
-            this.type = type;
-            this.bedroom = bedroom;
-            this.median = median;
+            this.NoOfBsn = NoOfBsn;
         }
 
         //Get acommondation rating
@@ -168,101 +175,21 @@ namespace RegionalVIC.Controllers
         {
             _context = context;
         }
-        // GET: Map
+
+        //Index page
         public ActionResult Index()
         {
-            //var first = _context.Rtrtbl;
-            //var second = _context.Critbl;
-            //var third = _context.Ppltbl;
-
-            return View(/*Tuple.Create(first, second, third)*/);
+            return View();
         }
 
 
-        // GET: Map
+        //Recommendation page
         public ActionResult Recommendation()
         {
-            //var first = _context.Rtrtbl;
-            //var second = _context.Critbl;
-            //var third = _context.Ppltbl;
-
-            return View(/*Tuple.Create(first, second, third)*/);
-        }
-        // GET: Map/Details/5
-        public ActionResult Details(int id)
-        {
             return View();
         }
 
-        // GET: Map/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Map/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Map/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Map/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Map/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Map/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
+        //Get all country
         [HttpPost]
         public string getAllCountry()
         {
@@ -280,6 +207,7 @@ namespace RegionalVIC.Controllers
 
         }
 
+        //Get all regions
         [HttpPost]
         public string getAllRegions()
         {
@@ -296,6 +224,140 @@ namespace RegionalVIC.Controllers
             return json;
         }
 
+        //Get industry list
+        [HttpPost]
+        public string getAllIndustry()
+        {
+            var list = _context.Idsmas.ToList();
+
+            List<string> result = new List<string>();
+            foreach (var i in list)
+            {
+                result.Add(i.IdsName);
+            }
+
+
+            var json = JsonConvert.SerializeObject(result);
+            return json;
+
+        }
+
+
+        //get data For barchart
+        [HttpPost]
+        public string getBarchartData(string[] industries, string[] regions, string option)
+        {
+
+            //join t in _context.Poetbl on r.IdsCode equals t.IdsCode
+
+            if (option.Contains("0")) // Number of business
+            {
+                var list = (from r in _context.Idsmas
+                            join l in _context.Nbitbl on r.IdsCode equals l.IdsCode
+                            join t in _context.Lgatbl on l.LgaCode equals t.LgaCode
+                            where industries.Contains(r.IdsName) && regions.Contains(l.LgaCode)
+                            select new
+                            {
+                                LgaName = t.NameRent,
+                                IdsName = r.IdsName,
+                                Year = l.Yr,
+                                NoOfBsn = l.NoOfBsn
+                            }).ToList();
+
+                var json = JsonConvert.SerializeObject(list);
+                return json;
+
+            }
+            else // proportion of person
+            {
+                var list = (from r in _context.Idsmas
+                            join l in _context.Poetbl on r.IdsCode equals l.IdsCode
+                            join t in _context.Lgatbl on l.LgaCode equals t.LgaCode
+                            where industries.Contains(r.IdsName) && regions.Contains(l.LgaCode)
+                            select new
+                            {
+                                LgaName = t.NameRent,
+                                IdsName = r.IdsName,
+                                Year = l.Yr,
+                                Proportion = l.Proportion
+                            }).ToList();
+
+                var json = JsonConvert.SerializeObject(list);
+                return json;
+            }
+        }
+
+        //Get unemployment rate list
+        [HttpPost]
+        public string getUnemployment()
+        {
+            var list = (from r in _context.Ueptbl
+                        join t in _context.Lgatbl on r.LgaCode equals t.LgaCode
+                        select new
+                        {
+                            LgaCode = t.LgaCode,
+                            LgaName = t.NameRent,
+                            Rate = r.UnempRate,
+                            Color = colorDisplay.getUnempColor(r.UnempRate)
+                        }).ToList();
+
+            var json = JsonConvert.SerializeObject(list);
+            return json;
+
+        }
+
+        //Get income list
+        [HttpPost]
+        public string getIncome()
+        {
+            var list = (from r in _context.Inctbl
+                        join t in _context.Lgatbl on r.LgaCode equals t.LgaCode
+                        select new
+                        {
+                            LgaCode = t.LgaCode,
+                            LgaName = t.NameRent,
+                            Income = r.MeTtlInc,
+                            Color = colorDisplay.getIncomeColor(r.MeTtlInc.Value)
+                        }).ToList();
+
+            var json = JsonConvert.SerializeObject(list);
+            return json;
+
+        }
+        //Show more info about recommendation result
+        [HttpPost]
+        public string getMore(string code)
+        {
+
+            var item = (from a in _context.Lgamas
+                         join l in _context.Lgatbl on a.LgaCode equals l.LgaCode
+                         join r in _context.Rtrtbl on a.LgaCode equals r.LgaCode
+                         join p in _context.Ppltbl on a.LgaCode equals p.LgaCode
+                         join c in _context.Critbl on a.LgaCode equals c.LgaCode
+                         
+                         where a.LgaCode.Contains(code) && l.Status == "R" && r.Yr.Equals(2018) && r.Quarter.Equals(3) && r.Typ.Contains("all") &&
+                             r.Median > 0 && 
+                             c.YrEnd.Equals(2018) && c.Rate > 0 &&
+                             p.Density > 0
+                         select new
+                         {
+                             LgaCode = a.LgaCode,
+                             Median = r.Median,
+                             LgaName = a.LgaBdesc,
+                             Region = l.Region,
+                             Rate = c.Rate,
+                             LgaImage = a.LgaImage,
+                             Density = p.Density,
+                             Population = p.Popul
+                         }).First();
+            
+            
+            var json = JsonConvert.SerializeObject(item);
+            return json;
+
+        }
+
+        //Get info of a region
         [HttpPost]
         public string getInfo(string code)
         {
@@ -327,13 +389,14 @@ namespace RegionalVIC.Controllers
             return json;
 
         }
-
+        //Store color in map. Deprecated
         [HttpPost]
         public void setCodeColors(string json)
         {
 
             codeColors = JObject.Parse(json);
         }
+        //Get chro map result
         [HttpPost]
         public Object getContent(char require, string bedroom = "0", string type = "house")
         {
@@ -413,7 +476,7 @@ namespace RegionalVIC.Controllers
         }
 
 
-
+        //Get region result
         [HttpPost]
         public string getRegions(string country)
         {
@@ -459,7 +522,7 @@ namespace RegionalVIC.Controllers
             return json;
 
         }
-
+        //Get country result
         [HttpPost]
         public string getCountry(string code)
         {
@@ -494,7 +557,7 @@ namespace RegionalVIC.Controllers
         }
 
 
-
+        //Get lat and lon of a polygon
         [HttpPost]
         public string getLngLat(string code)
         {
@@ -511,7 +574,7 @@ namespace RegionalVIC.Controllers
             return "{ \"latitude\":" + item.Lat + ",\"longitude\": " + item.Lng + "}";
 
         }
-
+        //Get language result
         [HttpPost]
         public string getLan(string code)
         {
@@ -544,7 +607,7 @@ namespace RegionalVIC.Controllers
             return json;
 
         }
-
+        //Filter rent
         [HttpPost]
         public string filterRent(int min, int max, string bedroom = "", string type = "All")
         {
@@ -580,12 +643,28 @@ namespace RegionalVIC.Controllers
                 }).ToList();
 
             list = list.OrderBy(t => t.Median).ToList();
+            var msg = "";
             if (list.Count == 0)
             {
-                display = "<div class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
-                   "<div class=\"d-flex w-100 justify-content-between\" > <h4 class=\"mb-1\">" +
-                   "No record within this price range</h4> <small class=\"text-muted\" ></small> </div> <p class=\"mb-1\">" +
-                   "Change your price range and try again</p> </div>";
+                msg = "Sorry, there is no record within this price range. But here is the result you might be interested in:";
+
+                list = (from r in _context.Rtrtbl
+                        join l in _context.Lgatbl on r.LgaCode equals l.LgaCode
+                        where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3)
+                                && l.Status == "R" && r.Median > 0
+                                && (type.Contains("ll") ? r.Typ.Contains("ll") : (r.Typ.Contains(type) && (int)r.NoOfBedrm == bedno))
+                        select new
+                        {
+                            LgaCode = r.LgaCode,
+                            Median = r.Median,
+                            LgaName = l.NameRent,
+                            Region = l.Region,
+                            Bedroom = r.NoOfBedrm,
+                            Type = r.Typ,
+                            Color = colorDisplay.getAcomColor(r.Median.Value)
+                        }).ToList();
+
+                list = list.OrderBy(t => t.Median).ToList();
             }
 
             //List<string> tmpAreas = new List<string>();
@@ -606,61 +685,127 @@ namespace RegionalVIC.Controllers
             var tmpObject = new
             {
                 areas = list,
-                display = display
+                display = display,
+                msg = msg
             };
             return JsonConvert.SerializeObject(tmpObject);
         }
-
+        //get recommendation
         [HttpPost]
         public string getRecommendation(int min, int max, float acmWeight, float crmWeight, float pouWeight, float culWeight, float jobWeight, string country = " ", string industry = " ")
         {
             string display = "";
 
             var query = (from r in _context.Rtrtbl
-                        join l in _context.Lgatbl on r.LgaCode equals l.LgaCode
-                        join p in _context.Ppltbl on r.LgaCode equals p.LgaCode
-                        join c in _context.Critbl on r.LgaCode equals c.LgaCode
-                        join d in _context.Cobtbl on r.LgaCode equals d.LgaCode
-                        join m in _context.Cobmas on d.Cob equals m.Seq
-                        join i in _context.Nbitbl on r.LgaCode equals i.LgaCode
-                        join s in _context.Idsmas on i.IdsCode equals s.IdsCode
-                        where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3) && r.Typ.Contains("all") &&
-                            r.Median > 0 && (r.Median >= min && r.Median <= max) &&
-                            c.YrEnd.Equals(2018) && c.Rate > 0 &&
-                            p.Density > 0 && l.Status == "R"
-                        select new
-                        {
-                            LgaCode = r.LgaCode,
-                            Median = r.Median,
-                            LgaName = l.NameRent,
-                            Region = l.Region,
-                            Bedroom = r.NoOfBedrm,
-                            Type = r.Typ,
-                            Rate = c.Rate,
-                            IciNum = c.IncdRcd,
-                            Density = p.Density,
-                            Population = p.Popul,
-                            Rank = d.Rank,
-                            NoOfBsn = i.NoOfBsn,
-                            Cob = m.Cob,
-                            IdsName = s.IdsName
-                        });
+                         join l in _context.Lgatbl on r.LgaCode equals l.LgaCode
+                         join p in _context.Ppltbl on r.LgaCode equals p.LgaCode
+                         join c in _context.Critbl on r.LgaCode equals c.LgaCode
+                         where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3) && r.Typ.Contains("all") &&
+                             r.Median > 0 && (r.Median >= min && r.Median <= max) &&
+                             c.YrEnd.Equals(2018) && c.Rate > 0 &&
+                             p.Density > 0 && l.Status == "R"
+                         select new
+                         {
+                             LgaCode = r.LgaCode,
+                             Median = r.Median,
+                             LgaName = l.NameRent,
+                             Region = l.Region,
+                             Bedroom = r.NoOfBedrm,
+                             Type = r.Typ,
+                             Rate = c.Rate,
+                             IciNum = c.IncdRcd,
+                             Density = p.Density,
+                             Population = p.Popul,
+                             Rank = (short)11,
+                             Cob = "",
+                             NoOfBsn = 0,
+                             IdsName = ""
+                         });
+
 
             if (!String.IsNullOrEmpty(country))
-                query = query.Where(i => i.Cob.Contains(country));
+            {
+                query = (from r in query
+                         join d in _context.Cobtbl on r.LgaCode equals d.LgaCode
+                         join m in _context.Cobmas on d.Cob equals m.Seq
+                         where m.Cob.Contains(country)
+                         select new
+                         {
+                             LgaCode = r.LgaCode,
+                             Median = r.Median,
+                             LgaName = r.LgaName,
+                             Region = r.Region,
+                             Bedroom = r.Bedroom,
+                             Type = r.Type,
+                             Rate = r.Rate,
+                             IciNum = r.IciNum,
+                             Density = r.Density,
+                             Population = r.Population,
+                             Rank = d.Rank,
+                             Cob = m.Cob,
+                             NoOfBsn = r.NoOfBsn,
+                             IdsName = r.IdsName
+                         });
+            }
 
             if (!String.IsNullOrEmpty(industry))
-                query = query.Where(i => i.IdsName.Contains(industry));
+            {
+                query = (from r in query
+                         join i in _context.Nbitbl on r.LgaCode equals i.LgaCode
+                         join s in _context.Idsmas on i.IdsCode equals s.IdsCode
+                         where s.IdsName.Contains(industry)
+                         select new
+                         {
+                             LgaCode = r.LgaCode,
+                             Median = r.Median,
+                             LgaName = r.LgaName,
+                             Region = r.Region,
+                             Bedroom = r.Bedroom,
+                             Type = r.Type,
+                             Rate = r.Rate,
+                             IciNum = r.IciNum,
+                             Density = r.Density,
+                             Population = r.Population,
+                             Rank = r.Rank,
+                             Cob = r.Cob,
+                             NoOfBsn = i.NoOfBsn,
+                             IdsName = s.IdsName
+                         });
+            }
 
-            
+            var msg = "";
             var list = query.ToList();
-
             if (list.Count == 0)
             {
-                display = "<div class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
-                   "<div class=\"d-flex w-100 justify-content-between\" > <h4 class=\"mb-1\">" +
-                   "No record within this price range</h4> <small class=\"text-muted\" ></small> </div> <p class=\"mb-1\">" +
-                   "Change your preference and try again</p> </div>";
+
+                msg = "Sorry, no exact matches found. But here is the result you might be interested in:";
+                query = (from r in _context.Rtrtbl
+                             join l in _context.Lgatbl on r.LgaCode equals l.LgaCode
+                             join p in _context.Ppltbl on r.LgaCode equals p.LgaCode
+                             join c in _context.Critbl on r.LgaCode equals c.LgaCode
+                             where r.LgaCode != "00000" && r.Yr.Equals(2018) && r.Quarter.Equals(3) && r.Typ.Contains("all") &&
+                                 r.Median > 0 && 
+                                 c.YrEnd.Equals(2018) && c.Rate > 0 &&
+                                 p.Density > 0 && l.Status == "R"
+                             select new
+                             {
+                                 LgaCode = r.LgaCode,
+                                 Median = r.Median,
+                                 LgaName = l.NameRent,
+                                 Region = l.Region,
+                                 Bedroom = r.NoOfBedrm,
+                                 Type = r.Typ,
+                                 Rate = c.Rate,
+                                 IciNum = c.IncdRcd,
+                                 Density = p.Density,
+                                 Population = p.Popul,
+                                 Rank = (short)11,
+                                 Cob = "",
+                                 NoOfBsn = 0,
+                                 IdsName = ""
+                             });
+
+                list = query.ToList();
             }
 
             var regionsList = _context.Lgatbl.ToList();
@@ -668,47 +813,51 @@ namespace RegionalVIC.Controllers
             foreach (var i in list)
             {
 
-                var rate = acmWeight * recommendationItem.getRatingByPrice(i.Median) +
-                    crmWeight * recommendationItem.getRatingByCrime(i.Rate) +
-                    pouWeight * recommendationItem.getRatingByDensity(i.Density) +
-                    culWeight * recommendationItem.getRatingByCulture(i.Rank) +
-                    jobWeight * recommendationItem.getRatingByJob(i.NoOfBsn);
+                var rate1 = recommendationItem.getRatingByPrice(i.Median);
+                var rate2 = recommendationItem.getRatingByCrime(i.Rate);
+                var rate3 = recommendationItem.getRatingByDensity(i.Density);
+                var rate4 = culWeight == 0 ? 0 : recommendationItem.getRatingByCulture(i.Rank);
+                var rate5 = recommendationItem.getRatingByJob(i.NoOfBsn);
+                var rate = acmWeight * rate1 + crmWeight * rate2 + pouWeight * rate3 + culWeight * rate4 + jobWeight * rate5;
 
-                recommendationItem item = new recommendationItem(i.LgaCode, rate, i.LgaName, i.Region, i.Type, i.Bedroom ?? default(byte), i.Median.ToString());
+                recommendationItem item = new recommendationItem(i.LgaCode, rate, rate1, rate2, rate3, rate4, rate5, i.LgaName, i.Region, i.NoOfBsn);
                 rates.Add(item);
 
             }
 
+
             rates = rates.GroupBy(x => x.code)
-                         .Select(g => g.First())
+                         .Select(g => g.OrderByDescending(y => y.rate).First())
                          .ToList();
 
             rates = rates.OrderByDescending(t => t.rate).ToList();
 
-            List<string> areas = new List<string>();
+            List<recommendationItem> areas = new List<recommendationItem>();
+            
             for (var j = 0; j < ((rates.Count < 10)? rates.Count : 10); j++)
             {
-                areas.Add(rates[j].code);
-                display += "<a href=\"javascript:flytoPoly(" + rates[j].code + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
+                areas.Add(rates[j]);
+                display += "<a href=\"javascript:showMore(" + rates[j].code + "," + rates[j].rater + "," + rates[j].rates + "," + rates[j].ratep + "," + rates[j].ratec + "," + rates[j].ratei + "," + rates[j].NoOfBsn + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
                     "<div class=\"d-flex w-100 justify-content-between\" > " +
                     "<h4 class=\"mb-1\">"
                     + rates[j].name + " - " + rates[j].region + "</h4> <small class=\"text-muted\" >Top "
                     + (j+1) + "</small> </div>" +
                     "<div class=\"d-flex w-100 justify-content-between\" > " +
-                    "<div> Rent </div>" +
+                    "<div> Rating </div>" +
                     //"<div>" + rates[j].bedroom + " bedroom(s) " + FirstCharToUpper(rates[j].type) + "</div> " +
-                    "<small class=\"text-muted\"><b>$" + rates[j].median + "</b></small> " +
+                    "<small class=\"text-muted\"><b>" + Math.Round(rates[j].rate,2) + " of 10</b></small> " +
                     "</div></a>";
                 
             }
             var tmpObject = new
             {
                 areas = areas,
-                display = display
+                display = display,
+                msg = msg
             };
             return JsonConvert.SerializeObject(tmpObject);
         }
-
+        //First letter to uppercase
         public string FirstCharToUpper(string input)
         {
             switch (input)
