@@ -217,6 +217,11 @@
         min-height: 200px;
     }
 
+    #image-container-r {
+        min-width: 340px;
+        min-height: 200px;
+    }
+
     #more-content {
         min-width: 348px;
         min-height: 286px;
@@ -293,7 +298,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>RegionalVIC Insight  - Explore Regional Victoria</title>
+    <title>RegionalVICInsight - Get recommendation</title>
     <!-- Fontawesome -->
     <link rel="stylesheet" href="/fontawesome/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
@@ -322,12 +327,7 @@
 
     <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.min.js'></script>
 
-
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js'></script>
-
     <script src="/Scripts/ion.rangeSlider.min.js"></script>
-    <script src="/Scripts/covervid.min.js"></script>
     <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js"></script>
 
     <link rel="stylesheet" href="/css/ion.rangeSlider.min.css">
@@ -827,7 +827,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputIndustryR" class="font--18 text--lebel">
-                            Choose your interested industry
+                            Choose your preferred industry
                         </label>
                         <select id="inputIndustryR" class="form-control" onchange="changeSelect2()">
                             <option selected>Disable</option>
@@ -1438,7 +1438,7 @@
         //Good bad empty average
         function getTextByRate(rate) {
 
-            return rate == 0 ? "Empty" : rate > 7 ? "Good" : rate > 3 ? "Average" : "Bad";
+            return rate == 0 ? "N/A" : rate > 7 ? "Good" : rate > 3 ? "Average" : "Bad";
         }
         //fly to the polygon on map
     function flytoPoly(LGA_Code, option=1) {
@@ -1939,6 +1939,34 @@
 
     }
 
+        //Hightlight the feature when hover in barchart
+        function highlight(code, name) {
+                features.style.display = "none";
+
+
+            var queryFeature = lga["features"];
+            if (queryFeature.length) {
+
+                var feature = queryFeature.find(function (element) {
+                    return parseInt(element.properties.LGA_CODE18) === parseInt(code);
+                });
+                //feature = queryFeature[i];
+                //if (parseInt(feature.properties.LGA_CODE18) === parseInt(code)) {
+
+                document.getElementById('pd').innerHTML = '<h5><strong>' + name + '</strong></h5><div class="content-line">' + displayList[code] + '</div>';
+
+
+                if (hoveredStateId) {
+                    map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+                }
+                hoveredStateId = feature.id;
+                map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
+
+
+            }
+
+
+        }
     </script>
 
     <!-- Contact form JavaScript -->

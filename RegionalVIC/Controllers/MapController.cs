@@ -671,7 +671,10 @@ namespace RegionalVIC.Controllers
             foreach (var i in list)
             {
                 //tmpAreas.Add(i.LgaCode);
-                display += "<a href=\"javascript:flytoPoly(" + i.LgaCode + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
+                display += "<a href=\"javascript:flytoPoly(" + i.LgaCode + ")\"" +
+                    " class=\"list-group-item list-group-item-action flex-column align-items-start\"" +
+                    "onmouseover='highlight(" + i.LgaCode + ",\"" + i.LgaName + "\")'" +
+                    "> " +
                     "  <div class=\"d-flex w-100 justify-content-between\" > <h4 class=\"mb-1\">"
                     + i.LgaName + " - " + i.Region + "</h4> <small class=\"text-muted\" >$"
                     + i.Median + "</small> </div> " +
@@ -837,7 +840,9 @@ namespace RegionalVIC.Controllers
             for (var j = 0; j < ((rates.Count < 10)? rates.Count : 10); j++)
             {
                 areas.Add(rates[j]);
-                display += "<a href=\"javascript:showMore(" + rates[j].code + "," + rates[j].rater + "," + rates[j].rates + "," + rates[j].ratep + "," + rates[j].ratec + "," + rates[j].ratei + "," + rates[j].NoOfBsn + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"> " +
+                display += "<a href=\"javascript:showMore(" + rates[j].code + "," + rates[j].rater + "," + rates[j].rates + "," + rates[j].ratep + "," + rates[j].ratec + "," + rates[j].ratei + "," + rates[j].NoOfBsn + ")\" class=\"list-group-item list-group-item-action flex-column align-items-start\"" +
+                "onmouseover='highlight(" + rates[j].code + ",\"" + rates[j].name + "\")'" +
+                "> " +
                     "<div class=\"d-flex w-100 justify-content-between\" > " +
                     "<h4 class=\"mb-1\">"
                     + rates[j].name + " - " + rates[j].region + "</h4> <small class=\"text-muted\" >Top "

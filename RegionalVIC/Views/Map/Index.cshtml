@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>RegionalVIC Insight  - Explore Regional Victoria</title>
+    <title>RegionalVICInsight  - Explore Regional Victoria</title>
     <!-- Fontawesome -->
     <link rel="stylesheet" href="/fontawesome/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
@@ -41,7 +41,6 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js'></script>
 
     <link href="/css/select2.min.css" rel="stylesheet" />
-    <link href="/css/rangeslider.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/ion.rangeSlider.min.css">
 
     <!-- Custom styles -->
@@ -186,7 +185,14 @@
                             ["boolean", ["feature-state", "hover"], false],
                             1,
                             0.7
-                        ]
+                        ],
+                        'fill-outline-color':
+                            ["case",
+                            ["boolean", ["feature-state", "hover"], false],
+                            "#ca5f2e",
+                                ["get", ["to-string", ["get", "LGA_CODE18"]], ["literal", cheo]]
+                            ],
+
                     }
                 });
                 //Label
@@ -1190,6 +1196,8 @@
                         <button id="byValue" class="btn btn-info btn-sort"> Top 10 Max</button>
                     </div>
                     <br>
+                    <div id="instr" class="text-center ">Click the bar to check where they are!</div>
+                    <br>
                     <div id="barchart"></div>
                 </div>
             </div>
@@ -1268,7 +1276,7 @@
     <script>
         var lines;
         var spanDisabled = false;
-    var toggleRecomd = false;
+        var toggleRecomd = false;
 
         var hoveredStateId = null;
         var highlightedStateId = null;
@@ -1278,22 +1286,22 @@
         var minRBudget;
         var maxRBudget;
         var selected = "";
-    var allCode = [20110, 20260, 20570, 20660, 20740, 20830, 20910, 21010, 21110, 21180, 21270, 21370, 21450, 21610, 21670, 21750, 21830, 21890, 22110, 22170, 22250, 22310, 22410, 22490, 22620, 22670, 22750, 22830, 22910, 22980, 23110, 23190, 23270, 23350, 23430, 23670, 23810, 23940, 24130, 24210, 24250, 24330, 24410, 24600, 24650, 24780, 24850, 24900, 24970, 25060, 25150, 25250, 25340, 25430, 25490, 25620, 25710, 25810, 25900, 25990, 26080, 26170, 26260, 26350, 26430, 26490, 26610, 26670, 26700, 26730, 26810, 26890, 26980, 27070, 27170, 27260, 27350, 27450, 27630, 29399, 29499, 29799];
+        var allCode = [20110, 20260, 20570, 20660, 20740, 20830, 20910, 21010, 21110, 21180, 21270, 21370, 21450, 21610, 21670, 21750, 21830, 21890, 22110, 22170, 22250, 22310, 22410, 22490, 22620, 22670, 22750, 22830, 22910, 22980, 23110, 23190, 23270, 23350, 23430, 23670, 23810, 23940, 24130, 24210, 24250, 24330, 24410, 24600, 24650, 24780, 24850, 24900, 24970, 25060, 25150, 25250, 25340, 25430, 25490, 25620, 25710, 25810, 25900, 25990, 26080, 26170, 26260, 26350, 26430, 26490, 26610, 26670, 26700, 26730, 26810, 26890, 26980, 27070, 27170, 27260, 27350, 27450, 27630, 29399, 29499, 29799];
 
-    const TOKEN = "pk.eyJ1Ijoia2FzYWx1b3FpIiwiYSI6ImNqbHZ2OW53bTB5aHozcW9kcDJibndycXUifQ.SeWM7HbI0owT-Rwuv14Ntg";
-    //Map
-    mapboxgl.accessToken = TOKEN;
-    var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/light-v9',
-        //style: 'mapbox://styles/mapbox/light-v9',
-        center: [145.045837, -37.06823],
-        zoom: 6.5
-    });
+        const TOKEN = "pk.eyJ1Ijoia2FzYWx1b3FpIiwiYSI6ImNqbHZ2OW53bTB5aHozcW9kcDJibndycXUifQ.SeWM7HbI0owT-Rwuv14Ntg";
+        //Map
+        mapboxgl.accessToken = TOKEN;
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/light-v9',
+            //style: 'mapbox://styles/mapbox/light-v9',
+            center: [145.045837, -37.06823],
+            zoom: 6.5
+        });
 
 
-    var nav = new mapboxgl.NavigationControl();
-    map.addControl(nav, 'bottom-right');
+        var nav = new mapboxgl.NavigationControl();
+        map.addControl(nav, 'bottom-right');
 
 
 
@@ -1322,14 +1330,14 @@
         var stateIncomeLegend = document.getElementById('state-income-legend');
         var stateUnempLegend = document.getElementById('state-unemp-legend');
         //Random color of map
-    function getRandomColor() {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
         }
-        return color;
-    }
         function formRegionColorMap() {
             rcMap = new Map();
             rcMap.set('20110', getRandomColor());
@@ -1543,8 +1551,10 @@
             $("#mapcontainer").removeClass('col-6').addClass('col-12');
             $('#chart-section').hide();
 
-            map.resize();
             showCheoBlock = false;
+
+            features.style.display = "none";
+            map.resize();
             resetLayer();
             selected = "";
             clicked = "";
@@ -1973,6 +1983,7 @@
                 history.replaceState(null, null, newUrl);
             });
 
+
             initCountryList();
             initRegionList();
             for (var i = 0; i < allCode.length; i++) {
@@ -2065,8 +2076,8 @@
                 selected = $("#inputRegion").val();
                 if (selected != "") {
                     initLanguageCharts(selected);
-                flytoPoly(selected);
-            }
+                    flytoPoly(selected);
+                }
             }
             else if (option === 'autocountry') {
 
@@ -2480,7 +2491,7 @@
                         var color = item["Color"];
                         //var region = item["Region"]
                         //var incdRcd = item["IncdRcd"];
-                        var rate = item["Rate"]
+                        var rate = Math.round(item["Rate"] * 100) / 100
                         cheo[code] = color;
                         if (color === '#ddd') {
                             textColor[code] = '#999';
@@ -2747,10 +2758,10 @@
             const tip = d3.tip().html(d => d.value);
             // set the dimensions and margins of the graph
             var w = $('#chart-section').width();
-            var h = $('#buttons').height();
+            var h = $('#buttons').height() + $('#instr').height()
             var margin = { top: 60, right: 20, bottom: 30, left: 160 },
                 width = w - margin.left - margin.right,
-                height = 700 - margin.top - margin.bottom - h;
+                height = 660 - margin.top - margin.bottom - h;
 
             // set the ranges
             var y = d3.scaleBand()
@@ -3164,7 +3175,7 @@
                 var areas = result["areas"];
                 for (var i = 0; i < allCode.length; i++) {
                     cheo[allCode[i]] = "#ddd";
-                    displayList[allCode[i]] = "";
+                    displayList[allCode[i]] = "No record";
                 }
                 for (var i = 0; i < areas.length; i++) {
                     var item = areas[i];
