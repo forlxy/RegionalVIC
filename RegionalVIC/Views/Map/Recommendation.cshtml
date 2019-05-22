@@ -278,16 +278,71 @@
         color: #0085A1;
     }
 
-    .loader-svg {
+    .loader-css {
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(0, 0, 0, 0.8) url(/spinner.svg) center center no-repeat;
+        background: rgba(0, 0, 0, 0.8) /*url(/spinner.svg) center center no-repeat*/;
         z-index: 5;
     }
+    @@keyframes lds-rolling {
+        0% {
+            -webkit-transform: translate(-50%, -50%) rotate(0deg);
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
 
+        100% {
+            -webkit-transform: translate(-50%, -50%) rotate(360deg);
+            transform: translate(-50%, -50%) rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes lds-rolling {
+        0% {
+            -webkit-transform: translate(-50%, -50%) rotate(0deg);
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: translate(-50%, -50%) rotate(360deg);
+            transform: translate(-50%, -50%) rotate(360deg);
+        }
+    }
+
+    .lds-rolling {
+        position: relative;
+    }
+
+        .lds-rolling div,
+        .lds-rolling div:after {
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            border: 20px solid #07abcc;
+            border-top-color: transparent;
+            border-radius: 50%;
+        }
+
+        .lds-rolling div {
+            -webkit-animation: lds-rolling 1s linear infinite;
+            animation: lds-rolling 1s linear infinite;
+            top: 50%;
+            left: 50%;
+            /* bring your own prefixes */
+            transform: translate(-50%, -50%);
+        }
+
+            .lds-rolling div:after {
+                -webkit-transform: rotate(90deg);
+                transform: rotate(90deg);
+            }
+
+    .lds-rolling {
+        -webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+        transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+    }
 </style>
 <!DOCTYPE html>
 
@@ -783,7 +838,11 @@
         <div class="container-fluid">
             <div class="container-fluid">
                 <div class="mapcontainer col-12" id="mapcontainer">
-                    <div class="loader-svg" id="loader"></div>
+                    <!-- Loader -->
+                    @*<div class="loader-svg" id="loader"></div>*@
+                    <div class="lds-css ng-scope loader-css" id="loader">
+                        <div style="width:100%;height:100%" class="lds-rolling"><div></div></div>
+                    </div>
 
                     <div id="map" class="mmap" style="height:700px"></div>
                     <div class='map-overlay' id='features' style="display: none"><div class='block-content' id='pd'><p></p></div></div>
