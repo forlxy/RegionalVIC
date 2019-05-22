@@ -335,6 +335,29 @@
         font-family: Montserrat,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';
         color: #0085A1;
     }
+
+
+    .fullwidth-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        min-height: 100%;
+        min-width: 100%;
+        -webkit-transform-style: preserve-3d;
+    }
+
+        .fullwidth-video video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            min-height: 100%;
+            min-width: 100%;
+            height: auto;
+            width: 100%;
+            object-fit: cover;
+        }
 </style>
 <!DOCTYPE html>
 <html lang="en">
@@ -404,16 +427,16 @@
     </nav>
     <!-- Header -->
     <header class="masthead">
-        <div class="vidheader">
-            <div class='container'>
+        <div class='container'>
+            <div class="fullwidth-video">
                 <video id="bgvid" playsinline autoplay muted loop poster="/video/poster.png">
                     <source src="/video/home2.mp4" type="video/mp4">
                 </video>
-                <div class="intro-text">
-                    <div class="intro-lead-in"></div>
-                    <div class="intro-heading">Planning to move to regional Victoria after graduation?</div>
-                    <a class="btn btn-primary btn-xl js-scroll-trigger" href="/Map/Recommendation"><i>Let us help!</i></a>
-                </div>
+            </div>
+            <div class="intro-text">
+                <div class="intro-lead-in"></div>
+                <div class="intro-heading">Planning to move to regional Victoria after graduation?</div>
+                <a class="btn btn-primary btn-xl js-scroll-trigger" href="/Map/Recommendation"><i>Let us help!</i></a>
             </div>
         </div>
     </header>
