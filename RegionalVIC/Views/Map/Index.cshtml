@@ -11,7 +11,7 @@
     <!-- Fontawesome -->
     <link rel="stylesheet" href="/fontawesome/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -32,13 +32,13 @@
     <script src="/Scripts/select2.min.js"></script>
 
     <!-- Map and chart JavaScript -->
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+    <script src='/Scripts/mapbox-gl.js'></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.min.js'></script>
     <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js'></script>
+    <script src="/Scripts/chart.js"></script>
+    <script src="/Scripts/d3.v5.min.js"></script>
+    <script src='/Scripts/d3-tip.min.js'></script>
 
     <link href="/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/css/ion.rangeSlider.min.css">
@@ -56,7 +56,7 @@
             //Load geojson file thread 1
             function ajax1() {
                 return $.ajax({
-                    url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_1.json", // path to file
+                    url: "/lga48.js", // path to file
 
                     dataType: 'text',
                     success: function (data) { // callback for successful completion
@@ -69,89 +69,10 @@
                 });
             }
 
-            //Load geojson file thread 2
-            function ajax2() {
-                return $.ajax({
-                    url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_2.json", // path to file
-
-                    dataType: 'text',
-                    success: function (data) { // callback for successful completion
-                        var tmpObj = JSON.parse(data);
-                        lga["features"] = lga["features"].concat(tmpObj["features"]);
-                    },
-                    error: function () { // callback if there's an error
-                        alert("error");
-                    }
-                });
-            }
-
-            //Load geojson file thread 3
-            function ajax3() {
-                return $.ajax({
-                    url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_3.json", // path to file
-
-                    dataType: 'text',
-                    success: function (data) { // callback for successful completion
-                        var tmpObj = JSON.parse(data);
-                        lga["features"] = lga["features"].concat(tmpObj["features"]);
-                    },
-                    error: function () { // callback if there's an error
-                        alert("error");
-                    }
-                });
-            }
-
-            //Load geojson file thread 4
-            function ajax4() {
-                return $.ajax({
-                    url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_4.json", // path to file
-
-                    dataType: 'text',
-                    success: function (data) { // callback for successful completion
-                        var tmpObj = JSON.parse(data);
-                        lga["features"] = lga["features"].concat(tmpObj["features"]);
-                    },
-                    error: function () { // callback if there's an error
-                        alert("error");
-                    }
-                });
-            }
-
-            //Load geojson file thread 5
-            function ajax5() {
-                return $.ajax({
-                    url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_5.json", // path to file
-
-                    dataType: 'text',
-                    success: function (data) { // callback for successful completion
-                        var tmpObj = JSON.parse(data);
-                        lga["features"] = lga["features"].concat(tmpObj["features"]);
-                    },
-                    error: function () { // callback if there's an error
-                        alert("error");
-                    }
-                });
-            }
-
-            //Load geojson file thread 6
-            function ajax6() {
-                return $.ajax({
-                    url: "https://raw.githubusercontent.com/kasaluoqi/root/master/lga48_6.json", // path to file
-
-                    dataType: 'text',
-                    success: function (data) { // callback for successful completion
-                        var tmpObj = JSON.parse(data);
-                        lga["features"] = lga["features"].concat(tmpObj["features"]);
-                    },
-                    error: function () { // callback if there's an error
-                        alert("error");
-                    }
-                });
-            }
 
             //Call functions and trigger when all of them are done.
-            $.when(ajax1(), ajax2(), ajax3(), ajax4(), ajax5(), ajax6()).done(function (a1, a2, a3, a4, a5, a6) {
-                // Add a layer showing the places.
+            $.when(ajax1()).done(function (a1) {
+            // Add a layer showing the places.
                 map.addSource("states", {
                     "type": "geojson",
                     "data": lga
