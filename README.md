@@ -7,3 +7,5 @@ This repository contains code for the RegionalVIC project which provides recomme
 You can check the product video from: https://www.youtube.com/watch?v=CsxhUUl6fg0
 
 
+Preview:
+![Preview](/Video_20190820_012608_704.gif)
