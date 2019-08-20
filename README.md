@@ -20,3 +20,6 @@ You can check the product video from: https://www.youtube.com/watch?v=CsxhUUl6fg
 * Job & income comparison by d3.js
 * Criminal rate & population data visualisation with map
 * Culture background ranking and comparison
+
+## Dataset:
+All open datasets were download from Australian Bureau of Statistics website (https://www.abs.gov.au), Victorian government open data website (https://data.vic.gov.au), Crime Statistics Agency website (https://www.crimestatistics.vic.gov.au) and Victorian Multicultural Commission website (https://multicultural.vic.gov.au).
