@@ -9,7 +9,9 @@ You can check the product video from: https://www.youtube.com/watch?v=CsxhUUl6fg
 
 Preview:
 
-![HomePreview](/Video_20190820_012608_704.gif)
+<p align="center">
+  <img src="/Video_20190820_012608_704.gif"/>
+</p>
 
 ## Features
 * Recommendation by importance of factors user considered & rating result visualisation.
