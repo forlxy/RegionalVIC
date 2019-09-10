@@ -26,3 +26,6 @@ C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcor
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcoreapp2.1\RegionalVIC.pdb
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcoreapp2.1\RegionalVIC.csproj.CopyComplete
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcoreapp2.1\Razor\Views\Home\Disclaimer.g.cshtml.cs
+C:\Users\kasal\Source\Repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcoreapp2.1\RegionalVIC.Properties.Resources.resources
+C:\Users\kasal\Source\Repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcoreapp2.1\RegionalVIC.csproj.GenerateResource.cache
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\bin\Release\netcoreapp2.1\Dockerfile
