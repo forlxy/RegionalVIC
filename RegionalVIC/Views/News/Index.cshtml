@@ -172,9 +172,11 @@
                     //"https://newsapi.org/v2/everything?q=-Trump,+immigration,+plan&sources=abc-news-au&apiKey=79a6a2e25a7c4063a5857e750e7b80fc",
                     //"https://gnews.io/api/v2/?q=plan+visa+austrlia+migration&token=d6064764444e9134bd179852cec2c4a7",
                     //"https://gnews.io/api/v2/?q=australia+policy+immigration+visa&country=AU&token=d6064764444e9134bd179852cec2c4a7",
-                    'https://gnews.io/api/v2/?q=australia+melbourne+victoria+%22visa%20Subclass%22+immigration+&country=AU&token=d6064764444e9134bd179852cec2c4a7',
+                    'https://cors-anywhere.herokuapp.com/https://gnews.io/api/v3/search?country=au&q=australia+melbourne+victoria+%22visa%20Subclass%22+immigration+&token=d6064764444e9134bd179852cec2c4a7',
                 method: "GET",
-                error: function () {
+                crossDomain: true,
+
+                error: function (xhr, status) {
                     console.log("fucked");
 
                     $("#loader").removeClass("is-active");
@@ -198,12 +200,12 @@
                 }
                 else {
                     for (var i = 0; i < data.articles.length; i++) {
-                        var source = data.articles[i].source;
+                        var source = data.articles[i].source.name;
                         var title = data.articles[i].title;
-                        var description = data.articles[i].desc;
-                        var artUrl = data.articles[i].link;
-                        var date = data.articles[i].date;
-                        var website = data.articles[i].website;
+                        var description = data.articles[i].description + ' (more)';
+                        var artUrl = data.articles[i].url;
+                        var date = data.articles[i].publishedAt;
+                        var website = data.articles[i].source.url;
 
                         var $element = $('<div class="post-preview"> <a href="' + artUrl + '"> <h3 class="post-title"> ' + title + '</h3>'
                             + '<h5 class="post-subtitle"> ' + description + '</h5></a><p class="post-meta">Posted by  <a href="' + website + '">' + source + '</a> on <strong>' + date + ' </strong> </p></div><hr>');

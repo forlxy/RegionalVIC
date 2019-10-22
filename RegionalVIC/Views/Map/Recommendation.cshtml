@@ -397,7 +397,8 @@
         lga["type"] = "FeatureCollection"
         lga["features"] = []
         window.onload = function () {
-            
+            //Fetch the map
+            {
             //Load geojson file thread 1
             function ajax1() {
                 return $.ajax({
@@ -492,6 +493,7 @@
                         alert("error");
                     }
                 });
+            }
             }
 
             //Call functions and trigger when all of them are done.

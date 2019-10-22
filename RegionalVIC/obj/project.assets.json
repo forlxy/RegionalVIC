@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.1": {
+      "AWSSDK.Core/3.3.103.52": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/AWSSDK.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AWSSDK.Core.dll": {}
+        }
+      },
       "bootstrap/4.3.1": {
         "type": "package",
         "dependencies": {
@@ -4648,6 +4657,55 @@
     }
   },
   "libraries": {
+    "AWSSDK.Core/3.3.103.52": {
+      "sha512": "Xzdm37KuEuVEV4f+8h6rS7VU/jqNk+wH+T3rZ1tG3Lv3fNcnrNBlPnB/Ig+SGx8QS9EWp0W3AGkoq3wwk/3Cuw==",
+      "type": "package",
+      "path": "awssdk.core/3.3.103.52",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "awssdk.core.3.3.103.52.nupkg.sha512",
+        "awssdk.core.nuspec",
+        "lib/MonoAndroid10/AWSSDK.Core.XML",
+        "lib/MonoAndroid10/AWSSDK.Core.dll",
+        "lib/MonoAndroid10/AWSSDK.Core.pdb",
+        "lib/MonoTouch10/AWSSDK.Core.XML",
+        "lib/MonoTouch10/AWSSDK.Core.dll",
+        "lib/Xamarin.Mac20/AWSSDK.Core.XML",
+        "lib/Xamarin.Mac20/AWSSDK.Core.dll",
+        "lib/Xamarin.iOS10/AWSSDK.Core.XML",
+        "lib/Xamarin.iOS10/AWSSDK.Core.dll",
+        "lib/net35/AWSSDK.Core.dll",
+        "lib/net35/AWSSDK.Core.pdb",
+        "lib/net35/AWSSDK.Core.xml",
+        "lib/net45/AWSSDK.Core.dll",
+        "lib/net45/AWSSDK.Core.pdb",
+        "lib/net45/AWSSDK.Core.xml",
+        "lib/netstandard1.3/AWSSDK.Core.dll",
+        "lib/netstandard1.3/AWSSDK.Core.pdb",
+        "lib/netstandard1.3/AWSSDK.Core.xml",
+        "lib/netstandard2.0/AWSSDK.Core.dll",
+        "lib/netstandard2.0/AWSSDK.Core.pdb",
+        "lib/netstandard2.0/AWSSDK.Core.xml",
+        "lib/portable-net45+win8+wpa81+wp8/AWSSDK.Core.XML",
+        "lib/portable-net45+win8+wpa81+wp8/AWSSDK.Core.dll",
+        "lib/portable-net45+win8+wpa81+wp8/AWSSDK.Core.pdb",
+        "lib/uap/AWSSDK.Core.XML",
+        "lib/uap/AWSSDK.Core.dll",
+        "lib/uap/AWSSDK.Core.pdb",
+        "lib/win8/AWSSDK.Core.XML",
+        "lib/win8/AWSSDK.Core.dll",
+        "lib/win8/AWSSDK.Core.pdb",
+        "lib/wp8/AWSSDK.Core.XML",
+        "lib/wp8/AWSSDK.Core.dll",
+        "lib/wp8/AWSSDK.Core.pdb",
+        "lib/wpa81/AWSSDK.Core.XML",
+        "lib/wpa81/AWSSDK.Core.dll",
+        "lib/wpa81/AWSSDK.Core.pdb",
+        "tools/account-management.ps1"
+      ]
+    },
     "bootstrap/4.3.1": {
       "sha512": "lrVBeG2vmfwsHJuwSzeXz+1hPn/374vXDOAusU50vzljEWcFOFtif3wzIJJqfqQRHs2RnY0xttZ0Zv5JX4BFGg==",
       "type": "package",
@@ -16516,6 +16574,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
+      "AWSSDK.Core >= 3.3.103.52",
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.AspNetCore.Razor.Design >= 2.1.2",
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.1.4",
@@ -16533,11 +16592,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kasal\\Source\\Repos\\kasaluoqi\\RegionalVIC\\RegionalVIC\\RegionalVIC.csproj",
+      "projectUniqueName": "C:\\Users\\kasal\\source\\repos\\kasaluoqi\\RegionalVIC\\RegionalVIC\\RegionalVIC.csproj",
       "projectName": "RegionalVIC",
-      "projectPath": "C:\\Users\\kasal\\Source\\Repos\\kasaluoqi\\RegionalVIC\\RegionalVIC\\RegionalVIC.csproj",
+      "projectPath": "C:\\Users\\kasal\\source\\repos\\kasaluoqi\\RegionalVIC\\RegionalVIC\\RegionalVIC.csproj",
       "packagesPath": "C:\\Users\\kasal\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kasal\\Source\\Repos\\kasaluoqi\\RegionalVIC\\RegionalVIC\\obj\\",
+      "outputPath": "C:\\Users\\kasal\\source\\repos\\kasaluoqi\\RegionalVIC\\RegionalVIC\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -16567,6 +16626,10 @@
     "frameworks": {
       "netcoreapp2.1": {
         "dependencies": {
+          "AWSSDK.Core": {
+            "target": "Package",
+            "version": "[3.3.103.52, )"
+          },
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",
             "target": "Package",

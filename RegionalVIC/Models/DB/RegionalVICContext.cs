@@ -7,6 +7,7 @@ namespace RegionalVIC.Models.DB
     public partial class RegionalVICContext : DbContext
     {
         public RegionalVICContext()
+      
         {
         }
 
@@ -38,7 +39,10 @@ namespace RegionalVIC.Models.DB
         {
             if (!optionsBuilder.IsConfigured)
             {
-               optionsBuilder.UseSqlServer("Server=tcp:regionalvic.database.windows.net,1433;Initial Catalog=regionalVIC;Persist Security Info=False;User ID=vic_web;Password=b@55m0rp12E;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+             //  optionsBuilder.UseSqlServer("Server=tcp:regionalvic.database.windows.net,1433;Initial Catalog=regionalVIC;Persist Security Info=False;User ID=vic_web;Password=b@55m0rp12E;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+           //    optionsBuilder.UseSqlServer("Server=tcp:regionaldb.ccpxedmwa2fo.ap-southeast-2.rds.amazonaws.com,2912;Initial Catalog=regionaldb;Persist Security Info=False;User ID=admin;Password=11111111;Connection Timeout=30");
+
+                optionsBuilder.UseSqlServer("Server=regionaldb.ccpxedmwa2fo.ap-southeast-2.rds.amazonaws.com,2912;Initial Catalog=regionaldb;Persist Security Info=False;User ID=admin;Password=11111111;Connection Timeout=30");
             }
         }
 

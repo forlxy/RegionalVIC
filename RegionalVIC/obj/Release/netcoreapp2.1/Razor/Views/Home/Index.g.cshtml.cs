@@ -410,7 +410,7 @@ namespace AspNetCore
             WriteLiteral(" min-width: 100%;\r\n            height: auto;\r\n            width: 100%;\r\n            object-fit: cover;\r\n        }\r\n</style>\r\n<!DOCTYPE html>\r\n<html lang=\"en\">\r\n");
             EndContext();
             BeginContext(8393, 1254, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fa077c52b8944d80bc146c63ca17b91f", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9743da80829b4adeb5e9a879b2673c18", async() => {
                 BeginContext(8399, 1241, true);
                 WriteLiteral(@"
     <meta charset=""utf-8"">
@@ -444,7 +444,7 @@ namespace AspNetCore
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(9649, 17940, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "64ce3bf3814d4eb4b331466795d9b73d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "38820772eb904957a30af1d412e4178f", async() => {
                 BeginContext(9669, 2034, true);
                 WriteLiteral(@"
     <!-- Navigation -->

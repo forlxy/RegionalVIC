@@ -9,7 +9,6 @@ C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcor
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcoreapp2.1\RegionalVIC.csproj.CoreCompileInputs.cache
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcoreapp2.1\RegionalVIC.RazorAssemblyInfo.cache
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcoreapp2.1\RegionalVIC.RazorAssemblyInfo.cs
-C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcoreapp2.1\UserSecretsAssemblyInfo.cs
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcoreapp2.1\RegionalVIC.AssemblyInfoInputs.cache
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcoreapp2.1\RegionalVIC.AssemblyInfo.cs
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcoreapp2.1\RegionalVIC.TagHelpers.input.cache
@@ -28,4 +27,4 @@ C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcor
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcoreapp2.1\Razor\Views\Home\Disclaimer.g.cshtml.cs
 C:\Users\kasal\Source\Repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcoreapp2.1\RegionalVIC.Properties.Resources.resources
 C:\Users\kasal\Source\Repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcoreapp2.1\RegionalVIC.csproj.GenerateResource.cache
-C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\bin\Release\netcoreapp2.1\Dockerfile
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Release\netcoreapp2.1\UserSecretsAssemblyInfo.cs

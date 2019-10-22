@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "04ba9dca9d6c97838a0c7cf28f38b60109ab78bb"
+    "signature": "af5b15a4f10f0ecf18b16d0cf18d62b197368029"
   },
   "compilationOptions": {
     "defines": [
@@ -24,6 +24,7 @@
     ".NETCoreApp,Version=v2.1": {
       "RegionalVIC/1.0.0": {
         "dependencies": {
+          "AWSSDK.Core": "3.3.103.52",
           "Microsoft.AspNetCore.App": "2.1.1",
           "Microsoft.AspNetCore.Razor.Design": "2.1.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.1.4",
@@ -38,6 +39,17 @@
         },
         "compile": {
           "RegionalVIC.dll": {}
+        }
+      },
+      "AWSSDK.Core/3.3.103.52": {
+        "runtime": {
+          "lib/netstandard2.0/AWSSDK.Core.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.3.103.52"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/AWSSDK.Core.dll": {}
         }
       },
       "bootstrap/4.3.1": {
@@ -3521,6 +3533,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AWSSDK.Core/3.3.103.52": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Xzdm37KuEuVEV4f+8h6rS7VU/jqNk+wH+T3rZ1tG3Lv3fNcnrNBlPnB/Ig+SGx8QS9EWp0W3AGkoq3wwk/3Cuw==",
+      "path": "awssdk.core/3.3.103.52",
+      "hashPath": "awssdk.core.3.3.103.52.nupkg.sha512"
     },
     "bootstrap/4.3.1": {
       "type": "package",

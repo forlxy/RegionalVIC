@@ -21,7 +21,8 @@ namespace RegionalVIC
             services.AddResponseCompression();
             services.AddMvc();
             // var connection = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=regionalVIC;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            var connection = @"Server=tcp:regionalvic.database.windows.net,1433;Initial Catalog=regionalVIC;Persist Security Info=False;User ID=vic_web;Password=b@55m0rp12E;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
+            var connection = @"Data Source=regionaldb.ccpxedmwa2fo.ap-southeast-2.rds.amazonaws.com,2912;Initial Catalog=regionalVIC;User ID=admin;Password=11111111;";
+            
 
             services.AddDbContext<RegionalVICContext>(options =>
                options.UseSqlServer(connection));
