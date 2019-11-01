@@ -6,7 +6,7 @@ This repository contains code for the RegionalVIC project which provides recomme
 
 - Framework: **ASP.NET Core**
 - Front-end: **JQuery** + **Bootstrap**
-- Back-end: **ASP.NET Web API**
+- Back-end: **Entity Framework Core + ASP.NET Web API**
 - Hosting platform: **AWS Elastic Beanstalk + AWS RDS SQL Server** (Azure + Azure SQL database(Expired)).
 
 ## Demo
