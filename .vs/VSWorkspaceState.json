@@ -3,8 +3,9 @@
     "",
     "\\RegionalVIC",
     "\\RegionalVIC\\Views",
+    "\\RegionalVIC\\Views\\Home",
     "\\RegionalVIC\\Views\\Map"
   ],
-  "SelectedNode": "\\RegionalVIC.sln",
+  "SelectedNode": "\\RegionalVIC\\Views\\Home\\Index.cshtml",
   "PreviewInSolutionExplorer": false
 }

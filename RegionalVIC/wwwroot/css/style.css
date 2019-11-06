@@ -211,11 +211,15 @@ body {
     min-width: 325px;
 }
 
+header {
+    height: 100vh;
+}
 
 /* Main Content */
 section {
     padding-top: 50px;
-    margin-bottom: 50px;
+    padding-bottom: 50px;
+    height: 100vh;
 }
 
 section .section-header {
@@ -233,7 +237,6 @@ section .filter {
 }
 
 /* Recomendation tab */
-
 #beforeMapClicked {
     position: absolute;
     top: 0;
@@ -258,13 +261,13 @@ section .filter {
 
 @media (max-width:768px) {
     header {
-        height: 60vh;
+        height: 100vh;
     }
 }
 
 @media (max-width:557px) {
     header {
-        height: 85vh;
+        height: 100vh;
     }
 }
 
@@ -773,3 +776,76 @@ input[type='range']::-webkit-slider-thumb {
 .progress-circle.p100 .value-bar {
     transform: rotate(360deg);
 }
+.shrink-img {
+    width: 200px;
+    margin: auto;
+}
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+@media (min-width: 768px) {
+    .shrink-img {
+        display: block
+    }
+
+    .left {
+        display: block
+    }
+    .right {
+        display: block
+    }
+
+    #carouselExampleIndicators {
+        padding: 0 5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .shrink-img {
+        display: none
+    }
+
+    .left {
+        display: none
+    }
+
+    .right {
+        display: none
+    }
+
+    #carouselExampleIndicators {
+        padding: 0 1rem;
+    }
+}
+
+.owl-prev {
+    width: 15px;
+    height: 100px;
+    position: absolute;
+    top: 40%;
+    margin-left: -20px !important;
+    display: block !important;
+    border: 0px solid black;
+}
+
+.owl-next {
+    width: 15px;
+    height: 100px;
+    position: absolute;
+    top: 40%;
+    right: -25px !important;
+    display: block !important;
+    border: 0px solid black;
+}
+
+    .owl-prev i, .owl-next i {
+        transform: scale(2,2);
+        color: #ccc;
+    }
+

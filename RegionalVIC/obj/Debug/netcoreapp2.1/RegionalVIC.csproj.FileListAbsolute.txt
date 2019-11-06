@@ -5,7 +5,6 @@ C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\bin\Debug\netcorea
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\bin\Debug\netcoreapp2.1\RegionalVIC.pdb
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\bin\Debug\netcoreapp2.1\RegionalVIC.Views.dll
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\bin\Debug\netcoreapp2.1\RegionalVIC.Views.pdb
-C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.csproj.CoreCompileInputs.cache
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.RazorAssemblyInfo.cache
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.RazorAssemblyInfo.cs
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
@@ -14,11 +13,6 @@ C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcorea
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.TagHelpers.input.cache
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.TagHelpers.output.cache
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.RazorCoreGenerate.cache
-C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\Home\Disclaimer.g.cshtml.cs
-C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.g.cshtml.cs
-C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\Map\Index.g.cshtml.cs
-C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\Map\Recommendation.g.cshtml.cs
-C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\News\Index.g.cshtml.cs
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.RazorTargetAssemblyInfo.cache
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.RazorTargetAssemblyInfo.cs
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.Views.pdb
@@ -28,3 +22,15 @@ C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcorea
 C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.csprojAssemblyReference.cache
 C:\Users\kasal\Source\Repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.Properties.Resources.resources
 C:\Users\kasal\Source\Repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\RegionalVIC.csproj.GenerateResource.cache
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\bin\Debug\netcoreapp2.1\appsettings.json
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\bin\Debug\netcoreapp2.1\aws-beanstalk-tools-defaults.json
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\bin\Debug\netcoreapp2.1\bower.json
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\bin\Debug\netcoreapp2.1\libman.json
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\bin\Debug\netcoreapp2.1\package-lock.json
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\bin\Debug\netcoreapp2.1\package.json
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\bin\Debug\netcoreapp2.1\Properties\launchSettings.json
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\Home\Disclaimer.cshtml.g.cs
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.cshtml.g.cs
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\Map\Index.cshtml.g.cs
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\Map\Recommendation.cshtml.g.cs
+C:\Users\kasal\source\repos\kasaluoqi\RegionalVIC\RegionalVIC\obj\Debug\netcoreapp2.1\Razor\Views\News\Index.cshtml.g.cs

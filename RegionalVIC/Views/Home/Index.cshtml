@@ -27,7 +27,7 @@
     }
 
     .carousel-item-sm {
-        height: 100vh;
+        height: 50vh;
         max-height: 380px;
         background: no-repeat center center scroll;
         -webkit-background-size: cover;
@@ -244,7 +244,7 @@
                     margin-left: 5px;
                 }
 
-        .carousel .thumb-wrapper {
+        .thumb-wrapper {
             margin: 5px;
             text-align: left;
             background: #fff;
@@ -252,7 +252,7 @@
             box-shadow: 0px 2px 2px rgba(0,0,0,0.1);
         }
 
-        .carousel .thumb-content {
+        .thumb-content {
             padding: 15px;
             font-size: 13px;
             height: 190px;
@@ -272,7 +272,7 @@
                 position: absolute;
                 top: 50%;
                 display: inline-block;
-                margin: -19px 0 0 0;
+                margin: -18px 0 0 0;
                 z-index: 5;
                 left: 0;
                 right: 0;
@@ -337,26 +337,17 @@
     }
 
 
-    .fullwidth-video {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        min-height: 100%;
-        min-width: 100%;
-        -webkit-transform-style: preserve-3d;
-    }
 
         .fullwidth-video video {
             position: absolute;
             top: 0;
             left: 0;
             z-index: -1;
-            min-height: 100%;
             min-width: 100%;
-            height: auto;
             width: 100%;
-            object-fit: cover;
+            height: auto;
+            max-height: 100vh;
+            object-fit: fill;
         }
 </style>
 <!DOCTYPE html>
@@ -375,6 +366,11 @@
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
     <!-- Custom styles for this template -->
     <link href="css/agency.min.css" rel="stylesheet">
 
@@ -443,121 +439,90 @@
 
     <!-- Function-->
     <section id="function">
-        @*<div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading text-uppercase"><font color="black">Functions</font></h2>
-            </div>
-        </div>*@
-        <br>
-        <br>
         <div class="container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 col-center m-auto">
-                        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-                            <!-- Carousel indicators -->
-                            <ol class="carousel-indicators">
-                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#myCarousel" data-slide-to="1"></li>
-                            </ol>
-                            <!-- Wrapper for carousel items -->
-                            <div class="carousel-inner">
-                                <div class="item carousel-item active">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper">
-                                                <div class="img-box">
-                                                    <img src="img/carousel/recommendation.jpeg" class="img-responsive img-fluid" alt="">
-                                                </div>
-                                                <div class="thumb-content d-flex align-items-start flex-column">
-                                                    <h4 class="content-font-family">Recommendation</h4>
-                                                    <p class="content-font-family">
-                                                        There are too many aspects to consider. Let us help you to find the best options.
-                                                    </p>
-
-                                                    <a href="/Map/recommendation" class="btn btn-primary mt-auto">More <i class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper">
-                                                <div class="img-box">
-                                                    <img src="img/carousel/housing.jpeg" class="img-responsive img-fluid" alt="">
-                                                </div>
-                                                <div class="thumb-content d-flex align-items-start flex-column">
-                                                    <h4 class="content-font-family">Rent</h4>
-                                                    <p class="content-font-family">
-                                                        Find the regions that have houses or flats within your budget.
-                                                    </p>
-                                                    <a href="/Map#living" class="btn btn-primary mt-auto">More <i class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper">
-                                                <div class="img-box">
-                                                    <img src="img/carousel/job.jpeg" class="img-responsive img-fluid" alt="">
-                                                </div>
-                                                <div class="thumb-content d-flex align-items-start flex-column">
-                                                    <h4 class="content-font-family">Job</h4>
-                                                    <p class="content-font-family">Find the ideal regional area for your industry to have more job opportunities.</p>
-                                                    <a href="/Map#job" class="btn btn-primary mt-auto">More <i class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5">
+                    <h2 class="section-heading text-uppercase"><font color="black">Feature</font></h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-center m-auto">
+                    <div class="owl-carousel owl-theme">
+                        <div class="item">
+                            <div class="thumb-wrapper">
+                                <div class="img-box">
+                                    <img src="img/carousel/recommendation.jpeg" class="img-responsive img-fluid" alt="">
                                 </div>
-                                <div class="item carousel-item">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper">
-                                                <div class="img-box">
-                                                    <img src="img/carousel/safety.png" class="img-responsive img-fluid" alt="">
-                                                </div>
-                                                <div class="thumb-content d-flex align-items-start flex-column">
-                                                    <h4 class="content-font-family">Safety</h4>
-                                                    <p class="content-font-family">Find the regions with least criminal rate to live safely.</p>
-                                                    <a href="/Map#safety" class="btn btn-primary mt-auto">More <i class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper">
-                                                <div class="img-box">
-                                                    <img src="img/carousel/culture.jpeg" class="img-responsive img-fluid" alt="">
-                                                </div>
-                                                <div class="thumb-content d-flex align-items-start flex-column">
-                                                    <h4 class="content-font-family">Culture</h4>
-                                                    <p class="content-font-family">Find the regions with people from your home country and can speak the same language.</p>
-                                                    <a href="/Map#culture" class="btn btn-primary mt-auto">More <i class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper">
-                                                <div class="img-box">
-                                                    <img src="/img/carousel/news.jpg" class="img-responsive img-fluid" alt="">
-                                                </div>
-                                                <div class="thumb-content d-flex align-items-start flex-column">
-                                                    <h4 class="content-font-family">News</h4>
-                                                    <p class="content-font-family">Get the latest news related to immigration to stay up to date.</p>
-                                                    <a href="/News" class="btn btn-primary mt-auto">More <i class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                <div class="thumb-content d-flex align-items-start flex-column">
+                                    <h4 class="content-font-family">Recommendation</h4>
+                                    <p class="content-font-family">
+                                        There are too many aspects to consider. Let us help you to find the best options.
+                                    </p>
+                                    <a href="/Map/recommendation" class="btn btn-primary mt-auto">More <i class="fa fa-angle-right"></i></a>
                                 </div>
                             </div>
-                            <!-- Carousel controls -->
-                            <a class="carousel-control left carousel-control-prev" href="#myCarousel" data-slide="prev">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a class="carousel-control right carousel-control-next" href="#myCarousel" data-slide="next">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
+                        </div>
+                        <div class="item">
+                            <div class="thumb-wrapper">
+                                <div class="img-box">
+                                    <img src="img/carousel/housing.jpeg" class="img-responsive img-fluid" alt="">
+                                </div>
+                                <div class="thumb-content d-flex align-items-start flex-column">
+                                    <h4 class="content-font-family">Rent</h4>
+                                    <p class="content-font-family">
+                                        Find the regions that have houses or flats within your budget.
+                                    </p>
+                                    <a href="/Map#living" class="btn btn-primary mt-auto">More <i class="fa fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="thumb-wrapper">
+                                <div class="img-box">
+                                    <img src="img/carousel/job.jpeg" class="img-responsive img-fluid" alt="">
+                                </div>
+                                <div class="thumb-content d-flex align-items-start flex-column">
+                                    <h4 class="content-font-family">Job</h4>
+                                    <p class="content-font-family">Find the ideal regional area for your industry to have more job opportunities.</p>
+                                    <a href="/Map#job" class="btn btn-primary mt-auto">More <i class="fa fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="thumb-wrapper">
+                                <div class="img-box">
+                                    <img src="img/carousel/safety.png" class="img-responsive img-fluid" alt="">
+                                </div>
+                                <div class="thumb-content d-flex align-items-start flex-column">
+                                    <h4 class="content-font-family">Safety</h4>
+                                    <p class="content-font-family">Find the regions with least criminal rate to live safely.</p>
+                                    <a href="/Map#safety" class="btn btn-primary mt-auto">More <i class="fa fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="thumb-wrapper">
+                                <div class="img-box">
+                                    <img src="img/carousel/culture.jpeg" class="img-responsive img-fluid" alt="">
+                                </div>
+                                <div class="thumb-content d-flex align-items-start flex-column">
+                                    <h4 class="content-font-family">Culture</h4>
+                                    <p class="content-font-family">Find the regions with people from your home country and can speak the same language.</p>
+                                    <a href="/Map#culture" class="btn btn-primary mt-auto">More <i class="fa fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="thumb-wrapper">
+                                <div class="img-box">
+                                    <img src="/img/carousel/news.jpg" class="img-responsive img-fluid" alt="">
+                                </div>
+                                <div class="thumb-content d-flex align-items-start flex-column">
+                                    <h4 class="content-font-family">News</h4>
+                                    <p class="content-font-family">Get the latest news related to immigration to stay up to date.</p>
+                                    <a href="/News" class="btn btn-primary mt-auto">More <i class="fa fa-angle-right"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -581,29 +546,29 @@
                 </ol>
                 <div class="carousel-inner" role="listbox">
                     <!-- Slide One - Set the background image for this slide in the line below -->
-                    <div class="carousel-item active" style="max-height:380px">
-                        <div class="carousel-caption row">
-                            <div class="col-sm-4 align-self-center">
-                                <img class="rounded-circle img-fluid" src="img/about/a1.jpg" alt="">
+                    <div class="carousel-item active">
+                        <div class="row vertical-center">
+                            <div class="col-md-4 col-sm-12 align-self-center">
+                                <img class="rounded-circle img-fluid shrink-img" src="img/about/a1.jpg" alt="">
                             </div>
-                            <div class="col-sm-8 align-self-center">
-                                <h6 class="display-4"><font color="black">Background</font></h6>
+                            <div class="col-md-8 col-sm-12 align-self-center">
+                                <h1><font color="black">Background</font></h1>
                                 <p class="content-font-family">
-                                <font color="black">
-                                    Over population is a major thread for Melbourne. There are lots of competition for the international graduates to get permanent residency in Melbourne. As result, more international graduates are looking forward to moving to regional Victoria to get better opportunities to settle in.
-                                </font>
+                                    <font color="black">
+                                        Over population is a major thread for Melbourne. There are lots of competition for the international graduates to get permanent residency in Melbourne. As result, more international graduates are looking forward to moving to regional Victoria to get better opportunities to settle in.
+                                    </font>
                                 </p>
                             </div>
                         </div>
                     </div>
                     <!-- Slide Three - Set the background image for this slide in the line below -->
-                    <div class="carousel-item" style="max-height:380px">
-                        <div class="carousel-caption row">
-                            <div class="col-sm-4 align-self-center">
-                                <img class="rounded-circle img-fluid" src="img/about/a3.jpg" alt="">
+                    <div class="carousel-item ">
+                        <div class="row vertical-center">
+                            <div class="col-md-4 col-sm-12 align-self-center">
+                                <img class="rounded-circle img-fluid shrink-img" src="img/about/a3.jpg" alt="">
                             </div>
-                            <div class="col-sm-8 align-self-center">
-                                <h6 class="display-4"><font color="black">Value</font></h6>
+                            <div class="col-md-8 col-sm-12 align-self-center">
+                                <h1><font color="black">Value</font></h1>
                                 <p class="content-font-family">
                                     <font color="black">
                                         Moving to a new regional area is always stressful and confusing. Let us help you to facilitate this process by providing insight on the regional areas of Victoria. Find the most suitable regions to move in according to your preferences.
@@ -624,7 +589,25 @@
             </div>
         </div>
     </section>
-
+    <script>
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            navText : ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>'],
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 3
+                }
+            }
+        });
+    </script>
     <!-- Footer -->
     <footer>
         <div class="container">

@@ -183,8 +183,8 @@ header.masthead {
         }
 
     header.masthead .intro-text {
-        padding-top: 150px;
-        padding-bottom: 100px
+        padding-top: 30vh;
+        padding-bottom: 30vh
     }
 
         header.masthead .intro-text .intro-lead-in {
@@ -218,8 +218,8 @@ header.masthead {
         }
 
     header.masthead .intro-text {
-        padding-top: 300px;
-        padding-bottom: 200px
+        padding-top: 30vh;
+        padding-bottom: 30vh
     }
 
         header.masthead .intro-text .intro-lead-in {
